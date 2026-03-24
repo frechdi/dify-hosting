@@ -41,6 +41,12 @@ function renderStars(rating: number) {
   return { full, hasHalf, empty };
 }
 
+function scoreClass(rating: number) {
+  if (rating >= 4.5) return 'score-badge score-green';
+  if (rating >= 4.0) return 'score-badge score-blue';
+  return 'score-badge score-yellow';
+}
+
 function rankClass(rank: number) {
   if (rank === 1) return 'rank-badge rank-1';
   if (rank === 2) return 'rank-badge rank-2';
@@ -95,9 +101,9 @@ function rankClass(rank: number) {
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;max-width:1000px;margin:0 auto;">
         <!-- Best Overall -->
-        <div class="card card-featured" style="position:relative;">
-          <div style="position:absolute;top:-1px;left:1.5rem;">
-            <span class="badge badge-editors-choice">Best Overall</span>
+        <div class="card card-featured" style="position:relative;background:linear-gradient(160deg,#f0f7ff 0%,#ffffff 60%);">
+          <div style="position:absolute;top:-1px;left:1.5rem;display:flex;gap:0.4rem;">
+            <span class="badge badge-editors-choice">🏆 Top Pick 2026</span>
           </div>
           <div style="margin-top:1.25rem;">
             <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
@@ -220,6 +226,7 @@ function rankClass(rank: number) {
               <th class="hide-mobile">Locations</th>
               <th>Ease</th>
               <th>Rating</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -247,10 +254,10 @@ function rankClass(rank: number) {
                     </div>
                   </td>
                   <td>
-                    <div style="display:flex;align-items:center;gap:0.25rem;">
-                      <span style="font-weight:700;color:#111827;">{p.rating}</span>
-                      <span style="color:#F59E0B;font-size:0.75rem;">★</span>
-                    </div>
+                    <span class={scoreClass(p.rating)}>{p.rating}</span>
+                  </td>
+                  <td>
+                    <a href={p.href} class="btn-visit">Visit →</a>
                   </td>
                 </tr>
               );
@@ -273,16 +280,14 @@ function rankClass(rank: number) {
           <div style="display:flex;align-items:center;gap:0.75rem;">
             <div style="width:40px;height:40px;border-radius:10px;border:1px solid #E5E7EB;background:#fff;display:flex;align-items:center;justify-content:center;padding:6px;flex-shrink:0;"><img src="/logos/hetzner-logo.svg" alt="Hetzner" width="28" height="28" style="object-fit:contain;" /></div>
             <div>
-              <div style="display:flex;align-items:center;gap:0.5rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
                 <h3 style="font-size:1.2rem;font-weight:700;color:#111827;margin:0;">1. Hetzner</h3>
-                <span class="badge badge-editors-choice">Editors' Choice</span>
+                <span class="badge badge-editors-choice">🏆 Top Pick 2026</span>
               </div>
               <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">From €3.79/mo</div>
             </div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:1.75rem;font-weight:800;color:#111827;">4.8<span style="font-size:1rem;color:#F59E0B;">★</span></div>
-          </div>
+          <div><span class="score-badge score-green" style="width:52px;height:52px;font-size:0.95rem;">4.8</span></div>
         </div>
         <div class="prose">
           <p>Hetzner is the undisputed value champion for self-hosting Dify in Europe. Their CX22 plan (€3.79/mo) hits Dify's minimum specs — 2 vCPU, 4GB RAM, 40GB NVMe — for less than a cup of coffee per week. Step up to CX32 (€5.59/mo, 4 vCPU / 8GB RAM) and you have a production-grade Dify instance that handles parallel agent runs without breaking a sweat.</p>
@@ -307,9 +312,7 @@ function rankClass(rank: number) {
               <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">From $7.99/mo</div>
             </div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:1.75rem;font-weight:800;color:#111827;">4.5<span style="font-size:1rem;color:#F59E0B;">★</span></div>
-          </div>
+          <div><span class="score-badge score-green" style="width:52px;height:52px;font-size:0.95rem;">4.5</span></div>
         </div>
         <div class="prose">
           <p>Hostinger's KVM VPS plans punch well above their weight. The entry KVM 1 plan ($7.99/mo) gives you 4GB RAM and 50GB NVMe — meeting Dify's minimum specs — while the KVM 2 ($12.99/mo, 8GB RAM / 2 vCPU) is one of the best Dify value propositions globally. That 8GB RAM at under $13/mo beats DigitalOcean's comparable offering by over $40/mo.</p>
@@ -333,9 +336,7 @@ function rankClass(rank: number) {
               <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">From $24/mo</div>
             </div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:1.75rem;font-weight:800;color:#111827;">4.3<span style="font-size:1rem;color:#F59E0B;">★</span></div>
-          </div>
+          <div><span class="score-badge score-blue" style="width:52px;height:52px;font-size:0.95rem;">4.3</span></div>
         </div>
         <div class="prose">
           <p>DigitalOcean costs more than Hetzner for equivalent specs, but the trade-off is a mature ecosystem of managed services. Pair a Premium AMD Droplet ($28/mo, 4GB / 2vCPU NVMe) with Managed PostgreSQL and Managed Redis, and you get a production Dify stack where you never touch database administration. New users also get $200 in free credits — enough for nearly 7 months of a minimum-spec Droplet.</p>
@@ -356,9 +357,7 @@ function rankClass(rank: number) {
               <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">From $12/mo</div>
             </div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:1.75rem;font-weight:800;color:#111827;">4.2<span style="font-size:1rem;color:#F59E0B;">★</span></div>
-          </div>
+          <div><span class="score-badge score-blue" style="width:52px;height:52px;font-size:0.95rem;">4.2</span></div>
         </div>
         <div class="prose">
           <p>Vultr's High Frequency Compute plans use NVMe storage and deliver solid performance for Dify. At $12/mo for 4GB RAM / 2 vCPU / 65GB NVMe, Vultr lands between Hetzner's price and DigitalOcean's polish. With 32 server locations — the largest network of any provider on this list — Vultr is the best option for teams that need servers close to users in less-common regions like South Korea, Australia, or South America.</p>
@@ -380,9 +379,7 @@ function rankClass(rank: number) {
               <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">From $19/mo</div>
             </div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:1.75rem;font-weight:800;color:#111827;">4.0<span style="font-size:1rem;color:#F59E0B;">★</span></div>
-          </div>
+          <div><span class="score-badge score-blue" style="width:52px;height:52px;font-size:0.95rem;">4.0</span></div>
         </div>
         <div class="prose">
           <p>Elestio is the only fully managed Dify hosting option on this list. You click "Deploy Dify", choose your region and plan, and Elestio handles everything: Docker setup, SSL certificates, backups, monitoring, and version updates. For non-technical founders or teams who want AI workflows without any DevOps, it's genuinely the best option.</p>
@@ -401,9 +398,7 @@ function rankClass(rank: number) {
               <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">From $5/mo</div>
             </div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:1.75rem;font-weight:800;color:#111827;">3.8<span style="font-size:1rem;color:#F59E0B;">★</span></div>
-          </div>
+          <div><span class="score-badge score-yellow" style="width:52px;height:52px;font-size:0.95rem;">3.8</span></div>
         </div>
         <div class="prose">
           <p>Railway's usage-based pricing sounds attractive but requires careful monitoring. Dify's multi-container architecture can rack up costs quickly when memory usage spikes during heavy AI workflows. Railway is best suited for development and testing environments rather than production Dify deployments.</p>
@@ -422,9 +417,7 @@ function rankClass(rank: number) {
               <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">From $25/mo</div>
             </div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:1.75rem;font-weight:800;color:#111827;">3.7<span style="font-size:1rem;color:#F59E0B;">★</span></div>
-          </div>
+          <div><span class="score-badge score-yellow" style="width:52px;height:52px;font-size:0.95rem;">3.7</span></div>
         </div>
         <div class="prose">
           <p>Render's managed platform simplifies deployment but the cost per compute unit is high relative to VPS options. At $25/mo you get 2GB RAM on a shared CPU — not enough for comfortable Dify operation. Running the full Dify stack on Render requires a higher-tier plan, pushing costs well above alternatives. Render works for Dify but it's hard to recommend when cheaper options exist.</p>
@@ -442,9 +435,7 @@ function rankClass(rank: number) {
               <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">From ~$12/mo (4GB RAM)</div>
             </div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:1.75rem;font-weight:800;color:#111827;">3.9<span style="font-size:1rem;color:#F59E0B;">★</span></div>
-          </div>
+          <div><span class="score-badge score-yellow" style="width:52px;height:52px;font-size:0.95rem;">3.9</span></div>
         </div>
         <div class="prose">
           <p>Kamatera's advertised $4/mo entry price is misleading for Dify — that gets you only 1GB RAM, well below the 4GB minimum. A usable Dify configuration (4GB RAM, 2 vCPU, 20GB storage) costs around $12/mo, making it comparable to Vultr but with a less polished interface and a steeper learning curve. The 13-server-location footprint includes useful regions like Israel and South Africa that other providers miss.</p>

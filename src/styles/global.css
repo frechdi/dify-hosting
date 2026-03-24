@@ -88,6 +88,16 @@ p { font-size: 1rem; }
 .prose .btn-primary, .card .btn-primary { color: #FFFFFF; text-decoration: none; }
 .prose .btn-primary:hover, .card .btn-primary:hover { color: #FFFFFF; }
 
+.btn-visit {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  background: linear-gradient(to right, #2563EB, #3B82F6); color: #FFFFFF; font-weight: 600;
+  padding: 0.4rem 0.9rem; border-radius: 6px;
+  text-decoration: none; transition: transform 0.15s, box-shadow 0.2s;
+  border: none; cursor: pointer; font-size: 0.8rem; line-height: 1; white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(22,119,255,0.3);
+}
+.btn-visit:hover { transform: translateY(-1px) scale(1.03); box-shadow: 0 4px 14px rgba(22,119,255,0.45); }
+
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 0.5rem;
   background: #FFFFFF; color: #1677FF; font-weight: 600;
@@ -196,10 +206,28 @@ p { font-size: 1rem; }
 .cta-dark p { color: rgba(255,255,255,0.75); }
 
 .provider-icon {
-  width: 40px; height: 40px; border-radius: var(--radius-logo);
+  width: 48px; height: 48px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 1rem; flex-shrink: 0;
+  font-weight: 800; font-size: 1.1rem; flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
+.provider-icon-sm {
+  width: 36px; height: 36px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.85rem; flex-shrink: 0;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.12);
+}
+
+/* Score badge for ratings */
+.score-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: 50%;
+  font-weight: 800; font-size: 0.8rem; line-height: 1;
+  flex-shrink: 0;
+}
+.score-green { background: linear-gradient(135deg, #16A34A, #22C55E); color: white; box-shadow: 0 2px 8px rgba(34,197,94,0.35); }
+.score-blue  { background: linear-gradient(135deg, #1d4ed8, #3B82F6); color: white; box-shadow: 0 2px 8px rgba(59,130,246,0.35); }
+.score-yellow{ background: linear-gradient(135deg, #D97706, #FBBF24); color: white; box-shadow: 0 2px 8px rgba(251,191,36,0.35); }
 .spec-chip {
   display: inline-flex; align-items: center; gap: 0.3rem;
   background: #F3F4F6; color: #374151;
