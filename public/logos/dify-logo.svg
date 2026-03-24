@@ -1,11 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40">
   <defs>
     <linearGradient id="dg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4f46e5"/>
-      <stop offset="100%" style="stop-color:#7c3aed"/>
+      <stop offset="0%" style="stop-color:#1677FF"/>
+      <stop offset="100%" style="stop-color:#0958D9"/>
     </linearGradient>
   </defs>
   <rect x="0" y="4" width="32" height="32" rx="8" fill="url(#dg)"/>
-  <text x="16" y="26" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="18" fill="white">D</text>
-  <text x="42" y="27" font-family="Arial,sans-serif" font-weight="bold" font-size="20" fill="#1e1e2e">dify</text>
+  <text x="16" y="26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-weight="800" font-size="17" fill="white">D</text>
+  <text x="42" y="28" font-family="Inter,Arial,sans-serif" font-weight="700" font-size="18" fill="#111827">dify</text>
+  <text x="76" y="28" font-family="Inter,Arial,sans-serif" font-weight="700" font-size="18" fill="#1677FF">-hosting</text>
+  <text x="148" y="28" font-family="Inter,Arial,sans-serif" font-weight="400" font-size="18" fill="#9CA3AF">.com</text>
 </svg>
