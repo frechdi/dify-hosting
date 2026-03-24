@@ -8,34 +8,23 @@ const hreflang = getHreflang('/providers/railway/');
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Review',
-  name: 'Análisis de Dify Hosting en Railway 2026',
-  description: 'Despliega Dify en Railway con integración Git y autoescalado. Plan Hobby desde $5/mes con nivel gratuito. La mejor opción para desarrolladores que quieren simplicidad sin configuración.',
-  reviewRating: {
-    '@type': 'Rating',
-    ratingValue: '3.8',
-    bestRating: '5',
-    worstRating: '1',
-  },
+  name: 'Reseña de Railway para hosting de Dify 2026',
+  description: 'Despliega Dify en Railway con integración Git y autoescalado. Plan Hobby desde $5/mes con nivel gratuito. Ideal para desarrolladores que quieren simplicidad sobre configuración.',
+  reviewRating: { '@type': 'Rating', ratingValue: '3.8', bestRating: '5', worstRating: '1' },
   author: { '@type': 'Organization', name: 'Dify Hosting' },
-  itemReviewed: {
-    '@type': 'SoftwareApplication',
-    name: 'Railway PaaS',
-    url: 'https://railway.app',
-    applicationCategory: 'Cloud Hosting',
-  },
+  itemReviewed: { '@type': 'SoftwareApplication', name: 'Railway PaaS', url: 'https://railway.app', applicationCategory: 'Cloud Hosting' },
   datePublished: '2026-01-01',
   dateModified: '2026-03-01',
 };
 ---
 
 <BaseLayout
-  title="Análisis de Dify Hosting en Railway 2026 — Despliegue PaaS Sencillo"
-  description="Despliega Dify en Railway con integración Git y autoescalado. Plan Hobby desde $5/mes con nivel gratuito. La mejor opción para desarrolladores que quieren simplicidad sin configuración."
+  title="Reseña de Railway para hosting de Dify 2026 — Despliegue PaaS fácil"
+  description="Despliega Dify en Railway con integración Git y autoescalado. Plan Hobby desde $5/mes con nivel gratuito. Ideal para desarrolladores que quieren simplicidad sobre configuración."
   lang="es"
   canonical="https://dify-hosting.com/es/providers/railway/"
   hreflang={hreflang}
   schema={schema}
-  keywords="Railway Dify hosting, desplegar Dify Railway, Railway PaaS Dify, Railway nivel gratuito Dify, despliegue Dify fácil"
 >
   <!-- Hero -->
   <section class="section hero-gradient">
@@ -51,28 +40,28 @@ const schema = {
         <div style="flex:1;min-width:200px;">
           <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:0.5rem;">
             <span class="badge badge-success">Configuración más sencilla</span>
-            <span style="color:#6B7280;font-size:0.85rem;">Análisis de proveedor</span>
+            <span style="color:#6B7280;font-size:0.85rem;">Reseña de proveedor</span>
           </div>
           <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#111827;line-height:1.2;margin-bottom:0.5rem;">
-            Análisis de Dify Hosting en Railway 2026
+            Reseña de Railway para hosting de Dify 2026
           </h1>
           <p style="color:#4B5563;font-size:1.05rem;">PaaS orientado a desarrolladores con despliegues basados en Git. Sin gestión de servidores, despliegues instantáneos de Dify.</p>
         </div>
       </div>
 
-      <!-- Fila de valoración -->
+      <!-- Rating row -->
       <div class="card" style="display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;padding:1.25rem 1.5rem;margin-bottom:2rem;">
         <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
-          <div class="stars" aria-label="3.8 de 5 estrellas">
+          <div class="stars" aria-label="3.8 sobre 5 estrellas">
             <span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span class="empty">★</span>
           </div>
-          <span style="font-size:1.5rem;font-weight:800;color:#111827;">3.8<span style="font-size:0.9rem;color:#6B7280;">/5</span></span>
+          <span style="font-size:1.5rem;font-weight:800;color:#111827;">3,8<span style="font-size:0.9rem;color:#6B7280;">/5</span></span>
           <span style="font-size:0.75rem;color:#6B7280;font-weight:500;">Nuestra valoración</span>
         </div>
         <div style="width:1px;height:48px;background:#E2E8F0;flex-shrink:0;" class="hide-mobile"></div>
         <div style="display:flex;flex-wrap:wrap;gap:0.6rem;flex:1;">
           <span class="spec-chip">💰 Desde $5/mes</span>
-          <span class="spec-chip">☁️ Infraestructura gestionada</span>
+          <span class="spec-chip">☁️ Infra gestionada</span>
           <span class="spec-chip">🔁 Despliegue Git</span>
           <span class="spec-chip">📈 Autoescalado</span>
           <span class="spec-chip">💳 Precios por uso</span>
@@ -84,25 +73,25 @@ const schema = {
     </div>
   </section>
 
-  <!-- Descripción general -->
+  <!-- Overview -->
   <section class="section">
     <div class="container-sm prose">
       <h2>Descripción general</h2>
       <p>
-        Railway es un PaaS orientado a desarrolladores que hace que desplegar Dify sea tan sencillo como conectar un repositorio de GitHub. Sin gestión de servidores, sin líneas de comando Docker — solo haz push y despliega. El nivel gratuito ofrece <strong>$5 de crédito/mes</strong>, suficiente para pruebas y experimentación ligera.
+        Railway es un PaaS orientado a desarrolladores que hace que desplegar Dify sea tan simple como conectar un repositorio de GitHub. Sin gestión de servidores, sin líneas de comandos Docker — solo haz push y despliega. El nivel gratuito ofrece <strong>$5 de crédito/mes</strong>, suficiente para pruebas y experimentación ligera.
       </p>
       <p>
-        Sin embargo, el almacenamiento efímero y las limitaciones de PaaS de Railway significan que es más adecuado para <strong>entornos de desarrollo y staging</strong> que para cargas de trabajo de Dify en producción con grandes bibliotecas de documentos. Para equipos que procesan grandes volúmenes de documentos o que necesitan almacenamiento persistente de alto rendimiento, un VPS en Hetzner o Vultr será más rentable y fiable.
+        Sin embargo, el almacenamiento efímero y las limitaciones del PaaS de Railway hacen que sea más adecuado para <strong>entornos de desarrollo y staging</strong> que para cargas de trabajo de Dify en producción con grandes bibliotecas de documentos. Para equipos que procesan grandes volúmenes de documentos o necesitan almacenamiento persistente de alto rendimiento, un VPS en Hetzner o Vultr será más rentable y fiable.
       </p>
     </div>
   </section>
 
-  <!-- Tabla de planes -->
+  <!-- Plans Table -->
   <section class="section section-alt">
     <div class="container-sm">
       <span class="section-label">Precios</span>
       <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Planes de Railway para Dify</h2>
-      <p style="color:#4B5563;margin-bottom:1.5rem;">Precios por uso además de las tarifas del plan base. Cómputo: $0.000463/vCPU/min, Memoria: $0.000231/GB RAM/min.</p>
+      <p style="color:#4B5563;margin-bottom:1.5rem;">Precios por uso sobre las tarifas del plan base. Cómputo: $0,000463/vCPU/min, Memoria: $0,000231/GB RAM/min.</p>
       <div style="overflow-x:auto;border-radius:12px;border:1px solid #E2E8F0;">
         <table class="comparison-table">
           <thead>
@@ -119,7 +108,7 @@ const schema = {
             <tr>
               <td>Trial</td>
               <td class="price">Gratis</td>
-              <td>Compartido</td>
+              <td>Compartida</td>
               <td>Hasta 512 MB</td>
               <td>Efímero</td>
               <td>Solo pruebas</td>
@@ -127,59 +116,59 @@ const schema = {
             <tr>
               <td>Hobby</td>
               <td class="price">$5/mes + uso</td>
-              <td>Compartido</td>
+              <td>Compartida</td>
               <td>Hasta 8 GB</td>
               <td>Persistente limitado</td>
-              <td>Dev / Staging</td>
+              <td>Desarrollo / Staging</td>
             </tr>
             <tr style="background:#F0F7FF;">
               <td><strong>Pro</strong></td>
               <td class="price"><strong>$20/mes + uso</strong></td>
-              <td>Compartido</td>
+              <td>Compartida</td>
               <td>Hasta 32 GB</td>
-              <td>Volúmenes montados</td>
-              <td><span class="check">✅</span> <strong>Producción pequeña</strong></td>
+              <td>Montajes de volumen</td>
+              <td><span class="check">✅</span> <strong>Pequeña producción</strong></td>
             </tr>
             <tr>
               <td>Team</td>
-              <td class="price">$20/puesto + uso</td>
-              <td>Prioritario</td>
+              <td class="price">$20/seat + uso</td>
+              <td>Prioritaria</td>
               <td>Hasta 32 GB</td>
-              <td>Volúmenes montados</td>
+              <td>Montajes de volumen</td>
               <td>Equipos</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p style="color:#6B7280;font-size:0.8rem;margin-top:0.75rem;">Precios por uso: $0.000463/vCPU/min · $0.000231/GB RAM/min. Los costes pueden acumularse en cargas de trabajo siempre activas.</p>
+      <p style="color:#6B7280;font-size:0.8rem;margin-top:0.75rem;">Precios por uso: $0,000463/vCPU/min · $0,000231/GB RAM/min. Los costes pueden acumularse en cargas de trabajo siempre activas.</p>
     </div>
   </section>
 
-  <!-- Ventajas e inconvenientes -->
+  <!-- Pros & Cons -->
   <section class="section">
     <div class="container-sm">
       <span class="section-label">Evaluación</span>
-      <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Ventajas e inconvenientes</h2>
+      <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Ventajas y desventajas</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;">
         <div class="card">
           <h3 style="font-size:1rem;font-weight:700;color:#16A34A;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">
             <span>✅</span> Ventajas
           </h3>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem;">
-            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Despliegue ultrarrápido desde GitHub</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Despliegue simplísimo desde GitHub</li>
             <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> HTTPS automático y dominios personalizados</li>
-            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Servicios integrados de Postgres y Redis</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Servicios Postgres y Redis integrados</li>
             <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Integración con GitHub Actions</li>
-            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Excelente experiencia de desarrollador (DX)</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Excelente experiencia de desarrollador</li>
             <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Reversiones instantáneas a cualquier despliegue anterior</li>
           </ul>
         </div>
         <div class="card">
           <h3 style="font-size:1rem;font-weight:700;color:#DC2626;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">
-            <span>❌</span> Inconvenientes
+            <span>❌</span> Desventajas
           </h3>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem;">
-            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#DC2626;flex-shrink:0;">−</span> No ideal para almacenamiento masivo de documentos</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#DC2626;flex-shrink:0;">−</span> No ideal para almacenamiento intensivo de documentos</li>
             <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#DC2626;flex-shrink:0;">−</span> Puede encarecerse a escala con precios por uso</li>
             <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#DC2626;flex-shrink:0;">−</span> Menos control sobre la infraestructura subyacente</li>
             <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#DC2626;flex-shrink:0;">−</span> Arranques en frío en el nivel gratuito</li>
@@ -190,7 +179,7 @@ const schema = {
     </div>
   </section>
 
-  <!-- Pasos de configuración -->
+  <!-- Setup Steps -->
   <section class="section section-alt">
     <div class="container-sm">
       <span class="section-label">Primeros pasos</span>
@@ -199,11 +188,11 @@ const schema = {
         {[
           { n: 1, title: 'Crear una cuenta en Railway', desc: 'Regístrate en railway.app y conecta tu cuenta de GitHub.' },
           { n: 2, title: 'Hacer un fork del repositorio de Dify', desc: 'Haz un fork de langgenius/dify en tu cuenta de GitHub para que Railway pueda desplegarlo.' },
-          { n: 3, title: 'Añadir un servicio PostgreSQL', desc: 'En tu proyecto de Railway, añade un nuevo servicio de base de datos PostgreSQL.' },
-          { n: 4, title: 'Añadir un servicio Redis', desc: 'Añade un servicio Redis — Railway ofrece ambos como servicios de primera clase.' },
-          { n: 5, title: 'Configurar las variables de entorno', desc: 'Configura SECRET_KEY, DB_USERNAME, DB_PASSWORD y otros valores .env requeridos.' },
-          { n: 6, title: 'Desplegar desde GitHub', desc: 'Crea un nuevo Web Service apuntando a tu fork del repositorio de Dify. Railway gestiona el resto.' },
-          { n: 7, title: 'Añadir un dominio personalizado', desc: 'En la configuración del servicio, añade tu dominio personalizado y Railway aprovisiona SSL automáticamente.' },
+          { n: 3, title: 'Añadir un servicio de PostgreSQL', desc: 'En tu proyecto de Railway, añade un nuevo servicio de base de datos PostgreSQL.' },
+          { n: 4, title: 'Añadir un servicio de Redis', desc: 'Añade un servicio de Redis — Railway proporciona ambos como servicios de primera clase.' },
+          { n: 5, title: 'Establecer variables de entorno', desc: 'Configura SECRET_KEY, DB_USERNAME, DB_PASSWORD y otros valores requeridos en .env.' },
+          { n: 6, title: 'Desplegar desde GitHub', desc: 'Crea un nuevo Servicio Web apuntando a tu fork de Dify. Railway se encarga del resto.' },
+          { n: 7, title: 'Añadir un dominio personalizado', desc: 'En la configuración del servicio, añade tu dominio personalizado y Railway provisiona SSL automáticamente.' },
         ].map(step => (
           <div style="display:flex;gap:1rem;align-items:flex-start;">
             <div class="step-number">{step.n}</div>
@@ -217,14 +206,14 @@ const schema = {
     </div>
   </section>
 
-  <!-- Veredicto + CTA -->
+  <!-- Verdict + CTA -->
   <section class="section">
     <div class="container-sm">
       <div class="card" style="text-align:center;padding:2.5rem;border-color:#E2E8F0;">
         <span class="section-label">Nuestro veredicto</span>
-        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0.5rem 0 1rem;">Genial para Dev/Staging, limitado para producción</h2>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0.5rem 0 1rem;">Excelente para desarrollo/staging, limitado para producción</h2>
         <p style="color:#4B5563;max-width:560px;margin:0 auto 1.75rem;">
-          Perfecto para desarrolladores que quieren probar Dify o ejecutar despliegues de bajo tráfico sin tocar un servidor. No se recomienda para entornos de producción con grandes conjuntos de datos o bibliotecas de documentos — las restricciones de almacenamiento y los precios por uso se convierten en factores limitantes.
+          Perfecto para desarrolladores que quieren probar Dify o ejecutar despliegues de bajo tráfico sin tocar un servidor. No recomendado para entornos de producción con grandes conjuntos de datos o bibliotecas de documentos — las restricciones de almacenamiento y los precios por uso se convierten en factores limitantes.
         </p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
           <a href="https://railway.app?ref=difyhosting" rel="nofollow noopener" target="_blank" class="btn-primary">
@@ -236,13 +225,13 @@ const schema = {
     </div>
   </section>
 
-  <!-- Enlaces internos -->
+  <!-- Internal links -->
   <section class="section section-alt">
     <div class="container-sm">
       <h2 style="font-size:1.2rem;font-weight:700;color:#111827;margin-bottom:1rem;">Guías relacionadas</h2>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
         <a href="/es/best-dify-hosting/" class="btn-secondary" style="font-size:0.875rem;">Mejor hosting para Dify 2026</a>
-        <a href="/es/providers/render/" class="btn-secondary" style="font-size:0.875rem;">Análisis de Render</a>
+        <a href="/es/providers/render/" class="btn-secondary" style="font-size:0.875rem;">Reseña de Render</a>
         <a href="/es/guides/self-host-dify/" class="btn-secondary" style="font-size:0.875rem;">Guía de autoalojamiento de Dify</a>
       </div>
     </div>
