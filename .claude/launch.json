@@ -3,14 +3,14 @@
   "configurations": [
     {
       "name": "Astro Dev Server",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/xenot/OneDrive/Documents/Claude Code Folder/dify-hosting/node_modules/astro/astro.js", "dev"],
       "port": 4321
     },
     {
       "name": "Astro Preview Server",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "preview"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/xenot/OneDrive/Documents/Claude Code Folder/dify-hosting/node_modules/astro/astro.js", "preview"],
       "port": 4321
     }
   ]

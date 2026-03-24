@@ -47,7 +47,7 @@ const schema = {
       ]} />
 
       <div style="display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.5rem;">
-        <div class="provider-icon" style="background:#46E3B7;color:#0A3622;font-size:1.1rem;width:56px;height:56px;">R</div>
+        <div style="width:56px;height:56px;border-radius:14px;border:1px solid #E5E7EB;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;flex-shrink:0;"><img src="/logos/render-logo.svg" alt="render logo" width="36" height="36" style="object-fit:contain;" /></div>
         <div style="flex:1;min-width:200px;">
           <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:0.5rem;">
             <span class="badge badge-primary">Simple Deployment</span>
@@ -78,7 +78,7 @@ const schema = {
           <span class="spec-chip">🌍 US & EU</span>
           <span class="spec-chip">🔁 Auto-Deploy</span>
         </div>
-        <a href="https://render.com?ref=difyhosting" rel="nofollow noopener" target="_blank" class="btn-primary">
+        <a href="/go/render" rel="nofollow noopener" target="_blank" class="btn-primary">
           Try Render →
         </a>
       </div>
@@ -234,7 +234,7 @@ const schema = {
           Render offers the easiest Dify setup on this list — but at a significant cost premium. Only recommended if you absolutely need zero server management and have the budget for it. For most teams, a Hetzner or DigitalOcean VPS offers far better value.
         </p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-          <a href="https://render.com?ref=difyhosting" rel="nofollow noopener" target="_blank" class="btn-primary">
+          <a href="/go/render" rel="nofollow noopener" target="_blank" class="btn-primary">
             Try Render →
           </a>
           <a href="/en/best-dify-hosting/" class="btn-secondary">Compare All Providers</a>
@@ -254,4 +254,29 @@ const schema = {
       </div>
     </div>
   </section>
+
+  <!-- Sticky CTA -->
+  <div id="sticky-cta" style="position:fixed;bottom:0;left:0;right:0;z-index:40;background:#fff;border-top:1px solid #e5e7eb;box-shadow:0 -4px 20px rgba(0,0,0,0.08);padding:0.875rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;transform:translateY(100%);transition:transform 0.3s ease;">
+    <div style="display:flex;align-items:center;gap:0.75rem;min-width:0;">
+      <img src="/logos/render-logo.svg" alt="Render" width="28" height="28" style="object-fit:contain;flex-shrink:0;" />
+      <div style="min-width:0;">
+        <div style="font-size:0.8125rem;font-weight:700;color:#111827;white-space:nowrap;">Render</div>
+        <div style="font-size:0.75rem;color:#6b7280;">From Free–$25 · Dify-ready</div>
+      </div>
+    </div>
+    <a href="/go/render" style="flex-shrink:0;background:#4f46e5;color:#fff;font-size:0.875rem;font-weight:700;padding:0.625rem 1.25rem;border-radius:0.625rem;text-decoration:none;white-space:nowrap;">Try Render →</a>
+    <button onclick="document.getElementById('sticky-cta').style.display='none'" style="flex-shrink:0;background:none;border:none;color:#9ca3af;cursor:pointer;font-size:1.1rem;padding:0.25rem;line-height:1;">✕</button>
+  </div>
+  <script>
+    (function(){
+      var cta = document.getElementById('sticky-cta');
+      var shown = false;
+      window.addEventListener('scroll', function(){
+        if (!shown && window.scrollY > 600) {
+          shown = true;
+          cta.style.transform = 'translateY(0)';
+        }
+      }, {passive:true});
+    })();
+  </script>
 </BaseLayout>
