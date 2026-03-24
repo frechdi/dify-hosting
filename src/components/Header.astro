@@ -11,11 +11,11 @@ const navItems = [
   { href:`${base}/blog`, label:t.nav.blog },
 ];
 const langs = [
-  {code:'en',label:'EN',flag:'🇺🇸',name:'English'},
-  {code:'de',label:'DE',flag:'🇩🇪',name:'Deutsch'},
-  {code:'fr',label:'FR',flag:'🇫🇷',name:'Français'},
-  {code:'es',label:'ES',flag:'🇪🇸',name:'Español'},
-  {code:'it',label:'IT',flag:'🇮🇹',name:'Italiano'},
+  {code:'en',label:'EN',flag:'us',name:'English'},
+  {code:'de',label:'DE',flag:'de',name:'Deutsch'},
+  {code:'fr',label:'FR',flag:'fr',name:'Français'},
+  {code:'es',label:'ES',flag:'es',name:'Español'},
+  {code:'it',label:'IT',flag:'it',name:'Italiano'},
 ];
 const currentPath = Astro.url.pathname.replace(/^\/(en|de|fr|es|it)/,'') || '/';
 ---
@@ -35,14 +35,14 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|de|fr|es|it)/,'') || '/';
     <div style="display:flex;align-items:center;gap:0.75rem;">
       <div style="position:relative;" id="lang-switcher">
         <button id="lang-btn" style="display:flex;align-items:center;gap:0.4rem;background:#F8FAFF;border:1px solid #E2E8F0;border-radius:8px;padding:0.4rem 0.7rem;color:#374151;cursor:pointer;font-size:0.825rem;font-weight:600;font-family:Inter,sans-serif;transition:border-color 0.15s;">
-          <span>{langs.find(l=>l.code===lang)?.flag}</span>
+          <img src={`https://flagcdn.com/20x15/${langs.find(l=>l.code===lang)?.flag}.png`} width="20" height="15" alt={lang} style="border-radius:2px;flex-shrink:0;" />
           <span>{lang.toUpperCase()}</span>
           <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" style="opacity:0.5;"><path d="M5 7L1 3h8z"/></svg>
         </button>
         <div id="lang-dropdown" style="display:none;position:absolute;top:calc(100%+6px);right:0;background:white;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden;min-width:140px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:100;">
           {langs.map(l=>(
             <a href={`/${l.code}${currentPath}`} style={`display:flex;align-items:center;gap:0.6rem;padding:0.6rem 1rem;color:${l.code===lang?'#1677FF':'#374151'};text-decoration:none;font-size:0.85rem;font-weight:${l.code===lang?'600':'400'};background:${l.code===lang?'#EFF6FF':'white'};transition:background 0.1s;`} onmouseover={`this.style.background='${l.code===lang?'#DBEAFE':'#F9FAFB'}'`} onmouseout={`this.style.background='${l.code===lang?'#EFF6FF':'white'}'`}>
-              <span style="font-size:1rem;">{l.flag}</span>
+              <img src={`https://flagcdn.com/20x15/${l.flag}.png`} width="20" height="15" alt={l.name} style="border-radius:2px;flex-shrink:0;" />
               <span>{l.name}</span>
             </a>
           ))}
@@ -60,7 +60,10 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|de|fr|es|it)/,'') || '/';
     ))}
     <div style="display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap;">
       {langs.map(l=>(
-        <a href={`/${l.code}${currentPath}`} style={`font-size:0.8rem;padding:0.3rem 0.6rem;border-radius:6px;border:1px solid ${l.code===lang?'#BAD7FF':'#E2E8F0'};background:${l.code===lang?'#EFF6FF':'white'};color:${l.code===lang?'#1677FF':'#6B7280'};text-decoration:none;font-weight:${l.code===lang?'600':'400'};`}>{l.flag} {l.label}</a>
+        <a href={`/${l.code}${currentPath}`} style={`display:flex;align-items:center;gap:0.35rem;font-size:0.8rem;padding:0.3rem 0.6rem;border-radius:6px;border:1px solid ${l.code===lang?'#BAD7FF':'#E2E8F0'};background:${l.code===lang?'#EFF6FF':'white'};color:${l.code===lang?'#1677FF':'#6B7280'};text-decoration:none;font-weight:${l.code===lang?'600':'400'};`}>
+          <img src={`https://flagcdn.com/20x15/${l.flag}.png`} width="16" height="12" alt={l.name} style="border-radius:1px;" />
+          {l.label}
+        </a>
       ))}
     </div>
   </div>
