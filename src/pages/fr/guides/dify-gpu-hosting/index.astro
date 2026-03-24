@@ -2,80 +2,354 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../../components/Breadcrumb.astro';
 import { getHreflang } from '../../../../i18n/hreflang';
+
 const hreflang = getHreflang('/guides/dify-gpu-hosting/');
+
+const gpuProviders = [
+  { provider: 'Lambda Labs', gpu: 'A10', vram: '24 Go', price: '0,75 $/h', best: 'Développement' },
+  { provider: 'Vast.ai', gpu: 'RTX 4090', vram: '24 Go', price: '~0,35 $/h', best: 'Économique' },
+  { provider: 'RunPod', gpu: 'A100', vram: '80 Go', price: '1,99 $/h', best: 'Production' },
+  { provider: 'CoreWeave', gpu: 'H100', vram: '80 Go', price: '2,50 $/h', best: 'Entreprise' },
+  { provider: 'Hetzner GPU', gpu: 'A100', vram: '80 Go', price: '2,49 EUR/h', best: 'Conformité EU' },
+];
+
+const models = [
+  { name: 'llama3.1:8b', vram: '~6 Go', speed: 'Rapide', best: 'Usage général, chat' },
+  { name: 'mistral:7b', vram: '~5 Go', speed: 'Très rapide', best: 'Applications critiques en vitesse' },
+  { name: 'codellama:13b', vram: '~10 Go', speed: 'Moyen', best: 'Génération de code' },
+  { name: 'llama3.1:70b', vram: '~40 Go', speed: 'Lent', best: 'Sorties haute qualité' },
+  { name: 'mixtral:8x7b', vram: '~26 Go', speed: 'Moyen', best: 'Équilibre qualité/vitesse' },
+];
+
+const cudaInstallCode = `# Vérifier si le pilote NVIDIA est déjà installé
+nvidia-smi
+
+# Si non installé, ajouter le dépôt NVIDIA
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt update
+
+# Installer le toolkit CUDA (inclut les pilotes)
+sudo apt install -y cuda-toolkit-12-3
+
+# Redémarrage requis après l'installation du pilote
+sudo reboot`;
+
+const cudaVerifyCode = `# Après le redémarrage, vérifier que le GPU est détecté
+nvidia-smi
+
+# Installer le NVIDIA Container Toolkit (pour l'accès GPU depuis Docker)
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+sudo apt update && sudo apt install -y nvidia-container-toolkit
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker`;
+
+const ollamaInstallCode = `# Installer Ollama (installateur en une ligne)
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Vérifier qu'Ollama fonctionne
+ollama list
+
+# Télécharger des modèles LLM
+ollama pull llama3.1:8b
+ollama pull mistral:7b
+ollama pull codellama:13b
+
+# Tester un modèle
+ollama run llama3.1:8b "Bonjour, que peux-tu faire ?"`;
+
+const ollamaBindCode = `# Modifier le service systemd d'Ollama pour écouter sur toutes les interfaces
+sudo systemctl edit ollama --force --full
+
+# Trouver la section [Service] et ajouter :
+# Environment="OLLAMA_HOST=0.0.0.0:11434"
+
+# Appliquer les changements
+sudo systemctl daemon-reload
+sudo systemctl restart ollama`;
+
+const dockerOverrideCode = `services:
+  api:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  worker:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"`;
+
+const localAICode = `# Lancer LocalAI avec Docker (avec GPU activé)
+docker run -d --gpus all -p 8080:8080 -v /path/to/models:/models --name local-ai localai/localai:latest-aio-gpu-nvidia-cuda-12`;
+
+const howToSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Comment exécuter des LLM locaux avec Dify sur des serveurs GPU",
+  "description": "Guide étape par étape pour exécuter Ollama ou LocalAI avec Dify sur des serveurs GPU, couvrant la configuration CUDA, l'intégration Ollama et l'exécution locale de Llama 3 et Mistral.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Installer CUDA et le NVIDIA Container Toolkit",
+      "text": "Installer le toolkit CUDA 12.3 et le NVIDIA Container Toolkit pour activer l'accès GPU depuis les conteneurs Docker."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Installer Ollama et télécharger des modèles LLM",
+      "text": "Installer Ollama sur le serveur GPU, le configurer pour écouter sur toutes les interfaces réseau et télécharger les modèles LLM."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Connecter Dify à Ollama",
+      "text": "Dans Dify, naviguer vers Paramètres > Fournisseur de modèle > Ollama et configurer l'URL de l'endpoint."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Utiliser LocalAI comme alternative",
+      "text": "Déployer LocalAI avec Docker comme alternative compatible OpenAI à Ollama pour servir des modèles locaux."
+    }
+  ]
+});
 ---
+
 <BaseLayout
-  title="Dify GPU Hosting 2026 — LLMs Locaux avec Ollama"
-  description="Comment exécuter des LLMs locaux avec Dify et Ollama sur un serveur GPU. Comparatif des fournisseurs GPU."
+  title="Guide d'hébergement GPU pour Dify 2026 — Exécuter des LLM locaux avec Dify"
+  description="Exécutez Ollama ou LocalAI avec Dify sur des serveurs GPU. Guide couvrant le choix du fournisseur GPU, la configuration CUDA, l'intégration Ollama et l'exécution locale de Llama 3, Mistral."
   lang="fr"
   canonical="https://dify-hosting.com/fr/guides/dify-gpu-hosting/"
   hreflang={hreflang}
 >
-  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
-    <div class="container-sm">
-      <Breadcrumb items={[{"label":"Accueil","href":"/fr/"},{"label":"Guides","href":"/fr/guides/"},{"label":"Dify GPU Hosting 2026"}]} />
-      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
-        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Updated March 2026</span>
+
+  <script type="application/ld+json" set:text={howToSchema}></script>
+
+  <!-- Hero -->
+  <section style="background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 50%,#0f172a 100%);color:#fff;padding:3rem 1rem 2.5rem;">
+    <div style="max-width:860px;margin:0 auto;">
+      <Breadcrumb items={[
+        { label: 'Accueil', href: '/fr/' },
+        { label: 'Guides', href: '/fr/guides/' },
+        { label: 'Hébergement GPU' }
+      ]} />
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin:1rem 0;">
+        <span style="background:rgba(99,102,241,0.25);color:#c7d2fe;border:1px solid rgba(99,102,241,0.4);border-radius:9999px;padding:0.25rem 0.75rem;font-size:0.8rem;font-weight:600;">Mis à jour mars 2026</span>
+        <span style="background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.35);border-radius:9999px;padding:0.25rem 0.75rem;font-size:0.8rem;font-weight:600;">0 € de coûts API</span>
       </div>
-      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">Dify GPU Hosting 2026</h1>
-      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">Exécutez des LLMs locaux sans coûts d'API. Connectez Ollama à Dify pour une inférence privée et rapide.</p>
+      <h1 style="font-size:clamp(1.75rem,4vw,2.75rem);font-weight:800;line-height:1.2;margin:0 0 1rem;">Guide d'hébergement GPU pour Dify 2026<br/>Exécuter des LLM locaux avec Dify</h1>
+      <p style="font-size:1.1rem;color:#cbd5e1;max-width:680px;line-height:1.7;margin:0;">Hébergez Dify sur un serveur GPU et connectez-le à Ollama ou LocalAI pour exécuter Llama 3, Mistral et d'autres modèles open source localement — sans coûts d'API par token et avec une confidentialité totale des données.</p>
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="container-sm">
-      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Fournisseurs GPU pour Dify</h2>
-      <div style="overflow-x:auto;">
-        <table class="comparison-table">
-          <thead><tr><th>Provider</th><th>GPU</th><th>VRAM</th><th>Price/hr</th><th>Best For</th></tr></thead>
+  <div style="max-width:860px;margin:0 auto;padding:2rem 1rem;">
+
+    <!-- Pourquoi GPU -->
+    <section style="margin-bottom:3rem;">
+      <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Pourquoi exécuter Dify sur un serveur GPU ?</h2>
+      <p style="color:#6b7280;margin-bottom:1.5rem;">Connecter Dify à un LLM hébergé localement via Ollama ou LocalAI supprime toute dépendance aux fournisseurs d'IA cloud. Voici ce que vous gagnez :</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:0.75rem;padding:1.25rem;">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">💰</div>
+          <h3 style="font-size:1rem;font-weight:700;color:#14532d;margin:0 0 0.4rem;">Zéro coût API</h3>
+          <p style="font-size:0.875rem;color:#166534;margin:0;">Payez uniquement le serveur GPU — pas de coût par token. L'utilisation intensive devient dramatiquement moins chère.</p>
+        </div>
+        <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:0.75rem;padding:1.25rem;">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">🔒</div>
+          <h3 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:0 0 0.4rem;">Confidentialité des données</h3>
+          <p style="font-size:0.875rem;color:#1e40af;margin:0;">Les prompts et réponses ne quittent jamais votre infrastructure — essentiel pour les secteurs réglementés.</p>
+        </div>
+        <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:0.75rem;padding:1.25rem;">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">🧩</div>
+          <h3 style="font-size:1rem;font-weight:700;color:#3b0764;margin:0 0 0.4rem;">Modèles personnalisés</h3>
+          <p style="font-size:0.875rem;color:#6b21a8;margin:0;">Exécutez des modèles fine-tunés ou spécialisés non disponibles via aucune API publique.</p>
+        </div>
+        <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:0.75rem;padding:1.25rem;">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">🚀</div>
+          <h3 style="font-size:1rem;font-weight:700;color:#431407;margin:0 0 0.4rem;">Sans limites de débit</h3>
+          <p style="font-size:0.875rem;color:#c2410c;margin:0;">Envoyez autant de requêtes que votre GPU peut en gérer — sans throttling ni erreurs de quota.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tableau des fournisseurs GPU -->
+    <section style="margin-bottom:3rem;">
+      <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Comparatif des fournisseurs GPU cloud</h2>
+      <p style="color:#6b7280;margin-bottom:1.25rem;">Les prix sont des tarifs à la demande approximatifs début 2026. Les instances réservées et spot sont généralement moins chères.</p>
+      <div style="overflow-x:auto;border-radius:0.75rem;border:1px solid #e5e7eb;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+          <thead>
+            <tr style="background:#f9fafb;border-bottom:2px solid #e5e7eb;">
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Fournisseur</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">GPU</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">VRAM</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Prix/h</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Idéal pour</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Vast.ai</td><td>RTX 4090</td><td>24 GB</td><td>~$0.35</td><td>Budget</td></tr>
-            <tr style="background:#F0F7FF;"><td><strong>RunPod</strong></td><td>A100</td><td>80 GB</td><td>$1.99</td><td>Production</td></tr>
-            <tr><td>Lambda Labs</td><td>A10</td><td>24 GB</td><td>$0.75</td><td>Development</td></tr>
-            <tr><td>Hetzner GPU</td><td>A100</td><td>80 GB</td><td>€2.49</td><td>EU compliance</td></tr>
+            {gpuProviders.map((p, i) => (
+              <tr style={i % 2 === 0 ? 'border-bottom:1px solid #e5e7eb;' : 'border-bottom:1px solid #e5e7eb;background:#f9fafb;'}>
+                <td style="padding:0.75rem 1rem;font-weight:600;color:#111827;">{p.provider}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{p.gpu}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{p.vram}</td>
+                <td style="padding:0.75rem 1rem;color:#059669;font-weight:600;">{p.price}</td>
+                <td style="padding:0.75rem 1rem;color:#6b7280;">{p.best}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container-sm">
-      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1rem;">Modèles LLM recommandés</h2>
-      <div style="overflow-x:auto;">
-        <table class="comparison-table">
-          <thead><tr><th>Model</th><th>VRAM</th><th>Speed</th><th>Best For</th></tr></thead>
+    </section>
+
+    <!-- Étape 1 : Installer CUDA -->
+    <section style="margin-bottom:3rem;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <div style="background:#6366f1;color:#fff;border-radius:9999px;width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">1</div>
+        <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin:0;">Installer CUDA et le NVIDIA Container Toolkit</h2>
+      </div>
+      <p style="color:#374151;margin-bottom:1rem;">Avant d'installer Dify ou Ollama, vous avez besoin des pilotes NVIDIA CUDA et du Container Toolkit pour que les conteneurs Docker puissent accéder au GPU.</p>
+
+      <h3 style="font-size:1rem;font-weight:600;color:#374151;margin-bottom:0.5rem;">Installer le toolkit CUDA 12.3</h3>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code set:text={cudaInstallCode}/></pre>
+
+      <h3 style="font-size:1rem;font-weight:600;color:#374151;margin:1.25rem 0 0.5rem;">Vérifier le GPU et configurer Docker</h3>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code set:text={cudaVerifyCode}/></pre>
+
+      <p style="color:#6b7280;font-size:0.875rem;margin-top:0.75rem;">Après avoir exécuté <code style="background:#f3f4f6;padding:0.1rem 0.35rem;border-radius:0.25rem;">nvidia-smi</code>, vous devriez voir votre GPU listé avec sa version de pilote et sa VRAM. Si Docker peut maintenant utiliser <code style="background:#f3f4f6;padding:0.1rem 0.35rem;border-radius:0.25rem;">--gpus all</code>, vous êtes prêt pour l'étape suivante.</p>
+    </section>
+
+    <!-- Étape 2 : Installer Ollama -->
+    <section style="margin-bottom:3rem;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <div style="background:#6366f1;color:#fff;border-radius:9999px;width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">2</div>
+        <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin:0;">Installer Ollama et télécharger des modèles LLM</h2>
+      </div>
+      <p style="color:#374151;margin-bottom:1rem;">Ollama est le moyen le plus simple de servir des LLM open source sur votre GPU. Il détecte automatiquement CUDA et utilise le GPU pour l'inférence.</p>
+
+      <h3 style="font-size:1rem;font-weight:600;color:#374151;margin-bottom:0.5rem;">Installer Ollama et télécharger des modèles</h3>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code set:text={ollamaInstallCode}/></pre>
+
+      <h3 style="font-size:1rem;font-weight:600;color:#374151;margin:1.25rem 0 0.5rem;">Lier Ollama à toutes les interfaces réseau</h3>
+      <p style="color:#6b7280;font-size:0.875rem;margin-bottom:0.5rem;">Par défaut, Ollama n'écoute que sur localhost. Pour le rendre accessible depuis les conteneurs Docker de Dify, vous devez le lier à <code style="background:#f3f4f6;padding:0.1rem 0.35rem;border-radius:0.25rem;">0.0.0.0</code> :</p>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code set:text={ollamaBindCode}/></pre>
+
+      <h3 style="font-size:1rem;font-weight:600;color:#374151;margin:1.25rem 0 0.5rem;">Configurer docker-compose.override.yaml</h3>
+      <p style="color:#6b7280;font-size:0.875rem;margin-bottom:0.5rem;">Créez ou modifiez <code style="background:#f3f4f6;padding:0.1rem 0.35rem;border-radius:0.25rem;">docker-compose.override.yaml</code> dans votre répertoire Dify pour que les conteneurs puissent résoudre <code style="background:#f3f4f6;padding:0.1rem 0.35rem;border-radius:0.25rem;">host.docker.internal</code> vers la machine hôte sous Linux :</p>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code set:text={dockerOverrideCode}/></pre>
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:0.5rem;padding:0.875rem 1rem;margin-top:0.75rem;">
+        <p style="color:#92400e;font-size:0.875rem;margin:0;"><strong>Note :</strong> Sur macOS et Windows, <code style="background:rgba(0,0,0,0.08);padding:0.1rem 0.3rem;border-radius:0.2rem;">host.docker.internal</code> se résout automatiquement. Sur Linux, l'entrée <code style="background:rgba(0,0,0,0.08);padding:0.1rem 0.3rem;border-radius:0.2rem;">extra_hosts</code> ci-dessus est requise.</p>
+      </div>
+    </section>
+
+    <!-- Étape 3 : Connecter Dify à Ollama -->
+    <section style="margin-bottom:3rem;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <div style="background:#6366f1;color:#fff;border-radius:9999px;width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">3</div>
+        <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin:0;">Connecter Dify à Ollama</h2>
+      </div>
+      <p style="color:#374151;margin-bottom:1.25rem;">Avec Ollama en fonctionnement et accessible, ajoutez-le comme fournisseur de modèle dans Dify :</p>
+      <ol style="color:#374151;padding-left:1.5rem;line-height:2;">
+        <li>Ouvrez votre instance Dify et cliquez sur votre avatar en haut à droite.</li>
+        <li>Allez dans <strong>Paramètres</strong> puis <strong>Fournisseur de modèle</strong>.</li>
+        <li>Faites défiler pour trouver <strong>Ollama</strong> et cliquez sur <strong>Ajouter un modèle</strong>.</li>
+        <li>Définissez l'<strong>URL de base</strong> sur <code style="background:#f3f4f6;padding:0.15rem 0.4rem;border-radius:0.25rem;">http://host.docker.internal:11434</code>.</li>
+        <li>Entrez le <strong>nom du modèle</strong> exactement tel qu'il apparaît dans <code style="background:#f3f4f6;padding:0.15rem 0.4rem;border-radius:0.25rem;">ollama list</code> (par exemple <code style="background:#f3f4f6;padding:0.15rem 0.4rem;border-radius:0.25rem;">llama3.1:8b</code>).</li>
+        <li>Cliquez sur <strong>Enregistrer</strong> — Dify testera la connexion. Une coche verte confirme le succès.</li>
+        <li>Le modèle est maintenant disponible dans toutes vos applications et workflows Dify.</li>
+      </ol>
+      <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:0.5rem;padding:0.875rem 1rem;margin-top:0.5rem;">
+        <p style="color:#0c4a6e;font-size:0.875rem;margin:0;"><strong>Conseil :</strong> Répétez l'étape 5 pour chaque modèle téléchargé. Vous pouvez ajouter autant de modèles Ollama que vous le souhaitez — chacun apparaît comme un modèle sélectionnable distinct dans Dify.</p>
+      </div>
+    </section>
+
+    <!-- Étape 4 : LocalAI -->
+    <section style="margin-bottom:3rem;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <div style="background:#6366f1;color:#fff;border-radius:9999px;width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">4</div>
+        <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin:0;">LocalAI — Une alternative compatible OpenAI</h2>
+      </div>
+      <p style="color:#374151;margin-bottom:1rem;">Si vous préférez une surface d'API compatible OpenAI, LocalAI est une excellente alternative à Ollama. Il expose des endpoints comme <code style="background:#f3f4f6;padding:0.15rem 0.4rem;border-radius:0.25rem;">/v1/chat/completions</code> pour que vous puissiez utiliser l'intégration OpenAI existante de Dify sans configuration supplémentaire.</p>
+
+      <h3 style="font-size:1rem;font-weight:600;color:#374151;margin-bottom:0.5rem;">Exécuter LocalAI avec Docker (GPU)</h3>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code set:text={localAICode}/></pre>
+
+      <p style="color:#6b7280;font-size:0.875rem;margin-top:0.75rem;">Une fois en fonctionnement, configurez Dify avec <strong>Fournisseur de modèle : compatible OpenAI-API</strong>, définissez l'URL de base sur <code style="background:#f3f4f6;padding:0.15rem 0.4rem;border-radius:0.25rem;">http://host.docker.internal:8080/v1</code> et utilisez n'importe quel nom de modèle chargé dans LocalAI. Aucune clé API n'est requise pour les déploiements locaux.</p>
+    </section>
+
+    <!-- Recommandations de modèles -->
+    <section style="margin-bottom:3rem;">
+      <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Recommandations de modèles par cas d'usage</h2>
+      <p style="color:#6b7280;margin-bottom:1.25rem;">Choisissez votre modèle en fonction de la VRAM disponible et du compromis qualité-vitesse dont votre application a besoin.</p>
+      <div style="overflow-x:auto;border-radius:0.75rem;border:1px solid #e5e7eb;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+          <thead>
+            <tr style="background:#f9fafb;border-bottom:2px solid #e5e7eb;">
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Modèle</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">VRAM requise</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Vitesse</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Idéal pour</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>llama3.1:8b</td><td>~6 GB</td><td>Fast</td><td>General purpose</td></tr>
-            <tr><td>mistral:7b</td><td>~5 GB</td><td>Very fast</td><td>Speed-critical</td></tr>
-            <tr style="background:#F0F7FF;"><td><strong>llama3.1:70b</strong></td><td>~40 GB</td><td>Slow</td><td>High quality</td></tr>
-            <tr><td>mixtral:8x7b</td><td>~26 GB</td><td>Medium</td><td>Balanced</td></tr>
+            {models.map((m, i) => (
+              <tr style={i % 2 === 0 ? 'border-bottom:1px solid #e5e7eb;' : 'border-bottom:1px solid #e5e7eb;background:#f9fafb;'}>
+                <td style="padding:0.75rem 1rem;"><code style="background:#f3f4f6;padding:0.15rem 0.4rem;border-radius:0.25rem;font-size:0.85rem;">{m.name}</code></td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{m.vram}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{m.speed}</td>
+                <td style="padding:0.75rem 1rem;color:#6b7280;">{m.best}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
-    </div>
-  </section>
-  <section class="section section-alt">
-    <div class="container-sm">
-      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1rem;">Installation rapide Ollama</h2>
-      <div style="background:#0f172a;border-radius:0.75rem;padding:1.25rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;color:#e2e8f0;">
-        <pre><code># Install Ollama
-curl -fsSL https://ollama.com/install.sh | sh
+    </section>
 
-# Pull a model
-ollama pull llama3.1:8b
+    <!-- Référence rapide VRAM -->
+    <section style="margin-bottom:3rem;">
+      <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin-bottom:1rem;">Référence rapide VRAM</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.75rem;">
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1rem;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:#6366f1;">~6 Go</div>
+          <div style="font-size:0.8rem;font-weight:600;color:#374151;margin-top:0.25rem;">Modèles 7B</div>
+          <div style="font-size:0.75rem;color:#9ca3af;margin-top:0.2rem;">ex. Llama 3.1 8B, Mistral 7B</div>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1rem;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:#6366f1;">~10 Go</div>
+          <div style="font-size:0.8rem;font-weight:600;color:#374151;margin-top:0.25rem;">Modèles 13B</div>
+          <div style="font-size:0.75rem;color:#9ca3af;margin-top:0.2rem;">ex. CodeLlama 13B</div>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1rem;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:#6366f1;">~20 Go</div>
+          <div style="font-size:0.8rem;font-weight:600;color:#374151;margin-top:0.25rem;">Modèles 34B</div>
+          <div style="font-size:0.75rem;color:#9ca3af;margin-top:0.2rem;">ex. CodeLlama 34B</div>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1rem;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:#6366f1;">~40 Go</div>
+          <div style="font-size:0.8rem;font-weight:600;color:#374151;margin-top:0.25rem;">Modèles 70B</div>
+          <div style="font-size:0.75rem;color:#9ca3af;margin-top:0.2rem;">ex. Llama 3.1 70B</div>
+        </div>
+      </div>
+      <p style="color:#6b7280;font-size:0.875rem;margin-top:0.75rem;">Ce sont des exigences approximatives pour une inférence en précision complète (fp16). Les modèles quantifiés (Q4/Q5) peuvent réduire l'utilisation de VRAM de 30 à 50 %, permettant aux modèles plus grands de fonctionner sur des GPU plus petits.</p>
+    </section>
 
-# Dify: Settings → Model Providers → Ollama
-# Host: http://localhost:11434</code></pre>
+    <!-- Liens internes -->
+    <section style="border-top:1px solid #e5e7eb;padding-top:2rem;">
+      <h2 style="font-size:1.3rem;font-weight:700;color:#111827;margin-bottom:1rem;">Guides liés</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+        <a href="/fr/guides/self-host-dify/" style="display:block;background:#f9fafb;border:1px solid #e5e7eb;border-radius:0.75rem;padding:1rem;text-decoration:none;color:inherit;">
+          <div style="font-weight:600;color:#4f46e5;margin-bottom:0.3rem;">Guide d'auto-hébergement Dify</div>
+          <div style="font-size:0.85rem;color:#6b7280;">Guide complet pour auto-héberger Dify sur votre propre serveur ou VPS.</div>
+        </a>
+        <a href="/fr/guides/dify-docker-setup/" style="display:block;background:#f9fafb;border:1px solid #e5e7eb;border-radius:0.75rem;padding:1rem;text-decoration:none;color:inherit;">
+          <div style="font-weight:600;color:#4f46e5;margin-bottom:0.3rem;">Configuration Docker Compose pour Dify</div>
+          <div style="font-size:0.85rem;color:#6b7280;">Configuration Docker Compose étape par étape pour exécuter Dify en production.</div>
+        </a>
+        <a href="/fr/best-dify-hosting/" style="display:block;background:#f9fafb;border:1px solid #e5e7eb;border-radius:0.75rem;padding:1rem;text-decoration:none;color:inherit;">
+          <div style="font-weight:600;color:#4f46e5;margin-bottom:0.3rem;">Meilleurs hébergeurs Dify</div>
+          <div style="font-size:0.85rem;color:#6b7280;">Comparatif des options d'hébergement géré et cloud pour Dify en 2026.</div>
+        </a>
       </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container-sm">
-      <h2 style="font-size:1.2rem;font-weight:700;color:#111827;margin-bottom:1rem;">Ressources associées</h2>
-      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-        <a href="/fr/best-dify-hosting/" class="btn-secondary">Meilleur Hébergement Dify 2026</a>
-        <a href="/fr/providers/hetzner/" class="btn-secondary">Hetzner Review</a>
-      </div>
-    </div>
-  </section>
+    </section>
+
+  </div>
+
 </BaseLayout>
