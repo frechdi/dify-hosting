@@ -1,0 +1,297 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-pricing/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Dify Hosting Preisleitfaden 2026 — Self-Hosting vs Dify Cloud Kosten',
+  description: 'Vollständige Kostenaufschlüsselung für Dify im Jahr 2026. Vergleich selbstgehosteter VPS-Kosten mit Dify-Cloud-Plänen. Den günstigsten Weg finden, Dify für Ihre Nutzungsebene zu betreiben.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+
+const cloudPlans = [
+  { name: 'Free', price: '$0/Mon.', credits: '200 Msg-Credits', users: '1', limit: 'Nur sehr begrenzte Tests' },
+  { name: 'Sandbox', price: '$0/Mon.', credits: '5.000 Credits', users: '1', limit: 'Persönliche Erkundung' },
+  { name: 'Professional', price: '$59/Mon.', credits: '1M Credits/Mon.', users: '3 Mitglieder', limit: 'Kleine Teams' },
+  { name: 'Team', price: '$159/Mon.', credits: '3M Credits/Mon.', users: '10 Mitglieder', limit: 'Wachsende Teams' },
+  { name: 'Enterprise', price: 'Individuell', credits: 'Unbegrenzt', users: 'Unbegrenzt', limit: 'Große Organisationen' },
+];
+
+const selfHostScenarios = [
+  { scenario: 'Hobby / Tests', provider: 'Railway', config: 'Kostenloser Tarif', monthly: '$0–5/Mon.', badge: null },
+  { scenario: 'Persönliche Nutzung', provider: 'Hetzner CX22', config: '2 vCPU / 4 GB', monthly: '€3,79/Mon.', badge: 'Bestes Preis-Leistungs-Verhältnis' },
+  { scenario: 'Kleines Team', provider: 'Hetzner CX32', config: '4 vCPU / 8 GB', monthly: '€5,59/Mon.', badge: null },
+  { scenario: 'Wachsendes Team', provider: 'Hostinger KVM4', config: '4 vCPU / 16 GB', monthly: '$19,99/Mon.', badge: null },
+  { scenario: 'Produktion', provider: 'DigitalOcean', config: '4 vCPU / 8 GB + Verwaltete DB', monthly: '~$80/Mon.', badge: null },
+  { scenario: 'Enterprise', provider: 'Bare Metal', config: 'Individuell', monthly: '$200+/Mon.', badge: null },
+];
+---
+
+<BaseLayout
+  title="Dify Hosting Preisleitfaden 2026 — Self-Hosting vs Dify Cloud Kosten"
+  description="Vollständige Kostenaufschlüsselung für Dify im Jahr 2026. Vergleich selbstgehosteter VPS-Kosten mit Dify-Cloud-Plänen. Den günstigsten Weg finden, Dify für Ihre Nutzungsebene zu betreiben."
+  lang="de"
+  canonical="https://dify-hosting.com/de/guides/dify-pricing/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Startseite', href: '/de/' },
+        { label: 'Anleitungen', href: '/de/guides/' },
+        { label: 'Dify Preisgestaltung' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Aktualisiert März 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#fef9c3;color:#713f12;">Echte Kostendaten</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Dify Preisleitfaden 2026
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Was kostet Dify wirklich? Wir schlüsseln jede Option auf — vom kostenlosen Cloud-Tarif bis zum Bare-Metal-Self-Hosting — damit Sie das kosteneffektivste Setup für Ihr Team finden können.
+      </p>
+    </div>
+  </section>
+
+  <!-- Dify Cloud Preisgestaltung -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Dify Cloud Preisgestaltung (2026)</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify Cloud verwendet ein Nachrichtenkredit-System. Ein LLM-Aufruf verbraucht in der Regel 1–10 Credits, je nach Modell und Nachrichtenlänge. Hier sind die aktuellen Pläne:
+      </p>
+
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+          <thead>
+            <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Plan</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Preis</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Credits / Monat</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Teamgröße</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Geeignet für</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cloudPlans.map((p, i) => (
+              <tr style={`border-bottom:1px solid #e5e7eb;${i % 2 === 0 ? '' : 'background:#f9fafb;'}`}>
+                <td style="padding:0.75rem 1rem;font-weight:600;color:#111827;">{p.name}</td>
+                <td style="padding:0.75rem 1rem;font-weight:700;color:#1677FF;">{p.price}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{p.credits}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{p.users}</td>
+                <td style="padding:0.75rem 1rem;color:#6B7280;font-size:0.85rem;">{p.limit}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background:#fef2f2;border-left:3px solid #ef4444;padding:1rem 1.25rem;border-radius:0 0.5rem 0.5rem 0;margin-top:1.5rem;">
+        <p style="margin:0;font-size:0.9rem;color:#7f1d1d;"><strong>Wichtige Einschränkung:</strong> Dify Cloud erlaubt bei niedrigeren Tarifen keine unbegrenzte Anzahl von Workspace-Mitgliedern. Enterprise-Features (SSO, Audit-Protokolle, dedizierter Support) erfordern den Enterprise-Plan. Credits werden monatlich zurückgesetzt und verfallen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Self-Hosting-Kosten -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Self-Hosting-Kostenszenarien</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Self-Hosting-Kosten variieren stark. Hier sind realistische monatliche Kosten für verschiedene Nutzungsebenen — <strong>alle beinhalten unbegrenzte Nachrichten-Credits</strong>:
+      </p>
+
+      <div style="display:grid;gap:1rem;">
+        {selfHostScenarios.map(s => (
+          <div class={s.badge ? 'card card-featured' : 'card'} style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:1rem;align-items:center;">
+            <div>
+              <p style="font-size:0.75rem;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Szenario</p>
+              <p style="font-weight:600;color:#111827;margin:0;">{s.scenario}</p>
+            </div>
+            <div>
+              <p style="font-size:0.75rem;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Anbieter</p>
+              <p style="color:#374151;margin:0;font-size:0.9rem;">{s.provider}</p>
+            </div>
+            <div>
+              <p style="font-size:0.75rem;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Konfiguration</p>
+              <p style="color:#374151;margin:0;font-size:0.9rem;">{s.config}</p>
+            </div>
+            <div style="text-align:right;">
+              <p style="font-size:1.25rem;font-weight:800;color:#1677FF;margin:0;">{s.monthly}</p>
+              {s.badge && <span style="display:inline-block;padding:0.15rem 0.5rem;background:#dcfce7;color:#166534;border-radius:9999px;font-size:0.7rem;font-weight:600;margin-top:0.25rem;">{s.badge}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style="background:#f0f9ff;border-left:3px solid #1677FF;padding:1rem 1.25rem;border-radius:0 0.5rem 0.5rem 0;margin-top:1.5rem;">
+        <p style="margin:0;font-size:0.9rem;color:#1e40af;"><strong>Hinweis zu LLM-API-Kosten:</strong> Dies sind nur Serverkosten. Sie zahlen weiterhin für LLM-API-Aufrufe (OpenAI, Anthropic usw.), es sei denn, Sie führen lokale Modelle über Ollama aus. Sehen Sie sich die <a href="/de/guides/dify-gpu-hosting/" style="color:#1677FF;font-weight:600;">GPU-Hosting-Anleitung</a> an, um API-Kosten vollständig zu eliminieren.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Versteckte Kosten -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Die versteckten Kosten des Self-Hostings</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Die Serverrechnung ist nur ein Teil des Bildes. Seien Sie realistisch bezüglich dieser zusätzlichen Kosten:
+      </p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+        {[
+          { label: 'Initiale Einrichtungszeit', cost: '~2–4 Stunden', note: 'Einmalig. Erfahrene DevOps: 30 Min.' },
+          { label: 'Monatliche Wartung', cost: '~1–2 Std./Mon.', note: 'Updates, Monitoring, gelegentliche Fehlerbehebung.' },
+          { label: 'Domain-Name', cost: '$10–15/Jahr', note: 'Optional, aber für professionellen Einsatz empfohlen.' },
+          { label: 'SSL-Zertifikat', cost: 'Kostenlos', note: "Let's Encrypt via Certbot — automatische Erneuerung." },
+          { label: 'Backup-Speicher', cost: '$0–5/Mon.', note: 'S3 oder kompatibel — hängt vom Datenvolumen ab.' },
+          { label: 'Monitoring', cost: '$0–20/Mon.', note: 'Kostenlose Optionen: UptimeRobot, Netdata. Kostenpflichtig: Grafana Cloud.' },
+        ].map(c => (
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem;">
+              <h3 style="font-size:0.9rem;font-weight:600;color:#111827;margin:0;">{c.label}</h3>
+              <span style="font-weight:700;color:#1677FF;font-size:0.95rem;white-space:nowrap;margin-left:0.5rem;">{c.cost}</span>
+            </div>
+            <p style="font-size:0.8rem;color:#6B7280;margin:0;line-height:1.5;">{c.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Break-Even-Analyse -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Break-Even-Analyse</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Bei welcher Teamgröße schlägt Self-Hosting Dify Cloud? Unter der Annahme von Hetzner CX32 für €5,59/Mon. (~$6/Mon.) und einem Stundensatz Ihrer Zeit von $50:
+      </p>
+
+      <div style="display:grid;gap:1rem;margin-bottom:1.5rem;">
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:1rem;font-weight:700;color:#14532d;margin-bottom:0.5rem;">Self-Hosting gewinnt wenn...</h3>
+          <ul style="color:#166534;line-height:2;margin:0;padding-left:1.25rem;">
+            <li>Ihr Team einen Entwickler hat, der einen Linux-Server verwalten kann</li>
+            <li>Sie mehr als 3 Workspace-Mitglieder benötigen (Pro-Plan-Einschränkung)</li>
+            <li>Sie Datensouveränität / DSGVO-Compliance auf Ihrer eigenen Infrastruktur schätzen</li>
+            <li>Die monatliche LLM-Nutzung die Professional-Plan-Credits überschreiten würde</li>
+            <li>Sie ein Startup sind, das jeden Euro beobachtet</li>
+          </ul>
+        </div>
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:1rem;font-weight:700;color:#7f1d1d;margin-bottom:0.5rem;">Dify Cloud gewinnt wenn...</h3>
+          <ul style="color:#991b1b;line-height:2;margin:0;padding-left:1.25rem;">
+            <li>Ihr Team keine DevOps-Erfahrung hat</li>
+            <li>Sie 99,9%+ Uptime ohne Betriebsaufwand benötigen</li>
+            <li>Sie nur erkunden oder einen Prototyp entwickeln</li>
+            <li>Die $59/Mon. weniger als 1–2 Stunden Ihrer Team-Zeit sind</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card card-featured">
+        <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Die Rechnung für ein 5-Personen-Team</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+          <div>
+            <p style="font-size:0.8rem;font-weight:600;color:#6B7280;text-transform:uppercase;margin-bottom:0.75rem;">Dify Cloud Pro (3 Plätze + extra)</p>
+            <p style="font-size:0.85rem;color:#4B5563;margin:0 0 0.25rem;">Basisplan: $59/Mon.</p>
+            <p style="font-size:0.85rem;color:#4B5563;margin:0 0 0.25rem;">Extra Plätze ($20/Platz × 2): $40/Mon.</p>
+            <p style="font-size:1.1rem;font-weight:700;color:#ef4444;margin-top:0.5rem;">Gesamt: ~$99/Mon.</p>
+          </div>
+          <div>
+            <p style="font-size:0.8rem;font-weight:600;color:#6B7280;text-transform:uppercase;margin-bottom:0.75rem;">Self-Hosting (unbegrenzte Plätze)</p>
+            <p style="font-size:0.85rem;color:#4B5563;margin:0 0 0.25rem;">Hetzner CX32: €5,59/Mon.</p>
+            <p style="font-size:0.85rem;color:#4B5563;margin:0 0 0.25rem;">Domain + Backups: ~$2/Mon.</p>
+            <p style="font-size:1.1rem;font-weight:700;color:#16a34a;margin-top:0.5rem;">Gesamt: ~$9/Mon.</p>
+          </div>
+        </div>
+        <p style="margin-top:1rem;padding-top:1rem;border-top:1px solid #e5e7eb;font-size:0.9rem;color:#374151;">
+          <strong>Ersparnis: ~$90/Mon. ($1.080/Jahr)</strong> — genug, um 21 Stunden Entwicklerzeit für Einrichtung und Wartung abzudecken.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- API-Kosten -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">LLM-API-Kostenschätzungen</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Self-Hosting von Dify eliminiert keine LLM-API-Kosten (es sei denn, Sie führen lokale Modelle aus). Typische monatliche Kosten für verschiedene Nutzungsebenen mit Cloud-Anbietern:
+      </p>
+
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Nutzungsebene</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">OpenAI GPT-4o</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Claude 3 Haiku</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Gemini Flash</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { level: 'Gering (1T Nachr./Mon.)', gpt4o: '~$5', haiku: '~$0,50', flash: '~$0,10' },
+              { level: 'Mittel (10T Nachr./Mon.)', gpt4o: '~$50', haiku: '~$5', flash: '~$1' },
+              { level: 'Hoch (100T Nachr./Mon.)', gpt4o: '~$500', haiku: '~$50', flash: '~$10' },
+            ].map((row, i) => (
+              <tr style={`border-bottom:1px solid #e5e7eb;${i % 2 === 0 ? '' : 'background:#f9fafb;'}`}>
+                <td style="padding:0.75rem 1rem;font-weight:500;color:#111827;">{row.level}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{row.gpt4o}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{row.haiku}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{row.flash}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.8rem;color:#9CA3AF;margin-top:0.75rem;">Schätzungen basieren auf durchschnittlich 500 Eingabe- + 300 Ausgabe-Tokens pro Nachricht. Tatsächliche Kosten hängen von Ihrer Prompt-Struktur ab.</p>
+    </div>
+  </section>
+
+  <!-- Empfehlungsmatrix -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Welche Option ist die richtige für Sie?</h2>
+
+      <div style="display:grid;gap:1rem;">
+        {[
+          { profile: 'Einzelentwickler / Hobbyist', rec: 'Dify Cloud Free → dann Hetzner CX22 selbst hosten', reason: 'Kostenlos starten, auf €3,79/Mon. VPS wechseln, wenn mehr benötigt wird.' },
+          { profile: 'Kleines Startup (2–5 Personen, technisches Team)', rec: 'Hetzner CX32 selbst gehostet', reason: 'Unter $10/Mon., unbegrenzte Mitglieder, volle Kontrolle. Einfach einzurichten.' },
+          { profile: 'Nicht-technisches Team', rec: 'Dify Cloud Professional ($59/Mon.)', reason: 'Keine Serververwaltung. Verwaltete Updates, Backups und Support.' },
+          { profile: 'Wachsendes Unternehmen (10+ Nutzer)', rec: 'Self-Hosting auf DigitalOcean oder Hostinger mit verwalteter DB', reason: 'Skalierung für $30–80/Mon. statt $159+/Mon. für Team-Plan.' },
+          { profile: 'Enterprise / regulierte Branche', rec: 'Self-Hosting auf Bare Metal oder privater Cloud', reason: 'Vollständige Datensouveränität, Compliance und Anpassungsoptionen.' },
+        ].map((r, i) => (
+          <div class="card" style="display:grid;grid-template-columns:1fr 2fr;gap:1rem;">
+            <div style="border-right:1px solid #e5e7eb;padding-right:1rem;">
+              <p style="font-size:0.75rem;font-weight:600;color:#6B7280;text-transform:uppercase;margin-bottom:0.25rem;">Profil</p>
+              <p style="font-weight:500;color:#111827;font-size:0.9rem;margin:0;">{r.profile}</p>
+            </div>
+            <div>
+              <p style="font-weight:700;color:#1677FF;margin:0 0 0.25rem;">{r.rec}</p>
+              <p style="font-size:0.85rem;color:#6B7280;margin:0;">{r.reason}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+        <a href="/de/best-dify-hosting/" class="btn-primary" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;">
+          Alle Hosting-Anbieter vergleichen
+        </a>
+        <a href="/de/guides/self-host-dify/" class="btn-secondary" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Self-Hosting-Einrichtungsanleitung
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

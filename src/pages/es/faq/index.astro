@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/faq/');
+
+const faqs = [
+  {
+    question: '¿Cuáles son los requisitos mínimos para autoalojar Dify?',
+    answer: 'Dify requiere como mínimo 2 vCPU, 4GB RAM y 50GB de almacenamiento SSD. Recomendamos 4 vCPU y 8GB RAM para un uso cómodo. La configuración predeterminada de Docker Compose ejecuta más de 10 contenedores, incluyendo Nginx, servidor API, worker, PostgreSQL, Redis y la base de datos vectorial Weaviate.',
+  },
+  {
+    question: '¿Puedo alojar Dify de forma gratuita?',
+    answer: 'Sí, parcialmente. Railway ofrece $5 de crédito gratuito al mes que puede ejecutar una pequeña instancia de Dify. Render tiene un nivel gratuito pero se detiene tras la inactividad y solo tiene 512MB de RAM (demasiado pequeño). Para un alojamiento gratuito fiable, la opción de pago más barata es Hetzner a €3,79/mes.',
+  },
+  {
+    question: '¿Cuál es la diferencia entre Dify Cloud y el autoalojamiento?',
+    answer: 'Dify Cloud gestiona toda la infraestructura por ti — solo te registras y empiezas a usarlo. El autoalojamiento te da control total, sin límites de mensajes y privacidad de datos, pero requiere configuración técnica. En cuanto a costes, el autoalojamiento es mucho más barato para usuarios activos: €5,59/mes en Hetzner vs $59/mes para Dify Cloud Pro.',
+  },
+  {
+    question: '¿Dify admite aceleración GPU?',
+    answer: "Dify en sí no requiere una GPU — llama a APIs de LLM (OpenAI, Anthropic, etc.) de forma remota. Sin embargo, si quieres ejecutar modelos locales sin costes de API, puedes instalar Ollama en un servidor GPU y conectarlo a Dify. Dify admite Ollama de forma nativa como proveedor de modelos.",
+  },
+  {
+    question: '¿Cuánto tiempo lleva configurar Dify?',
+    answer: 'En un VPS nuevo, espera de 30 a 60 minutos para la configuración inicial: 10 min de configuración del servidor, 5 min de instalación de Docker, 5 min de clonado y configuración de Dify, 10 min de primer inicio (descargas de imágenes), 10 min de configuración SSL. Después de la primera instalación, las actualizaciones tardan menos de 5 minutos.',
+  },
+  {
+    question: '¿Es Dify compatible con GDPR cuando se autoaloja?',
+    answer: "Sí — cuando se autoaloja, todos los datos permanecen en tu servidor. No se envían datos a los servidores de Dify excepto la telemetría (que puede desactivarse). Usa Hetzner (Alemania/Finlandia) para residencia completa de datos en la UE. Controlas todos los datos y puedes configurar Dify para usar solo proveedores de LLM con base en la UE.",
+  },
+  {
+    question: '¿Puedo usar Dify con LLM locales (sin costes de API)?',
+    answer: "Sí. Instala Ollama en el mismo servidor o en un servidor GPU separado, luego configura Dify para usar Ollama como proveedor de modelos. Modelos locales populares: Llama 3.1 8B (uso general), Mistral 7B (rápido), CodeLlama 13B (programación). Necesitarás un servidor GPU para un rendimiento aceptable con modelos de más de 7B parámetros.",
+  },
+  {
+    question: '¿Cómo actualizo Dify a una nueva versión?',
+    answer: 'Ve al directorio dify/docker, ejecuta: git pull && docker compose pull && docker compose up -d. Dify usa actualizaciones continuas con migraciones de base de datos gestionadas automáticamente. Siempre realiza una copia de seguridad de tu base de datos PostgreSQL antes de las actualizaciones de versiones principales.',
+  },
+  {
+    question: '¿Qué proveedores de LLM admite Dify?',
+    answer: 'Dify admite más de 50 proveedores de modelos, incluyendo OpenAI, Anthropic (Claude), Google Gemini, Mistral, Cohere, Azure OpenAI, AWS Bedrock, Hugging Face, Replicate, Together AI y modelos locales a través de Ollama, LocalAI y LM Studio.',
+  },
+  {
+    question: '¿Cuánto cuesta ejecutar Dify con 10 usuarios?',
+    answer: 'Coste del servidor: €5,59/mes (Hetzner CX32) gestiona 10 usuarios concurrentes cómodamente. Los costes de la API de LLM dependen del uso — un usuario típico que envía 50 mensajes al día con GPT-4o-mini cuesta aproximadamente $0,10/día por usuario. Para 10 usuarios: ~$30/mes servidor + costes de API. Total: $35–50/mes vs $59–159/mes en Dify Cloud.',
+  },
+  {
+    question: '¿Puedo ejecutar Dify en Windows?',
+    answer: 'Dify se ejecuta a través de Docker, así que técnicamente sí con Docker Desktop para Windows. Sin embargo, las limitaciones de WSL2 y la sobrecarga de Docker Desktop hacen que el alojamiento en Windows sea poco práctico para producción. Siempre usa un VPS Linux (se recomienda Ubuntu 22.04) para despliegues de Dify en producción.',
+  },
+  {
+    question: '¿Dify es de código abierto y gratuito de usar?',
+    answer: "El núcleo de Dify es de código abierto bajo licencia Apache 2.0. Algunas características empresariales (SSO, registros de auditoría, permisos avanzados) requieren la Edición Empresarial con una licencia comercial. Para la mayoría de los usuarios de autoalojamiento, la versión de código abierto tiene todas las funciones y es completamente gratuita.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Preguntas Frecuentes sobre Dify Hosting 2026',
+  description: 'Respuestas a las preguntas más comunes sobre el autoalojamiento de Dify. Requisitos de hardware, configuración de Docker, opciones de alojamiento gratuito, soporte de GPU y más.',
+  url: 'https://dify-hosting.com/es/faq/',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Dify Hosting',
+    url: 'https://dify-hosting.com',
+  },
+};
+---
+
+<BaseLayout
+  title="Preguntas Frecuentes sobre Dify Hosting 2026 — FAQ"
+  description="Respuestas a las preguntas más comunes sobre el autoalojamiento de Dify. Requisitos de hardware, configuración de Docker, opciones de alojamiento gratuito, soporte de GPU y más."
+  lang="es"
+  canonical="https://dify-hosting.com/es/faq/"
+  hreflang={hreflang}
+  schema={[faqSchema, articleSchema]}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Inicio', href: '/es/' },
+        { label: 'FAQ' },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        Preguntas Frecuentes sobre Dify Hosting
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:640px;line-height:1.7;">
+        Todo lo que necesitas saber sobre el autoalojamiento de Dify — desde los requisitos del servidor hasta los costes y la configuración.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div style="display:flex;flex-direction:column;gap:0;">
+        {faqs.map((faq, i) => (
+          <div class="faq-item" style={`border-bottom:1px solid #e5e7eb;padding:1.5rem 0;${i === 0 ? 'border-top:1px solid #e5e7eb;' : ''}`}>
+            <h2 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.75rem;line-height:1.5;">{faq.question}</h2>
+            <p style="color:#4B5563;line-height:1.75;margin:0;font-size:0.9375rem;">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+
+      <div style="margin-top:3rem;padding:2rem;background:#eff6ff;border-radius:1rem;border:1px solid #bfdbfe;">
+        <h2 style="font-size:1.25rem;font-weight:700;color:#1e3a5f;margin-bottom:0.75rem;">¿Tienes más preguntas?</h2>
+        <p style="color:#1e40af;line-height:1.7;margin-bottom:1rem;">
+          Consulta nuestras guías detalladas o ponte en contacto con nosotros directamente.
+        </p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="/es/guides/self-host-dify/" class="btn-primary" style="text-decoration:none;">Guía de Autoalojamiento</a>
+          <a href="/es/contact/" class="btn-secondary" style="text-decoration:none;">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

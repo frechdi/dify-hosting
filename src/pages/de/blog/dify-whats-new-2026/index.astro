@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/blog/dify-whats-new-2026/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: 'Was ist neu in Dify 2026 — Überblick der wichtigsten Features & Updates',
+  description: 'Difys 2026-Updates bringen MCP-Server-Unterstützung, verbesserte RAG-Pipelines, eine erweiterte Workflow-Engine, neue Modellanbieter und bessere Self-Hosting-Tools. Vollständige Übersicht.',
+  datePublished: '2026-03-15',
+  dateModified: '2026-03-15',
+  url: 'https://dify-hosting.com/de/blog/dify-whats-new-2026/',
+  author: {
+    '@type': 'Organization',
+    name: 'Dify Hosting Team',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Dify Hosting',
+    url: 'https://dify-hosting.com',
+  },
+  articleSection: 'News',
+};
+---
+
+<BaseLayout
+  title="Was ist neu in Dify 2026 — Überblick der wichtigsten Features & Updates"
+  description="Difys 2026-Updates bringen MCP-Server-Unterstützung, verbesserte RAG-Pipelines, eine erweiterte Workflow-Engine, neue Modellanbieter und bessere Self-Hosting-Tools. Vollständige Übersicht."
+  lang="de"
+  canonical="https://dify-hosting.com/de/blog/dify-whats-new-2026/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Startseite', href: '/de/' },
+        { label: 'Blog', href: '/de/blog/' },
+        { label: 'Was ist neu in Dify 2026' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span class="badge-primary" style="font-size:0.75rem;padding:0.2rem 0.7rem;">News</span>
+        <time datetime="2026-03-15" style="font-size:0.85rem;color:#94a3b8;">15. März 2026</time>
+        <span style="font-size:0.85rem;color:#94a3b8;">· Dify Hosting Team</span>
+      </div>
+      <h1 style="font-size:clamp(1.75rem,4vw,2.6rem);font-weight:800;color:#f8fafc;line-height:1.25;margin-bottom:1rem;">
+        Was ist neu in Dify 2026: Überblick der wichtigsten Features
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:660px;line-height:1.7;">
+        Dify ist im Jahr 2026 in einem rasanten Entwicklungstempo, mit wichtigen Updates, die es für Self-Hoster und Unternehmensnutzer deutlich leistungsfähiger machen.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div style="display:grid;grid-template-columns:1fr;gap:2rem;max-width:800px;">
+
+        <article class="prose">
+
+          <p>
+            Dify ist im Jahr 2026 in einem rasanten Entwicklungstempo und liefert wichtige Updates, die es für Self-Hoster und Unternehmensnutzer gleichermaßen deutlich leistungsfähiger machen. In dieser Übersicht behandeln wir alle wichtigsten Änderungen und was sie für Teams bedeuten, die Dify auf ihrer eigenen Infrastruktur betreiben.
+          </p>
+
+          <h2>MCP-Server-Unterstützung</h2>
+          <p>
+            Die größte architektonische Neuerung im Jahr 2026 ist die native Unterstützung für Model Context Protocol (MCP)-Server. Dify ermöglicht es nun, benutzerdefinierte Tools und Datenquellen über MCP zu verbinden, ohne benutzerdefinierte API-Integrationen von Grund auf neu schreiben zu müssen. Für Enterprise-Dify-Deployments — bei denen das Verbinden interner Datenbanken, Ticketing-Systeme oder proprietärer APIs ein häufiges Anforderungsmerkmal ist — ist dies eine erhebliche Zeitersparnis. Sie konfigurieren einen MCP-Server einmal, und jeder Workflow oder Agent in Dify kann ihn aufrufen.
+          </p>
+          <p>
+            Dies ist ein entscheidender Schritt für Enterprise-Dify-Deployments, bei denen vielfältige Tool-Konnektivität bisher eine große Integrationslast war.
+          </p>
+
+          <h2>Verbesserte RAG-Pipeline</h2>
+          <p>
+            Die Retrieval-Augmented-Generation-Pipeline wurde grundlegend überarbeitet. Wichtige Verbesserungen umfassen:
+          </p>
+          <ul>
+            <li>Hybridsuche, die semantische (Vektor-)Suche und Stichwortsuche für präzisere Abrufresultate kombiniert</li>
+            <li>Re-Ranking-Modelle zur erneuten Bewertung abgerufener Chunks, bevor sie dem LLM zugeführt werden</li>
+            <li>Multi-Dokument-Abruf mit dokumentübergreifenden Zitaten, sodass Antworten mehrere Wissensdatenbankdokumente gleichzeitig referenzieren können</li>
+          </ul>
+          <p>
+            In der Praxis verbessern diese Änderungen die Antwortqualität für Knowledge-Base-Q&amp;A-Anwendungsfälle spürbar, insbesondere wenn Dokumente überlappende oder ergänzende Inhalte aufweisen.
+          </p>
+
+          <h2>Erweiterte Workflow-Engine</h2>
+          <p>
+            Der visuelle Workflow-Editor hat bedeutende Upgrades erhalten. Das wirkungsvollste: Parallele Zweige, die es ermöglichen, verschiedene Workflow-Pfade gleichzeitig statt sequenziell auszuführen. Dies reduziert die Latenz bei Workflows, die mehrere unabhängige API-Aufrufe oder LLM-Generierungen beinhalten.
+          </p>
+          <p>
+            Zusätzlich wurde die Bedingungslogik mit mehr Vergleichsoperatoren und verschachtelten Bedingungen verbessert. Neue Schleifen-/Iterationsknoten ermöglichen es Workflows, Listen von Dokumenten oder API-Ergebnissen ohne komplexe Umgehungslösungen zu verarbeiten.
+          </p>
+
+          <h2>Neue Modellanbieter</h2>
+          <p>
+            Zu den Modellzusätzen 2026 gehören einige bedeutende Namen:
+          </p>
+          <ul>
+            <li><strong>Google Gemini 2.0</strong> — verfügbar mit vollständiger Function-Calling- und Vision-Unterstützung</li>
+            <li><strong>Anthropic Claude 4</strong> — Langkontext-Unterstützung mit verbesserter Anweisungsbefolgung</li>
+            <li><strong>Llama 4 via Ollama</strong> — Metas neuestes Open-Weight-Modell, lokal ausführbar</li>
+            <li><strong>Mistral Large 3</strong> — starke Leistung bei europäischsprachigen Aufgaben</li>
+          </ul>
+          <p>
+            Dify unterstützt nun insgesamt über 50 Modellanbieter und deckt jede wichtige kommerzielle API und die führenden lokalen Inferenz-Laufzeitumgebungen ab.
+          </p>
+
+          <h2>Self-Hosting-Verbesserungen</h2>
+          <p>
+            Das Docker-Compose-Setup wurde vereinfacht: Die Standard-<code>docker-compose.yml</code> hat jetzt bessere Standardwerte für Ressourcenlimits, was die Wahrscheinlichkeit von OOM-Kills auf Einstiegs-VPS-Instanzen reduziert. Der Gesamtressourcenverbrauch ist im Vergleich zu 2024-Builds um ca. 20 % gesunken. Neue Health-Check-Endpunkte machen das Monitoring über Uptime Kuma, Grafana oder ähnliche Tools unkompliziert.
+          </p>
+
+          <h2>Fazit</h2>
+          <p>
+            Die selbstgehostete Dify-Erfahrung im Jahr 2026 ist deutlich besser als 2024. Die MCP-Integration beseitigt einen wichtigen Integrations-Engpass, die verbesserte RAG-Pipeline hebt die Messlatte für die Qualität von Wissensdatenbanken, und die Leistungsverbesserungen bedeuten, dass kleinere VPS-Instanzen praktikabel sind. Kombiniert mit erschwinglichen Optionen wie Hetzners CX32 für €5,59/Mon. gab es nie eine bessere Zeit, von Dify Cloud zum Self-Hosting zu wechseln.
+          </p>
+
+          <hr style="margin:2rem 0;border:none;border-top:1px solid #e2e8f0;"/>
+
+          <p style="font-size:0.9rem;color:#6B7280;">
+            <strong>Verwandte Artikel:</strong>
+            <a href="/de/guides/self-host-dify/" style="color:#1677FF;text-decoration:none;">Dify selbst hosten</a>
+            · <a href="/de/providers/hetzner/" style="color:#1677FF;text-decoration:none;">Hetzner für Dify</a>
+            · <a href="/de/blog/ai-hosting-trends-2026/" style="color:#1677FF;text-decoration:none;">KI-Hosting-Trends 2026</a>
+          </p>
+
+        </article>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>

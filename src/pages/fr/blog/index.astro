@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/blog/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Blog Dify Hosting',
+  description: 'Actualités et guides sur Dify, l\'IA auto-hébergée et les tendances de l\'hébergement cloud.',
+  url: 'https://dify-hosting.com/fr/blog/',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Dify Hosting',
+    url: 'https://dify-hosting.com',
+  },
+  blogPost: [
+    {
+      '@type': 'BlogPosting',
+      headline: "Nouveautés de Dify en 2026 : Revue des fonctionnalités majeures",
+      datePublished: '2026-03-15',
+      url: 'https://dify-hosting.com/fr/blog/dify-whats-new-2026/',
+    },
+    {
+      '@type': 'BlogPosting',
+      headline: "Tendances de l'hébergement IA en 2026 : Ce qui change dans l'infrastructure cloud",
+      datePublished: '2026-02-28',
+      url: 'https://dify-hosting.com/fr/blog/ai-hosting-trends-2026/',
+    },
+  ],
+};
+
+const posts = [
+  {
+    title: "Nouveautés de Dify en 2026 : Revue des fonctionnalités majeures",
+    date: '15 mars 2026',
+    dateISO: '2026-03-15',
+    category: 'Actualités',
+    excerpt: 'Dify a publié plusieurs mises à jour majeures début 2026, notamment des contrôles améliorés du pipeline RAG, la prise en charge native des serveurs MCP et un moteur de workflow amélioré...',
+    href: '/fr/blog/dify-whats-new-2026/',
+  },
+  {
+    title: "Tendances de l'hébergement IA en 2026 : Ce qui change dans l'infrastructure cloud",
+    date: '28 février 2026',
+    dateISO: '2026-02-28',
+    category: 'Tendances',
+    excerpt: "Les fournisseurs cloud se disputent pour proposer des instances optimisées GPU à mesure que l'adoption des LLM locaux progresse. Voici ce qui compte pour l'hébergement Dify en 2026...",
+    href: '/fr/blog/ai-hosting-trends-2026/',
+  },
+];
+---
+
+<BaseLayout
+  title="Blog Dify Hosting — Actualités, Guides & Tendances hébergement IA"
+  description="Dernières actualités et guides sur Dify, l'IA auto-hébergée et les tendances de l'hébergement cloud. Mis à jour régulièrement par l'équipe Dify Hosting."
+  lang="fr"
+  canonical="https://dify-hosting.com/fr/blog/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Accueil', href: '/fr/' },
+        { label: 'Blog' },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        Blog Dify Hosting
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:640px;line-height:1.7;">
+        Actualités, guides et analyses sur Dify, l'infrastructure IA auto-hébergée et les tendances de l'hébergement cloud. Mis à jour régulièrement par l'équipe Dify Hosting.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div style="display:grid;gap:1.5rem;">
+        {posts.map((post) => (
+          <article class="card" style="padding:0;overflow:hidden;transition:box-shadow 0.2s;">
+            <a href={post.href} style="display:block;padding:2rem;text-decoration:none;color:inherit;">
+              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap;">
+                <span class="badge-primary" style="font-size:0.75rem;padding:0.2rem 0.7rem;">{post.category}</span>
+                <time datetime={post.dateISO} style="font-size:0.85rem;color:#6B7280;">{post.date}</time>
+              </div>
+              <h2 style="font-size:1.3rem;font-weight:700;color:#111827;line-height:1.4;margin-bottom:0.75rem;transition:color 0.2s;"
+                onmouseover="this.style.color='#1677FF'"
+                onmouseout="this.style.color='#111827'"
+              >
+                {post.title}
+              </h2>
+              <p style="color:#4B5563;line-height:1.75;margin-bottom:1.25rem;">{post.excerpt}</p>
+              <span style="font-size:0.875rem;font-weight:600;color:#1677FF;display:inline-flex;align-items:center;gap:0.375rem;">
+                Lire l'article
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 7h8M7 3l4 4-4 4"/>
+                </svg>
+              </span>
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <div style="margin-top:3rem;text-align:center;padding:2rem;background:#f8fafc;border-radius:1rem;border:1px solid #e2e8f0;">
+        <p style="color:#4B5563;margin-bottom:1rem;">Vous cherchez des recommandations d'hébergement ?</p>
+        <a href="/fr/best-dify-hosting/" class="btn-primary" style="text-decoration:none;">Comparer les hébergeurs Dify</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

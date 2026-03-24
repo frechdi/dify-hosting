@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/contact/');
+---
+
+<BaseLayout
+  title="Contatti — Dify Hosting"
+  description="Contatta il team di Dify Hosting. Domande, correzioni o richieste di partnership."
+  lang="it"
+  canonical="https://dify-hosting.com/it/contact/"
+  hreflang={hreflang}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/it/' },
+        { label: 'Contatti' },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        Contattaci
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:640px;line-height:1.7;">
+        Domande, correzioni o richieste di partnership — rispondiamo solitamente entro 24 ore.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div style="display:grid;gap:2rem;grid-template-columns:1fr 1fr;align-items:start;">
+
+        <div class="card" style="padding:2rem;">
+          <h2 style="font-size:1.25rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Invia un messaggio</h2>
+          <form style="display:flex;flex-direction:column;gap:1rem;" onsubmit="return false;">
+            <div style="display:flex;flex-direction:column;gap:0.375rem;">
+              <label for="contact-name" style="font-size:0.875rem;font-weight:600;color:#374151;">Nome</label>
+              <input
+                id="contact-name"
+                type="text"
+                placeholder="Il tuo nome"
+                style="padding:0.625rem 0.875rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:0.9375rem;color:#111827;background:#fff;outline:none;transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='#1677FF'"
+                onblur="this.style.borderColor='#d1d5db'"
+              />
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.375rem;">
+              <label for="contact-email" style="font-size:0.875rem;font-weight:600;color:#374151;">Email</label>
+              <input
+                id="contact-email"
+                type="email"
+                placeholder="tu@esempio.com"
+                style="padding:0.625rem 0.875rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:0.9375rem;color:#111827;background:#fff;outline:none;transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='#1677FF'"
+                onblur="this.style.borderColor='#d1d5db'"
+              />
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.375rem;">
+              <label for="contact-message" style="font-size:0.875rem;font-weight:600;color:#374151;">Messaggio</label>
+              <textarea
+                id="contact-message"
+                rows="5"
+                placeholder="Il tuo messaggio..."
+                style="padding:0.625rem 0.875rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:0.9375rem;color:#111827;background:#fff;outline:none;resize:vertical;transition:border-color 0.2s;font-family:inherit;"
+                onfocus="this.style.borderColor='#1677FF'"
+                onblur="this.style.borderColor='#d1d5db'"
+              ></textarea>
+            </div>
+            <div>
+              <button type="submit" class="btn-primary">Invia messaggio</button>
+            </div>
+          </form>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:1.5rem;">
+          <div class="card" style="padding:1.5rem;">
+            <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Email</h3>
+            <p style="color:#4B5563;margin:0;">
+              <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;text-decoration:none;">contact@dify-hosting.com</a>
+            </p>
+          </div>
+
+          <div class="card" style="padding:1.5rem;">
+            <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Tempi di risposta</h3>
+            <p style="color:#4B5563;margin:0;font-size:0.9rem;line-height:1.6;">Rispondiamo solitamente entro 24 ore nei giorni feriali.</p>
+          </div>
+
+          <div class="card" style="padding:1.5rem;">
+            <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Argomenti frequenti</h3>
+            <ul style="color:#4B5563;font-size:0.875rem;line-height:2;margin:0;padding-left:1.25rem;">
+              <li>Correzioni alle recensioni dei provider</li>
+              <li>Suggerimenti di nuovi provider</li>
+              <li>Richieste di partnership affiliata</li>
+              <li>Domande tecniche su Dify</li>
+              <li>Richieste di privacy o rimozione dati</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>

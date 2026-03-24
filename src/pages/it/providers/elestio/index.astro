@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/providers/elestio/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  name: 'Elestio Dify Hosting Review 2026',
+  reviewBody: 'Elestio for self-hosting Dify — IT review.',
+  author: { '@type': 'Organization', name: 'Dify Hosting Team' },
+  itemReviewed: { '@type': 'SoftwareApplication', name: 'Elestio' },
+  reviewRating: { '@type': 'Rating', ratingValue: '4.0', bestRating: '5', worstRating: '1' },
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-01',
+};
+---
+
+<BaseLayout
+  title="Elestio Dify Hosting Review 2026 — Guida alla configurazione"
+  description="Elestio — Recensito marzo 2026. Da $19/mo. Miglior Hosting Dify 2026."
+  lang="it"
+  canonical="https://dify-hosting.com/it/providers/elestio/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <section class="hero-gradient section" style="padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/it/' },
+        { label: 'Provider', href: '/it/best-dify-hosting/' },
+        { label: 'Elestio' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span class="badge badge-success">Configurazione più semplice</span>
+        <span class="badge badge-success">Recensito marzo 2026</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;">
+        <div class="provider-icon" style="background:#6366F1;color:white;width:56px;height:56px;font-size:1.1rem;font-weight:800;border-radius:14px;flex-shrink:0;">E</div>
+        <div>
+          <h1 style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;color:#111827;line-height:1.2;margin-bottom:0.5rem;">
+            Elestio Dify Hosting
+          </h1>
+          <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+            <span style="color:#F59E0B;font-size:1.2rem;">★★★★☆</span>
+            <span style="font-size:1.1rem;font-weight:700;color:#111827;">4.0 / 5</span>
+            <span style="color:#D1D5DB;">·</span>
+            <span style="color:#16A34A;font-weight:700;">Da $19/mo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#FFFFFF;border-bottom:1px solid #E2E8F0;padding:1.25rem 1.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;">
+        {[
+          { value: '$19/mo', label: 'Prezzo di partenza' },
+          { value: 'Géré', label: 'RAM' },
+          { value: 'Géré', label: 'CPU' },
+          { value: 'Géré', label: 'Storage' },
+          { value: 'Global', label: 'Sedi server' },
+        ].map((stat) => (
+          <div style="text-align:center;">
+            <div style="font-size:1.1rem;font-weight:700;color:#111827;">{stat.value}</div>
+            <div style="font-size:0.75rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Elestio — Plans & Pricing</h2>
+      <div style="overflow-x:auto;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Plan</th><th>vCPU</th><th>RAM</th><th>Storage</th><th>Price</th><th>Consigliato</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="provider-name">Starter</span></td>
+              <td>2 vCPU</td><td>2 GB</td><td>50 GB SSD</td><td class="price">$19/mo</td>
+              <td><span class="check">✅</span> <span style="font-size:0.8rem;color:#4B5563;">Minimo</span></td>
+            </tr>
+            <tr style="background:#F0F7FF;">
+              <td><span class="provider-name">Standard</span> <span class="badge badge-editors-choice" style="margin-left:0.5rem;">Consigliato ⭐</span></td>
+              <td>2 vCPU</td><td>4 GB</td><td>80 GB SSD</td><td class="price">$39/mo</td>
+              <td><span class="check">✅</span> <span style="font-size:0.8rem;color:#4B5563;">Consigliato</span></td>
+            </tr>
+            <tr>
+              <td><span class="provider-name">Pro</span></td>
+              <td>4 vCPU</td><td>8 GB</td><td>160 GB SSD</td><td class="price">$59/mo</td>
+              <td><span class="check">✅</span> <span style="font-size:0.8rem;color:#4B5563;">Produzione</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-sm">
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Pro & Contro</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div class="card" style="border-top:3px solid #22C55E;">
+          <h3 style="font-size:1rem;font-weight:700;color:#16A34A;margin-bottom:1rem;">✅ Pro</h3>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+            <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;"><span style="color:#22C55E;flex-shrink:0;">✓</span>One-click Dify deployment</li>
+            <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;"><span style="color:#22C55E;flex-shrink:0;">✓</span>Automatic backups & SSL</li>
+            <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;"><span style="color:#22C55E;flex-shrink:0;">✓</span>No Docker knowledge required</li>
+            <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;"><span style="color:#22C55E;flex-shrink:0;">✓</span>Monitoring included</li>
+            <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;"><span style="color:#22C55E;flex-shrink:0;">✓</span>Global deployment options</li>
+          </ul>
+        </div>
+        <div class="card" style="border-top:3px solid #EF4444;">
+          <h3 style="font-size:1rem;font-weight:700;color:#DC2626;margin-bottom:1rem;">❌ Contro</h3>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+            <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;"><span style="color:#EF4444;flex-shrink:0;">✗</span>More expensive than raw VPS</li>
+            <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;"><span style="color:#EF4444;flex-shrink:0;">✗</span>Less control over infrastructure</li>
+            <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;"><span style="color:#EF4444;flex-shrink:0;">✗</span>Vendor lock-in risk</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div class="card card-featured">
+        <p class="section-label">Il Nostro Verdetto</p>
+        <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">Elestio è la soluzione ideale per team senza competenze DevOps. Distribuisci Dify con un clic con SSL, backup e monitoraggio automatici.</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;">
+          <span style="font-size:2rem;font-weight:800;color:#111827;">4.0</span>
+          <span style="color:#F59E0B;font-size:1.1rem;">★★★★☆</span>
+        </div>
+        <a href="https://elest.io/?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-primary">Visita il sito →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-sm">
+      <h2 style="font-size:1.2rem;font-weight:700;color:#111827;margin-bottom:1rem;">Risorse correlate</h2>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="/it/best-dify-hosting/" class="btn-secondary">← Tutti i provider</a>
+        <a href="/it/guides/dify-docker-setup/" class="btn-secondary">Guida Docker</a>
+        <a href="/it/guides/dify-pricing/" class="btn-secondary">Prezzi</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

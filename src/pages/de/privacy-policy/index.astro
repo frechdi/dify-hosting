@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/privacy-policy/');
+---
+
+<BaseLayout
+  title="Datenschutzrichtlinie — Dify Hosting"
+  description="Datenschutzrichtlinie für dify-hosting.com. Erfahren Sie, wie wir Ihre Daten erheben, verwenden und schützen."
+  lang="de"
+  canonical="https://dify-hosting.com/de/privacy-policy/"
+  hreflang={hreflang}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Startseite', href: '/de/' },
+        { label: 'Datenschutzrichtlinie' },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        Datenschutzrichtlinie
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:640px;line-height:1.7;">
+        Zuletzt aktualisiert: März 2026
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div class="card" style="padding:2rem;">
+        <div class="prose">
+          <h2>1. Informationen, die wir erheben</h2>
+          <p>
+            Dify-hosting.com ist eine Informationswebsite. Wir erfordern keine Kontoregistrierung. Wir können anonyme Analysedaten (Seitenaufrufe, Referrer, Browsertyp) über datenschutzfreundliche Analyse-Tools erheben. Wir erheben keine personenbezogenen Daten, es sei denn, Sie kontaktieren uns direkt.
+          </p>
+
+          <h2>2. Cookies</h2>
+          <p>
+            Wir verwenden ein minimales Cookie-Zustimmungsbanner. Wenn Sie Cookies akzeptieren, können wir ein einzelnes Cookie setzen, um Ihre Präferenz zu speichern. Wir verwenden keine Tracking-Cookies oder Drittanbieter-Werbe-Cookies. Sie können Cookies ablehnen und die Website funktioniert weiterhin vollständig.
+          </p>
+
+          <h2>3. Affiliate-Links</h2>
+          <p>
+            Diese Seite enthält Affiliate-Links zu Hosting-Anbietern. Wenn Sie auf einen Affiliate-Link klicken und einen Kauf tätigen, erhalten wir möglicherweise eine Provision ohne zusätzliche Kosten für Sie. Affiliate-Link-Klicks können vom jeweiligen Affiliate-Programm des Anbieters nachverfolgt werden. Bitte lesen Sie die Datenschutzrichtlinie jedes Anbieters für Details.
+          </p>
+
+          <h2>4. Analysen</h2>
+          <p>
+            Wir können datenschutzorientierte Analysen verwenden, um zu verstehen, welche Seiten beliebt sind und unsere Inhalte zu verbessern. Alle erhobenen Analysedaten werden aggregiert und anonymisiert. Wir verkaufen keine Analysedaten an Dritte.
+          </p>
+
+          <h2>5. Kontaktdaten</h2>
+          <p>
+            Wenn Sie unser Kontaktformular verwenden oder uns direkt eine E-Mail senden, verwenden wir Ihre E-Mail-Adresse ausschließlich, um auf Ihre Anfrage zu antworten. Wir fügen Sie ohne Ihre ausdrückliche Zustimmung keiner Mailingliste hinzu.
+          </p>
+
+          <h2>6. Dienste von Drittanbietern</h2>
+          <p>
+            Wir verlinken auf externe Hosting-Anbieter. Sobald Sie unsere Website verlassen, gilt diese Datenschutzrichtlinie nicht mehr. Wir empfehlen Ihnen, die Datenschutzrichtlinien aller Drittanbieter-Websites zu lesen, die Sie besuchen.
+          </p>
+
+          <h2>7. Datenspeicherung</h2>
+          <p>
+            Kontaktformular-Einsendungen werden nur so lange aufbewahrt, wie es erforderlich ist, um auf Ihre Anfrage zu antworten, und werden dann gelöscht. Anonyme Analysedaten können bis zu 12 Monate für die Trendanalyse aufbewahrt werden.
+          </p>
+
+          <h2>8. Ihre Rechte</h2>
+          <p>
+            Gemäß der DSGVO und ähnlichen Vorschriften haben Sie das Recht, auf personenbezogene Daten, die wir über Sie besitzen, zuzugreifen, sie zu korrigieren oder zu löschen. Um diese Rechte auszuüben, kontaktieren Sie uns unter <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;text-decoration:none;">contact@dify-hosting.com</a>.
+          </p>
+
+          <h2>9. Änderungen dieser Richtlinie</h2>
+          <p>
+            Wir können diese Datenschutzrichtlinie von Zeit zu Zeit aktualisieren. Änderungen werden auf dieser Seite mit einem aktualisierten Datum veröffentlicht. Die fortgesetzte Nutzung der Website nach Änderungen stellt die Akzeptanz der überarbeiteten Richtlinie dar.
+          </p>
+
+          <h2>10. Kontakt</h2>
+          <p>
+            Für datenschutzbezogene Fragen kontaktieren Sie uns unter <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;text-decoration:none;">contact@dify-hosting.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

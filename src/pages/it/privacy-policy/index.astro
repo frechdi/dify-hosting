@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/privacy-policy/');
+---
+
+<BaseLayout
+  title="Informativa sulla privacy — Dify Hosting"
+  description="Informativa sulla privacy di dify-hosting.com. Scopri come raccogliamo, utilizziamo e proteggiamo i tuoi dati."
+  lang="it"
+  canonical="https://dify-hosting.com/it/privacy-policy/"
+  hreflang={hreflang}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/it/' },
+        { label: 'Informativa sulla privacy' },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        Informativa sulla privacy
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:640px;line-height:1.7;">
+        Ultimo aggiornamento: marzo 2026
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div class="card" style="padding:2rem;">
+        <div class="prose">
+          <h2>1. Informazioni che raccogliamo</h2>
+          <p>
+            Dify-hosting.com è un sito web informativo. Non richiediamo la registrazione di un account. Potremmo raccogliere dati analitici anonimi (visualizzazioni di pagina, referrer, tipo di browser) tramite strumenti di analisi che rispettano la privacy. Non raccogliamo informazioni personalmente identificabili a meno che tu non ci contatti direttamente.
+          </p>
+
+          <h2>2. Cookie</h2>
+          <p>
+            Utilizziamo un banner minimo per il consenso ai cookie. Se accetti i cookie, potremmo impostare un singolo cookie per ricordare la tua preferenza. Non utilizziamo cookie di tracciamento o cookie pubblicitari di terze parti. Puoi rifiutare i cookie e il sito continuerà a funzionare correttamente.
+          </p>
+
+          <h2>3. Link affiliati</h2>
+          <p>
+            Questo sito contiene link affiliati a provider di hosting. Quando fai clic su un link affiliato e acquisti, potremmo ricevere una commissione senza costi aggiuntivi per te. I clic sui link affiliati potrebbero essere tracciati dal programma di affiliazione del rispettivo provider. Ti invitiamo a consultare l'informativa sulla privacy di ogni provider per i dettagli.
+          </p>
+
+          <h2>4. Analisi dei dati</h2>
+          <p>
+            Potremmo utilizzare analisi focalizzate sulla privacy per capire quali pagine sono più popolari e migliorare i nostri contenuti. Tutti i dati analitici raccolti sono aggregati e anonimizzati. Non vendiamo dati analitici a terze parti.
+          </p>
+
+          <h2>5. Dati di contatto</h2>
+          <p>
+            Se utilizzi il nostro modulo di contatto o ci scrivi direttamente, utilizzeremo il tuo indirizzo email esclusivamente per rispondere alla tua richiesta. Non ti aggiungeremo a nessuna mailing list senza il tuo consenso esplicito.
+          </p>
+
+          <h2>6. Servizi di terze parti</h2>
+          <p>
+            Colleghiamo a provider di hosting esterni. Una volta abbandonato il nostro sito, questa informativa sulla privacy non si applica più. Ti invitiamo a consultare le informative sulla privacy di qualsiasi sito di terze parti che visiti.
+          </p>
+
+          <h2>7. Conservazione dei dati</h2>
+          <p>
+            I moduli di contatto inviati vengono conservati solo per il tempo necessario a rispondere alla tua richiesta e vengono poi eliminati. I dati analitici anonimi possono essere conservati per un massimo di 12 mesi per l'analisi delle tendenze.
+          </p>
+
+          <h2>8. I tuoi diritti</h2>
+          <p>
+            In base al GDPR e normative analoghe, hai il diritto di accedere, correggere o eliminare qualsiasi dato personale che conserviamo su di te. Per esercitare questi diritti, contattaci all'indirizzo <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;text-decoration:none;">contact@dify-hosting.com</a>.
+          </p>
+
+          <h2>9. Modifiche a questa informativa</h2>
+          <p>
+            Potremmo aggiornare questa informativa sulla privacy di tanto in tanto. Le modifiche verranno pubblicate su questa pagina con una data aggiornata. L'utilizzo continuato del sito dopo le modifiche costituisce accettazione della politica rivista.
+          </p>
+
+          <h2>10. Contatto</h2>
+          <p>
+            Per domande relative alla privacy, contattaci all'indirizzo <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;text-decoration:none;">contact@dify-hosting.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

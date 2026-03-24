@@ -1,0 +1,290 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/comparisons/dify-vs-langflow/');
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Dify vs Langflow 2026 — Comparación de Constructores LangChain',
+  description: 'Dify vs Langflow comparados: Dify se centra en apps de IA para producción, Langflow en la construcción visual de LangChain. Compara características, costes de alojamiento y casos de uso para 2026.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: '¿Cuál es la principal diferencia entre Dify y Langflow?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Langflow está construido sobre LangChain y se centra en la creación de prototipos visuales de pipelines de LangChain. Dify es una plataforma independiente centrada en construir y desplegar aplicaciones de IA para producción con un conjunto de características más amplio que incluye gestión de equipos, bases de conocimiento y análisis de conversaciones.' },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Es Langflow gratuito para autoalojar?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Sí. Langflow es de código abierto (licencia MIT) y gratuito para autoalojar. DataStax también ofrece Langflow Cloud con un nivel gratuito y precios basados en uso a $0,02 por ejecución.' },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Cuál es mejor para usuarios que no usan LangChain?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Dify. Es agnóstico al framework LLM — se conecta directamente a las APIs de proveedores de LLM sin requerir conocimiento de LangChain. Langflow es más útil si ya trabajas con LangChain.' },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Tiene Dify una comunidad más grande que Langflow?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Sí. A partir de 2026, Dify tiene más de 134k estrellas en GitHub vs más de 18k de Langflow. Dify también tiene una comunidad de Discord más activa y más tutoriales de terceros.' },
+    },
+  ],
+};
+
+const comparison = [
+  { feature: 'Estrellas en GitHub', dify: '134k+', langflow: '18k+', winner: 'dify' },
+  { feature: 'Fundado / Respaldo', dify: '2023 / Independiente', langflow: '2023 / DataStax', winner: 'tie' },
+  { feature: 'Licencia', dify: 'Apache 2.0', langflow: 'MIT', winner: 'tie' },
+  { feature: 'Construido Sobre', dify: 'Plataforma independiente', langflow: 'Construido sobre LangChain', winner: 'tie' },
+  { feature: 'Interfaz Principal', dify: 'Dashboard + canvas de flujos', langflow: 'Editor de flujos visual', winner: 'tie' },
+  { feature: 'RAM Mínima', dify: '4 GB', langflow: '2 GB', winner: 'langflow' },
+  { feature: 'Configuración Docker', dify: 'docker-compose (complejo)', langflow: 'Contenedor único (simple)', winner: 'langflow' },
+  { feature: 'RAG / Base de Conocimiento', dify: 'Avanzado integrado', langflow: 'Vía cargadores LangChain', winner: 'dify' },
+  { feature: 'UI Multilingüe', dify: '13+ idiomas', langflow: 'Solo inglés', winner: 'dify' },
+  { feature: 'Gestión de Equipo', dify: 'Sí (workspaces, roles)', langflow: 'Limitado', winner: 'dify' },
+  { feature: 'Análisis de Conversaciones', dify: 'Sí', langflow: 'No', winner: 'dify' },
+  { feature: 'Integración LangChain', dify: 'Vía API solo', langflow: 'Nativo (dependencia principal)', winner: 'langflow' },
+  { feature: 'Precio Cloud', dify: '$59/mes (Pro)', langflow: '$0,02/ejecución (DataStax Cloud)', winner: 'tie' },
+  { feature: 'Preparación para Producción', dify: 'Alta', langflow: 'Media', winner: 'dify' },
+];
+---
+
+<BaseLayout
+  title="Dify vs Langflow 2026 — Comparación de Constructores LangChain"
+  description="Dify vs Langflow comparados: Dify se centra en apps de IA para producción, Langflow en la construcción visual de LangChain. Compara características, costes de alojamiento y casos de uso para 2026."
+  lang="es"
+  canonical="https://dify-hosting.com/es/comparisons/dify-vs-langflow/"
+  hreflang={hreflang}
+  schema={[articleSchema, faqSchema]}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Inicio', href: '/es/' },
+        { label: 'Comparaciones', href: '/es/comparisons/' },
+        { label: 'Dify vs Langflow' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Actualizado Marzo 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#ede9fe;color:#5b21b6;">Respaldado por DataStax</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Dify vs Langflow (2026)
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Dify y Langflow son ambos constructores visuales de aplicaciones LLM, pero provienen de filosofías diferentes. Dify es una plataforma de IA completa; Langflow es una interfaz visual para pipelines de LangChain.
+      </p>
+    </div>
+  </section>
+
+  <!-- Veredicto Rápido -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div class="card card-featured">
+        <h2 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:1rem;">Veredicto Rápido</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+          <div style="padding:1rem;background:#eff6ff;border-radius:0.5rem;">
+            <p style="font-size:0.8rem;font-weight:700;color:#1677FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Elige Dify si...</p>
+            <ul style="color:#1e40af;font-size:0.875rem;line-height:1.8;margin:0;padding-left:1.25rem;">
+              <li>Estás construyendo para un equipo o clientes</li>
+              <li>Necesitas RAG avanzado y bases de conocimiento</li>
+              <li>No usas LangChain</li>
+              <li>Quieres análisis de conversaciones</li>
+              <li>Necesitas soporte de UI en múltiples idiomas</li>
+            </ul>
+          </div>
+          <div style="padding:1rem;background:#f5f3ff;border-radius:0.5rem;">
+            <p style="font-size:0.8rem;font-weight:700;color:#5b21b6;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Elige Langflow si...</p>
+            <ul style="color:#4c1d95;font-size:0.875rem;line-height:1.8;margin:0;padding-left:1.25rem;">
+              <li>Ya estás profundo en el ecosistema LangChain</li>
+              <li>Quieres prototipar flujos LangChain visualmente</li>
+              <li>Prefieres la infraestructura cloud de DataStax</li>
+              <li>Los requisitos de recursos más bajos son importantes</li>
+              <li>Quieres licencia MIT (sin restricciones EE)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué es Langflow -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">¿Qué es Langflow?</h2>
+      <div class="prose">
+        <p>
+          Langflow es un constructor visual de código abierto para aplicaciones de IA basadas en LangChain. Fue adquirido por DataStax en 2024, lo que trajo respaldo comercial y una oferta de cloud gestionado. Con Langflow, construyes flujos conectando componentes de LangChain — cargadores de documentos, embeddings, LLMs, memoria — en un canvas de arrastrar y soltar.
+        </p>
+        <p>
+          El cloud de Langflow (vía DataStax) cobra <strong>$0,02 por ejecución de flujo</strong> — un modelo de consumo que puede ser más barato que Dify Cloud para apps de bajo volumen, pero costoso a escala.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabla de Comparación -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Comparación Completa de Características</h2>
+
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;width:35%;">Característica</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#1677FF;width:32.5%;">Dify</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#7c3aed;width:32.5%;">Langflow</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row, i) => (
+              <tr style={`border-bottom:1px solid #e5e7eb;${i % 2 === 0 ? '' : 'background:#f9fafb;'}`}>
+                <td style="padding:0.75rem 1rem;font-weight:500;color:#374151;">{row.feature}</td>
+                <td style={`padding:0.75rem 1rem;${row.winner === 'dify' ? 'font-weight:600;color:#1677FF;' : 'color:#374151;'}`}>
+                  {row.winner === 'dify' && <span style="margin-right:0.25rem;">★</span>}{row.dify}
+                </td>
+                <td style={`padding:0.75rem 1rem;${row.winner === 'langflow' ? 'font-weight:600;color:#7c3aed;' : 'color:#374151;'}`}>
+                  {row.winner === 'langflow' && <span style="margin-right:0.25rem;">★</span>}{row.langflow}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.8rem;color:#9CA3AF;margin-top:0.75rem;">★ indica la opción más fuerte para esa característica</p>
+    </div>
+  </section>
+
+  <!-- Diferencias Clave -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Diferencias Clave</h2>
+      <div style="display:grid;gap:2rem;">
+
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Dependencia de LangChain</h3>
+          <p style="color:#4B5563;line-height:1.7;">
+            Esta es la diferencia fundamental. Langflow es esencialmente una GUI para LangChain — cada componente se corresponde con una clase de LangChain. Esto es excelente si conoces LangChain, pero crea un acoplamiento estrecho y significa que tus flujos dependen de los cambios de API de LangChain.
+          </p>
+          <p style="color:#4B5563;line-height:1.7;">
+            Dify es agnóstico al framework. Se conecta directamente a las APIs de proveedores de LLM (OpenAI, Anthropic, Ollama, etc.) sin LangChain. Esto lo hace más accesible para desarrolladores que no son de Python y más estable ya que no hereda los cambios disruptivos de LangChain.
+          </p>
+        </div>
+
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Producción vs Prototipado</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="card">
+              <p style="font-size:0.8rem;font-weight:700;color:#1677FF;text-transform:uppercase;margin-bottom:0.75rem;">Dify para Producción</p>
+              <ul style="color:#4B5563;font-size:0.875rem;line-height:1.8;margin:0;padding-left:1.25rem;">
+                <li>Acceso al workspace basado en roles</li>
+                <li>Gestión de claves API por app</li>
+                <li>Registros de conversaciones y análisis</li>
+                <li>Control de versiones de prompts</li>
+                <li>Widget embebible para usuarios finales</li>
+                <li>Monitorización y límites de uso</li>
+              </ul>
+            </div>
+            <div class="card">
+              <p style="font-size:0.8rem;font-weight:700;color:#7c3aed;text-transform:uppercase;margin-bottom:0.75rem;">Langflow para Prototipado</p>
+              <ul style="color:#4B5563;font-size:0.875rem;line-height:1.8;margin:0;padding-left:1.25rem;">
+                <li>Experimentación rápida con flujos</li>
+                <li>Acceso directo a componentes LangChain</li>
+                <li>Exportar flujos como JSON/Python</li>
+                <li>Excelente para exploración del desarrollador</li>
+                <li>Cloud DataStax para despliegue fácil</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Complejidad del Autoalojamiento</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div style="background:#eff6ff;border-radius:0.5rem;padding:1rem;">
+              <p style="font-size:0.8rem;font-weight:700;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Dify — 8 contenedores</p>
+              <pre style="background:#1e3a5f;color:#bfdbfe;padding:0.75rem;border-radius:0.375rem;font-size:0.75rem;overflow-x:auto;margin:0;"><code>nginx, api, worker, web,
+db, redis, weaviate, sandbox</code></pre>
+              <p style="font-size:0.8rem;color:#1e40af;margin-top:0.5rem;">Mín: 4 GB RAM, 50 GB disco</p>
+            </div>
+            <div style="background:#f5f3ff;border-radius:0.5rem;padding:1rem;">
+              <p style="font-size:0.8rem;font-weight:700;color:#7c3aed;text-transform:uppercase;margin-bottom:0.5rem;">Langflow — 2 contenedores</p>
+              <pre style="background:#2d1b69;color:#ddd6fe;padding:0.75rem;border-radius:0.375rem;font-size:0.75rem;overflow-x:auto;margin:0;"><code>langflow, postgres
+(o SQLite para dev)</code></pre>
+              <p style="font-size:0.8rem;color:#4c1d95;margin-top:0.5rem;">Mín: 2 GB RAM, 10 GB disco</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:2rem;">Preguntas Frecuentes</h2>
+      <div style="display:grid;gap:1.5rem;">
+        {[
+          {
+            q: '¿Cuál es la principal diferencia entre Dify y Langflow?',
+            a: 'Langflow está construido sobre LangChain y se centra en la creación de prototipos visuales de pipelines de LangChain. Dify es una plataforma independiente para construir y desplegar aplicaciones de IA para producción con características más amplias que incluyen gestión de equipos, bases de conocimiento y análisis de conversaciones.',
+          },
+          {
+            q: '¿Es Langflow gratuito para autoalojar?',
+            a: 'Sí. Langflow es de código abierto (licencia MIT) y gratuito para autoalojar. DataStax también ofrece Langflow Cloud con un nivel gratuito y precios basados en uso a $0,02 por ejecución.',
+          },
+          {
+            q: '¿Cuál es mejor para usuarios que no usan LangChain?',
+            a: 'Dify. Es agnóstico al framework LLM — se conecta directamente a las APIs de proveedores de LLM sin requerir conocimiento de LangChain. Langflow es más útil si ya trabajas con LangChain.',
+          },
+          {
+            q: '¿Tiene Dify una comunidad más grande que Langflow?',
+            a: 'Sí. A partir de 2026, Dify tiene más de 134k estrellas en GitHub vs más de 18k de Langflow. Dify también tiene una comunidad de Discord más activa y más tutoriales de terceros.',
+          },
+        ].map(faq => (
+          <div class="faq-item" style="border-bottom:1px solid #e5e7eb;padding-bottom:1.5rem;">
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">{faq.q}</h3>
+            <p style="color:#4B5563;line-height:1.7;margin:0;">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparaciones Relacionadas -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Más Comparaciones</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+        <a href="/es/comparisons/dify-vs-flowise/" style="text-decoration:none;">
+          <div class="card">
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Comparación</p>
+            <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.25rem;">Dify vs Flowise</h3>
+            <p style="font-size:0.875rem;color:#4B5563;margin:0;">Plataforma rica en características vs constructor ligero.</p>
+          </div>
+        </a>
+        <a href="/es/comparisons/dify-vs-n8n/" style="text-decoration:none;">
+          <div class="card">
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Comparación</p>
+            <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.25rem;">Dify vs n8n</h3>
+            <p style="font-size:0.875rem;color:#4B5563;margin:0;">Plataforma de IA vs automatización de flujos de trabajo.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

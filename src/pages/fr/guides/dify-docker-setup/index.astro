@@ -1,0 +1,352 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-docker-setup/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Guide de Configuration Docker Compose Dify 2026',
+  description: 'Maîtrisez la configuration Docker Compose de Dify — services, variables d\'environnement, ports personnalisés, durcissement de production et dépannage.',
+  totalTime: 'PT1H',
+  step: [
+    { '@type': 'HowToStep', position: 1, name: 'Comprendre l\'architecture Docker', text: 'Découvrez les huit services qui composent un déploiement Docker Dify.' },
+    { '@type': 'HowToStep', position: 2, name: 'Configurer les variables d\'environnement', text: 'Définir SECRET_KEY, mots de passe de base de données, Redis, CORS et clés API LLM dans .env.' },
+    { '@type': 'HowToStep', position: 3, name: 'Personnaliser la configuration des services', text: 'Changer les ports, activer le support GPU, désactiver les services inutilisés.' },
+    { '@type': 'HowToStep', position: 4, name: 'Durcissement de production', text: 'Changer les mots de passe par défaut, sécuriser .env et activer les sauvegardes automatisées.' },
+  ],
+};
+---
+
+<BaseLayout
+  title="Guide de Configuration Docker Compose Dify 2026 — Configuration complète"
+  description="Maîtrisez la configuration Docker Compose de Dify. Apprenez à personnaliser les ports, configurer les bases de données, définir les variables d'environnement, mettre à l'échelle les services et dépanner les problèmes courants."
+  lang="fr"
+  canonical="https://dify-hosting.com/fr/guides/dify-docker-setup/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Accueil', href: '/fr/' },
+        { label: 'Guides', href: '/fr/guides/' },
+        { label: 'Configuration Docker' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Mis à jour mars 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dbeafe;color:#1e40af;">8 services expliqués</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Guide de configuration Docker Compose Dify
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Tout ce que vous devez savoir sur l'architecture Docker de Dify — de ce que fait chaque conteneur au durcissement de votre déploiement en production avec des configurations personnalisées.
+      </p>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div class="prose">
+        <h2>Architecture Docker de Dify</h2>
+        <p>
+          Le fichier <code>docker-compose.yaml</code> de Dify démarre huit services. Comprendre ce que fait chacun vous aide à configurer, dépanner et mettre à l'échelle votre déploiement.
+        </p>
+      </div>
+
+      <div style="display:grid;gap:1rem;margin-top:1.5rem;">
+        {[
+          { name: 'nginx', role: 'Proxy inverse / serveur web', ram: '~50 Mo', desc: 'Achemine les requêtes HTTP entrantes vers le service interne correct (UI web ou API). C\'est le seul conteneur qui doit être accessible publiquement.' },
+          { name: 'api', role: 'Serveur API Dify', ram: '~300 Mo', desc: 'Le backend Python/Flask principal. Gère toute la logique métier, les appels LLM, l\'exécution du pipeline RAG et les endpoints REST API.' },
+          { name: 'worker', role: 'Worker Celery en arrière-plan', ram: '~300 Mo', desc: 'Traite les tâches asynchrones : indexation de documents, imports de datasets, chaînes LLM longues. Partage le code avec le conteneur API.' },
+          { name: 'web', role: 'Frontend Next.js', ram: '~150 Mo', desc: 'L\'interface utilisateur basée sur React servie comme application Next.js. Communique avec le conteneur API.' },
+          { name: 'db', role: 'Base de données PostgreSQL', ram: '~100 Mo', desc: 'Stocke toutes les données persistantes : apps, conversations, métadonnées de datasets, utilisateurs et clés API.' },
+          { name: 'redis', role: 'Cache & courtier de messages', ram: '~30 Mo', desc: 'Met en cache les requêtes fréquentes, stocke la file d\'attente Celery pour le worker, et gère les données de limitation de débit.' },
+          { name: 'weaviate', role: 'Base de données vectorielle', ram: '~500 Mo', desc: 'Stocke les embeddings de documents pour les bases de connaissances RAG. Le consommateur de mémoire le plus important. Peut être remplacé par pgvector ou Qdrant.' },
+          { name: 'sandbox', role: 'Sandbox d\'exécution de code', ram: '~100 Mo', desc: 'Conteneur isolé pour exécuter les nœuds de code définis par l\'utilisateur dans les workflows Dify. S\'exécute avec des permissions restreintes.' },
+        ].map(s => (
+          <div class="card" style="display:grid;grid-template-columns:1fr auto;gap:0.5rem;">
+            <div>
+              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+                <code style="background:#f1f5f9;padding:0.2em 0.5em;border-radius:0.25rem;font-size:0.85rem;color:#0f172a;font-weight:600;">{s.name}</code>
+                <span style="font-size:0.8rem;color:#6B7280;">{s.role}</span>
+              </div>
+              <p style="font-size:0.875rem;color:#4B5563;margin:0;line-height:1.6;">{s.desc}</p>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <span class="spec-chip">{s.ram}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style="background:#fefce8;border-left:3px solid #ca8a04;padding:1rem 1.25rem;border-radius:0 0.5rem 0.5rem 0;margin-top:1.5rem;">
+        <p style="margin:0;font-size:0.9rem;color:#713f12;"><strong>RAM totale de base :</strong> ~1,5 Go rien que pour les conteneurs inactifs. Sur un serveur 4 Go, cela laisse ~2,5 Go pour le système d'exploitation et les charges de travail réelles. Pour la production, 8 Go de RAM est recommandé.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Variables d'environnement -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Guide des variables d'environnement</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Toute la configuration Dify se trouve dans <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">dify/docker/.env</code>. Copiez depuis <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">.env.example</code> et personnalisez ces paramètres clés :
+      </p>
+
+      <div style="display:grid;gap:1.5rem;">
+
+        <div>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#ef4444;"></span>
+            Sécurité (Requis)
+          </h3>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Générez avec : openssl rand -base64 42
+SECRET_KEY=votre-très-longue-clé-secrète-aléatoire
+
+# Clé de chiffrement pour les données sensibles stockées
+# Générez avec : openssl rand -hex 16
+ENCRYPT_IV=votre-valeur-hex-16-chars</code></pre>
+        </div>
+
+        <div>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#f59e0b;"></span>
+            Paramètres de base de données
+          </h3>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Paramètres PostgreSQL (réseau Docker interne)
+DB_USERNAME=postgres
+DB_PASSWORD=changez-ce-mot-de-passe-fort
+DB_HOST=db
+DB_PORT=5432
+DB_DATABASE=dify
+
+# Paramètres Redis
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_PASSWORD=changez-ce-mot-de-passe-redis
+REDIS_DB=0</code></pre>
+        </div>
+
+        <div>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#3b82f6;"></span>
+            Paramètres URL &amp; CORS
+          </h3>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Votre domaine (sans barre oblique finale)
+CONSOLE_URL=https://votre-domaine.com
+APP_URL=https://votre-domaine.com
+SERVICE_API_URL=https://votre-domaine.com
+
+# Origines CORS (séparées par des virgules)
+CONSOLE_CORS_ALLOW_ORIGINS=https://votre-domaine.com
+WEB_API_CORS_ALLOW_ORIGINS=https://votre-domaine.com</code></pre>
+        </div>
+
+        <div>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#8b5cf6;"></span>
+            Stockage de fichiers
+          </h3>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Par défaut : système de fichiers local (stocké dans ./volumes/app/storage)
+STORAGE_TYPE=local
+
+# Pour le stockage compatible S3 (recommandé pour la production)
+# STORAGE_TYPE=s3
+# S3_ENDPOINT=https://s3.amazonaws.com
+# S3_BUCKET_NAME=mon-bucket-dify
+# S3_ACCESS_KEY=votre-clé-accès
+# S3_SECRET_KEY=votre-clé-secrète
+# S3_REGION=eu-west-1</code></pre>
+        </div>
+
+        <div>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10b981;"></span>
+            Clés API LLM (optionnel à la configuration)
+          </h3>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Vous pouvez aussi configurer cela dans l'interface web Dify
+# Ces paramètres .env pré-configurent les fournisseurs au premier démarrage
+
+OPENAI_API_KEY=sk-votre-clé-openai
+ANTHROPIC_API_KEY=sk-ant-votre-clé
+GOOGLE_API_KEY=votre-clé-gemini
+
+# Pour Ollama (LLM locaux)
+# Configurez dans l'UI : Paramètres → Fournisseur de modèle → Ollama</code></pre>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Configurations personnalisées -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Configurations personnalisées</h2>
+
+      <div style="display:grid;gap:2rem;">
+
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:600;color:#111827;margin-bottom:0.75rem;">Mappage de ports personnalisé</h3>
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:0.75rem;">
+            Si le port 80 est occupé, changez le port hôte auquel le Nginx de Dify se lie en éditant <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">.env</code> :
+          </p>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Changer le port hôte du conteneur Nginx
+EXPOSE_NGINX_PORT=8080
+EXPOSE_NGINX_SSL_PORT=8443</code></pre>
+        </div>
+
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:600;color:#111827;margin-bottom:0.75rem;">Désactiver Weaviate (utiliser pgvector à la place)</h3>
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:0.75rem;">
+            Weaviate utilise ~500 Mo de RAM. Sur les serveurs à mémoire limitée, basculez vers pgvector (déjà disponible dans le conteneur PostgreSQL) :
+          </p>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Dans .env — basculer le stockage vectoriel vers pgvector
+VECTOR_STORE=pgvector
+
+# Puis redémarrer sans Weaviate
+docker compose up -d --scale weaviate=0</code></pre>
+        </div>
+
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:600;color:#111827;margin-bottom:0.75rem;">Activer le support GPU</h3>
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:0.75rem;">
+            Pour passer un GPU NVIDIA (pour les modèles d'embedding locaux), ajoutez le runtime GPU à votre <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker-compose.override.yaml</code> :
+          </p>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code>services:
+  api:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]</code></pre>
+          <p style="color:#4B5563;line-height:1.7;margin-top:0.75rem;">Consultez le <a href="/fr/guides/dify-gpu-hosting/" style="color:#1677FF;text-decoration:none;font-weight:500;">guide d'hébergement GPU</a> pour les instructions de configuration complètes.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Commandes courantes -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Commandes courantes</h2>
+      <div style="display:grid;gap:1rem;">
+        {[
+          { label: 'Démarrer tous les services', cmd: 'docker compose up -d' },
+          { label: 'Arrêter tous les services', cmd: 'docker compose down' },
+          { label: 'Redémarrer un service', cmd: 'docker compose restart api' },
+          { label: 'Voir les logs (en direct)', cmd: 'docker compose logs -f api worker' },
+          { label: 'Ouvrir un shell dans le conteneur API', cmd: 'docker compose exec api bash' },
+          { label: 'Vérifier l\'état des conteneurs', cmd: 'docker compose ps' },
+          { label: 'Utilisation des ressources par conteneur', cmd: 'docker stats' },
+          { label: 'Supprimer les conteneurs arrêtés', cmd: 'docker compose down --remove-orphans' },
+          { label: 'Mettre à jour les images', cmd: 'docker compose pull' },
+          { label: 'Reconstruire un service', cmd: 'docker compose up -d --build api' },
+        ].map(c => (
+          <div style="display:flex;align-items:center;gap:1rem;padding:0.75rem 1rem;background:#f8fafc;border-radius:0.5rem;border:1px solid #e2e8f0;">
+            <span style="font-size:0.875rem;color:#6B7280;min-width:220px;">{c.label}</span>
+            <code style="font-size:0.85rem;color:#0f172a;font-family:monospace;">{c.cmd}</code>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Dépannage -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Dépannage</h2>
+      <div style="display:grid;gap:1.5rem;">
+
+        <div class="faq-item" style="border-bottom:1px solid #e5e7eb;padding-bottom:1.5rem;">
+          <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Le conteneur redémarre en boucle / CrashLoopBackOff</h3>
+          <p style="color:#4B5563;line-height:1.7;margin:0;">Vérifiez les logs : <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker compose logs api</code>. Causé généralement par un format <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">SECRET_KEY</code> incorrect ou une variable d'environnement requise manquante. Assurez-vous que SECRET_KEY fait au moins 32 caractères.</p>
+        </div>
+
+        <div class="faq-item" style="border-bottom:1px solid #e5e7eb;padding-bottom:1.5rem;">
+          <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Manque de mémoire — conteneurs tués par OOM killer</h3>
+          <p style="color:#4B5563;line-height:1.7;margin:0;">Ajoutez de l'espace swap et/ou passez à un serveur plus grand. Exécutez <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">dmesg | grep -i "killed process"</code> pour confirmer les kills OOM. Le conteneur weaviate est généralement le coupable — envisagez de basculer vers pgvector.</p>
+        </div>
+
+        <div class="faq-item" style="border-bottom:1px solid #e5e7eb;padding-bottom:1.5rem;">
+          <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Erreurs de connexion à la base de données</h3>
+          <p style="color:#4B5563;line-height:1.7;margin:0;">Assurez-vous que le conteneur DB est en bonne santé avant que l'API démarre : <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker compose ps db</code>. Essayez <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker compose restart api</code> si la DB n'a pas fini de s'initialiser à temps.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Erreurs de permission refusée sur ./volumes</h3>
+          <p style="color:#4B5563;line-height:1.7;margin:0;">Le répertoire de volumes de stockage nécessite des permissions correctes. Exécutez : <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">sudo chown -R 1000:1000 ./volumes</code> depuis le répertoire <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">dify/docker</code>.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Durcissement de production -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Durcissement de production</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">Avant de mettre en ligne, appliquez ces mesures de sécurité :</p>
+
+      <div style="display:grid;gap:1rem;">
+        <div class="card">
+          <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">1. Changer tous les mots de passe par défaut</h3>
+          <p style="font-size:0.875rem;color:#4B5563;margin:0;">Définissez des valeurs uniques et fortes pour <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">DB_PASSWORD</code>, <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">REDIS_PASSWORD</code>, et surtout <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">SECRET_KEY</code>. N'utilisez jamais les valeurs par défaut de .env.example en production.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">2. Sécuriser votre fichier .env</h3>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:0.75rem 1rem;border-radius:0.5rem;font-size:0.8rem;margin:0.5rem 0 0;"><code>chmod 600 dify/docker/.env
+# Ne committez jamais .env dans le contrôle de version</code></pre>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">3. Activer les sauvegardes automatisées</h3>
+          <p style="font-size:0.875rem;color:#4B5563;margin:0 0 0.5rem;">Ajoutez dans crontab (<code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">crontab -e</code>) :</p>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:0.75rem 1rem;border-radius:0.5rem;font-size:0.8rem;margin:0;"><code>0 3 * * * cd ~/dify/docker && docker compose exec -T db pg_dump -U postgres dify > ~/backups/dify_$(date +\%Y\%m\%d).sql</code></pre>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">4. Utiliser S3 pour le stockage de fichiers</h3>
+          <p style="font-size:0.875rem;color:#4B5563;margin:0;">Basculez <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">STORAGE_TYPE=s3</code> pour que les documents uploadés soient stockés séparément de votre serveur et survivent aux reconstructions de conteneurs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Liens connexes -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Guides connexes</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+        <a href="/fr/guides/self-host-dify/" style="text-decoration:none;">
+          <div class="card">
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Guide</p>
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Comment auto-héberger Dify</h3>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">Guide complet pour débutants, de la configuration du serveur au SSL.</p>
+          </div>
+        </a>
+        <a href="/fr/guides/dify-gpu-hosting/" style="text-decoration:none;">
+          <div class="card">
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Guide</p>
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Hébergement GPU pour Dify</h3>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">Exécutez des LLM locaux avec Ollama sur des serveurs GPU.</p>
+          </div>
+        </a>
+        <a href="/fr/providers/hetzner/" style="text-decoration:none;">
+          <div class="card">
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Hébergeur</p>
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Hetzner pour Dify</h3>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">Meilleur rapport qualité-prix VPS pour les déploiements Dify basés sur Docker.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

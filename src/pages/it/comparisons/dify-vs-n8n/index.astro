@@ -1,0 +1,312 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/comparisons/dify-vs-n8n/');
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Dify vs n8n 2026 — Piattaforma AI vs Automazione Workflow',
+  description: 'Dify vs n8n a confronto: Dify è un LLM app builder, n8n è automazione workflow. Scopri quando scegliere ciascuno, prezzi, requisiti di self-hosting e opzioni di integrazione.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Dify e n8n possono essere usati insieme?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Sì — si complementano bene. Usa n8n per l\'automazione event-driven e le integrazioni, e triggera i workflow Dify tramite l\'API REST di Dify quando è necessaria l\'elaborazione LLM.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Quale è più facile da fare self-host, Dify o n8n?',
+      acceptedAnswer: { '@type': 'Answer', text: 'n8n è più semplice: un singolo container Docker su 2GB RAM. Dify richiede docker-compose con 8 servizi e almeno 4GB RAM.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'n8n supporta LLM e AI?',
+      acceptedAnswer: { '@type': 'Answer', text: 'n8n ha nodi HTTP e un nodo AI agent base per chiamare API LLM, ma manca della pipeline RAG di Dify, della gestione della knowledge base e delle funzionalità di interfaccia chat delle conversazioni.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Come si confrontano i prezzi cloud?',
+      acceptedAnswer: { '@type': 'Answer', text: 'n8n Starter è $20/mo (2.500 esecuzioni). Dify Professional è $59/mo (1M crediti messaggio). Per l\'automazione workflow n8n è più economico; per le app AI Dify fornisce più valore specializzato.' },
+    },
+  ],
+};
+
+const apiExample = `# Esempio: nodo HTTP di n8n che chiama l'API Dify
+POST https://tuo-dify.com/v1/chat-messages
+Headers:
+  Authorization: Bearer TUA_DIFY_APP_API_KEY
+  Content-Type: application/json
+Body:
+{
+  "inputs": {},
+  "query": "{{ $json.customer_message }}",
+  "response_mode": "blocking",
+  "conversation_id": "",
+  "user": "{{ $json.user_id }}"
+}`;
+
+const comparison = [
+  { feature: 'Uso Principale', dify: 'LLM app builder, pipeline RAG', tool: 'Automazione workflow, integrazioni' },
+  { feature: 'GitHub Stars', dify: '134k+', tool: '48k+' },
+  { feature: 'Licenza', dify: 'Apache 2.0 (con funzionalità EE)', tool: 'Sustainable Use License' },
+  { feature: 'Self-host', dify: 'Docker Compose (complesso)', tool: 'Container Docker singolo (semplice)' },
+  { feature: 'RAM Minima', dify: '4 GB', tool: '2 GB' },
+  { feature: 'Livello Gratuito', dify: 'Sì (5.000 crediti)', tool: 'Sì (community edition)' },
+  { feature: 'Prezzo Cloud', dify: '$59/mo (Pro)', tool: '$20/mo (Starter)' },
+  { feature: 'Focus AI / LLM', dify: 'Nativo (funzionalità core)', tool: 'Via HTTP / nodi AI' },
+  { feature: 'Supporto RAG', dify: 'Knowledge base integrata', tool: 'Solo via strumenti esterni' },
+  { feature: 'UI Chatbot', dify: 'Integrata, incorporabile', tool: 'Non inclusa' },
+  { feature: 'Editor Visuale', dify: 'Workflow + prompt editor', tool: 'Canvas workflow a nodi' },
+  { feature: 'Integrazioni', dify: '20+ provider LLM', tool: '400+ app e servizi' },
+];
+---
+
+<BaseLayout
+  title="Dify vs n8n 2026 — Piattaforma AI vs Automazione Workflow"
+  description="Dify vs n8n a confronto: Dify è un LLM app builder, n8n è automazione workflow. Scopri quando scegliere ciascuno, prezzi, requisiti di self-hosting e opzioni di integrazione."
+  lang="it"
+  canonical="https://dify-hosting.com/it/comparisons/dify-vs-n8n/"
+  hreflang={hreflang}
+  schema={[articleSchema, faqSchema]}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/it/' },
+        { label: 'Confronti', href: '/it/comparisons/' },
+        { label: 'Dify vs n8n' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Aggiornato Marzo 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dbeafe;color:#1e40af;">Strumenti Diversi</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Dify vs n8n (2026)
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Confrontare Dify e n8n è come confrontare un coltello da chef con un coltellino svizzero. Sono progettati per lavori diversi — ma usati insieme, sono ancora più potenti.
+      </p>
+    </div>
+  </section>
+
+  <!-- Verdetto Rapido -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div class="card card-featured">
+        <h2 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:1rem;">Verdetto Rapido</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+          <div style="padding:1rem;background:#eff6ff;border-radius:0.5rem;">
+            <p style="font-size:0.8rem;font-weight:700;color:#1677FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Scegli Dify se...</p>
+            <ul style="color:#1e40af;font-size:0.875rem;line-height:1.8;margin:0;padding-left:1.25rem;">
+              <li>Stai costruendo chatbot AI o assistenti</li>
+              <li>Hai bisogno di una knowledge base RAG</li>
+              <li>Vuoi un'interfaccia chat pronta all'uso</li>
+              <li>Gli utenti non tecnici devono usarla</li>
+            </ul>
+          </div>
+          <div style="padding:1rem;background:#f0fdf4;border-radius:0.5rem;">
+            <p style="font-size:0.8rem;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Scegli n8n se...</p>
+            <ul style="color:#166534;font-size:0.875rem;line-height:1.8;margin:0;padding-left:1.25rem;">
+              <li>Hai bisogno di automatizzare workflow aziendali</li>
+              <li>Integri 400+ app diverse</li>
+              <li>Vuoi automazione event-driven</li>
+              <li>RAM bassa / risorse minime</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:1rem;padding-top:1rem;border-top:1px solid #e5e7eb;font-size:0.9rem;color:#374151;">
+          <strong>Il meglio di entrambi i mondi:</strong> Molti team usano n8n per l'automazione aziendale e Dify per il layer AI. n8n può chiamare l'API di Dify per triggerare workflow LLM quando è necessaria l'elaborazione AI.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabella di Confronto -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Confronto Fianco a Fianco</h2>
+
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;width:35%;">Funzionalità</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;width:32.5%;color:#1677FF;">
+                <span style="display:inline-flex;align-items:center;gap:0.5rem;">
+                  <span style="width:8px;height:8px;background:#1677FF;border-radius:50%;display:inline-block;"></span>
+                  Dify
+                </span>
+              </th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#ea580c;width:32.5%;">
+                <span style="display:inline-flex;align-items:center;gap:0.5rem;">
+                  <span style="width:8px;height:8px;background:#ea580c;border-radius:50%;display:inline-block;"></span>
+                  n8n
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row, i) => (
+              <tr style={`border-bottom:1px solid #e5e7eb;${i % 2 === 0 ? '' : 'background:#f9fafb;'}`}>
+                <td style="padding:0.75rem 1rem;font-weight:500;color:#374151;">{row.feature}</td>
+                <td style="padding:0.75rem 1rem;color:#1e40af;">{row.dify}</td>
+                <td style="padding:0.75rem 1rem;color:#9a3412;">{row.tool}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Analisi Casi d'Uso -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Analisi dei Casi d'Uso</h2>
+      <div style="display:grid;gap:1.5rem;">
+
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Quando usare Dify</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+            {['Chatbot supporto clienti', 'App Document Q&A / RAG', 'Assistente scrittura AI', 'Bot knowledge base interno', 'Pipeline LLM multi-step', 'Prodotto AI via API'].map(u => (
+              <div style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.75rem;background:#eff6ff;border-radius:0.5rem;font-size:0.875rem;color:#1e40af;">
+                <span style="color:#1677FF;font-size:1rem;">✓</span> {u}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Quando usare n8n</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+            {['Automazione CRM → Slack', 'Sync GitHub → Jira', 'Pipeline dati schedulata', 'Workflow multi-app', 'Elaborazione webhook', 'Elaborazione ordini e-commerce'].map(u => (
+              <div style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.75rem;background:#fff7ed;border-radius:0.5rem;font-size:0.875rem;color:#9a3412;">
+                <span style="color:#ea580c;font-size:1rem;">✓</span> {u}
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Confronto Self-Hosting -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Confronto Self-Hosting</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div class="card">
+          <h3 style="font-size:1rem;font-weight:700;color:#1677FF;margin-bottom:1rem;">Self-Hosting Dify</h3>
+          <ul style="color:#4B5563;font-size:0.875rem;line-height:2;margin:0;padding-left:1.25rem;">
+            <li>8 container Docker via Compose</li>
+            <li>Min 4 GB RAM (8 GB consigliati)</li>
+            <li>~15 min per avviarsi</li>
+            <li>50+ GB disco per storage/DB</li>
+            <li>Aggiornamenti via <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;font-size:0.8rem;">docker compose pull</code></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1rem;font-weight:700;color:#ea580c;margin-bottom:1rem;">Self-Hosting n8n</h3>
+          <ul style="color:#4B5563;font-size:0.875rem;line-height:2;margin:0;padding-left:1.25rem;">
+            <li>Container Docker singolo</li>
+            <li>Min 2 GB RAM</li>
+            <li>~5 min per avviarsi</li>
+            <li>10+ GB disco</li>
+            <li>Aggiornamenti via <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;font-size:0.8rem;">docker pull</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflow Combinato -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Usare n8n e Dify Insieme</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        Un pattern potente: usa n8n come backbone di automazione e chiama l'API di Dify quando è necessaria l'elaborazione AI.
+      </p>
+      <div style="background:#0f172a;border-radius:0.75rem;padding:1.25rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;color:#e2e8f0;margin-bottom:1rem;">
+        <pre><code set:text={apiExample}/></pre>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;">
+        Questo ti permette di triggerare risposte AI di Dify da qualsiasi trigger n8n — nuovo ticket Zendesk, email in arrivo, messaggio Slack, webhook o job schedulato.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:2rem;">Domande Frequenti</h2>
+      <div style="display:grid;gap:1.5rem;">
+        {[
+          {
+            q: 'Dify e n8n possono essere usati insieme?',
+            a: 'Sì — si complementano bene. Usa n8n per l\'automazione event-driven e le integrazioni, poi triggera i workflow Dify tramite l\'API REST di Dify quando è necessaria l\'elaborazione LLM.',
+          },
+          {
+            q: 'Quale è più facile da fare self-host?',
+            a: 'n8n è considerevolmente più semplice: un singolo container Docker su 2 GB RAM è tutto ciò di cui hai bisogno. Dify richiede docker-compose con 8 servizi e almeno 4 GB RAM per funzionare in modo affidabile.',
+          },
+          {
+            q: 'n8n supporta LLM e AI?',
+            a: 'n8n ha nodi HTTP e nodi AI agent base per chiamare API LLM, ma manca della pipeline RAG di Dify, della gestione della knowledge base, della cronologia delle conversazioni e dell\'interfaccia chat incorporabile.',
+          },
+          {
+            q: 'Come si confrontano i prezzi cloud?',
+            a: 'n8n Starter è $20/mo (2.500 esecuzioni workflow). Dify Professional è $59/mo (1M crediti messaggio). Per l\'automazione workflow generale n8n è più economico; per app AI dedicate Dify fornisce più valore specializzato.',
+          },
+        ].map(faq => (
+          <div class="faq-item" style="border-bottom:1px solid #e5e7eb;padding-bottom:1.5rem;">
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">{faq.q}</h3>
+            <p style="color:#4B5563;line-height:1.7;margin:0;">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Link Correlati -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Altri Confronti</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+        <a href="/it/comparisons/dify-vs-flowise/" style="text-decoration:none;">
+          <div class="card">
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Confronto</p>
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Dify vs Flowise</h3>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">Confronta Dify e Flowise, l'LLM builder open-source leggero.</p>
+          </div>
+        </a>
+        <a href="/it/comparisons/dify-vs-langflow/" style="text-decoration:none;">
+          <div class="card">
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Confronto</p>
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Dify vs Langflow</h3>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">Piattaforma AI vs visual builder LangChain.</p>
+          </div>
+        </a>
+        <a href="/it/best-dify-hosting/" style="text-decoration:none;">
+          <div class="card">
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Guida</p>
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Miglior Hosting Dify</h3>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">8 provider VPS testati per il self-hosting di Dify.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

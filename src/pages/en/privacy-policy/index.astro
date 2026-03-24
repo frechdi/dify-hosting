@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/privacy-policy/');
+---
+
+<BaseLayout
+  title="Privacy Policy — Dify Hosting"
+  description="Privacy policy for dify-hosting.com. Learn how we collect, use, and protect your data."
+  lang="en"
+  canonical="https://dify-hosting.com/en/privacy-policy/"
+  hreflang={hreflang}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/en/' },
+        { label: 'Privacy Policy' },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        Privacy Policy
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:640px;line-height:1.7;">
+        Last updated: March 2026
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div class="card" style="padding:2rem;">
+        <div class="prose">
+          <h2>1. Information We Collect</h2>
+          <p>
+            Dify-hosting.com is an informational website. We do not require account registration. We may collect anonymous analytics data (page views, referrer, browser type) via privacy-respecting analytics tools. We do not collect personally identifiable information unless you contact us directly.
+          </p>
+
+          <h2>2. Cookies</h2>
+          <p>
+            We use a minimal cookie consent banner. If you accept cookies, we may set a single cookie to remember your preference. We do not use tracking cookies or third-party advertising cookies. You can decline cookies and the site will still function fully.
+          </p>
+
+          <h2>3. Affiliate Links</h2>
+          <p>
+            This site contains affiliate links to hosting providers. When you click an affiliate link and make a purchase, we may receive a commission at no additional cost to you. Affiliate link clicks may be tracked by the respective provider's affiliate program. Please review each provider's privacy policy for details.
+          </p>
+
+          <h2>4. Analytics</h2>
+          <p>
+            We may use privacy-focused analytics to understand which pages are popular and improve our content. Any analytics data collected is aggregated and anonymized. We do not sell analytics data to third parties.
+          </p>
+
+          <h2>5. Contact Data</h2>
+          <p>
+            If you use our contact form or email us directly, we will use your email address solely to respond to your inquiry. We do not add you to any mailing list without your explicit consent.
+          </p>
+
+          <h2>6. Third-Party Services</h2>
+          <p>
+            We link to external hosting providers. Once you leave our site, this privacy policy no longer applies. We encourage you to review the privacy policies of any third-party sites you visit.
+          </p>
+
+          <h2>7. Data Retention</h2>
+          <p>
+            Any contact form submissions are retained only as long as necessary to respond to your inquiry and are then deleted. Anonymous analytics data may be retained for up to 12 months for trend analysis.
+          </p>
+
+          <h2>8. Your Rights</h2>
+          <p>
+            Under GDPR and similar regulations, you have the right to access, correct, or delete any personal data we hold about you. To exercise these rights, contact us at <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;text-decoration:none;">contact@dify-hosting.com</a>.
+          </p>
+
+          <h2>9. Changes to This Policy</h2>
+          <p>
+            We may update this privacy policy from time to time. Changes will be posted on this page with an updated date. Continued use of the site after changes constitutes acceptance of the revised policy.
+          </p>
+
+          <h2>10. Contact</h2>
+          <p>
+            For privacy-related questions, contact us at <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;text-decoration:none;">contact@dify-hosting.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

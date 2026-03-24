@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+const hreflang = getHreflang('/guides/dify-gpu-hosting/');
+---
+<BaseLayout
+  title="Dify GPU Hosting 2026 — LLMs Locaux avec Ollama"
+  description="Comment exécuter des LLMs locaux avec Dify et Ollama sur un serveur GPU. Comparatif des fournisseurs GPU."
+  lang="fr"
+  canonical="https://dify-hosting.com/fr/guides/dify-gpu-hosting/"
+  hreflang={hreflang}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[{"label":"Accueil","href":"/fr/"},{"label":"Guides","href":"/fr/guides/"},{"label":"Dify GPU Hosting 2026"}]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Updated March 2026</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">Dify GPU Hosting 2026</h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">Exécutez des LLMs locaux sans coûts d'API. Connectez Ollama à Dify pour une inférence privée et rapide.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Fournisseurs GPU pour Dify</h2>
+      <div style="overflow-x:auto;">
+        <table class="comparison-table">
+          <thead><tr><th>Provider</th><th>GPU</th><th>VRAM</th><th>Price/hr</th><th>Best For</th></tr></thead>
+          <tbody>
+            <tr><td>Vast.ai</td><td>RTX 4090</td><td>24 GB</td><td>~$0.35</td><td>Budget</td></tr>
+            <tr style="background:#F0F7FF;"><td><strong>RunPod</strong></td><td>A100</td><td>80 GB</td><td>$1.99</td><td>Production</td></tr>
+            <tr><td>Lambda Labs</td><td>A10</td><td>24 GB</td><td>$0.75</td><td>Development</td></tr>
+            <tr><td>Hetzner GPU</td><td>A100</td><td>80 GB</td><td>€2.49</td><td>EU compliance</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container-sm">
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1rem;">Modèles LLM recommandés</h2>
+      <div style="overflow-x:auto;">
+        <table class="comparison-table">
+          <thead><tr><th>Model</th><th>VRAM</th><th>Speed</th><th>Best For</th></tr></thead>
+          <tbody>
+            <tr><td>llama3.1:8b</td><td>~6 GB</td><td>Fast</td><td>General purpose</td></tr>
+            <tr><td>mistral:7b</td><td>~5 GB</td><td>Very fast</td><td>Speed-critical</td></tr>
+            <tr style="background:#F0F7FF;"><td><strong>llama3.1:70b</strong></td><td>~40 GB</td><td>Slow</td><td>High quality</td></tr>
+            <tr><td>mixtral:8x7b</td><td>~26 GB</td><td>Medium</td><td>Balanced</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="section section-alt">
+    <div class="container-sm">
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1rem;">Installation rapide Ollama</h2>
+      <div style="background:#0f172a;border-radius:0.75rem;padding:1.25rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;color:#e2e8f0;">
+        <pre><code># Install Ollama
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Pull a model
+ollama pull llama3.1:8b
+
+# Dify: Settings → Model Providers → Ollama
+# Host: http://localhost:11434</code></pre>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container-sm">
+      <h2 style="font-size:1.2rem;font-weight:700;color:#111827;margin-bottom:1rem;">Ressources associées</h2>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="/fr/best-dify-hosting/" class="btn-secondary">Meilleur Hébergement Dify 2026</a>
+        <a href="/fr/providers/hetzner/" class="btn-secondary">Hetzner Review</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/affiliate-disclosure/');
+---
+
+<BaseLayout
+  title="Déclaration d'affiliation — Dify Hosting"
+  description="Déclaration d'affiliation de dify-hosting.com. Nous percevons des commissions sur les liens d'affiliation sans frais supplémentaires pour vous."
+  lang="fr"
+  canonical="https://dify-hosting.com/fr/affiliate-disclosure/"
+  hreflang={hreflang}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Accueil', href: '/fr/' },
+        { label: "Déclaration d'affiliation" },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        Déclaration d'affiliation
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:640px;line-height:1.7;">
+        Dernière mise à jour : mars 2026
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div class="card" style="padding:2rem;border-left:4px solid #f59e0b;">
+        <div class="prose">
+          <h2>Nos relations d'affiliation</h2>
+          <p>
+            Dify-hosting.com participe à des programmes d'affiliation avec les hébergeurs présentés sur ce site. Lorsque vous cliquez sur un lien d'hébergeur et effectuez un achat ou vous inscrivez à un forfait, nous pouvons percevoir une commission sans frais supplémentaires pour vous.
+          </p>
+
+          <h2>Quels hébergeurs ont des programmes d'affiliation</h2>
+          <p>
+            Nous avons des relations d'affiliation avec certains ou tous les hébergeurs suivants présentés sur ce site : Hetzner, Hostinger, DigitalOcean, Vultr, Elestio, Railway, Render et Kamatera. Les liens vers ces hébergeurs sur l'ensemble du site peuvent être des liens affiliés.
+          </p>
+
+          <h2>Comment cela affecte nos avis</h2>
+          <p>
+            Nos avis et classements sont basés uniquement sur nos tests et évaluations indépendants. Les taux de commission n'influencent pas nos classements. Les hébergeurs ne paient jamais pour apparaître dans nos classements ou obtenir un meilleur positionnement. Nous ne recommandons que les hébergeurs que nous avons personnellement testés.
+          </p>
+          <p>
+            Notre engagement : si un hébergeur verse de fortes commissions mais obtient de mauvais résultats lors des tests, nous le classerons en conséquence — ou ne le présenterons pas du tout.
+          </p>
+
+          <h2>Conformité FTC et RGPD</h2>
+          <p>
+            Conformément aux directives de la Federal Trade Commission (16 CFR Partie 255) et aux réglementations similaires dans d'autres juridictions, notamment en Europe, nous déclarons que ce site contient des liens d'affiliation. Cette déclaration est fournie pour être transparents sur notre modèle économique et pour nous conformer aux exigences légales.
+          </p>
+
+          <h2>Aucun coût supplémentaire pour vous</h2>
+          <p>
+            Utiliser nos liens d'affiliation ne vous coûte rien de plus. Dans certains cas, vous pouvez même bénéficier de réductions ou de prix promotionnels via nos relations d'affiliation. La commission que nous percevons provient du budget marketing de l'hébergeur.
+          </p>
+
+          <h2>Questions</h2>
+          <p>
+            Si vous avez des questions sur nos relations d'affiliation ou sur un lien spécifique sur ce site, veuillez nous contacter à <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;text-decoration:none;">contact@dify-hosting.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

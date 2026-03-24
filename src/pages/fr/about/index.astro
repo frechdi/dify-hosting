@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/about/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'À propos de Dify Hosting — Notre mission et méthodologie',
+  description: 'Découvrez la mission éditoriale de Dify Hosting, comment nous testons les hébergeurs, notre déclaration d\'affiliation et comment nous contacter.',
+  url: 'https://dify-hosting.com/fr/about/',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Dify Hosting',
+    url: 'https://dify-hosting.com',
+  },
+};
+
+const methodology = [
+  { step: '1', label: 'Créer un vrai compte chez chaque hébergeur' },
+  { step: '2', label: 'Déployer Dify avec Docker Compose' },
+  { step: '3', label: 'Effectuer des tests standardisés sur 30 jours (temps de réponse, disponibilité, utilisation des ressources)' },
+  { step: '4', label: 'Évaluer la qualité du support' },
+  { step: '5', label: 'Calculer le coût total de possession' },
+];
+
+const testMetrics = [
+  'Temps de configuration (minutes entre la première connexion et Dify fonctionnel)',
+  'Temps de première réponse dans Dify',
+  'Utilisation CPU et RAM sous charge simulée',
+  'Vitesse d\'E/S de stockage',
+  'Latence réseau depuis les régions clés',
+  'Précision de la facturation',
+];
+---
+
+<BaseLayout
+  title="À propos de Dify Hosting — Notre mission et méthodologie"
+  description="Découvrez la mission éditoriale de Dify Hosting, comment nous testons les hébergeurs, notre déclaration d'affiliation et comment nous contacter."
+  lang="fr"
+  canonical="https://dify-hosting.com/fr/about/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Accueil', href: '/fr/' },
+        { label: 'À propos' },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        À propos de Dify Hosting
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:640px;line-height:1.7;">
+        Notre mission, notre méthodologie de test et nos normes éditoriales — pour que vous sachiez exactement comment nous établissons nos recommandations.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div style="display:grid;gap:2.5rem;">
+
+        <!-- Qui sommes-nous -->
+        <div class="card" style="padding:2rem;">
+          <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Qui sommes-nous</h2>
+          <div class="prose">
+            <p>
+              Dify Hosting est un site de comparaison indépendant des hébergeurs pour l'auto-hébergement de Dify. Nous testons chaque hébergeur en déployant réellement Dify sur leur infrastructure et en mesurant les performances, le temps de configuration et le rapport qualité-prix.
+            </p>
+            <p>
+              Nous sommes une petite équipe de développeurs et d'ingénieurs cloud qui utilisent Dify en production depuis 2023. Nous avons créé ce site parce que nous ne trouvions pas de comparaison honnête et pratique des options d'hébergement disponibles — alors nous en avons fait une nous-mêmes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Méthodologie -->
+        <div class="card" style="padding:2rem;">
+          <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Notre méthodologie de test</h2>
+          <p style="color:#4B5563;line-height:1.75;margin-bottom:1.5rem;">
+            Chaque classement d'hébergeur sur ce site est le résultat d'un processus de test standardisé :
+          </p>
+          <ol style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.875rem;">
+            {methodology.map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:1rem;">
+                <span style="flex-shrink:0;width:2rem;height:2rem;border-radius:50%;background:#1677FF;color:#fff;font-weight:700;font-size:0.875rem;display:flex;align-items:center;justify-content:center;">
+                  {item.step}
+                </span>
+                <span style="color:#374151;line-height:1.6;padding-top:0.25rem;">{item.label}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <!-- Ce que nous testons -->
+        <div class="card" style="padding:2rem;">
+          <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Ce que nous mesurons</h2>
+          <p style="color:#4B5563;line-height:1.75;margin-bottom:1.25rem;">
+            Notre suite de benchmarks couvre les indicateurs les plus importants pour un déploiement Dify :
+          </p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.625rem;">
+            {testMetrics.map((metric) => (
+              <li style="display:flex;align-items:flex-start;gap:0.75rem;color:#374151;line-height:1.6;">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:0.2rem;">
+                  <circle cx="9" cy="9" r="9" fill="#dcfce7"/>
+                  <path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#16a34a" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {metric}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Déclaration d'affiliation -->
+        <div class="card" style="padding:2rem;border-left:4px solid #f59e0b;">
+          <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Déclaration d'affiliation</h2>
+          <div class="prose">
+            <p>
+              Ce site perçoit des commissions via des liens d'affiliation lorsque vous cliquez et vous inscrivez chez un hébergeur. C'est ainsi que nous finançons les tests continus et la maintenance de ce site.
+            </p>
+            <p>
+              Nous ne recommandons que les hébergeurs que nous avons personnellement testés et que nous utiliserions nous-mêmes. Nos classements sont basés sur le mérite — performance, valeur et fiabilité — et non sur les taux de commission. Les hébergeurs ne paient jamais pour apparaître dans nos classements ou obtenir un meilleur positionnement.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="card" style="padding:2rem;" id="contact">
+          <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Nous contacter</h2>
+          <p style="color:#4B5563;line-height:1.75;margin-bottom:1.5rem;">
+            Utilisez le formulaire ci-dessous ou envoyez-nous un e-mail à <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;text-decoration:none;">contact@dify-hosting.com</a>. Nous répondons généralement dans les 24 heures.
+          </p>
+          <form style="display:flex;flex-direction:column;gap:1rem;" onsubmit="return false;">
+            <div style="display:flex;flex-direction:column;gap:0.375rem;">
+              <label for="contact-name" style="font-size:0.875rem;font-weight:600;color:#374151;">Nom</label>
+              <input
+                id="contact-name"
+                type="text"
+                placeholder="Votre nom"
+                style="padding:0.625rem 0.875rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:0.9375rem;color:#111827;background:#fff;outline:none;transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='#1677FF'"
+                onblur="this.style.borderColor='#d1d5db'"
+              />
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.375rem;">
+              <label for="contact-email" style="font-size:0.875rem;font-weight:600;color:#374151;">E-mail</label>
+              <input
+                id="contact-email"
+                type="email"
+                placeholder="vous@exemple.com"
+                style="padding:0.625rem 0.875rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:0.9375rem;color:#111827;background:#fff;outline:none;transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='#1677FF'"
+                onblur="this.style.borderColor='#d1d5db'"
+              />
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.375rem;">
+              <label for="contact-message" style="font-size:0.875rem;font-weight:600;color:#374151;">Message</label>
+              <textarea
+                id="contact-message"
+                rows="5"
+                placeholder="Votre message..."
+                style="padding:0.625rem 0.875rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:0.9375rem;color:#111827;background:#fff;outline:none;resize:vertical;transition:border-color 0.2s;font-family:inherit;"
+                onfocus="this.style.borderColor='#1677FF'"
+                onblur="this.style.borderColor='#d1d5db'"
+              ></textarea>
+            </div>
+            <div>
+              <button type="submit" class="btn-primary">Envoyer le message</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Liens connexes -->
+        <div style="padding:1.5rem;background:#f8fafc;border-radius:1rem;border:1px solid #e2e8f0;">
+          <p style="font-weight:600;color:#374151;margin-bottom:0.875rem;">Explorez nos recherches :</p>
+          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <a href="/fr/best-dify-hosting/" class="btn-primary" style="text-decoration:none;">Meilleurs hébergeurs Dify</a>
+            <a href="/fr/faq/" class="btn-secondary" style="text-decoration:none;">FAQ Dify</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>

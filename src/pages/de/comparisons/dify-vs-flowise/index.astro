@@ -1,0 +1,301 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/comparisons/dify-vs-flowise/');
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Dify vs Flowise 2026 — Welchen LLM Builder selbst hosten?',
+  description: 'Dify vs Flowise: Beide sind Open-Source LLM App Builder. Vergleich von Features, Benutzerfreundlichkeit, Self-Hosting-Anforderungen und welcher besser für Ihr KI-Projekt geeignet ist.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Ist Flowise einfacher selbst zu hosten als Dify?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Ja. Flowise läuft als einzelner Docker-Container mit nur 1 GB RAM. Dify benötigt docker-compose mit 8 Diensten und mindestens 4 GB RAM.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Welches hat bessere RAG-Unterstützung, Dify oder Flowise?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Dify hat deutlich fortgeschrittenere RAG-Funktionen, einschließlich mehrerer Abrufstrategien, Hybridsuche, benutzerdefiniertem Chunking und einer visuellen Wissensdatenbank-Management-Oberfläche.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Kann ich von Flowise zu Dify migrieren?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Es gibt kein automatisiertes Migrationstool zwischen Flowise und Dify. Sie müssten Ihre Flows manuell im Workflow-Editor von Dify neu erstellen.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Welches ist besser für ein nicht-technisches Team?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Dify hat eine ausgefeiltere Oberfläche mit rollenbasiertem Zugriff, Gesprächsverwaltung und einer fertigen Chat-Oberfläche, mit der nicht-technische Nutzer direkt interagieren können, ohne Entwicklerbeteiligung.' },
+    },
+  ],
+};
+
+const comparison = [
+  { feature: 'GitHub Stars', dify: '134k+', flowise: '32k+', winner: 'dify' },
+  { feature: 'Lizenz', dify: 'Apache 2.0', flowise: 'Apache 2.0', winner: 'tie' },
+  { feature: 'RAM-Minimum', dify: '4 GB', flowise: '1 GB', winner: 'flowise' },
+  { feature: 'Setup-Komplexität', dify: 'Mittel (docker-compose)', flowise: 'Einfach (einzelner Container)', winner: 'flowise' },
+  { feature: 'Oberfläche', dify: 'Modernes, ausgefeiltes Dashboard', flowise: 'Knotenbasierter visueller Editor', winner: 'tie' },
+  { feature: 'RAG / Wissensdatenbank', dify: 'Erweitert (Multi-Retrieval)', flowise: 'Grundlegend', winner: 'dify' },
+  { feature: 'Multi-Agent', dify: 'Ja (komplexe Workflows)', flowise: 'Ja (einfach)', winner: 'dify' },
+  { feature: 'API-Key-Verwaltung', dify: 'Eingebaut, pro App', flowise: 'Grundlegend', winner: 'dify' },
+  { feature: 'Gesprächshistorie', dify: 'Erweitert (pro Nutzer)', flowise: 'Grundlegend', winner: 'dify' },
+  { feature: 'UI-Sprachen', dify: '13+ Sprachen', flowise: 'Nur Englisch', winner: 'dify' },
+  { feature: 'Docker-Setup', dify: 'docker-compose (8 Dienste)', flowise: 'Einzelner docker run', winner: 'flowise' },
+  { feature: 'Benutzerdefinierte Modelle', dify: 'Ja (viele Anbieter)', flowise: 'Ja (via LangChain)', winner: 'tie' },
+  { feature: 'Einbettbarer Chat', dify: 'Ja (Web-Widget)', flowise: 'Ja (Einbettungskomponente)', winner: 'tie' },
+  { feature: 'Team / Rollen', dify: 'Ja (Workspace-Mitglieder)', flowise: 'Begrenzt', winner: 'dify' },
+];
+---
+
+<BaseLayout
+  title="Dify vs Flowise 2026 — Welchen LLM Builder selbst hosten?"
+  description="Dify vs Flowise: Beide sind Open-Source LLM App Builder. Vergleich von Features, Benutzerfreundlichkeit, Self-Hosting-Anforderungen und welcher besser für Ihr KI-Projekt geeignet ist."
+  lang="de"
+  canonical="https://dify-hosting.com/de/comparisons/dify-vs-flowise/"
+  hreflang={hreflang}
+  schema={[articleSchema, faqSchema]}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Startseite', href: '/de/' },
+        { label: 'Vergleiche', href: '/de/comparisons/' },
+        { label: 'Dify vs Flowise' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Aktualisiert März 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dbeafe;color:#1e40af;">Beide Apache 2.0</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Dify vs Flowise (2026)
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Beide sind Open-Source LLM App Builder, die Sie kostenlos selbst hosten können. Aber sie bedienen unterschiedliche Nutzer: Dify ist funktionsreich und produktionsreif; Flowise ist leichtgewichtiger und schneller einzurichten.
+      </p>
+    </div>
+  </section>
+
+  <!-- Schnelles Urteil -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div class="card card-featured">
+        <h2 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:1rem;">Schnelles Urteil</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+          <div style="padding:1rem;background:#eff6ff;border-radius:0.5rem;">
+            <p style="font-size:0.8rem;font-weight:700;color:#1677FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Wähle Dify wenn...</p>
+            <ul style="color:#1e40af;font-size:0.875rem;line-height:1.8;margin:0;padding-left:1.25rem;">
+              <li>Sie erweiterte RAG und Wissensdatenbanken benötigen</li>
+              <li>Sie ein Team mit mehreren Mitgliedern haben</li>
+              <li>Sie mehrsprachige UI-Unterstützung möchten</li>
+              <li>Sie produktionsreife KI-Apps entwickeln</li>
+              <li>Sie detaillierte Zugriffskontrolle benötigen</li>
+            </ul>
+          </div>
+          <div style="padding:1rem;background:#f0fdf4;border-radius:0.5rem;">
+            <p style="font-size:0.8rem;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Wähle Flowise wenn...</p>
+            <ul style="color:#166534;font-size:0.875rem;line-height:1.8;margin:0;padding-left:1.25rem;">
+              <li>Sie begrenzte Serverressourcen haben (1 GB RAM)</li>
+              <li>Sie knotenbasierte visuelle Bearbeitung bevorzugen</li>
+              <li>Sie das schnellstmögliche Setup wollen</li>
+              <li>Sie ein Solo-Entwickler beim Prototyping sind</li>
+              <li>Sie bereits im LangChain-Ökosystem arbeiten</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vergleichstabelle -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Vollständiger Feature-Vergleich</h2>
+
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;width:35%;">Feature</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#1677FF;width:32.5%;">Dify</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#059669;width:32.5%;">Flowise</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row, i) => (
+              <tr style={`border-bottom:1px solid #e5e7eb;${i % 2 === 0 ? '' : 'background:#f9fafb;'}`}>
+                <td style="padding:0.75rem 1rem;font-weight:500;color:#374151;">{row.feature}</td>
+                <td style={`padding:0.75rem 1rem;${row.winner === 'dify' ? 'font-weight:600;color:#1677FF;' : 'color:#374151;'}`}>
+                  {row.winner === 'dify' && <span style="margin-right:0.25rem;">★</span>}{row.dify}
+                </td>
+                <td style={`padding:0.75rem 1rem;${row.winner === 'flowise' ? 'font-weight:600;color:#059669;' : 'color:#374151;'}`}>
+                  {row.winner === 'flowise' && <span style="margin-right:0.25rem;">★</span>}{row.flowise}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.8rem;color:#9CA3AF;margin-top:0.75rem;">★ kennzeichnet die stärkere Option für dieses Feature</p>
+    </div>
+  </section>
+
+  <!-- Detaillierte Feature-Analyse -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Detaillierte Feature-Analyse</h2>
+
+      <div style="display:grid;gap:2rem;">
+
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">RAG und Wissensdatenbanken</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="card">
+              <p style="font-size:0.8rem;font-weight:700;color:#1677FF;text-transform:uppercase;margin-bottom:0.75rem;">Dify RAG</p>
+              <ul style="color:#4B5563;font-size:0.875rem;line-height:1.8;margin:0;padding-left:1.25rem;">
+                <li>Visueller Wissensdatenbank-Manager</li>
+                <li>Mehrere Abrufstrategien</li>
+                <li>Hybridsuche (Stichwort + Vektor)</li>
+                <li>Benutzerdefinierte Chunking-Regeln</li>
+                <li>Re-Ranking-Unterstützung</li>
+                <li>Zitatanzeige im Chat</li>
+              </ul>
+            </div>
+            <div class="card">
+              <p style="font-size:0.8rem;font-weight:700;color:#059669;text-transform:uppercase;margin-bottom:0.75rem;">Flowise RAG</p>
+              <ul style="color:#4B5563;font-size:0.875rem;line-height:1.8;margin:0;padding-left:1.25rem;">
+                <li>Knotenbasierte Dokumentenlader</li>
+                <li>Grundlegende Vektorspeicher-Integration</li>
+                <li>Standard-Ähnlichkeitssuche</li>
+                <li>Standard-Chunking-Einstellungen</li>
+                <li>Begrenzte Re-Ranking-Optionen</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Ressourcenverbrauch</h3>
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+            Flowise ist dramatisch leichtgewichtiger. Auf einem 1-GB-RAM-VPS (wie einem $4/Mon. Hetzner CX11) läuft Flowise problemlos. Dify kann das nicht — es benötigt mindestens 4 GB und empfiehlt 8 GB.
+          </p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div style="background:#eff6ff;border-radius:0.5rem;padding:1rem;text-align:center;">
+              <p style="font-size:2rem;font-weight:800;color:#1677FF;margin:0;">~1,5 GB</p>
+              <p style="font-size:0.8rem;color:#6B7280;margin:0.25rem 0 0;">Dify RAM-Nutzung im Leerlauf</p>
+            </div>
+            <div style="background:#f0fdf4;border-radius:0.5rem;padding:1rem;text-align:center;">
+              <p style="font-size:2rem;font-weight:800;color:#059669;margin:0;">~200 MB</p>
+              <p style="font-size:0.8rem;color:#6B7280;margin:0.25rem 0 0;">Flowise RAM-Nutzung im Leerlauf</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Oberflächen-Stil</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="card">
+              <p style="font-size:0.8rem;font-weight:700;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Dify</p>
+              <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin:0;">Dashboard-Oberfläche mit dedizierten Bereichen für Apps, Wissen, Tools und Einstellungen. Workflows nutzen eine visuelle Leinwand, aber die Gesamt-UX ist für Geschäftsnutzer vertrauter.</p>
+            </div>
+            <div class="card">
+              <p style="font-size:0.8rem;font-weight:700;color:#059669;text-transform:uppercase;margin-bottom:0.5rem;">Flowise</p>
+              <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin:0;">Vollständig knotenbasierte Leinwand. Alles wird durch Ziehen und Verbinden von Knoten aufgebaut. Entwickler und technische Nutzer, die visuelle Programmierung mögen, bevorzugen es oft.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Migrationsüberlegungen</h2>
+      <div style="background:#fefce8;border-left:3px solid #ca8a04;padding:1rem 1.25rem;border-radius:0 0.5rem 0.5rem 0;">
+        <p style="margin:0;font-size:0.9rem;color:#713f12;">
+          <strong>Kein Migrationspfad vorhanden</strong> zwischen Dify und Flowise. Sie verwenden vollständig unterschiedliche Workflow-Formate und Datenmodelle. Wenn Sie mit Flowise beginnen und später zu Dify wechseln möchten (oder umgekehrt), müssen Sie Ihre Flows manuell neu erstellen.
+        </p>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-top:1rem;">
+        Empfehlung: Wählen Sie basierend auf Ihren langfristigen Bedürfnissen. Wenn Sie erwarten, zu einem Teamprodukt mit mehreren Mitgliedern zu wachsen, beginnen Sie mit Dify. Wenn Sie solo prototypisieren oder minimale Ressourcen benötigen, ist Flowise schneller zu starten.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:2rem;">Häufig gestellte Fragen</h2>
+      <div style="display:grid;gap:1.5rem;">
+        {[
+          {
+            q: 'Ist Flowise einfacher selbst zu hosten als Dify?',
+            a: 'Ja. Flowise läuft als einzelner Docker-Container mit nur 1 GB RAM. Dify benötigt docker-compose mit 8 Diensten und mindestens 4 GB RAM für zuverlässigen Betrieb.',
+          },
+          {
+            q: 'Welches hat bessere RAG-Unterstützung?',
+            a: 'Dify hat deutlich fortgeschrittenere RAG-Funktionen: mehrere Abrufstrategien, Hybridsuche, benutzerdefiniertes Chunking, Re-Ranking und eine visuelle Wissensdatenbank-Management-Oberfläche.',
+          },
+          {
+            q: 'Kann ich von Flowise zu Dify migrieren?',
+            a: 'Es gibt kein automatisiertes Migrationstool. Sie müssten Ihre Flows manuell im Workflow-Editor von Dify neu erstellen. Die Architektur ist grundlegend unterschiedlich.',
+          },
+          {
+            q: 'Welches ist besser für ein nicht-technisches Team?',
+            a: 'Dify. Es hat eine ausgefeiltere Dashboard-Oberfläche mit rollenbasierter Zugriffskontrolle, Gesprächsverwaltung und einer fertigen Chat-Oberfläche, mit der nicht-technische Nutzer direkt interagieren können.',
+          },
+        ].map(faq => (
+          <div class="faq-item" style="border-bottom:1px solid #e5e7eb;padding-bottom:1.5rem;">
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">{faq.q}</h3>
+            <p style="color:#4B5563;line-height:1.7;margin:0;">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Weitere Vergleiche -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Weitere Vergleiche</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+        <a href="/de/comparisons/dify-vs-langflow/" style="text-decoration:none;">
+          <div class="card">
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Vergleich</p>
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Dify vs Langflow</h3>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">Dify und Langflow, den visuellen LangChain-Builder, vergleichen.</p>
+          </div>
+        </a>
+        <a href="/de/comparisons/dify-vs-n8n/" style="text-decoration:none;">
+          <div class="card">
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Vergleich</p>
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Dify vs n8n</h3>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">KI-Plattform vs Workflow-Automatisierung — wann was verwenden.</p>
+          </div>
+        </a>
+        <a href="/de/best-dify-hosting/" style="text-decoration:none;">
+          <div class="card">
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;margin-bottom:0.5rem;">Anleitung</p>
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Bestes Dify Hosting</h3>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">8 VPS-Anbieter für das Self-Hosting von Dify getestet.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/affiliate-disclosure/');
+---
+
+<BaseLayout
+  title="Divulgación de afiliados — Dify Hosting"
+  description="Divulgación de afiliados de dify-hosting.com. Ganamos comisiones por enlaces de afiliado sin costo adicional para ti."
+  lang="es"
+  canonical="https://dify-hosting.com/es/affiliate-disclosure/"
+  hreflang={hreflang}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Inicio', href: '/es/' },
+        { label: 'Divulgación de afiliados' },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        Divulgación de afiliados
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:640px;line-height:1.7;">
+        Última actualización: marzo de 2026
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div class="card" style="padding:2rem;border-left:4px solid #f59e0b;">
+        <div class="prose">
+          <h2>Nuestras relaciones de afiliado</h2>
+          <p>
+            Dify-hosting.com participa en programas de afiliados con los proveedores de hosting presentados en este sitio. Cuando haces clic en un enlace de proveedor y realizas una compra o te suscribes a un plan, es posible que ganemos una comisión sin costo adicional para ti.
+          </p>
+
+          <h2>Qué proveedores tienen programas de afiliados</h2>
+          <p>
+            Tenemos relaciones de afiliado con algunos o todos los siguientes proveedores destacados en este sitio: Hetzner, Hostinger, DigitalOcean, Vultr, Elestio, Railway, Render y Kamatera. Los enlaces a estos proveedores en todo el sitio pueden ser enlaces de afiliado.
+          </p>
+
+          <h2>Cómo afecta esto a nuestras reseñas</h2>
+          <p>
+            Nuestras reseñas y clasificaciones se basan únicamente en nuestras pruebas y evaluaciones independientes. Las tasas de comisión no influyen en nuestras clasificaciones. Los proveedores nunca pagan para aparecer en nuestras clasificaciones ni para recibir una posición más alta. Solo recomendamos proveedores que hemos probado personalmente.
+          </p>
+          <p>
+            Nuestro compromiso: si un proveedor paga altas comisiones pero tiene un rendimiento deficiente en las pruebas, lo clasificaremos en consecuencia, o no lo presentaremos en absoluto.
+          </p>
+
+          <h2>Cumplimiento de la FTC</h2>
+          <p>
+            De conformidad con las directrices de la Comisión Federal de Comercio (16 CFR Parte 255) y regulaciones similares en otras jurisdicciones, declaramos que este sitio contiene enlaces de afiliado. Esta divulgación se proporciona para ser transparentes sobre nuestro modelo de negocio y para cumplir con los requisitos legales.
+          </p>
+
+          <h2>Sin costo adicional para ti</h2>
+          <p>
+            Usar nuestros enlaces de afiliado no te cuesta nada adicional. En algunos casos, incluso puedes recibir descuentos o precios promocionales a través de nuestras relaciones de afiliado. La comisión que ganamos proviene del presupuesto de marketing del proveedor.
+          </p>
+
+          <h2>Preguntas</h2>
+          <p>
+            Si tienes preguntas sobre nuestras relaciones de afiliado o cualquier enlace específico en este sitio, contáctanos en <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;text-decoration:none;">contact@dify-hosting.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,338 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/providers/hetzner/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  name: 'Reseña de Hetzner para hosting de Dify 2026',
+  reviewBody: 'Hetzner ofrece el VPS más barato para alojar Dify desde €3,79/mes con servidores EU conformes con el RGPD. Nuestra mejor elección en relación calidad-precio.',
+  author: { '@type': 'Organization', name: 'Dify Hosting Team' },
+  itemReviewed: { '@type': 'SoftwareApplication', name: 'Hetzner Cloud', url: 'https://www.hetzner.com/cloud' },
+  reviewRating: { '@type': 'Rating', ratingValue: '4.8', bestRating: '5', worstRating: '1' },
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-01',
+};
+
+const plans = [
+  { name: 'CX22', vcpu: '2 AMD', ram: '4 GB', nvme: '40 GB', price: '€3,79/mes', fit: 'Mínimo', fitOk: true },
+  { name: 'CX32', vcpu: '4 AMD', ram: '8 GB', nvme: '80 GB', price: '€5,59/mes', fit: 'Recomendado', fitOk: true, featured: true },
+  { name: 'CX42', vcpu: '8 AMD', ram: '16 GB', nvme: '160 GB', price: '€10,69/mes', fit: 'Producción', fitOk: true },
+  { name: 'CX52', vcpu: '16 AMD', ram: '32 GB', nvme: '320 GB', price: '€19,35/mes', fit: 'Empresarial', fitOk: true },
+  { name: 'CCX23 (Dedicado)', vcpu: '4 Dedicados', ram: '16 GB', nvme: '160 GB', price: '€30,42/mes', fit: 'Alto tráfico', fitOk: true },
+];
+---
+
+<BaseLayout
+  title="Reseña de Hetzner para hosting de Dify 2026 — Mejor precio VPS EU"
+  description="Hetzner ofrece el VPS más barato para alojar Dify desde €3,79/mes. Servidores EU conformes con el RGPD en Alemania y Finlandia. Nuestra mejor elección en precio."
+  lang="es"
+  canonical="https://dify-hosting.com/es/providers/hetzner/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="hero-gradient section" style="padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Inicio', href: '/es/' },
+        { label: 'Proveedores', href: '/es/best-dify-hosting/' },
+        { label: 'Hetzner' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span class="badge badge-editors-choice">Elección del Editor</span>
+        <span class="badge badge-success">Mejor Precio</span>
+        <span class="badge badge-primary">Revisado marzo 2026</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;">
+        <div class="provider-icon" style="background:#D50C2D;color:white;width:56px;height:56px;font-size:1.5rem;font-weight:800;border-radius:14px;flex-shrink:0;">H</div>
+        <div>
+          <h1 style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;color:#111827;line-height:1.2;margin-bottom:0.5rem;">
+            Reseña de Hetzner para hosting de Dify
+          </h1>
+          <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:2px;">
+              {[1,2,3,4,5].map(() => <span style="color:#F59E0B;font-size:1.2rem;">★</span>)}
+            </div>
+            <span style="font-size:1.1rem;font-weight:700;color:#111827;">4,8 / 5</span>
+            <span style="color:#D1D5DB;">·</span>
+            <span style="color:#16A34A;font-weight:700;font-size:1rem;">Desde €3,79/mes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Stats -->
+  <section style="background:#FFFFFF;border-bottom:1px solid #E2E8F0;padding:1.25rem 1.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;">
+        {[
+          { value: '€3,79/mes', label: 'Precio inicial' },
+          { value: '4 GB', label: 'RAM (CX22)' },
+          { value: '2 vCPU', label: 'CPU (CX22)' },
+          { value: '40 GB NVMe', label: 'Almacenamiento (CX22)' },
+          { value: 'DE & FI', label: 'Ubicaciones' },
+          { value: 'RGPD', label: 'Cumplimiento' },
+        ].map((stat) => (
+          <div style="text-align:center;">
+            <div style="font-size:1.1rem;font-weight:700;color:#111827;">{stat.value}</div>
+            <div style="font-size:0.75rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="section">
+    <div class="container-sm">
+      <div class="prose">
+        <p style="font-size:1.05rem;">
+          Hetzner es sin duda el proveedor cloud con mejor relación calidad-precio para autoalojar Dify. Su plan CX22 (€3,79/mes) cumple los requisitos mínimos de Dify — 2 vCPU, 4 GB RAM, 40 GB NVMe — a un precio que ningún competidor estadounidense puede igualar. El CX32 (€5,59/mes, 4 vCPU / 8 GB RAM) es el servidor de producción ideal para Dify: margen suficiente para ejecuciones paralelas de agentes de IA a un coste menor que una suscripción a Netflix.
+        </p>
+        <p>
+          Con sede en Alemania, los centros de datos de Hetzner en Nuremberg, Falkenstein (Alemania) y Helsinki (Finlandia) cumplen el RGPD por defecto — una ventaja crucial para empresas europeas que gestionan flujos de trabajo de IA con datos sensibles o personales. Hetzner ha firmado acuerdos estándar de procesamiento de datos de la UE y cuenta con múltiples certificaciones de seguridad, incluida la ISO 27001.
+        </p>
+        <p>
+          El inconveniente es la geografía: Hetzner no tiene servidores en EE. UU. ni en Asia. Si tu base de usuarios principal está fuera de Europa, la latencia desde Frankfurt o Helsinki puede ser notable. Para equipos de la UE, sin embargo, la combinación de precio, rendimiento y cumplimiento normativo convierte a Hetzner en nuestra primera elección indiscutible.
+        </p>
+
+        <!-- CTA -->
+        <div class="card card-featured" style="margin:2rem 0;text-align:center;">
+          <div style="display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
+            <span class="badge badge-editors-choice">Nuestra elección nº 1</span>
+          </div>
+          <p style="font-weight:600;color:#111827;margin-bottom:0.25rem;">Mejor precio para hosting de Dify — €5,59/mes por 8 GB RAM</p>
+          <p style="color:#4B5563;font-size:0.875rem;margin-bottom:1rem;">CX32: 4 vCPU / 8 GB RAM / 80 GB NVMe — nuestro plan de producción recomendado para Dify</p>
+          <a href="https://www.hetzner.com/cloud?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-primary">
+            Obtener Hetzner Cloud →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plans Table -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label">Precios</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Planes de Hetzner Cloud para Dify</h2>
+      <p style="color:#4B5563;margin-bottom:1.5rem;">Todos los planes incluyen IPv4 + IPv6, protección DDoS y facturación por horas. Precios netos (sin IVA alemán). A marzo de 2026.</p>
+      <div style="overflow-x:auto;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Plan</th>
+              <th>vCPU</th>
+              <th>RAM</th>
+              <th>NVMe</th>
+              <th>Precio</th>
+              <th>Adecuación para Dify</th>
+            </tr>
+          </thead>
+          <tbody>
+            {plans.map((plan) => (
+              <tr style={plan.featured ? 'background:#F0F7FF;' : ''}>
+                <td>
+                  <span class="provider-name">{plan.name}</span>
+                  {plan.featured && <span class="badge badge-editors-choice" style="margin-left:0.5rem;">Mejor opción ⭐</span>}
+                </td>
+                <td>{plan.vcpu}</td>
+                <td>{plan.ram}</td>
+                <td>{plan.nvme}</td>
+                <td class="price">{plan.price}</td>
+                <td>
+                  <span class="check">✅</span>
+                  <span style="font-size:0.8rem;color:#4B5563;margin-left:0.25rem;">{plan.fit}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.78rem;color:#6B7280;margin-top:0.75rem;">
+        * Los planes CCX de CPU dedicada ofrecen recursos de CPU garantizados — recomendados para cargas de trabajo intensivas de IA.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pros & Cons -->
+  <section class="section">
+    <div class="container-sm">
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Ventajas y desventajas</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div class="card" style="border-top:3px solid #22C55E;">
+          <h3 style="font-size:1rem;font-weight:700;color:#16A34A;margin-bottom:1rem;">✅ Ventajas</h3>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+            {[
+              'Proveedor cloud europeo más barato — por amplio margen',
+              'Conforme con el RGPD (Alemania y Finlandia)',
+              'Excelente rendimiento NVMe en todos los planes',
+              'Facturación por horas — sin gastos innecesarios',
+              'IPv4 + IPv6 incluidos gratis',
+              'Redes privadas, balanceadores de carga, instantáneas',
+              'API de Hetzner Cloud completa',
+              'Centros de datos certificados ISO 27001',
+            ].map((pro) => (
+              <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;">
+                <span style="color:#22C55E;flex-shrink:0;margin-top:1px;">✓</span>
+                {pro}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="card" style="border-top:3px solid #EF4444;">
+          <h3 style="font-size:1rem;font-weight:700;color:#DC2626;margin-bottom:1rem;">❌ Desventajas</h3>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+            {[
+              'Sin servidores fuera de Europa (sin EE. UU./Asia/LatAm)',
+              'Protección DDoS básica — se necesita mejora para grandes despliegues',
+              'Interfaz sin adornos comparada con DigitalOcean',
+              'Sin servicios de base de datos gestionada',
+              'El soporte es más lento que el chat 24/7 de Hostinger',
+            ].map((con) => (
+              <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;">
+                <span style="color:#EF4444;flex-shrink:0;margin-top:1px;">✗</span>
+                {con}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Setup Guide -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <p class="section-label">Guía de configuración</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Cómo desplegar Dify en Hetzner Cloud</h2>
+      <p style="color:#4B5563;margin-bottom:2rem;">Nuestra configuración recomendada usa un servidor CX32 en Falkenstein (FSN1) — la mejor latencia para la mayor parte de Europa.</p>
+
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        {[
+          {
+            n: 1,
+            title: 'Crear una cuenta en Hetzner Cloud',
+            body: 'Regístrate en hetzner.com/cloud. No se requiere tarjeta de crédito para el registro inicial. Añade los datos de facturación para activar tu cuenta.',
+          },
+          {
+            n: 2,
+            title: 'Crear un servidor CX32',
+            body: 'En la consola de Hetzner Cloud, haz clic en Crear servidor. Selecciona Falkenstein (FSN1) como centro de datos, Ubuntu 22.04 LTS como SO y CX32 como plan (4 vCPU / 8 GB RAM / 80 GB NVMe, €5,59/mes).',
+          },
+          {
+            n: 3,
+            title: 'Añadir tu clave SSH',
+            body: 'Durante la creación del servidor, pega tu clave pública SSH. Si necesitas generar una:',
+            code: 'ssh-keygen -t ed25519 -C "dify-hetzner"\ncat ~/.ssh/id_ed25519.pub',
+          },
+          {
+            n: 4,
+            title: 'Conectarse al servidor por SSH',
+            body: 'Una vez que el servidor está en marcha (30–60 segundos), conéctate:',
+            code: 'ssh root@TU_IP_DEL_SERVIDOR',
+          },
+          {
+            n: 5,
+            title: 'Actualizar el sistema',
+            body: 'Actualiza siempre los paquetes en un servidor nuevo antes de instalar cualquier cosa:',
+            code: 'apt update && apt upgrade -y',
+          },
+          {
+            n: 6,
+            title: 'Instalar Docker Engine y el plugin Compose',
+            body: 'Instala Docker usando el script oficial:',
+            code: 'curl -fsSL https://get.docker.com | sh\napt-get install -y docker-compose-plugin\n# Verificar instalación\ndocker --version && docker compose version',
+          },
+          {
+            n: 7,
+            title: 'Clonar el repositorio de Dify',
+            body: 'Clona Dify desde GitHub y navega al directorio Docker:',
+            code: 'git clone https://github.com/langgenius/dify\ncd dify/docker',
+          },
+          {
+            n: 8,
+            title: 'Configurar las variables de entorno',
+            body: 'Copia la configuración de ejemplo y establece una clave secreta robusta (necesaria para la seguridad):',
+            code: 'cp .env.example .env\n# Generar una clave secreta robusta:\nopenssl rand -base64 42\n# Editar .env y sustituir SECRET_KEY por el valor generado:\nnano .env',
+          },
+          {
+            n: 9,
+            title: 'Establecer un SECRET_KEY robusto',
+            body: 'En .env, localiza la línea SECRET_KEY y sustituye el marcador por tu clave generada. Esto es crítico — una clave débil puede exponer tu instancia de Dify.',
+            code: '# En .env:\nSECRET_KEY=tu_clave_generada_aqui',
+          },
+          {
+            n: 10,
+            title: 'Iniciar Dify',
+            body: 'Lanza todos los contenedores de Dify. La primera ejecución descarga ~4 GB de imágenes Docker — espera 5–10 minutos:',
+            code: 'docker compose up -d\n# Monitorizar el inicio:\ndocker compose logs -f\n# Comprobar que todos los contenedores están en marcha:\ndocker compose ps',
+          },
+        ].map((step) => (
+          <div style="display:flex;gap:1rem;align-items:flex-start;">
+            <div class="step-number">{step.n}</div>
+            <div style="flex:1;">
+              <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.4rem;">{step.title}</h3>
+              <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin-bottom:0.5rem;">{step.body}</p>
+              {step.code && (
+                <pre class="prose" style="margin:0;"><code>{step.code}</code></pre>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="card" style="background:#F0FDF4;border-color:#86EFAC;margin-top:1.5rem;">
+        <p style="font-size:0.875rem;color:#166534;margin:0;">
+          <strong>Próximos pasos:</strong> Accede a Dify en <code>http://TU_IP_DEL_SERVIDOR</code> para completar el asistente de configuración inicial. Para producción, añade un dominio, configura Nginx como proxy inverso y obtén un certificado SSL gratuito con Certbot. Consulta nuestra <a href="/es/guides/dify-docker-setup/" style="color:#166534;">guía de configuración Docker</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verdict -->
+  <section class="section">
+    <div class="container-sm">
+      <div class="card card-featured">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+          <span class="badge badge-editors-choice">Elección del Editor</span>
+        </div>
+        <p class="section-label">Nuestro veredicto</p>
+        <h2 style="font-size:1.3rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Mejor precio para hosting de Dify — especialmente para equipos de la UE</h2>
+        <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+          Hetzner es nuestra recomendación principal para autoalojar Dify. El CX32 a €5,59/mes ofrece 4 vCPU, 8 GB RAM y 80 GB NVMe — más del doble de cómputo que el Droplet de $24/mes de DigitalOcean a menos de un cuarto del precio. El cumplimiento del RGPD, el sólido rendimiento NVMe, la facturación por horas y la residencia de datos en la UE convierten a Hetzner en la elección definitiva para equipos europeos.
+        </p>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;">
+          <span style="font-size:2rem;font-weight:800;color:#111827;">4,8</span>
+          <div>
+            <div style="display:flex;gap:2px;">
+              {[1,2,3,4,5].map(() => <span style="color:#F59E0B;font-size:1.1rem;">★</span>)}
+            </div>
+            <div style="font-size:0.75rem;color:#6B7280;">Puntuación Dify Hosting</div>
+          </div>
+        </div>
+        <a href="https://www.hetzner.com/cloud?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-primary">
+          Obtener Hetzner Cloud →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Links -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <h2 style="font-size:1.2rem;font-weight:700;color:#111827;margin-bottom:1rem;">Recursos relacionados</h2>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="/es/best-dify-hosting/" class="btn-secondary">← Todos los rankings de proveedores</a>
+        <a href="/es/guides/dify-docker-setup/" class="btn-secondary">Guía de configuración Docker</a>
+        <a href="/es/providers/hostinger/" class="btn-secondary">Comparar: Hostinger</a>
+        <a href="/es/comparisons/dify-vs-n8n/" class="btn-secondary">Dify vs n8n</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

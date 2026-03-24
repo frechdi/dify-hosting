@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/affiliate-disclosure/');
+---
+
+<BaseLayout
+  title="Affiliate Disclosure — Dify Hosting"
+  description="Affiliate disclosure for dify-hosting.com. We earn commissions from affiliate links at no cost to you."
+  lang="en"
+  canonical="https://dify-hosting.com/en/affiliate-disclosure/"
+  hreflang={hreflang}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/en/' },
+        { label: 'Affiliate Disclosure' },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        Affiliate Disclosure
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:640px;line-height:1.7;">
+        Last updated: March 2026
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div class="card" style="padding:2rem;border-left:4px solid #f59e0b;">
+        <div class="prose">
+          <h2>Our Affiliate Relationships</h2>
+          <p>
+            Dify-hosting.com participates in affiliate programs with hosting providers featured on this site. When you click on a provider link and make a purchase or sign up for a plan, we may earn a commission at no additional cost to you.
+          </p>
+
+          <h2>Which Providers Have Affiliate Programs</h2>
+          <p>
+            We have affiliate relationships with some or all of the following providers featured on this site: Hetzner, Hostinger, DigitalOcean, Vultr, Elestio, Railway, Render, and Kamatera. Links to these providers throughout the site may be affiliate links.
+          </p>
+
+          <h2>How This Affects Our Reviews</h2>
+          <p>
+            Our reviews and rankings are based solely on our independent testing and evaluation. Commission rates do not influence our rankings. Providers are never paid to appear in our rankings or receive a higher placement. We only recommend providers we have personally tested.
+          </p>
+          <p>
+            Our commitment: if a provider pays high commissions but performs poorly in testing, we will rank it accordingly — or not feature it at all.
+          </p>
+
+          <h2>FTC Compliance</h2>
+          <p>
+            In accordance with the Federal Trade Commission's guidelines (16 CFR Part 255) and similar regulations in other jurisdictions, we disclose that this site contains affiliate links. This disclosure is provided to be transparent about our business model and to comply with legal requirements.
+          </p>
+
+          <h2>No Extra Cost to You</h2>
+          <p>
+            Using our affiliate links does not cost you anything extra. In some cases, you may even receive discounts or promotional pricing through our affiliate relationships. The commission we earn comes from the provider's marketing budget.
+          </p>
+
+          <h2>Questions</h2>
+          <p>
+            If you have questions about our affiliate relationships or any specific link on this site, please contact us at <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;text-decoration:none;">contact@dify-hosting.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/faq/');
+
+const faqs = [
+  {
+    question: 'Quelles sont les exigences minimales pour auto-héberger Dify ?',
+    answer: 'Dify nécessite au minimum 2 vCPU, 4 Go de RAM et 50 Go de stockage SSD. Nous recommandons 4 vCPU et 8 Go de RAM pour une utilisation confortable. La configuration Docker Compose par défaut exécute plus de 10 conteneurs incluant Nginx, le serveur API, le worker, PostgreSQL, Redis et la base de données vectorielle Weaviate.',
+  },
+  {
+    question: 'Puis-je héberger Dify gratuitement ?',
+    answer: 'Oui, partiellement. Railway offre 5 $ de crédit gratuit/mois qui peut faire fonctionner une petite instance Dify. Render a un niveau gratuit mais se met en veille après inactivité et dispose seulement de 512 Mo de RAM (trop peu). Pour un hébergement fiable, l\'option payante la moins chère est Hetzner à 3,79 €/mois.',
+  },
+  {
+    question: 'Quelle est la différence entre Dify Cloud et l\'auto-hébergement ?',
+    answer: 'Dify Cloud gère toute l\'infrastructure pour vous — vous vous inscrivez simplement et commencez à l\'utiliser. L\'auto-hébergement vous donne un contrôle total, sans limites de messages et une confidentialité des données, mais nécessite une configuration technique. En termes de coût, l\'auto-hébergement est beaucoup moins cher pour les utilisateurs actifs : 5,59 €/mois sur Hetzner contre 59 $/mois pour Dify Cloud Pro.',
+  },
+  {
+    question: 'Dify prend-il en charge l\'accélération GPU ?',
+    answer: "Dify lui-même ne nécessite pas de GPU — il appelle les API LLM (OpenAI, Anthropic, etc.) à distance. Cependant, si vous souhaitez exécuter des modèles locaux sans frais d'API, vous pouvez installer Ollama sur un serveur GPU et le connecter à Dify. Dify prend nativement en charge Ollama comme fournisseur de modèles.",
+  },
+  {
+    question: 'Combien de temps faut-il pour configurer Dify ?',
+    answer: 'Sur un VPS fraîchement provisionné, comptez 30 à 60 minutes pour la configuration initiale : 10 min de configuration du serveur, 5 min d\'installation de Docker, 5 min pour cloner et configurer Dify, 10 min pour le premier démarrage (téléchargement des images), 10 min pour la configuration SSL. Après la première installation, les mises à jour prennent moins de 5 minutes.',
+  },
+  {
+    question: 'Dify est-il conforme au RGPD en auto-hébergement ?',
+    answer: "Oui — en auto-hébergement, toutes les données restent sur votre serveur. Aucune donnée n'est envoyée aux serveurs de Dify sauf pour la télémétrie (qui peut être désactivée). Utilisez Hetzner (Allemagne/Finlande) pour une résidence complète des données en UE. Vous contrôlez toutes les données et pouvez configurer Dify pour n'utiliser que des fournisseurs LLM basés en Europe.",
+  },
+  {
+    question: 'Puis-je utiliser Dify avec des LLM locaux (sans frais d\'API) ?',
+    answer: "Oui. Installez Ollama sur le même serveur ou sur un serveur GPU séparé, puis configurez Dify pour utiliser Ollama comme fournisseur de modèles. Modèles locaux populaires : Llama 3.1 8B (usage général), Mistral 7B (rapide), CodeLlama 13B (programmation). Vous aurez besoin d'un serveur GPU pour des performances acceptables sur des modèles de plus de 7B paramètres.",
+  },
+  {
+    question: 'Comment mettre à jour Dify vers une nouvelle version ?',
+    answer: 'Naviguez dans votre répertoire dify/docker, puis exécutez : git pull && docker compose pull && docker compose up -d. Dify utilise des mises à jour continues avec les migrations de base de données gérées automatiquement. Sauvegardez toujours votre base de données PostgreSQL avant les mises à jour de versions majeures.',
+  },
+  {
+    question: 'Quels fournisseurs LLM Dify prend-il en charge ?',
+    answer: 'Dify prend en charge plus de 50 fournisseurs de modèles, dont OpenAI, Anthropic (Claude), Google Gemini, Mistral, Cohere, Azure OpenAI, AWS Bedrock, Hugging Face, Replicate, Together AI, et les modèles locaux via Ollama, LocalAI et LM Studio.',
+  },
+  {
+    question: 'Combien coûte l\'exécution de Dify pour 10 utilisateurs ?',
+    answer: 'Coût du serveur : 5,59 €/mois (Hetzner CX32) gère confortablement 10 utilisateurs simultanés. Les coûts des API LLM dépendent de l\'utilisation — un utilisateur typique envoyant 50 messages/jour avec GPT-4o-mini coûte environ 0,10 $/jour par utilisateur. Pour 10 utilisateurs : ~30 $ serveur + coûts API. Total : 35-50 $/mois contre 59-159 $/mois sur Dify Cloud.',
+  },
+  {
+    question: 'Puis-je exécuter Dify sur Windows ?',
+    answer: 'Dify fonctionne via Docker, donc techniquement oui avec Docker Desktop pour Windows. Cependant, les limitations de WSL2 et la surcharge de Docker Desktop rendent l\'hébergement Windows peu pratique pour la production. Utilisez toujours un VPS Linux (Ubuntu 22.04 recommandé) pour les déploiements Dify en production.',
+  },
+  {
+    question: 'Dify est-il open source et gratuit à utiliser ?',
+    answer: "Le cœur de Dify est open source sous licence Apache 2.0. Certaines fonctionnalités entreprise (SSO, journaux d'audit, autorisations avancées) nécessitent l'Edition Entreprise avec une licence commerciale. Pour la plupart des auto-hébergeurs, la version open source est complète et entièrement gratuite.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FAQ Hébergement Dify 2026 — Questions fréquemment posées',
+  description: 'Réponses aux questions les plus courantes sur l\'auto-hébergement de Dify. Exigences matérielles, configuration Docker, options d\'hébergement gratuit, support GPU et plus encore.',
+  url: 'https://dify-hosting.com/fr/faq/',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Dify Hosting',
+    url: 'https://dify-hosting.com',
+  },
+};
+---
+
+<BaseLayout
+  title="FAQ Hébergement Dify 2026 — Questions fréquemment posées"
+  description="Réponses aux questions les plus courantes sur l'auto-hébergement de Dify. Exigences matérielles, configuration Docker, options d'hébergement gratuit, support GPU et plus encore."
+  lang="fr"
+  canonical="https://dify-hosting.com/fr/faq/"
+  hreflang={hreflang}
+  schema={[faqSchema, articleSchema]}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Accueil', href: '/fr/' },
+        { label: 'FAQ' },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        FAQ Hébergement Dify
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:640px;line-height:1.7;">
+        Réponses aux questions les plus courantes sur l'auto-hébergement de Dify — exigences matérielles, configuration Docker, options d'hébergement gratuit, support GPU et plus encore.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        {faqs.map((faq, i) => (
+          <div class="faq-item card" style="padding:0;overflow:hidden;">
+            <button
+              class="faq-trigger"
+              aria-expanded="false"
+              aria-controls={`faq-answer-${i}`}
+              style="width:100%;text-align:left;background:none;border:none;padding:1.25rem 1.5rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;"
+            >
+              <span style="font-weight:600;font-size:1rem;color:#111827;line-height:1.5;">{faq.question}</span>
+              <svg
+                class="faq-icon"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="#6B7280"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="flex-shrink:0;transition:transform 0.25s ease;"
+              >
+                <path d="M5 8l5 5 5-5"/>
+              </svg>
+            </button>
+            <div
+              id={`faq-answer-${i}`}
+              class="faq-answer"
+              style="display:none;padding:0 1.5rem 1.25rem;border-top:1px solid #f1f5f9;"
+            >
+              <p style="color:#4B5563;line-height:1.75;margin:0.75rem 0 0;">{faq.answer}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style="margin-top:3rem;padding:2rem;background:#eff6ff;border-radius:1rem;border:1px solid #bfdbfe;">
+        <h2 style="font-size:1.25rem;font-weight:700;color:#1e3a5f;margin-bottom:0.75rem;">Vous avez encore des questions ?</h2>
+        <p style="color:#3b5998;line-height:1.7;margin-bottom:1rem;">
+          Consultez nos guides détaillés ou contactez-nous directement. Nous répondons généralement dans les 24 heures.
+        </p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="/fr/best-dify-hosting/" class="btn-primary" style="text-decoration:none;">Comparer les hébergeurs</a>
+          <a href="/fr/about/" class="btn-secondary" style="text-decoration:none;">Nous contacter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.faq-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      const answerId = trigger.getAttribute('aria-controls');
+      const answer = answerId ? document.getElementById(answerId) : null;
+      const icon = trigger.querySelector<SVGElement>('.faq-icon');
+
+      // Close all others
+      document.querySelectorAll<HTMLButtonElement>('.faq-trigger').forEach((t) => {
+        const id = t.getAttribute('aria-controls');
+        const a = id ? document.getElementById(id) : null;
+        const ic = t.querySelector<SVGElement>('.faq-icon');
+        if (t !== trigger) {
+          t.setAttribute('aria-expanded', 'false');
+          if (a) a.style.display = 'none';
+          if (ic) ic.style.transform = 'rotate(0deg)';
+        }
+      });
+
+      // Toggle current
+      trigger.setAttribute('aria-expanded', String(!expanded));
+      if (answer) answer.style.display = expanded ? 'none' : 'block';
+      if (icon) icon.style.transform = expanded ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+  });
+</script>

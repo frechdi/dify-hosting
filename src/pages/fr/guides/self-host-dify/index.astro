@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+const hreflang = getHreflang('/guides/self-host-dify/');
+---
+<BaseLayout
+  title="Comment auto-héberger Dify 2026 — Guide Complet"
+  description="Guide complet pour auto-héberger Dify sur votre propre serveur. Prérequis, installation Docker, SSL et maintenance."
+  lang="fr"
+  canonical="https://dify-hosting.com/fr/guides/self-host-dify/"
+  hreflang={hreflang}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[{"label":"Accueil","href":"/fr/"},{"label":"Guides","href":"/fr/guides/"},{"label":"Comment auto-héberger Dify"}]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Updated March 2026</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">Comment auto-héberger Dify</h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">Déployez Dify sur votre propre serveur et gardez le contrôle total de vos données et workflows IA.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Étapes d'installation</h2>
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div class="step-number">1</div>
+          <div style="flex:1;">
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.4rem;">Choisir un hébergeur</h3>
+            
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div class="step-number">2</div>
+          <div style="flex:1;">
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.4rem;">Créer un serveur Ubuntu 22.04</h3>
+            <pre class="prose" style="margin:0;"><code>ssh root@YOUR_SERVER_IP</code></pre>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div class="step-number">3</div>
+          <div style="flex:1;">
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.4rem;">Installer Docker</h3>
+            <pre class="prose" style="margin:0;"><code>curl -fsSL https://get.docker.com | sh
+apt-get install -y docker-compose-plugin</code></pre>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div class="step-number">4</div>
+          <div style="flex:1;">
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.4rem;">Installer Dify</h3>
+            <pre class="prose" style="margin:0;"><code>git clone https://github.com/langgenius/dify
+cd dify/docker
+cp .env.example .env
+docker compose up -d</code></pre>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div class="step-number">5</div>
+          <div style="flex:1;">
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.4rem;">Configurer SSL</h3>
+            <pre class="prose" style="margin:0;"><code>apt install -y certbot nginx
+certbot --nginx -d your-domain.com</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container-sm">
+      <h2 style="font-size:1.2rem;font-weight:700;color:#111827;margin-bottom:1rem;">Ressources associées</h2>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="/fr/best-dify-hosting/" class="btn-secondary">Meilleur Hébergement Dify 2026</a>
+        <a href="/fr/providers/hetzner/" class="btn-secondary">Hetzner Review</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
