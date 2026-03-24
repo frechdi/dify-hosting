@@ -1,0 +1,326 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-mcp/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Guide Dify + MCP 2026 : Connectez vos agents IA à n\'importe quel outil',
+  description: 'Guide complet pour utiliser le Model Context Protocol (MCP) avec Dify. Connectez vos agents IA aux fichiers, bases de données, GitHub, Slack et toute API via le standard MCP universel.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+---
+
+<BaseLayout
+  title="Guide Dify + MCP 2026 : Connectez vos agents IA à n'importe quel outil"
+  description="Guide complet pour utiliser le Model Context Protocol (MCP) avec Dify. Connectez vos agents IA aux fichiers, bases de données, GitHub, Slack et toute API via le standard MCP universel."
+  lang="fr"
+  canonical="https://dify-hosting.com/fr/guides/dify-mcp/"
+  hreflang={hreflang}
+  schema={[schema, {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu'est-ce que MCP (Model Context Protocol) ?","acceptedAnswer":{"@type":"Answer","text":"MCP est un standard ouvert d'Anthropic qui définit comment les modèles IA se connectent aux outils et sources de données externes. C'est comme le 'USB-C pour l'IA' — au lieu d'intégrations personnalisées, un standard universel fonctionne partout. Dify supporte MCP comme client."}},{"@type":"Question","name":"Que puis-je connecter à Dify via MCP ?","acceptedAnswer":{"@type":"Answer","text":"Via MCP, vous pouvez connecter Dify à : systèmes de fichiers locaux, GitHub (repos, PRs, issues), Slack (messages, canaux), bases PostgreSQL, navigateurs web (Puppeteer), recherche web (Brave, DuckDuckGo) et tout service avec un serveur MCP."}},{"@type":"Question","name":"Ai-je besoin de coder pour utiliser MCP avec Dify ?","acceptedAnswer":{"@type":"Answer","text":"Pour les serveurs MCP officiels (filesystem, GitHub, etc.), une seule commande npx suffit pour démarrer le serveur, puis ajoutez l'URL dans Dify. Pas de code nécessaire. Créer un serveur MCP personnalisé nécessite des bases en Node.js ou Python."}},{"@type":"Question","name":"MCP est-il sécurisé pour la production ?","acceptedAnswer":{"@type":"Answer","text":"La sécurité MCP dépend de votre configuration. Exécutez toujours les serveurs MCP sur localhost ou un réseau privé — jamais directement sur internet. Utilisez des tokens d'authentification et limitez l'accès au système de fichiers à des répertoires spécifiques."}}]}]}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Accueil', href: '/fr/' },
+        { label: 'Guides', href: '/fr/guides/' },
+        { label: 'Dify + MCP' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Mis à jour mars 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#ede9fe;color:#4c1d95;">Intégration MCP</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#fef9c3;color:#713f12;">Nouveau en 2026</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Guide Dify + MCP 2026 : Connectez vos agents IA à n'importe quel outil
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Le Model Context Protocol (MCP) est le nouveau standard universel pour connecter les modèles IA aux outils externes. Ce guide vous montre comment intégrer des serveurs MCP dans Dify — en donnant à vos agents l'accès à votre système de fichiers, GitHub, Slack, des bases de données et toute API via une interface standardisée.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.75rem;">
+        <a href="https://filedesign.com/go/hetzner?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;">
+          Héberger Dify sur Hetzner →
+        </a>
+        <a href="https://filedesign.com/go/elestio?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);">
+          Déploiement 1-clic sur Elestio
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Qu'est-ce que MCP -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Qu'est-ce que le MCP (Model Context Protocol) ?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        Le Model Context Protocol (MCP) est un standard ouvert introduit par Anthropic fin 2024. Il définit une façon universelle pour les modèles de langage de se connecter aux outils et sources de données externes. Avant MCP, chaque plateforme IA nécessitait ses propres intégrations pour chaque outil — un connecteur GitHub, un adaptateur de base de données, un lecteur de fichiers, tous développés séparément. MCP change tout cela.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        La meilleure analogie : MCP, c'est comme l'<strong>USB-C pour l'IA</strong>. De même que l'USB-C permet de connecter n'importe quel appareil à n'importe quel ordinateur, MCP permet à n'importe quel agent IA de se connecter à n'importe quel serveur d'outils compatible MCP. Un standard, une extensibilité infinie.
+      </p>
+      <div style="background:#f0f9ff;border-left:4px solid #0ea5e9;border-radius:0 0.5rem 0.5rem 0;padding:1.25rem;margin-bottom:1.5rem;">
+        <p style="margin:0;color:#0c4a6e;line-height:1.7;font-size:0.95rem;">
+          <strong>Note technique :</strong> MCP utilise une architecture client-serveur via HTTP ou stdio. L'agent IA (client) envoie des requêtes aux serveurs MCP, qui exposent des "outils" — des fonctions que l'agent peut appeler. Le protocole est indépendant du langage : les serveurs peuvent être écrits en Node.js, Python, Go ou tout autre langage.
+        </p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+        {[
+          { title: 'Standardisé', desc: 'Un protocole pour tous les outils. Construisez une fois, connectez partout.' },
+          { title: 'Open Source', desc: 'Licence Apache 2.0. Écosystème de serveurs piloté par la communauté.' },
+          { title: 'Sécurisé', desc: 'Les serveurs tournent en local ou sur votre réseau privé. Vos données restent les vôtres.' },
+          { title: 'Extensible', desc: 'Créez des serveurs MCP personnalisés pour toute API, base de données ou service.' },
+        ].map(f => (
+          <div class="card">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.4rem;">{f.title}</h3>
+            <p style="font-size:0.85rem;color:#6B7280;margin:0;line-height:1.5;">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Dify comme client MCP -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Dify comme client MCP</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        Dify supporte MCP nativement en tant que client, ce qui signifie que vos agents Dify peuvent communiquer avec n'importe quel serveur MCP. Quand vous ajoutez un serveur MCP à Dify, il découvre automatiquement tous les outils exposés et les rend disponibles dans vos applications Agent. Votre agent IA décide lui-même quand appeler quels outils.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        C'est une avancée majeure par rapport aux intégrations API traditionnelles. Au lieu de définir manuellement chaque appel API comme un "outil personnalisé" dans Dify, vous pointez Dify vers un serveur MCP et tout le catalogue d'outils est lu automatiquement. Ajoutez un serveur MCP GitHub et votre agent peut immédiatement lister des dépôts, lire des fichiers, créer des issues et passer en revue des pull requests.
+      </p>
+      <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:1rem;">Ce que vous pouvez connecter via MCP</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.75rem;">
+        {[
+          { icon: '📁', label: 'Système de fichiers local', desc: 'Lire et écrire des fichiers sur votre serveur. Idéal pour le traitement de documents.' },
+          { icon: '🐙', label: 'GitHub', desc: 'Dépôts, branches, PRs, issues, recherche de code, historique des commits.' },
+          { icon: '💬', label: 'Slack', desc: 'Lire et envoyer des messages, lister les canaux, chercher dans l\'historique.' },
+          { icon: '🐘', label: 'PostgreSQL', desc: 'Exécuter des requêtes SQL en lecture seule, explorer les schémas, analyser les données.' },
+          { icon: '🔍', label: 'Recherche web', desc: 'Recherche web en temps réel via Brave Search ou DuckDuckGo.' },
+          { icon: '🌐', label: 'Puppeteer', desc: 'Automatisation de navigateur — naviguer, extraire du contenu, prendre des captures d\'écran.' },
+        ].map(item => (
+          <div style="display:flex;gap:0.75rem;align-items:flex-start;background:#f8fafc;padding:1rem;border-radius:0.5rem;border:1px solid #e2e8f0;">
+            <span style="font-size:1.5rem;flex-shrink:0;">{item.icon}</span>
+            <div>
+              <div style="font-size:0.875rem;font-weight:700;color:#111827;margin-bottom:0.25rem;">{item.label}</div>
+              <div style="font-size:0.8rem;color:#6B7280;line-height:1.5;">{item.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Connecter un serveur MCP à Dify -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Comment connecter un serveur MCP à Dify</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Ajouter un serveur MCP comme outil dans Dify prend environ 2 minutes. Voici le processus complet étape par étape :
+      </p>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        {[
+          { step: '1', title: 'Démarrer votre serveur MCP', desc: 'Lancez votre serveur MCP en local ou sur votre serveur. Par exemple, pour démarrer le serveur filesystem officiel d\'Anthropic : npx @modelcontextprotocol/server-filesystem /chemin/vers/vos/fichiers — cela démarre un serveur MCP HTTP sur le port 3000 par défaut.' },
+          { step: '2', title: 'Ouvrir les outils Dify', desc: 'Dans votre instance Dify, cliquez sur Outils dans la navigation supérieure. Puis cliquez sur Outils personnalisés dans la barre latérale gauche.' },
+          { step: '3', title: 'Créer un nouvel outil MCP', desc: 'Cliquez sur le bouton "+ Créer". Dans le sélecteur de type d\'outil, choisissez Serveur MCP (pas OpenAPI).' },
+          { step: '4', title: 'Saisir l\'URL du serveur MCP', desc: 'Collez l\'URL de votre serveur MCP, par exemple http://localhost:3000/mcp. Si votre serveur nécessite une authentification, saisissez le token dans le champ Authorization.' },
+          { step: '5', title: 'Découverte automatique', desc: 'Dify récupère automatiquement le manifeste des outils du serveur. Vous verrez la liste de tous les outils exposés — ex. "read_file", "list_directory", "write_file" pour un serveur filesystem.' },
+          { step: '6', title: 'Ajouter à votre application Agent', desc: 'Ouvrez ou créez une application Agent dans Dify. Dans la section Outils, cliquez sur Ajouter un outil et sélectionnez votre serveur MCP. Votre agent peut maintenant utiliser tous les outils découverts.' },
+        ].map(s => (
+          <div style="display:flex;gap:1rem;align-items:flex-start;background:#fff;padding:1.25rem;border-radius:0.75rem;border:1px solid #e2e8f0;">
+            <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">{s.step}</span>
+            <div>
+              <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin:0 0 0.35rem;">{s.title}</h3>
+              <p style="font-size:0.875rem;color:#6B7280;margin:0;line-height:1.6;">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="background:#fef9c3;border-left:4px solid #eab308;border-radius:0 0.5rem 0.5rem 0;padding:1.25rem;margin-top:1.5rem;">
+        <p style="margin:0;color:#713f12;line-height:1.7;font-size:0.9rem;">
+          <strong>Conseil self-hosted :</strong> Si Dify et votre serveur MCP tournent sur le même hôte, utilisez l'IP interne ou le nom d'hôte — pas localhost, car Dify tourne dans Docker. Par exemple : http://172.17.0.1:3000/mcp ou http://host.docker.internal:3000/mcp sur macOS/Windows.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Serveurs MCP populaires -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Serveurs MCP populaires pour Dify</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Anthropic et la communauté maintiennent un écosystème croissant de serveurs MCP. Voici les plus utiles à connecter à Dify :
+      </p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Serveur MCP</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Fonction</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Outils principaux</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Installation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { name: 'filesystem', desc: 'Lire et écrire des fichiers locaux', tools: 'read_file, write_file, list_directory, search_files', install: 'npx @modelcontextprotocol/server-filesystem' },
+              { name: 'github', desc: 'Dépôts GitHub, PRs, issues', tools: 'get_file_contents, create_issue, list_pull_requests, search_code', install: 'npx @modelcontextprotocol/server-github' },
+              { name: 'slack', desc: 'Messages et canaux Slack', tools: 'list_channels, get_messages, send_message, search_messages', install: 'npx @modelcontextprotocol/server-slack' },
+              { name: 'postgresql', desc: 'Accès SQL en lecture seule', tools: 'query, list_tables, describe_table', install: 'npx @modelcontextprotocol/server-postgres' },
+              { name: 'brave-search', desc: 'Recherche web en temps réel', tools: 'brave_web_search, brave_local_search', install: 'npx @modelcontextprotocol/server-brave-search' },
+              { name: 'puppeteer', desc: 'Automatisation navigateur & scraping', tools: 'navigate, screenshot, get_content, click, fill', install: 'npx @modelcontextprotocol/server-puppeteer' },
+              { name: 'everything', desc: 'Indexation fichiers Windows', tools: 'search, get_file_info', install: 'npx @modelcontextprotocol/server-everything' },
+            ].map((s, i) => (
+              <tr style={`border-bottom:1px solid #f1f5f9;${i % 2 === 0 ? '' : 'background:#fafafa;'}`}>
+                <td style="padding:0.75rem 1rem;font-weight:600;color:#1677FF;">{s.name}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{s.desc}</td>
+                <td style="padding:0.75rem 1rem;color:#6B7280;font-size:0.8rem;font-family:monospace;">{s.tools}</td>
+                <td style="padding:0.75rem 1rem;color:#6B7280;font-size:0.8rem;font-family:monospace;white-space:nowrap;">{s.install}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Configurer un serveur MCP -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Configurer un serveur MCP : exemple pas à pas</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Exemple complet : configurer le serveur MCP filesystem d'Anthropic pour que votre agent Dify puisse lire et écrire des fichiers sur votre serveur.
+      </p>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div style="background:#1e293b;border-radius:0.75rem;padding:1.25rem;">
+          <p style="color:#94a3b8;font-size:0.8rem;margin:0 0 0.5rem;font-family:monospace;">Étape 1 : Installer Node.js 18+ (ignorer si déjà installé)</p>
+          <pre style="margin:0;color:#e2e8f0;font-family:monospace;font-size:0.85rem;white-space:pre-wrap;">curl -fsSL https://deb.nodesource.com/setup_20.x | sudo bash -
+sudo apt-get install -y nodejs</pre>
+        </div>
+        <div style="background:#1e293b;border-radius:0.75rem;padding:1.25rem;">
+          <p style="color:#94a3b8;font-size:0.8rem;margin:0 0 0.5rem;font-family:monospace;">Étape 2 : Démarrer le serveur MCP filesystem</p>
+          <pre style="margin:0;color:#e2e8f0;font-family:monospace;font-size:0.85rem;white-space:pre-wrap;">npx @modelcontextprotocol/server-filesystem /home/user/documents</pre>
+          <p style="color:#64748b;font-size:0.8rem;margin:0.5rem 0 0;font-family:monospace;"># Serveur démarré sur http://localhost:3000/mcp</p>
+        </div>
+        <div style="background:#1e293b;border-radius:0.75rem;padding:1.25rem;">
+          <p style="color:#94a3b8;font-size:0.8rem;margin:0 0 0.5rem;font-family:monospace;">Étape 3 : Exécuter en service de fond (optionnel)</p>
+          <pre style="margin:0;color:#e2e8f0;font-family:monospace;font-size:0.85rem;white-space:pre-wrap;">npm install -g pm2
+pm2 start "npx @modelcontextprotocol/server-filesystem /home/user/documents" --name mcp-filesystem
+pm2 save && pm2 startup</pre>
+        </div>
+        <div style="background:#1e293b;border-radius:0.75rem;padding:1.25rem;">
+          <p style="color:#94a3b8;font-size:0.8rem;margin:0 0 0.5rem;font-family:monospace;">Étape 4 : Tester le serveur</p>
+          <pre style="margin:0;color:#e2e8f0;font-family:monospace;font-size:0.85rem;white-space:pre-wrap;">curl http://localhost:3000/mcp
+# Devrait retourner : {"name":"filesystem","version":"...","tools":[...]}</pre>
+        </div>
+        <div style="background:#1e293b;border-radius:0.75rem;padding:1.25rem;">
+          <p style="color:#94a3b8;font-size:0.8rem;margin:0 0 0.5rem;font-family:monospace;">Étape 5 : Serveur MCP GitHub (avec authentification)</p>
+          <pre style="margin:0;color:#e2e8f0;font-family:monospace;font-size:0.85rem;white-space:pre-wrap;">GITHUB_PERSONAL_ACCESS_TOKEN=ghp_votre_token_ici \
+  npx @modelcontextprotocol/server-github</pre>
+          <p style="color:#64748b;font-size:0.8rem;margin:0.5rem 0 0;font-family:monospace;"># Créer un PAT GitHub sur : github.com/settings/tokens</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Cas d'usage -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Cas d'usage concrets</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Trois configurations Dify + MCP prêtes pour la production que vous pouvez reproduire dès aujourd'hui :
+      </p>
+      <div style="display:flex;flex-direction:column;gap:1.5rem;">
+        <div style="background:#f8fafc;border-radius:0.75rem;border:1px solid #e2e8f0;padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="font-size:1.75rem;">📄</span>
+            <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">Cas d'usage 1 : Assistant documentaire IA</h3>
+          </div>
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;font-size:0.925rem;">
+            Connectez le serveur MCP filesystem à un agent Dify. Votre IA peut désormais parcourir vos dossiers de documents, lire des contrats, extraire des données clés, comparer des versions et écrire des résumés sur disque — tout en langage naturel. Demandez "résume tous les rapports PDF dans /rapports/T1 et crée un résumé exécutif" et regardez-le s'exécuter.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+            <span style="background:#dbeafe;color:#1d4ed8;padding:0.25rem 0.6rem;border-radius:0.375rem;font-size:0.8rem;font-weight:600;">Serveur MCP : filesystem</span>
+            <span style="background:#f3f4f6;color:#374151;padding:0.25rem 0.6rem;border-radius:0.375rem;font-size:0.8rem;">App Dify : Agent</span>
+            <span style="background:#f3f4f6;color:#374151;padding:0.25rem 0.6rem;border-radius:0.375rem;font-size:0.8rem;">Modèle : Claude 3.5 Sonnet ou GPT-4o</span>
+          </div>
+        </div>
+        <div style="background:#f8fafc;border-radius:0.75rem;border:1px solid #e2e8f0;padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="font-size:1.75rem;">🐙</span>
+            <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">Cas d'usage 2 : Reviewer de PR GitHub</h3>
+          </div>
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;font-size:0.925rem;">
+            Connectez le serveur MCP GitHub à Dify. Créez un agent qui révise automatiquement les pull requests : liste les PRs ouvertes, lit les diffs, vérifie les standards de code, identifie les bugs potentiels et poste un commentaire de review — tout depuis l'interface Dify. Planifiez-le via les workflows Dify pour une revue de code automatique.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+            <span style="background:#dbeafe;color:#1d4ed8;padding:0.25rem 0.6rem;border-radius:0.375rem;font-size:0.8rem;font-weight:600;">Serveur MCP : github</span>
+            <span style="background:#f3f4f6;color:#374151;padding:0.25rem 0.6rem;border-radius:0.375rem;font-size:0.8rem;">App Dify : Workflow + Agent</span>
+            <span style="background:#f3f4f6;color:#374151;padding:0.25rem 0.6rem;border-radius:0.375rem;font-size:0.8rem;">Requis : token PAT GitHub</span>
+          </div>
+        </div>
+        <div style="background:#f8fafc;border-radius:0.75rem;border:1px solid #e2e8f0;padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="font-size:1.75rem;">🐘</span>
+            <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">Cas d'usage 3 : Analyste de base de données</h3>
+          </div>
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;font-size:0.925rem;">
+            Connectez le serveur MCP PostgreSQL à Dify avec des identifiants en lecture seule. Créez un analyste de données en langage naturel : les utilisateurs posent des questions métier en français, l'agent écrit des requêtes SQL, les exécute sur votre base de données et retourne les résultats de manière lisible. Aucune connaissance SQL nécessaire pour les utilisateurs finaux.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+            <span style="background:#dbeafe;color:#1d4ed8;padding:0.25rem 0.6rem;border-radius:0.375rem;font-size:0.8rem;font-weight:600;">Serveur MCP : postgresql</span>
+            <span style="background:#f3f4f6;color:#374151;padding:0.25rem 0.6rem;border-radius:0.375rem;font-size:0.8rem;">App Dify : Chatbot</span>
+            <span style="background:#f3f4f6;color:#374151;padding:0.25rem 0.6rem;border-radius:0.375rem;font-size:0.8rem;">Sécurité : utilisateur DB en lecture seule</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Questions fréquentes</h2>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        {[
+          { q: "Qu'est-ce que MCP (Model Context Protocol) ?", a: "MCP est un standard ouvert d'Anthropic qui définit comment les modèles IA se connectent aux outils et sources de données externes. C'est comme le 'USB-C pour l'IA' — au lieu d'intégrations personnalisées, un standard universel fonctionne partout. Dify supporte MCP comme client." },
+          { q: 'Que puis-je connecter à Dify via MCP ?', a: 'Via MCP, vous pouvez connecter Dify à : systèmes de fichiers locaux, GitHub (repos, PRs, issues), Slack (messages, canaux), bases PostgreSQL, navigateurs web (Puppeteer), recherche web (Brave, DuckDuckGo) et tout service avec un serveur MCP.' },
+          { q: "Ai-je besoin de coder pour utiliser MCP avec Dify ?", a: "Pour les serveurs MCP officiels (filesystem, GitHub, etc.), une seule commande npx suffit pour démarrer le serveur, puis ajoutez l'URL dans Dify. Pas de code nécessaire. Créer un serveur MCP personnalisé nécessite des bases en Node.js ou Python." },
+          { q: 'MCP est-il sécurisé pour la production ?', a: 'La sécurité MCP dépend de votre configuration. Exécutez toujours les serveurs MCP sur localhost ou un réseau privé — jamais directement sur internet. Utilisez des tokens d\'authentification et limitez l\'accès au système de fichiers à des répertoires spécifiques.' },
+        ].map(item => (
+          <div style="background:#fff;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1.25rem;">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin:0 0 0.5rem;">{item.q}</h3>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;line-height:1.7;">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Prêt à utiliser Dify + MCP en production ?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        MCP est plus puissant quand Dify et les serveurs MCP sont hébergés ensemble — sur le même serveur privé, sans que les données ne quittent votre infrastructure. Hetzner offre des VPS à partir de 3,79 €/mois avec les performances pour faire tourner Dify et plusieurs serveurs MCP simultanément. Ou utilisez Elestio pour un déploiement Dify entièrement géré en un clic.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="https://filedesign.com/go/hetzner?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;">
+          Déployer sur Hetzner (à partir de 3,79 €/mois) →
+        </a>
+        <a href="https://filedesign.com/go/elestio?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Déploiement 1-clic sur Elestio
+        </a>
+        <a href="/fr/best-dify-hosting/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Comparer toutes les options d'hébergement
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

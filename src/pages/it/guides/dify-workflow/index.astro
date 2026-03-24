@@ -1,0 +1,477 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-workflow/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Guida Workflow Dify 2026: Costruisci pipeline di automazione IA',
+  description: 'Guida completa ai Workflow Dify. Costruisci pipeline IA visive con nodi LLM, recupero conoscenza, esecuzione codice e richieste HTTP. Passo dopo passo con esempi reali.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+
+const faqSchema = {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Cos'è un Workflow Dify?","acceptedAnswer":{"@type":"Answer","text":"Un Workflow Dify è una pipeline IA visiva basata su nodi. Connetti nodi (LLM, codice, richieste HTTP, recupero conoscenza, condizioni) su un canvas per automatizzare attività multi-step. A differenza dei chatbot, i workflow eseguono una pipeline fissa — ideale per l'automazione."}},{"@type":"Question","name":"Quando usare un Workflow invece di un Chatbot?","acceptedAnswer":{"@type":"Answer","text":"Usa un Workflow per attività di automazione con input/output definiti (riepilogare documenti, elaborare dati, triage). Usa un Chatbot per conversazioni aperte. Usa un Agente per la selezione dinamica degli strumenti. I Workflow sono deterministici e più facili da debuggare."}},{"@type":"Question","name":"I Workflow Dify possono essere eseguiti automaticamente?","acceptedAnswer":{"@type":"Answer","text":"I Workflow Dify possono essere attivati via API, che puoi chiamare da qualsiasi scheduler (cron, n8n, Zapier, GitHub Actions). Dify non ha uno scheduler integrato, ma il trigger API rende semplice la pianificazione con strumenti esterni."}},{"@type":"Question","name":"I Workflow Dify possono chiamare API esterne?","acceptedAnswer":{"@type":"Answer","text":"Sì. Il nodo HTTP Request permette al tuo workflow di chiamare qualsiasi API REST — recuperare dati da servizi esterni, inviare webhook, interagire con piattaforme di terze parti. Combinalo con nodi Code per trasformare le risposte API prima di passarle all'LLM."}}]};
+---
+
+<BaseLayout
+  title="Guida Workflow Dify 2026: Costruisci pipeline di automazione IA"
+  description="Guida completa ai Workflow Dify. Costruisci pipeline IA visive con nodi LLM, recupero conoscenza, esecuzione codice e richieste HTTP. Passo dopo passo con esempi reali."
+  lang="it"
+  canonical="https://dify-hosting.com/it/guides/dify-workflow/"
+  hreflang={hreflang}
+  schema={[schema, faqSchema]}
+>
+
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/it/' },
+        { label: 'Guide', href: '/it/guides/' },
+        { label: 'Dify Workflow' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Aggiornato marzo 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#fef9c3;color:#713f12;">Workflow Builder</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#ede9fe;color:#4c1d95;">No-Code</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Guida Workflow Dify 2026: Costruisci pipeline di automazione IA
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        I Workflow Dify sono pipeline IA visive basate su nodi che ti permettono di connettere LLM, database, API e codice in un canvas drag-and-drop. Questa guida copre ogni tipo di nodo, ti guida nella costruzione del tuo primo workflow e mostra tre esempi di pipeline pronti per la produzione.
+      </p>
+    </div>
+  </section>
+
+  <!-- Cosa sono i Workflow Dify -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Cosa sono i Workflow Dify?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        Un Workflow Dify è un costruttore di pipeline visivo dove concateni nodi per automatizzare attività IA multi-step. Pensalo come n8n o Zapier — ma costruito nativamente per l'IA, con nodi di prima classe per chiamare LLM, cercare basi di conoscenza e gestire output strutturati.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        A differenza di un <strong>Chatbot</strong> (che risponde conversazionalmente turno per turno), un Workflow esegue una <em>pipeline fissa</em> da un input definito a un output definito. Lo attivi, esegue ogni nodo in sequenza (o in parallelo), e restituisce un risultato. Questo rende i workflow ideali per automazione, elaborazione di documenti, arricchimento dati e qualsiasi attività dove il processo è deterministico.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Internamente, i Workflow Dify usano un motore di esecuzione a grafo aciclico diretto (DAG). Ogni nodo riceve output dai nodi a monte come variabili, li elabora e passa i risultati a valle. Hai piena osservabilità — log di esecuzione, latenza per nodo, conteggio token — tutto integrato.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+        {[
+          'Canvas visivo drag-and-drop',
+          'Nodi LLM nativi per IA',
+          'RAG Knowledge Retrieval integrato',
+          'Nodi Code Python e JavaScript',
+          'Richiesta HTTP a qualsiasi API esterna',
+          'Diramazione condizionale (If/Else)',
+          'Piena osservabilità dell\'esecuzione',
+          'Trigger REST API per l\'automazione',
+        ].map(f => (
+          <div style="display:flex;align-items:center;gap:0.5rem;background:#f0fdf4;padding:0.75rem;border-radius:0.5rem;">
+            <span style="color:#16a34a;font-weight:700;">✓</span>
+            <span style="font-size:0.875rem;color:#166534;">{f}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tipi di nodi -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Tipi di nodi principali</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Ogni Workflow Dify è costruito da questi tipi di nodi fondamentali. Comprendere ognuno è la chiave per progettare pipeline efficaci.
+      </p>
+      <div style="display:grid;gap:1rem;">
+        {[
+          {
+            name: 'Start',
+            color: '#16a34a',
+            bg: '#f0fdf4',
+            border: '#86efac',
+            desc: 'Il punto di ingresso di ogni workflow. Definisci le variabili di input qui — ad esempio un campo testo chiamato <code>testo_articolo</code>, un upload di file o un URL. Tutti i nodi successivi possono riferire queste variabili.',
+            tip: 'Mantieni gli input minimi e tipizzati. Usa "text" per le stringhe, "number" per input numerici, "select" per dropdown.',
+          },
+          {
+            name: 'LLM',
+            color: '#1677FF',
+            bg: '#eff6ff',
+            border: '#93c5fd',
+            desc: 'Il nodo IA centrale. Chiama qualsiasi modello configurato (GPT-4o, Claude, Gemini, Llama, ecc.) con un system prompt e un user prompt. Puoi iniettare variabili da qualsiasi nodo a monte usando la sintassi <code>{{nome_variabile}}</code>.',
+            tip: 'Usa la modalità output strutturato (schema JSON) quando i nodi a valle devono parsare la risposta LLM programmaticamente.',
+          },
+          {
+            name: 'Knowledge Retrieval',
+            color: '#7c3aed',
+            bg: '#f5f3ff',
+            border: '#c4b5fd',
+            desc: 'Cerca nelle tue Knowledge Base Dify tramite similarità vettoriale (RAG). Passa una stringa di query e ottieni i chunk di documenti più rilevanti. Connetti il contesto recuperato a un nodo LLM per risposte fattuali e fondate.',
+            tip: 'Imposta il parametro top-K (quanti chunk recuperare) in base al tuo budget di finestra di contesto. 3-5 è generalmente ottimale.',
+          },
+          {
+            name: 'Code',
+            color: '#b45309',
+            bg: '#fffbeb',
+            border: '#fcd34d',
+            desc: 'Esegui Python o JavaScript direttamente nel workflow. Usalo per parsare JSON, trasformare stringhe, calcolare valori, filtrare array, o qualsiasi cosa uno script possa fare. Le variabili di input dai nodi a monte sono disponibili come variabili locali.',
+            tip: 'I nodi Code girano in un ambiente sandbox. Nessun accesso di rete — usa nodi HTTP Request per chiamate esterne.',
+          },
+          {
+            name: 'HTTP Request',
+            color: '#0891b2',
+            bg: '#f0f9ff',
+            border: '#7dd3fc',
+            desc: 'Effettua qualsiasi chiamata API REST — GET, POST, PUT, DELETE. Configura header, parametri di query e corpo della richiesta usando variabili del workflow. La risposta (JSON, testo o raw) è disponibile per i nodi a valle.',
+            tip: 'Archivia le chiavi API sensibili nelle variabili di ambiente Dify, non hardcoded nella config del nodo.',
+          },
+          {
+            name: 'If/Else',
+            color: '#dc2626',
+            bg: '#fef2f2',
+            border: '#fca5a5',
+            desc: 'Diramazione condizionale. Valuta qualsiasi espressione (confronto di stringa, soglia numerica, corrispondenza regex, verifica di contenuto) e instrada il workflow verso diversi rami. Puoi aggiungere più condizioni "Else If" per logica di routing complessa.',
+            tip: 'Usa If/Else per gestire i casi di errore — es. se la confidenza del LLM è bassa, instrada verso una risposta di fallback invece di restituire un\'ipotesi.',
+          },
+          {
+            name: 'Template Transform',
+            color: '#0f766e',
+            bg: '#f0fdfa',
+            border: '#5eead4',
+            desc: 'Trasforma e formatta dati con template Jinja2. Combina più variabili in una singola stringa, formatta date, itera su liste e applica logica condizionale — senza scrivere un nodo Code completo.',
+            tip: 'Ottimo per costruire prompt dinamici che combinano più output a monte prima di passarli a un nodo LLM.',
+          },
+          {
+            name: 'Variable Aggregator',
+            color: '#9333ea',
+            bg: '#fdf4ff',
+            border: '#d8b4fe',
+            desc: 'Unisce output da più rami paralleli in una singola variabile. Essenziale quando il tuo workflow si divide in percorsi paralleli (es. chiamare due LLM diversi simultaneamente) e devi combinare i risultati prima del nodo End.',
+            tip: 'Usa la modalità "array" per raccogliere tutti gli output dei rami in una lista, poi elabora con un nodo Code.',
+          },
+          {
+            name: 'End',
+            color: '#374151',
+            bg: '#f9fafb',
+            border: '#d1d5db',
+            desc: 'Il nodo terminale. Definisce cosa il workflow restituisce — una o più variabili di output. Quando attivato via API, questi output sono restituiti nella risposta JSON. Quando usato in un Chatflow, il contenuto del nodo End viene mostrato all\'utente.',
+            tip: 'Puoi avere più nodi End (uno per ramo If/Else) per restituire output diversi in base al percorso di routing intrapreso.',
+          },
+        ].map(node => (
+          <div style={`border:1px solid ${node.border};background:${node.bg};border-radius:0.75rem;padding:1.25rem;`}>
+            <div style="display:flex;align-items:flex-start;gap:1rem;">
+              <div style={`background:${node.color};color:#fff;padding:0.3rem 0.8rem;border-radius:0.375rem;font-size:0.8rem;font-weight:700;flex-shrink:0;margin-top:0.1rem;`}>{node.name}</div>
+              <div>
+                <p style="color:#374151;font-size:0.875rem;line-height:1.6;margin:0 0 0.5rem;" set:html={node.desc}></p>
+                <p style="color:#6B7280;font-size:0.8rem;line-height:1.5;margin:0;"><strong>Consiglio:</strong> {node.tip}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Costruire il primo workflow -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Costruisci il tuo primo Workflow</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Costruiamo un semplice riepilogatore di articoli — il classico "Hello World" delle pipeline IA. Prende un testo articolo come input e restituisce un riassunto in 3 punti.
+      </p>
+      <div style="display:grid;gap:1rem;max-width:680px;">
+        {[
+          {
+            step: '1',
+            title: 'Crea una nuova app Workflow',
+            desc: 'In Dify Studio, fai clic su "+ Crea App" → seleziona "Workflow". Dagli un nome come "Riepilogatore di articoli" e fai clic su Crea. Atterrerai sul canvas con un nodo Start e End vuoti.',
+          },
+          {
+            step: '2',
+            title: 'Configura il nodo Start',
+            desc: 'Fai clic sul nodo Start. Aggiungi una variabile di input: chiamala <code>testo_articolo</code>, imposta il tipo su "Paragraph" (testo lungo). Questo è ciò che l\'utente (o il chiamante API) fornirà quando attiva il workflow.',
+          },
+          {
+            step: '3',
+            title: 'Aggiungi un nodo LLM',
+            desc: 'Fai clic sul pulsante "+" nel canvas. Aggiungi un nodo LLM. Seleziona il tuo modello (es. GPT-4o Mini). Nel campo user prompt, scrivi: <code>Riassumi il seguente articolo in esattamente 3 punti. Sii conciso.\n\n{{testo_articolo}}</code>',
+          },
+          {
+            step: '4',
+            title: 'Connetti Start → LLM → End',
+            desc: 'Trascina una connessione dall\'handle di output del nodo Start all\'input del nodo LLM. Poi connetti l\'output del nodo LLM al nodo End. Il nodo End deve produrre la variabile <code>text</code> del nodo LLM.',
+          },
+          {
+            step: '5',
+            title: 'Testalo',
+            desc: 'Fai clic su "Esegui" nella barra in alto. Un pannello di test appare a destra. Incolla qualsiasi testo articolo nel campo <code>testo_articolo</code> e fai clic su Esegui. Vedrai l\'output e la traccia completa di esecuzione — nodo per nodo, con conteggi token e latenza.',
+          },
+        ].map(s => (
+          <div class="card" style="display:flex;gap:1rem;align-items:flex-start;padding:1rem;">
+            <span style="width:1.75rem;height:1.75rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;flex-shrink:0;">{s.step}</span>
+            <div>
+              <p style="font-weight:700;font-size:0.9rem;color:#111827;margin:0 0 0.3rem;">{s.title}</p>
+              <p style="font-size:0.85rem;color:#4B5563;margin:0;line-height:1.6;" set:html={s.desc}></p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="background:#f0f9ff;border-left:3px solid #1677FF;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;margin-top:1.25rem;font-size:0.875rem;color:#1e40af;">
+        <strong>Cosa hai costruito:</strong> Start (input testo_articolo) → LLM (prompt di riassunto) → End (riassunto in 3 punti). Questo stesso pattern si scala a qualsiasi pipeline testo-in, testo-out.
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflow vs Chatbot vs Agent -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Workflow vs Chatbot vs Agent — Quando usare ciascuno</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify offre tre tipi di applicazioni. Scegliere quello giusto è importante — servono casi d'uso fondamentalmente diversi.
+      </p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;">
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:700;color:#111827;border-bottom:2px solid #e2e8f0;">Caratteristica</th>
+              <th style="padding:0.75rem 1rem;text-align:center;font-weight:700;color:#1677FF;border-bottom:2px solid #e2e8f0;">Workflow</th>
+              <th style="padding:0.75rem 1rem;text-align:center;font-weight:700;color:#16a34a;border-bottom:2px solid #e2e8f0;">Chatbot</th>
+              <th style="padding:0.75rem 1rem;text-align:center;font-weight:700;color:#7c3aed;border-bottom:2px solid #e2e8f0;">Agent</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['Modello di interazione', 'Esecuzione singola: input → output', 'Conversazione multi-turno', 'Selezione dinamica di strumenti'],
+              ['Determinismo', 'Alto — pipeline fissa', 'Medio — LLM decide', 'Basso — agente decide'],
+              ['Ideale per', 'Automazione, elaborazione batch', 'Supporto clienti, Q&A', 'Ricerca, completamento attività'],
+              ['Debuggabilità', 'Eccellente — traccia completa', 'Buona — log conversazione', 'Più difficile — passi dinamici'],
+              ['Attivabile via API', 'Sì — endpoint REST', 'Sì — API chat', 'Sì — API chat'],
+              ['Recupero conoscenza', 'Sì — tramite nodo', 'Sì — tramite contesto', 'Sì — tramite strumento'],
+              ['Chiamate API esterne', 'Sì — nodo HTTP Request', 'Limitato — tramite plugin', 'Sì — tramite strumenti'],
+              ['Esecuzione parallela', 'Sì — supporto nativo', 'No', 'No'],
+            ].map((row, i) => (
+              <tr style={`background:${i % 2 === 0 ? '#fff' : '#f8fafc'};`}>
+                <td style="padding:0.65rem 1rem;color:#374151;font-weight:600;border-bottom:1px solid #f1f5f9;">{row[0]}</td>
+                <td style="padding:0.65rem 1rem;color:#374151;text-align:center;border-bottom:1px solid #f1f5f9;">{row[1]}</td>
+                <td style="padding:0.65rem 1rem;color:#374151;text-align:center;border-bottom:1px solid #f1f5f9;">{row[2]}</td>
+                <td style="padding:0.65rem 1rem;color:#374151;text-align:center;border-bottom:1px solid #f1f5f9;">{row[3]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div style="background:#fef9c3;border-left:3px solid #f59e0b;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;margin-top:1.25rem;font-size:0.875rem;color:#713f12;">
+        <strong>Regola pratica:</strong> Se il processo è identico ogni volta e puoi disegnarne un diagramma di flusso, usa un Workflow. Se gli utenti hanno bisogno di conversazioni bidirezionali, usa un Chatbot. Se l'IA deve decidere autonomamente quali strumenti chiamare, usa un Agent.
+      </div>
+    </div>
+  </section>
+
+  <!-- Esempi pratici -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">3 esempi pratici di Workflow</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Questi tre pipeline coprono i pattern di Workflow Dify più comuni nel mondo reale. Ognuno è testato in battaglia e pronto per la produzione.
+      </p>
+
+      <!-- Esempio 1 -->
+      <div class="card" style="margin-bottom:1.25rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+          <span style="background:#1677FF;color:#fff;padding:0.2rem 0.6rem;border-radius:9999px;font-size:0.75rem;font-weight:700;">Esempio 1</span>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin:0;">Pipeline di riepilogo contenuti</h3>
+        </div>
+        <p style="color:#4B5563;font-size:0.875rem;line-height:1.6;margin-bottom:0.75rem;">
+          Prende qualsiasi testo articolo e produce un riassunto strutturato con un titolo, 3 punti chiave e una frase conclusiva. Utile per team di contenuto, editor di newsletter e assistenti di ricerca.
+        </p>
+        <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;font-size:0.82rem;margin-bottom:0.75rem;">
+          <span style="background:#eff6ff;color:#1e40af;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">Start (testo_articolo)</span>
+          <span style="color:#9ca3af;">→</span>
+          <span style="background:#eff6ff;color:#1e40af;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">LLM (riassumere + strutturare)</span>
+          <span style="color:#9ca3af;">→</span>
+          <span style="background:#dcfce7;color:#166534;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">End (riassunto)</span>
+        </div>
+        <p style="color:#6B7280;font-size:0.8rem;margin:0;"><strong>Prompt LLM:</strong> "Sei un editor di contenuti. Dall'articolo seguente, restituisci: (1) un titolo accattivante, (2) esattamente 3 punti chiave, (3) una frase conclusiva. Formato JSON. Articolo: {'{{testo_articolo}}'}"</p>
+      </div>
+
+      <!-- Esempio 2 -->
+      <div class="card" style="margin-bottom:1.25rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+          <span style="background:#7c3aed;color:#fff;padding:0.2rem 0.6rem;border-radius:9999px;font-size:0.75rem;font-weight:700;">Esempio 2</span>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin:0;">Triage del supporto clienti</h3>
+        </div>
+        <p style="color:#4B5563;font-size:0.875rem;line-height:1.6;margin-bottom:0.75rem;">
+          Classifica i ticket di supporto in arrivo per intenzione (fatturazione, tecnico, generale), poi instrada ogni categoria verso una risposta LLM specializzata. Riduce le escalation del 40-60% per i team che lo usano.
+        </p>
+        <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;font-size:0.82rem;margin-bottom:0.75rem;">
+          <span style="background:#f5f3ff;color:#5b21b6;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">Start (testo_ticket)</span>
+          <span style="color:#9ca3af;">→</span>
+          <span style="background:#f5f3ff;color:#5b21b6;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">LLM (classificare intenzione)</span>
+          <span style="color:#9ca3af;">→</span>
+          <span style="background:#fef2f2;color:#dc2626;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">If/Else (instradare per categoria)</span>
+          <span style="color:#9ca3af;">→</span>
+          <span style="background:#f5f3ff;color:#5b21b6;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">LLM (risposta specializzata)</span>
+          <span style="color:#9ca3af;">→</span>
+          <span style="background:#dcfce7;color:#166534;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">End</span>
+        </div>
+        <p style="color:#6B7280;font-size:0.8rem;margin:0;"><strong>Logica If/Else:</strong> Se <code>intenzione == "fatturazione"</code> → LLM fatturazione (conosce prezzi, politica rimborsi). Se <code>intenzione == "tecnico"</code> → LLM tecnico (conosce docs prodotto). Altrimenti → LLM supporto generale.</p>
+      </div>
+
+      <!-- Esempio 3 -->
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+          <span style="background:#0f766e;color:#fff;padding:0.2rem 0.6rem;border-radius:9999px;font-size:0.75rem;font-weight:700;">Esempio 3</span>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin:0;">Pipeline Q&A su documenti</h3>
+        </div>
+        <p style="color:#4B5563;font-size:0.875rem;line-height:1.6;margin-bottom:0.75rem;">
+          Prende una domanda, recupera i chunk di documenti più rilevanti dalla tua knowledge base, poi li passa a un LLM per una risposta fondata con citazioni. Perfetto per documenti legali, manuali tecnici e wiki interni.
+        </p>
+        <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;font-size:0.82rem;margin-bottom:0.75rem;">
+          <span style="background:#f0fdfa;color:#0f766e;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">Start (domanda)</span>
+          <span style="color:#9ca3af;">→</span>
+          <span style="background:#f5f3ff;color:#5b21b6;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">Knowledge Retrieval (top-5 chunk)</span>
+          <span style="color:#9ca3af;">→</span>
+          <span style="background:#eff6ff;color:#1e40af;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">LLM (risposta con contesto)</span>
+          <span style="color:#9ca3af;">→</span>
+          <span style="background:#dcfce7;color:#166534;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">End (risposta)</span>
+        </div>
+        <p style="color:#6B7280;font-size:0.8rem;margin:0;"><strong>Prompt LLM:</strong> "Rispondi alla domanda usando SOLO il contesto fornito. Se la risposta non è nel contesto, dillo. Contesto: {'{{chunk_recuperati}}'} — Domanda: {'{{domanda}}'}"</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Eseguire via API -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Eseguire Workflow via API</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        Ogni Workflow Dify pubblicato ottiene automaticamente un endpoint API REST. Così integri i workflow nelle tue applicazioni, li attivi da scheduler, o concateni più workflow insieme.
+      </p>
+      <div style="background:#0f172a;border-radius:0.75rem;padding:1.5rem;margin-bottom:1.25rem;overflow-x:auto;">
+        <p style="color:#64748b;font-size:0.75rem;margin:0 0 0.5rem;font-family:monospace;">POST https://tua-istanza-dify/v1/workflows/run</p>
+        <pre style="color:#e2e8f0;font-size:0.82rem;margin:0;line-height:1.7;font-family:monospace;">{`curl -X POST 'https://tua-istanza-dify/v1/workflows/run' \\
+  -H 'Authorization: Bearer LA_TUA_CHIAVE_API' \\
+  -H 'Content-Type: application/json' \\
+  -d '{
+    "inputs": {
+      "testo_articolo": "Il contenuto del tuo articolo qui..."
+    },
+    "response_mode": "blocking",
+    "user": "utente-123"
+  }'`}</pre>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.75rem;">
+        {[
+          { mode: 'blocking', desc: 'Attende il risultato completo prima di rispondere. Ideale per workflow brevi sotto i 30 secondi.' },
+          { mode: 'streaming', desc: 'Restituisce un flusso Server-Sent Events. Ideale per workflow lunghi o streaming output LLM verso una UI.' },
+        ].map(m => (
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:0.5rem;padding:0.875rem;">
+            <p style="font-weight:700;font-size:0.875rem;color:#111827;margin:0 0 0.25rem;"><code style="background:#eff6ff;padding:0.1rem 0.4rem;border-radius:0.25rem;color:#1677FF;">{m.mode}</code></p>
+            <p style="font-size:0.82rem;color:#6B7280;margin:0;line-height:1.5;">{m.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Consigli per la produzione -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Consigli per i Workflow in produzione</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        Far funzionare un workflow una volta è semplice. Farlo girare in modo affidabile su larga scala richiede alcune considerazioni aggiuntive:
+      </p>
+      <div style="display:grid;gap:0.75rem;">
+        {[
+          {
+            title: 'Usare output strutturati dai nodi LLM',
+            desc: 'Abilita la modalità JSON sui tuoi nodi LLM e definisci uno schema. Questo rende il parsing da parte dei nodi Code a valle affidabile ed elimina la formattazione allucinata.',
+          },
+          {
+            title: 'Aggiungere gestione degli errori con If/Else',
+            desc: 'Verifica l\'output dei nodi critici prima di procedere. Se una richiesta HTTP restituisce uno stato 4xx, instrada verso un ramo di gestione errori invece di lasciare che i dati corrompano silenziosamente i passi successivi.',
+          },
+          {
+            title: 'Mantenere i prompt LLM focalizzati',
+            desc: 'In un workflow, ogni nodo LLM dovrebbe fare bene una cosa. Evita i "mega-prompt" che cercano di classificare, riassumere e formattare in una singola chiamata — dividili in nodi LLM separati per maggiore affidabilità.',
+          },
+          {
+            title: 'Monitorare l\'utilizzo token per esecuzione',
+            desc: 'Dify registra i conteggi token per nodo. Identifica i tuoi nodi più costosi e considera l\'uso di modelli più piccoli (es. GPT-4o Mini) per attività di classificazione dove la profondità di ragionamento è meno importante.',
+          },
+          {
+            title: 'Fissare le versioni dei modelli',
+            desc: 'Quando un workflow è in produzione, fissa una versione specifica del modello (es. gpt-4o-2024-08-06) invece di "latest". Gli aggiornamenti dei modelli possono modificare silenziosamente il comportamento dell\'output.',
+          },
+        ].map(tip => (
+          <div style="display:flex;gap:0.75rem;background:#fff;border:1px solid #e2e8f0;border-radius:0.5rem;padding:1rem;">
+            <span style="color:#1677FF;font-size:1.1rem;flex-shrink:0;margin-top:0.05rem;">→</span>
+            <div>
+              <p style="font-weight:700;font-size:0.875rem;color:#111827;margin:0 0 0.2rem;">{tip.title}</p>
+              <p style="font-size:0.83rem;color:#6B7280;margin:0;line-height:1.5;">{tip.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.25rem;">Domande frequenti</h2>
+      <div style="display:grid;gap:0.75rem;">
+        {[
+          {
+            q: 'Cos\'è un Workflow Dify?',
+            a: 'Un Workflow Dify è una pipeline IA visiva basata su nodi. Connetti nodi (LLM, codice, richieste HTTP, recupero conoscenza, condizioni) su un canvas per automatizzare attività multi-step. A differenza dei chatbot, i workflow eseguono una pipeline fissa dall\'input all\'output — ideale per l\'automazione e l\'elaborazione batch.',
+          },
+          {
+            q: 'Quando usare un Workflow invece di un Chatbot?',
+            a: 'Usa un Workflow per attività di automazione con input/output definiti (riepilogare documenti, elaborare dati, triage). Usa un Chatbot per conversazioni aperte. Usa un Agente per la selezione dinamica degli strumenti. I Workflow sono deterministici e più facili da debuggare.',
+          },
+          {
+            q: 'I Workflow Dify possono essere eseguiti automaticamente?',
+            a: 'I Workflow Dify possono essere attivati via API, che puoi chiamare da qualsiasi scheduler (cron, n8n, Zapier, GitHub Actions). Dify non ha uno scheduler integrato, ma il trigger API rende semplice la pianificazione con strumenti esterni.',
+          },
+          {
+            q: 'I Workflow Dify possono chiamare API esterne?',
+            a: 'Sì. Il nodo HTTP Request permette al tuo workflow di chiamare qualsiasi API REST — recuperare dati da servizi esterni, inviare webhook, interagire con piattaforme di terze parti. Combinalo con nodi Code per trasformare le risposte API prima di passarle all\'LLM.',
+          },
+        ].map(faq => (
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1.25rem;">
+            <p style="font-weight:700;font-size:0.9rem;color:#111827;margin:0 0 0.5rem;">{faq.q}</p>
+            <p style="font-size:0.875rem;color:#4B5563;margin:0;line-height:1.6;">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Ospita Dify e inizia a costruire Workflow</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        I Workflow Dify funzionano meglio su un'istanza self-hosted dove controlli il calcolo, non hai limiti di crediti e puoi elaborare esecuzioni di workflow illimitate. Inizia da €3,79/mese su Hetzner, o usa un deployment gestito in un clic su Elestio.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="https://filedesign.com/go/hetzner?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;">
+          Deploy su Hetzner →
+        </a>
+        <a href="https://filedesign.com/go/elestio?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#7c3aed;color:#fff;">
+          Un clic su Elestio →
+        </a>
+        <a href="/it/best-dify-hosting/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Confronta tutte le opzioni
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
