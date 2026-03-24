@@ -1,0 +1,257 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/providers/render/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  name: 'Render Dify Hosting Review 2026',
+  description: 'Render offers managed cloud hosting for Dify with auto-deploy from Git. Standard plans from $25/mo with 2GB RAM. Simple but pricey compared to VPS options.',
+  reviewRating: {
+    '@type': 'Rating',
+    ratingValue: '3.7',
+    bestRating: '5',
+    worstRating: '1',
+  },
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+  itemReviewed: {
+    '@type': 'SoftwareApplication',
+    name: 'Render Cloud',
+    url: 'https://render.com',
+    applicationCategory: 'Cloud Hosting',
+  },
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-01',
+};
+---
+
+<BaseLayout
+  title="Render Dify Hosting Review 2026 — Managed Cloud Deployment"
+  description="Render offers managed cloud hosting for Dify with auto-deploy from Git. Standard plans from $25/mo with 2GB RAM. Simple but pricey compared to VPS options."
+  lang="en"
+  canonical="https://dify-hosting.com/en/providers/render/"
+  hreflang={hreflang}
+  schema={schema}
+  keywords="Render Dify hosting, deploy Dify Render, Render managed cloud Dify, Render vs Heroku Dify, Render PaaS Dify"
+>
+  <!-- Hero -->
+  <section class="section hero-gradient">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/en/' },
+        { label: 'Providers', href: '/en/best-dify-hosting/' },
+        { label: 'Render' },
+      ]} />
+
+      <div style="display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+        <div class="provider-icon" style="background:#46E3B7;color:#0A3622;font-size:1.1rem;width:56px;height:56px;">R</div>
+        <div style="flex:1;min-width:200px;">
+          <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:0.5rem;">
+            <span class="badge badge-primary">Simple Deployment</span>
+            <span style="color:#6B7280;font-size:0.85rem;">Provider Review</span>
+          </div>
+          <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#111827;line-height:1.2;margin-bottom:0.5rem;">
+            Render Dify Hosting Review 2026
+          </h1>
+          <p style="color:#4B5563;font-size:1.05rem;">Fully managed cloud platform. Zero DevOps, automatic deploys from Git — but premium pricing for resources.</p>
+        </div>
+      </div>
+
+      <!-- Rating row -->
+      <div class="card" style="display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;padding:1.25rem 1.5rem;margin-bottom:2rem;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
+          <div class="stars" aria-label="3.7 out of 5 stars">
+            <span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span class="empty">★</span>
+          </div>
+          <span style="font-size:1.5rem;font-weight:800;color:#111827;">3.7<span style="font-size:0.9rem;color:#6B7280;">/5</span></span>
+          <span style="font-size:0.75rem;color:#6B7280;font-weight:500;">Our Rating</span>
+        </div>
+        <div style="width:1px;height:48px;background:#E2E8F0;flex-shrink:0;" class="hide-mobile"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.6rem;flex:1;">
+          <span class="spec-chip">💰 From $25/mo</span>
+          <span class="spec-chip">🧠 2GB RAM</span>
+          <span class="spec-chip">⚡ Shared vCPU</span>
+          <span class="spec-chip">💾 SSD Disk</span>
+          <span class="spec-chip">🌍 US & EU</span>
+          <span class="spec-chip">🔁 Auto-Deploy</span>
+        </div>
+        <a href="https://render.com?ref=difyhosting" rel="nofollow noopener" target="_blank" class="btn-primary">
+          Try Render →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="section">
+    <div class="container-sm prose">
+      <h2>Overview</h2>
+      <p>
+        Render is a fully managed cloud platform similar to Heroku. Deploy Dify by connecting your GitHub repo and Render handles builds, scaling, and SSL automatically. The <strong>$25/mo Standard plan</strong> provides 2GB RAM — technically the minimum for Dify, though 4GB+ is recommended for comfortable daily use.
+      </p>
+      <p>
+        Render's simplicity comes at a premium. You pay significantly more per GB of RAM compared to a Hetzner VPS — for context, Hetzner's CX22 offers 4GB RAM for €3.79/mo, while Render's Standard plan gives you half that for $25/mo. If budget matters more than zero-ops, consider a VPS alternative.
+      </p>
+    </div>
+  </section>
+
+  <!-- Plans Table -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <span class="section-label">Pricing</span>
+      <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Render Plans for Dify</h2>
+      <p style="color:#4B5563;margin-bottom:1.5rem;">Web services are billed per instance. Databases are separate add-on costs.</p>
+      <div style="overflow-x:auto;border-radius:12px;border:1px solid #E2E8F0;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Plan</th>
+              <th>Price</th>
+              <th>RAM</th>
+              <th>vCPU</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Free</td>
+              <td class="price">$0</td>
+              <td>512MB</td>
+              <td>Shared</td>
+              <td><span class="cross">❌</span> Too small — spins down after 15 min</td>
+            </tr>
+            <tr>
+              <td>Starter</td>
+              <td class="price">$7/mo</td>
+              <td>512MB</td>
+              <td>Shared</td>
+              <td><span class="cross">❌</span> Too small for Dify</td>
+            </tr>
+            <tr>
+              <td>Standard</td>
+              <td class="price">$25/mo</td>
+              <td>2GB</td>
+              <td>0.5 dedicated</td>
+              <td><span class="badge badge-warning" style="font-size:0.7rem;">⚠️ Minimum</span></td>
+            </tr>
+            <tr style="background:#F0F7FF;">
+              <td><strong>Pro</strong> ⭐</td>
+              <td class="price"><strong>$85/mo</strong></td>
+              <td><strong>4GB</strong></td>
+              <td>1 dedicated</td>
+              <td><span class="check">✅</span> <strong>Recommended</strong></td>
+            </tr>
+            <tr>
+              <td>Pro Plus</td>
+              <td class="price">$175/mo</td>
+              <td>8GB</td>
+              <td>2 dedicated</td>
+              <td><span class="check">✅</span> Production</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="margin-top:1rem;padding:1rem 1.25rem;background:#FFFBEB;border-color:#FCD34D;">
+        <p style="color:#92400E;font-size:0.875rem;margin:0;">
+          <strong>Value comparison:</strong> Render Pro at $85/mo (4GB RAM) vs Hetzner CX32 at ~€9/mo (8GB RAM). Render costs ~8× more per GB of RAM. You're paying for managed ops.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pros & Cons -->
+  <section class="section">
+    <div class="container-sm">
+      <span class="section-label">Evaluation</span>
+      <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Pros & Cons</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;">
+        <div class="card">
+          <h3 style="font-size:1rem;font-weight:700;color:#16A34A;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">
+            <span>✅</span> Pros
+          </h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem;">
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Zero DevOps required</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Automatic deployments from Git</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Managed SSL/TLS out of the box</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Built-in PostgreSQL and Redis</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Global CDN included</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Preview environments per branch</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#16A34A;flex-shrink:0;">+</span> Good monitoring and metrics dashboard</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1rem;font-weight:700;color:#DC2626;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">
+            <span>❌</span> Cons
+          </h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem;">
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#DC2626;flex-shrink:0;">−</span> Very expensive for resources provided</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#DC2626;flex-shrink:0;">−</span> Free tier spins down after 15 min inactivity</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#DC2626;flex-shrink:0;">−</span> Limited storage options</li>
+            <li style="display:flex;gap:0.5rem;color:#374151;font-size:0.9rem;"><span style="color:#DC2626;flex-shrink:0;">−</span> US and EU regions only</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Setup Steps -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <span class="section-label">Getting Started</span>
+      <h2 style="font-size:1.6rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">How to Deploy Dify on Render</h2>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        {[
+          { n: 1, title: 'Create a Render account', desc: 'Sign up at render.com and connect your GitHub account.' },
+          { n: 2, title: 'Create a new Web Service', desc: 'Select "New Web Service" and point it to the langgenius/dify GitHub repo.' },
+          { n: 3, title: 'Add a PostgreSQL database', desc: 'Create a managed PostgreSQL instance from the Render dashboard.' },
+          { n: 4, title: 'Add a Redis service', desc: 'Add a managed Redis service — required for Dify\'s task queue.' },
+          { n: 5, title: 'Configure environment variables', desc: 'Set SECRET_KEY, DB_USERNAME, DB_PASSWORD, REDIS_URL and other required .env values.' },
+          { n: 6, title: 'Deploy', desc: 'Render auto-detects the Dockerfile and builds your Dify instance. First deploy takes ~5 minutes.' },
+          { n: 7, title: 'Add a custom domain', desc: 'In service settings, add your domain. Render provisions a free TLS certificate automatically.' },
+        ].map(step => (
+          <div style="display:flex;gap:1rem;align-items:flex-start;">
+            <div class="step-number">{step.n}</div>
+            <div class="card" style="flex:1;padding:1rem 1.25rem;">
+              <p style="font-weight:600;color:#111827;margin-bottom:0.25rem;">{step.title}</p>
+              <p style="color:#4B5563;font-size:0.875rem;margin:0;">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Verdict + CTA -->
+  <section class="section">
+    <div class="container-sm">
+      <div class="card" style="text-align:center;padding:2.5rem;border-color:#E2E8F0;">
+        <span class="section-label">Our Verdict</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0.5rem 0 1rem;">Easiest Setup, Worst Value-for-Money</h2>
+        <p style="color:#4B5563;max-width:560px;margin:0 auto 1.75rem;">
+          Render offers the easiest Dify setup on this list — but at a significant cost premium. Only recommended if you absolutely need zero server management and have the budget for it. For most teams, a Hetzner or DigitalOcean VPS offers far better value.
+        </p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <a href="https://render.com?ref=difyhosting" rel="nofollow noopener" target="_blank" class="btn-primary">
+            Try Render →
+          </a>
+          <a href="/en/best-dify-hosting/" class="btn-secondary">Compare All Providers</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Internal links -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <h2 style="font-size:1.2rem;font-weight:700;color:#111827;margin-bottom:1rem;">Related Guides</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+        <a href="/en/best-dify-hosting/" class="btn-secondary" style="font-size:0.875rem;">Best Dify Hosting 2026</a>
+        <a href="/en/providers/railway/" class="btn-secondary" style="font-size:0.875rem;">Railway Review</a>
+        <a href="/en/providers/hostinger/" class="btn-secondary" style="font-size:0.875rem;">Hostinger Review</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

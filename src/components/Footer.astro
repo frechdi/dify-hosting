@@ -1,0 +1,68 @@
+---
+import { getCommon } from '../i18n/common';
+interface Props { lang: string; }
+const { lang } = Astro.props;
+const t = getCommon(lang);
+const base = `/${lang}`;
+const providers = ['hostinger','digitalocean','hetzner','vultr','railway','render','elestio','kamatera'];
+const currentPath = Astro.url.pathname.replace(/^\/(en|de|fr|es|it)/,'') || '/';
+const langLinks = [{c:'en',f:'🇺🇸'},{c:'de',f:'🇩🇪'},{c:'fr',f:'🇫🇷'},{c:'es',f:'🇪🇸'},{c:'it',f:'🇮🇹'}];
+---
+<footer style="background:#0F172A;color:#CBD5E1;padding:4rem 1.5rem 2rem;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;">
+      <div>
+        <a href={`${base}/`} style="display:flex;align-items:center;gap:0.6rem;text-decoration:none;margin-bottom:1rem;">
+          <div style="width:32px;height:32px;background:linear-gradient(135deg,#1677FF,#0958D9);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+            <span style="color:white;font-weight:800;font-size:1rem;">D</span>
+          </div>
+          <span style="font-weight:700;color:white;font-size:1rem;">dify<span style="color:#60A5FA;">hosting</span><span style="color:#475569;">.com</span></span>
+        </a>
+        <p style="color:#64748B;font-size:0.85rem;line-height:1.7;max-width:280px;">{t.footer.tagline}</p>
+        <p style="color:#475569;font-size:0.75rem;margin-top:0.875rem;line-height:1.6;max-width:280px;">{t.footer.affiliateNote}</p>
+        <div style="display:flex;gap:0.5rem;margin-top:1.25rem;">
+          {langLinks.map(l=>(
+            <a href={`/${l.c}${currentPath}`} style={`font-size:1.1rem;opacity:${l.c===lang?'1':'0.35'};transition:opacity 0.2s;text-decoration:none;`} title={l.c.toUpperCase()} onmouseover="this.style.opacity='1'" onmouseout={`this.style.opacity='${l.c===lang?'1':'0.35'}'`}>{l.f}</a>
+          ))}
+        </div>
+      </div>
+      <div>
+        <h4 style="color:white;font-weight:600;margin-bottom:1rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.06em;">{t.footer.providers}</h4>
+        {providers.map(p=>(
+          <a href={`${base}/providers/${p}`} style="display:block;color:#64748B;text-decoration:none;font-size:0.85rem;margin-bottom:0.4rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#64748B'">{p.charAt(0).toUpperCase()+p.slice(1)}</a>
+        ))}
+      </div>
+      <div>
+        <h4 style="color:white;font-weight:600;margin-bottom:1rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.06em;">{t.footer.guides}</h4>
+        <a href={`${base}/how-to-self-host-dify`} style="display:block;color:#64748B;text-decoration:none;font-size:0.85rem;margin-bottom:0.4rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#64748B'">{t.nav.howTo}</a>
+        <a href={`${base}/dify-docker-setup`} style="display:block;color:#64748B;text-decoration:none;font-size:0.85rem;margin-bottom:0.4rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#64748B'">{t.nav.dockerSetup}</a>
+        <a href={`${base}/dify-gpu-hosting`} style="display:block;color:#64748B;text-decoration:none;font-size:0.85rem;margin-bottom:0.4rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#64748B'">{t.nav.gpuHosting}</a>
+        <a href={`${base}/dify-pricing-guide`} style="display:block;color:#64748B;text-decoration:none;font-size:0.85rem;margin-bottom:0.4rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#64748B'">{t.nav.pricing}</a>
+        <a href={`${base}/blog`} style="display:block;color:#64748B;text-decoration:none;font-size:0.85rem;margin-bottom:0.4rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#64748B'">{t.nav.blog}</a>
+      </div>
+      <div>
+        <h4 style="color:white;font-weight:600;margin-bottom:1rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.06em;">{t.footer.compare}</h4>
+        <a href={`${base}/dify-vs-n8n`} style="display:block;color:#64748B;text-decoration:none;font-size:0.85rem;margin-bottom:0.4rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#64748B'">Dify vs n8n</a>
+        <a href={`${base}/dify-vs-flowise`} style="display:block;color:#64748B;text-decoration:none;font-size:0.85rem;margin-bottom:0.4rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#64748B'">Dify vs Flowise</a>
+        <a href={`${base}/dify-vs-langflow`} style="display:block;color:#64748B;text-decoration:none;font-size:0.85rem;margin-bottom:0.4rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#64748B'">Dify vs LangFlow</a>
+        <a href={`${base}/faq`} style="display:block;color:#64748B;text-decoration:none;font-size:0.85rem;margin-bottom:0.4rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#64748B'">{t.nav.faq}</a>
+        <a href={`${base}/about`} style="display:block;color:#64748B;text-decoration:none;font-size:0.85rem;margin-bottom:0.4rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#64748B'">{t.footer.about}</a>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1E293B;padding-top:1.5rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;">
+      <p style="color:#475569;font-size:0.8rem;">&copy; 2026 dify-hosting.com &mdash; {t.footer.rights}</p>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+        {[
+          {href:`${base}/privacy-policy`,label:t.footer.privacy},
+          {href:`${base}/affiliate-disclosure`,label:t.footer.disclosure},
+          {href:`${base}/contact`,label:t.footer.contact},
+        ].map(l=>(
+          <a href={l.href} style="color:#475569;text-decoration:none;font-size:0.8rem;transition:color 0.15s;" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#475569'">{l.label}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>
+<style>
+  @media(max-width:768px){footer .container>div:first-child{grid-template-columns:1fr!important}}
+</style>

@@ -1,0 +1,271 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/providers/digitalocean/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  name: 'DigitalOcean Dify Hosting Bewertung 2026',
+  reviewBody: 'DigitalOcean Premium Droplets für Dify Hosting ab 24 $/Monat. Ausgezeichnete Entwicklererfahrung mit verwalteten Datenbanken und robuster API.',
+  author: { '@type': 'Organization', name: 'Dify Hosting Team' },
+  itemReviewed: { '@type': 'SoftwareApplication', name: 'DigitalOcean', url: 'https://www.digitalocean.com' },
+  reviewRating: { '@type': 'Rating', ratingValue: '4.3', bestRating: '5', worstRating: '1' },
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-01',
+};
+
+const plans = [
+  { name: 'Basic (Regular)', price: '$12/Mon.', vcpu: '2 vCPU', ram: '2 GB', storage: '60 GB SSD', bandwidth: '3 TB', ready: 'Knapp', warning: true },
+  { name: 'Basic (Premium AMD)', price: '$18/Mon.', vcpu: '2 vCPU', ram: '4 GB', storage: '80 GB NVMe', bandwidth: '4 TB', ready: 'Minimum' },
+  { name: 'General (Premium AMD)', price: '$24/Mon.', vcpu: '2 vCPU', ram: '8 GB', storage: '50 GB NVMe', bandwidth: '5 TB', ready: 'Empfohlen', featured: true },
+  { name: 'General (Premium AMD)', price: '$48/Mon.', vcpu: '4 vCPU', ram: '16 GB', storage: '100 GB NVMe', bandwidth: '6 TB', ready: 'Produktiv' },
+  { name: 'CPU-Optimized', price: '$42/Mon.', vcpu: '4 vCPU', ram: '8 GB', storage: '25 GB NVMe', bandwidth: '5 TB', ready: 'Hochleistung' },
+];
+---
+
+<BaseLayout
+  title="DigitalOcean Dify Hosting Review 2026 — Droplets & Setup"
+  description="DigitalOcean Premium Droplets für Dify Hosting ab 24 $/Monat. Ausgezeichnete Entwicklererfahrung mit verwalteten Datenbanken."
+  lang="de"
+  canonical="https://dify-hosting.com/de/providers/digitalocean/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="hero-gradient section" style="padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Startseite', href: '/de/' },
+        { label: 'Anbieter', href: '/de/best-dify-hosting/' },
+        { label: 'DigitalOcean' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span class="badge badge-primary">Entwicklerfreundlich</span>
+        <span class="badge badge-success">Bewertet März 2026</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;">
+        <div style="background:#0080FF;color:white;width:56px;height:56px;font-size:1.2rem;font-weight:800;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">DO</div>
+        <div>
+          <h1 style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;color:#111827;line-height:1.2;margin-bottom:0.5rem;">
+            DigitalOcean Dify Hosting Bewertung
+          </h1>
+          <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:2px;">
+              {[1,2,3,4].map(() => <span style="color:#F59E0B;font-size:1.2rem;">★</span>)}
+              <span style="color:#E5E7EB;font-size:1.2rem;">★</span>
+            </div>
+            <span style="font-size:1.1rem;font-weight:700;color:#111827;">4.3 / 5</span>
+            <span style="color:#D1D5DB;">·</span>
+            <span style="color:#16A34A;font-weight:700;font-size:1rem;">Ab $24/Mon.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schnellübersicht -->
+  <section style="background:#FFFFFF;border-bottom:1px solid #E2E8F0;padding:1.25rem 1.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;">
+        {[
+          { value: '$24/Mon.', label: 'Empfohlener Plan' },
+          { value: '8 GB', label: 'RAM (General)' },
+          { value: '2 vCPU', label: 'CPU (General)' },
+          { value: '50 GB NVMe', label: 'Speicher' },
+          { value: '15 Regionen', label: 'Rechenzentren' },
+          { value: 'SOC 2', label: 'Compliance' },
+        ].map((stat) => (
+          <div style="text-align:center;">
+            <div style="font-size:1.1rem;font-weight:700;color:#111827;">{stat.value}</div>
+            <div style="font-size:0.75rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Übersicht -->
+  <section class="section">
+    <div class="container-sm">
+      <div class="prose">
+        <p style="font-size:1.05rem;">
+          DigitalOcean ist die bevorzugte Plattform für Entwickler, die Dify in einer gut dokumentierten, ökosystemreichen Umgebung betreiben möchten. Verwaltete PostgreSQL-Datenbanken, Kubernetes, Spaces (S3-kompatibles Speicher), Load Balancer und ein ausgereiftes CLI machen DigitalOcean zur idealen Wahl, wenn du Dify in eine größere Infrastruktur integrieren möchtest.
+        </p>
+        <p>
+          Der $24/Mon. General-Premium-AMD-Droplet (2 vCPU, 8 GB RAM, 50 GB NVMe) ist unser empfohlenes Minimum für Dify auf DigitalOcean. Zwar teurer als Hetzner, aber die Plattform-Integrationen, ausgezeichnete API und das ausgeprägte Ökosystem rechtfertigen den Aufpreis für Teams, die über ein einfaches Dify-Deployment hinaus planen.
+        </p>
+
+        <!-- CTA -->
+        <div class="card card-featured" style="margin:2rem 0;text-align:center;">
+          <p style="font-weight:600;color:#111827;margin-bottom:0.25rem;">Neu bei DigitalOcean? 200 $ Startguthaben erhalten</p>
+          <p style="color:#4B5563;font-size:0.875rem;margin-bottom:1rem;">60 Tage kostenloses Testen — mehr als genug für ein vollständiges Dify-Deployment</p>
+          <a href="https://www.digitalocean.com/?refcode=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-primary">
+            DigitalOcean testen — 200 $ Guthaben →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tarifübersicht -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label">Preise</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">DigitalOcean Droplet-Tarife für Dify</h2>
+      <p style="color:#4B5563;margin-bottom:1.5rem;">Premium AMD Droplets bieten NVMe-SSD. Regular Droplets nur für Test-/Entwicklungsumgebungen. Preise Stand März 2026.</p>
+      <div style="overflow-x:auto;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Tarif</th>
+              <th>Preis</th>
+              <th>vCPU</th>
+              <th>RAM</th>
+              <th>Speicher</th>
+              <th>Bandbreite</th>
+              <th>Dify-Eignung</th>
+            </tr>
+          </thead>
+          <tbody>
+            {plans.map((plan, i) => (
+              <tr style={plan.featured ? 'background:#F0F7FF;' : (i % 2 === 0 ? '' : 'background:#f9fafb;')}>
+                <td>
+                  <span class="provider-name">{plan.name}</span>
+                  {plan.featured && <span class="badge badge-primary" style="margin-left:0.5rem;">Empfohlen</span>}
+                </td>
+                <td class="price">{plan.price}</td>
+                <td>{plan.vcpu}</td>
+                <td>{plan.ram}</td>
+                <td>{plan.storage}</td>
+                <td>{plan.bandwidth}</td>
+                <td>
+                  {plan.warning ? (
+                    <span style="color:#D97706;font-size:0.8rem;">⚠️ {plan.ready}</span>
+                  ) : (
+                    <span><span class="check">✅</span><span style="font-size:0.8rem;color:#4B5563;margin-left:0.25rem;">{plan.ready}</span></span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vor- und Nachteile -->
+  <section class="section">
+    <div class="container-sm">
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Vor- und Nachteile</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div class="card" style="border-top:3px solid #22C55E;">
+          <h3 style="font-size:1rem;font-weight:700;color:#16A34A;margin-bottom:1rem;">✅ Vorteile</h3>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+            {[
+              'Hervorragende Dokumentation und Tutorials',
+              'Verwaltete Datenbanken (PostgreSQL, Redis, MongoDB)',
+              'Kubernetes-Service (DOKS) für Scale-out',
+              'S3-kompatibler Spaces-Speicher',
+              'Ausgereiftes CLI und Terraform-Provider',
+              'SOC 2 Typ II und ISO 27001',
+              '15 globale Regionen (US, EU, Asien, Australien)',
+              'Stundenweise Abrechnung',
+            ].map((pro) => (
+              <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;">
+                <span style="color:#22C55E;flex-shrink:0;margin-top:1px;">✓</span>
+                {pro}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="card" style="border-top:3px solid #EF4444;">
+          <h3 style="font-size:1rem;font-weight:700;color:#DC2626;margin-bottom:1rem;">❌ Nachteile</h3>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+            {[
+              'Teurer als Hetzner — 4× mehr für ähnliche Specs',
+              'Kein DSGVO-Verarbeitungsvertrag standardmäßig',
+              '$12/Mon.-Droplet zu klein für produktives Dify',
+              'Kein kostenloser Plan',
+              'Support-Reaktionszeiten können variieren',
+            ].map((con) => (
+              <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;">
+                <span style="color:#EF4444;flex-shrink:0;margin-top:1px;">✗</span>
+                {con}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Einrichtungsanleitung -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <p class="section-label">Einrichtungsanleitung</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Dify auf DigitalOcean deployen</h2>
+      <p style="color:#4B5563;margin-bottom:2rem;">Erstelle einen General-AMD-Droplet mit 8 GB RAM für optimale Dify-Performance auf DigitalOcean.</p>
+
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        {[
+          { n: 1, title: 'Droplet erstellen', body: 'Melde dich in der DigitalOcean-Konsole an und klicke auf Droplet erstellen. Wähle Ubuntu 22.04 LTS, Premium AMD, $24/Mon.-Plan (2 vCPU / 8 GB RAM / 50 GB NVMe).' },
+          { n: 2, title: 'SSH-Schlüssel hinzufügen', body: 'Lade deinen öffentlichen SSH-Schlüssel während der Droplet-Erstellung hoch oder füge ihn zu Kontoeinstellungen hinzu.' },
+          { n: 3, title: 'Per SSH verbinden', body: 'Sobald der Droplet bereit ist (30–60 Sekunden), verbinde dich:', code: 'ssh root@DROPLET_IP' },
+          { n: 4, title: 'System aktualisieren und Docker installieren', body: 'Pakete aktualisieren und Docker installieren:', code: 'apt update && apt upgrade -y\ncurl -fsSL https://get.docker.com | sh\napt-get install -y docker-compose-plugin' },
+          { n: 5, title: 'Dify klonen und konfigurieren', body: 'Repository klonen und Umgebungsvariablen setzen:', code: 'git clone https://github.com/langgenius/dify.git\ncd dify/docker\ncp .env.example .env\nnano .env  # SECRET_KEY setzen' },
+          { n: 6, title: 'Dify starten', body: 'Alle Container starten und Status prüfen:', code: 'docker compose up -d\ndocker compose ps' },
+        ].map((step) => (
+          <div style="display:flex;gap:1rem;align-items:flex-start;">
+            <div class="step-number">{step.n}</div>
+            <div style="flex:1;">
+              <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.4rem;">{step.title}</h3>
+              <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin-bottom:0.5rem;">{step.body}</p>
+              {step.code && <pre class="prose" style="margin:0;"><code>{step.code}</code></pre>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Fazit -->
+  <section class="section">
+    <div class="container-sm">
+      <div class="card card-featured">
+        <p class="section-label">Unser Fazit</p>
+        <h2 style="font-size:1.3rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Beste Wahl für Entwickler mit komplexem Infrastrukturbedarf</h2>
+        <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+          DigitalOcean ist teurer als Hetzner, bietet aber ein viel reicheres Ökosystem. Wenn du verwaltete Datenbanken, Kubernetes-Integration oder S3-Speicher neben Dify benötigst, ist DigitalOcean die logische Wahl. Für einfaches Dify-Hosting bleibt Hetzner das bessere Preis-Leistungs-Verhältnis.
+        </p>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;">
+          <span style="font-size:2rem;font-weight:800;color:#111827;">4.3</span>
+          <div>
+            <div style="display:flex;gap:2px;">
+              {[1,2,3,4].map(() => <span style="color:#F59E0B;font-size:1.1rem;">★</span>)}
+              <span style="color:#E5E7EB;font-size:1.1rem;">★</span>
+            </div>
+            <div style="font-size:0.75rem;color:#6B7280;">Dify-Hosting-Score</div>
+          </div>
+        </div>
+        <a href="https://www.digitalocean.com/?refcode=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-primary">
+          DigitalOcean testen — 200 $ Guthaben →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verwandte Links -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <h2 style="font-size:1.2rem;font-weight:700;color:#111827;margin-bottom:1rem;">Weiterführende Ressourcen</h2>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="/de/best-dify-hosting/" class="btn-secondary">← Alle Anbieter im Ranking</a>
+        <a href="/de/providers/hetzner/" class="btn-secondary">Vergleich: Hetzner</a>
+        <a href="/de/guides/dify-docker-setup/" class="btn-secondary">Docker-Einrichtungsanleitung</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

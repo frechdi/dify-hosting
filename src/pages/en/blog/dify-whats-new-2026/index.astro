@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/blog/dify-whats-new-2026/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: "What's New in Dify 2026 — Major Features & Updates Review",
+  description: "Dify's 2026 updates bring MCP server support, improved RAG pipelines, enhanced workflow engine, new model providers and better self-hosting tooling. Full review.",
+  datePublished: '2026-03-15',
+  dateModified: '2026-03-15',
+  url: 'https://dify-hosting.com/en/blog/dify-whats-new-2026/',
+  author: {
+    '@type': 'Organization',
+    name: 'Dify Hosting Team',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Dify Hosting',
+    url: 'https://dify-hosting.com',
+  },
+  articleSection: 'News',
+};
+---
+
+<BaseLayout
+  title="What's New in Dify 2026 — Major Features & Updates Review"
+  description="Dify's 2026 updates bring MCP server support, improved RAG pipelines, enhanced workflow engine, new model providers and better self-hosting tooling. Full review."
+  lang="en"
+  canonical="https://dify-hosting.com/en/blog/dify-whats-new-2026/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/en/' },
+        { label: 'Blog', href: '/en/blog/' },
+        { label: "What's New in Dify 2026" },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span class="badge-primary" style="font-size:0.75rem;padding:0.2rem 0.7rem;">News</span>
+        <time datetime="2026-03-15" style="font-size:0.85rem;color:#94a3b8;">March 15, 2026</time>
+        <span style="font-size:0.85rem;color:#94a3b8;">· Dify Hosting Team</span>
+      </div>
+      <h1 style="font-size:clamp(1.75rem,4vw,2.6rem);font-weight:800;color:#f8fafc;line-height:1.25;margin-bottom:1rem;">
+        What's New in Dify 2026: Major Features Review
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:660px;line-height:1.7;">
+        Dify has been on a rapid development pace in 2026, shipping major updates that make it significantly more powerful for self-hosters and enterprise users alike.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div style="display:grid;grid-template-columns:1fr;gap:2rem;max-width:800px;">
+
+        <article class="prose">
+
+          <p>
+            Dify has been on a rapid development pace in 2026, shipping major updates that make it significantly more powerful for self-hosters and enterprise users alike. In this review, we cover all the headline changes and what they mean for teams running Dify on their own infrastructure.
+          </p>
+
+          <h2>MCP Server Support</h2>
+          <p>
+            The biggest architectural addition in 2026 is native support for Model Context Protocol (MCP) servers. Dify now lets you connect custom tools and data sources via MCP without writing custom API integrations from scratch. For enterprise Dify deployments — where connecting to internal databases, ticketing systems, or proprietary APIs is a common requirement — this is a significant time-saver. You configure an MCP server once, and any workflow or agent in Dify can invoke it.
+          </p>
+          <p>
+            This is a game-changer for enterprise Dify deployments where diverse tool connectivity was previously a major integration burden.
+          </p>
+
+          <h2>Improved RAG Pipeline</h2>
+          <p>
+            The retrieval-augmented generation pipeline has been substantially overhauled. Key improvements include:
+          </p>
+          <ul>
+            <li>Hybrid search combining semantic (vector) and keyword search for more accurate retrieval</li>
+            <li>Re-ranking models to re-score retrieved chunks before feeding them to the LLM</li>
+            <li>Multi-document retrieval with cross-document citations, so answers can reference multiple knowledge base documents simultaneously</li>
+          </ul>
+          <p>
+            In practice, these changes noticeably improve answer quality for knowledge base Q&amp;A use cases, particularly when documents have overlapping or complementary content.
+          </p>
+
+          <h2>Enhanced Workflow Engine</h2>
+          <p>
+            The visual workflow editor has received meaningful upgrades. The most impactful: parallel branches, allowing different workflow paths to execute simultaneously rather than sequentially. This reduces latency for workflows that involve multiple independent API calls or LLM generations.
+          </p>
+          <p>
+            Additionally, conditional logic has been improved with more comparison operators and nested conditions. New loop/iteration nodes let workflows process lists of documents or API results without complex workarounds.
+          </p>
+
+          <h2>New Model Providers</h2>
+          <p>
+            2026 model additions include some significant names:
+          </p>
+          <ul>
+            <li><strong>Google Gemini 2.0</strong> — available with full function-calling and vision support</li>
+            <li><strong>Anthropic Claude 4</strong> — long-context support with improved instruction following</li>
+            <li><strong>Llama 4 via Ollama</strong> — Meta's latest open-weight model, runnable locally</li>
+            <li><strong>Mistral Large 3</strong> — strong performance on European-language tasks</li>
+          </ul>
+          <p>
+            Dify now supports over 50 model providers in total, covering every major commercial API and the leading local inference runtimes.
+          </p>
+
+          <h2>Self-Hosting Improvements</h2>
+          <p>
+            The Docker Compose setup has been simplified: the default <code>docker-compose.yml</code> now has better defaults for resource limits, reducing the chance of OOM kills on entry-level VPS instances. Overall resource usage is down approximately 20% compared to 2024 builds. New health check endpoints make monitoring via Uptime Kuma, Grafana, or similar tools straightforward.
+          </p>
+
+          <h2>Verdict</h2>
+          <p>
+            The self-hosted Dify experience in 2026 is significantly better than 2024. The MCP integration removes a major integration bottleneck, the improved RAG pipeline raises the bar for knowledge base quality, and the performance improvements mean smaller VPS instances are viable. Combined with affordable options like Hetzner's CX32 at €5.59/mo, there has never been a better time to migrate from Dify Cloud to self-hosting.
+          </p>
+
+          <hr style="margin:2rem 0;border:none;border-top:1px solid #e2e8f0;"/>
+
+          <p style="font-size:0.9rem;color:#6B7280;">
+            <strong>Related:</strong>
+            <a href="/en/guides/self-host-dify/" style="color:#1677FF;text-decoration:none;">How to Self-Host Dify</a>
+            · <a href="/en/providers/hetzner/" style="color:#1677FF;text-decoration:none;">Hetzner for Dify</a>
+            · <a href="/en/blog/ai-hosting-trends-2026/" style="color:#1677FF;text-decoration:none;">AI Hosting Trends 2026</a>
+          </p>
+
+        </article>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>

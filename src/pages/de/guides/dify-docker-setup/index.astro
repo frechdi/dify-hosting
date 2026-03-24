@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-docker-setup/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Dify Docker Compose Einrichtung 2026',
+  description: 'Vollständige Anleitung zur Dify Docker Compose Konfiguration: Ports, Datenbanken, Umgebungsvariablen.',
+  totalTime: 'PT1H',
+  step: [
+    { '@type': 'HowToStep', position: 1, name: 'Docker Compose verstehen', text: 'Überblick über Difys Container-Architektur und Dienste.' },
+    { '@type': 'HowToStep', position: 2, name: 'Umgebungsvariablen konfigurieren', text: 'Die wichtigsten .env-Einstellungen für eine produktive Dify-Instanz.' },
+    { '@type': 'HowToStep', position: 3, name: 'Ports und Netzwerk anpassen', text: 'Standard-Ports ändern und Netzwerkkonflikte lösen.' },
+    { '@type': 'HowToStep', position: 4, name: 'Datenbankverbindung konfigurieren', text: 'PostgreSQL und Redis für Dify einrichten.' },
+  ],
+};
+
+const dockerComposeEnv = `# Wichtigste .env-Einstellungen
+SECRET_KEY=dein_zufaelliger_schluessel_hier
+CONSOLE_WEB_URL=https://dify.deine-domain.de
+APP_WEB_URL=https://dify.deine-domain.de
+FILES_URL=https://dify.deine-domain.de
+
+# Datenbank
+DB_USERNAME=postgres
+DB_PASSWORD=sicheres_passwort
+DB_HOST=db
+DB_PORT=5432
+DB_DATABASE=dify
+
+# Redis
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_PASSWORD=redis_passwort`;
+---
+
+<BaseLayout
+  title="Dify Docker Compose Einrichtung 2026 — Vollständige Konfiguration"
+  description="Dify's Docker Compose Konfiguration meistern. Ports anpassen, Datenbanken konfigurieren, Umgebungsvariablen setzen."
+  lang="de"
+  canonical="https://dify-hosting.com/de/guides/dify-docker-setup/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Startseite', href: '/de/' },
+        { label: 'Anleitungen', href: '/de/guides/' },
+        { label: 'Docker Setup' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Aktualisiert März 2026</span>
+        <span style="padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dbeafe;color:#1e40af;">Docker Compose</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Dify Docker Compose Einrichtung 2026
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Vollständige Anleitung zur Dify Docker Compose Konfiguration — Ports anpassen, Datenbanken einrichten, Umgebungsvariablen optimieren und den Produktionsbetrieb sicherstellen.
+      </p>
+    </div>
+  </section>
+
+  <!-- Architektur-Übersicht -->
+  <section class="section">
+    <div class="container-sm">
+      <p class="section-label">Architektur</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1rem;">Difys Container-Architektur</h2>
+      <p style="color:#4B5563;margin-bottom:1.5rem;">Dify besteht aus mehreren Docker-Containern, die zusammenarbeiten. Hier ist ein Überblick über die wichtigsten Dienste:</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem;">
+        {[
+          { name: 'nginx', role: 'Reverse Proxy', desc: 'Leitet HTTP-Traffic an API und Web weiter', port: '80, 443' },
+          { name: 'api', role: 'Backend-API', desc: 'Haupt-API-Server (Python/Flask)', port: '5001' },
+          { name: 'worker', role: 'Background Worker', desc: 'Celery-Worker für asynchrone Aufgaben', port: '—' },
+          { name: 'web', role: 'Frontend', desc: 'Next.js-Frontend-Anwendung', port: '3000' },
+          { name: 'db', role: 'PostgreSQL', desc: 'Hauptdatenbank für Dify-Daten', port: '5432' },
+          { name: 'redis', role: 'Cache/Queue', desc: 'Session-Cache und Task-Queue', port: '6379' },
+          { name: 'weaviate', role: 'Vektordatenbank', desc: 'RAG-Pipeline Vektorspeicher', port: '8080' },
+          { name: 'sandbox', role: 'Code-Ausführung', desc: 'Sichere Sandbox für Code-Tools', port: '8194' },
+        ].map((svc) => (
+          <div class="card" style="padding:1rem;">
+            <code style="font-size:0.875rem;color:#7C3AED;font-weight:600;">{svc.name}</code>
+            <div style="font-size:0.75rem;font-weight:600;color:#111827;margin:0.25rem 0;">{svc.role}</div>
+            <div style="font-size:0.75rem;color:#6B7280;margin-bottom:0.25rem;">{svc.desc}</div>
+            <div style="font-size:0.7rem;color:#9CA3AF;">Port: {svc.port}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- .env Konfiguration -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <p class="section-label">Konfiguration</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1rem;">Umgebungsvariablen (.env)</h2>
+      <p style="color:#4B5563;margin-bottom:1rem;">Erstelle die .env-Datei aus der Beispieldatei und passe diese Einstellungen an:</p>
+      <pre class="prose"><code set:text={dockerComposeEnv} /></pre>
+
+      <div style="display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;">
+        {[
+          {
+            key: 'SECRET_KEY',
+            required: true,
+            desc: 'Kryptografischer Schlüssel für Sitzungen und Tokens. Muss zufällig und mindestens 32 Zeichen lang sein.',
+            cmd: 'openssl rand -base64 42',
+          },
+          {
+            key: 'CONSOLE_WEB_URL / APP_WEB_URL',
+            required: true,
+            desc: 'Öffentliche URL deiner Dify-Instanz. Muss mit https:// beginnen in Produktion. Ohne diese Einstellung funktionieren Datei-Uploads und OAuth nicht korrekt.',
+            cmd: null,
+          },
+          {
+            key: 'DB_PASSWORD',
+            required: true,
+            desc: 'PostgreSQL-Datenbankpasswort. Setze ein starkes Passwort — auch wenn die Datenbank intern ist.',
+            cmd: 'openssl rand -base64 24',
+          },
+          {
+            key: 'REDIS_PASSWORD',
+            required: false,
+            desc: 'Redis-Passwort. Empfohlen für Produktionsinstallationen.',
+            cmd: null,
+          },
+        ].map((item) => (
+          <div class="card" style="padding:1rem;">
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
+              <code style="font-size:0.875rem;color:#7C3AED;font-weight:600;">{item.key}</code>
+              {item.required && <span style="font-size:0.65rem;padding:0.1rem 0.4rem;background:#FEE2E2;color:#DC2626;border-radius:4px;font-weight:600;">Pflichtfeld</span>}
+            </div>
+            <p style="font-size:0.8rem;color:#4B5563;margin-bottom:0.5rem;">{item.desc}</p>
+            {item.cmd && (
+              <pre class="prose" style="margin:0;font-size:0.8rem;"><code>{item.cmd}</code></pre>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Port-Konfiguration -->
+  <section class="section">
+    <div class="container-sm">
+      <p class="section-label">Ports</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1rem;">Standard-Ports und Konflikte lösen</h2>
+      <p style="color:#4B5563;margin-bottom:1rem;">Wenn Port 80 bereits belegt ist (z.B. durch einen anderen Nginx), musst du Difys Ports in docker-compose.yml anpassen:</p>
+
+      <pre class="prose"><code># In docker-compose.yml unter dem nginx-Service:
+# Standard:
+#   ports:
+#     - "80:80"
+# Geändert auf Port 8080:
+ports:
+  - "8080:80"</code></pre>
+
+      <div class="card" style="background:#F0FDF4;border-color:#86EFAC;margin-top:1rem;">
+        <p style="font-size:0.875rem;color:#166534;margin:0;">
+          <strong>Tipp:</strong> Wenn du Nginx als äußeren Reverse Proxy nutzt, empfehlen wir, Dify auf einem internen Port (z.B. 8080) zu betreiben und den Nginx-Traffic darauf weiterzuleiten.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tipps für Produktion -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <p class="section-label">Produktion</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1rem;">Produktions-Checkliste</h2>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        {[
+          { done: true, item: 'SECRET_KEY auf starken zufälligen Wert gesetzt' },
+          { done: true, item: 'CONSOLE_WEB_URL und APP_WEB_URL auf HTTPS-Domain gesetzt' },
+          { done: true, item: 'Starke Datenbankpasswörter vergeben' },
+          { done: true, item: 'UFW-Firewall konfiguriert (nur 22, 80, 443 offen)' },
+          { done: true, item: 'Nginx Reverse Proxy eingerichtet' },
+          { done: true, item: 'SSL-Zertifikat mit Certbot installiert' },
+          { done: false, item: 'Automatische Datenbank-Backups eingerichtet' },
+          { done: false, item: 'Docker auto-restart konfiguriert (restart: unless-stopped)' },
+          { done: false, item: 'Monitoring-Alerts eingerichtet' },
+        ].map((item) => (
+          <div style="display:flex;gap:0.75rem;align-items:center;">
+            <span style={`width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0;${item.done ? 'background:#22C55E;color:white;' : 'background:#E5E7EB;color:#6B7280;'}`}>
+              {item.done ? '✓' : '○'}
+            </span>
+            <span style={`font-size:0.875rem;${item.done ? 'color:#374151;' : 'color:#9CA3AF;'}`}>{item.item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Weiterführende Links -->
+  <section class="section">
+    <div class="container-sm">
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="/de/guides/self-host-dify/" class="btn-secondary">Vollständige Installationsanleitung</a>
+        <a href="/de/best-dify-hosting/" class="btn-secondary">Anbieter vergleichen</a>
+        <a href="/de/guides/dify-pricing/" class="btn-secondary">Kostenübersicht</a>
+        <a href="/de/faq/" class="btn-secondary">FAQ</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

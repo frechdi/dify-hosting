@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/providers/render/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  name: 'Render Dify Hosting Bewertung 2026',
+  reviewBody: 'Render bietet verwaltetes Cloud-Hosting für Dify mit Auto-Deploy aus Git. Standard-Pläne ab 25 $/Monat.',
+  author: { '@type': 'Organization', name: 'Dify Hosting Team' },
+  itemReviewed: { '@type': 'SoftwareApplication', name: 'Render', url: 'https://render.com' },
+  reviewRating: { '@type': 'Rating', ratingValue: '3.7', bestRating: '5', worstRating: '1' },
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-01',
+};
+
+const plans = [
+  { name: 'Free', price: '$0', ram: '512 MB', cpu: 'Geteilt', note: 'Zu klein für Dify', warning: true },
+  { name: 'Starter', price: '$7/Mon.', ram: '512 MB', cpu: 'Geteilt', note: 'Zu klein', warning: true },
+  { name: 'Standard', price: '$25/Mon.', ram: '2 GB', cpu: 'Geteilt', note: 'Knapp ausreichend' },
+  { name: 'Pro', price: '$85/Mon.', ram: '4 GB', cpu: '1 vCPU', note: 'Empfohlen', featured: true },
+];
+---
+
+<BaseLayout
+  title="Render Dify Hosting Review 2026 — Managed Cloud Deployment"
+  description="Render bietet verwaltetes Cloud-Hosting für Dify mit Auto-Deploy aus Git. Standard-Pläne ab 25 $/Monat."
+  lang="de"
+  canonical="https://dify-hosting.com/de/providers/render/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <section class="hero-gradient section" style="padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Startseite', href: '/de/' },
+        { label: 'Anbieter', href: '/de/best-dify-hosting/' },
+        { label: 'Render' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span class="badge badge-primary">Managed Cloud</span>
+        <span class="badge badge-success">Bewertet März 2026</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;">
+        <div style="background:#46E3B7;color:#111827;width:56px;height:56px;font-size:1.2rem;font-weight:800;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">Re</div>
+        <div>
+          <h1 style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;color:#111827;line-height:1.2;margin-bottom:0.5rem;">
+            Render Dify Hosting Bewertung
+          </h1>
+          <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:2px;">
+              {[1,2,3].map(() => <span style="color:#F59E0B;font-size:1.2rem;">★</span>)}
+              <span style="color:#F59E0B;font-size:1.2rem;">½</span>
+              <span style="color:#E5E7EB;font-size:1.2rem;">★</span>
+            </div>
+            <span style="font-size:1.1rem;font-weight:700;color:#111827;">3.7 / 5</span>
+            <span style="color:#D1D5DB;">·</span>
+            <span style="color:#16A34A;font-weight:700;font-size:1rem;">Ab $25/Mon.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-sm">
+      <div class="prose">
+        <p style="font-size:1.05rem;">
+          Render ist eine entwicklerfreundliche Cloud-Plattform mit automatischem Deployment aus Git-Repositories. Die Benutzeroberfläche ist poliert, die Einrichtung schnell, und Render kümmert sich um SSL, Skalierung und Infrastrukturverwaltung. Für Dify-Hosting gibt es jedoch eine entscheidende Einschränkung: Die Free- und Starter-Pläne haben nur 512 MB RAM — viel zu wenig für Difys Docker-Stack.
+        </p>
+        <p>
+          Für produktiven Dify-Einsatz benötigst du mindestens den Pro-Plan ($85/Mon., 4 GB RAM), was Render zu einer teuren Option macht. Verglichen mit Hetzner (€5,59/Mon. für 8 GB RAM) ist das ein erheblicher Aufpreis für ähnliche oder geringere Ressourcen. Render eignet sich besser für einfachere Web-Apps als für ressourcenintensive Docker-Stacks wie Dify.
+        </p>
+
+        <div class="card" style="background:#FFF7ED;border-color:#FED7AA;margin:1.5rem 0;">
+          <p style="font-size:0.875rem;color:#92400E;margin:0;">
+            <strong>Hinweis:</strong> Render Free-Tier Services werden nach 15 Minuten Inaktivität heruntergefahren. Das macht kostenlose Pläne für Dify vollständig unbrauchbar.
+          </p>
+        </div>
+
+        <div class="card card-featured" style="margin:2rem 0;text-align:center;">
+          <p style="font-weight:600;color:#111827;margin-bottom:0.25rem;">Render für Dify testen</p>
+          <p style="color:#4B5563;font-size:0.875rem;margin-bottom:1rem;">Managed Cloud mit Auto-Deploy — für Teams, die keine Serververwaltung wollen</p>
+          <a href="https://render.com?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-primary">
+            Render testen →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label">Preise</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Render-Tarife für Dify</h2>
+      <div style="overflow-x:auto;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Tarif</th>
+              <th>Preis</th>
+              <th>RAM</th>
+              <th>CPU</th>
+              <th>Dify-Eignung</th>
+            </tr>
+          </thead>
+          <tbody>
+            {plans.map((plan, i) => (
+              <tr style={plan.featured ? 'background:#F0F7FF;' : (i % 2 === 0 ? '' : 'background:#f9fafb;')}>
+                <td>
+                  <span class="provider-name">{plan.name}</span>
+                  {plan.featured && <span class="badge badge-primary" style="margin-left:0.5rem;">Empfohlen</span>}
+                </td>
+                <td class="price">{plan.price}</td>
+                <td>{plan.ram}</td>
+                <td>{plan.cpu}</td>
+                <td>
+                  {plan.warning ? (
+                    <span style="color:#DC2626;font-size:0.8rem;">❌ {plan.note}</span>
+                  ) : (
+                    <span><span class="check">✅</span><span style="font-size:0.8rem;color:#4B5563;margin-left:0.25rem;">{plan.note}</span></span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-sm">
+      <div class="card card-featured">
+        <p class="section-label">Unser Fazit</p>
+        <h2 style="font-size:1.3rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Teuer für Dify — bessere Alternativen verfügbar</h2>
+        <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+          Render ist eine ausgezeichnete Plattform für einfache Web-Apps, aber für Dify zu teuer und ressourcenarme Pläne zu klein. Wir empfehlen Hetzner (8× mehr RAM für 10% des Preises) oder Elestio (ebenfalls managed, aber günstiger) als bessere Alternativen.
+        </p>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;">
+          <span style="font-size:2rem;font-weight:800;color:#111827;">3.7</span>
+          <div>
+            <div style="display:flex;gap:2px;">
+              {[1,2,3].map(() => <span style="color:#F59E0B;font-size:1.1rem;">★</span>)}
+              <span style="color:#F59E0B;font-size:1.1rem;">½</span>
+              <span style="color:#E5E7EB;font-size:1.1rem;">★</span>
+            </div>
+            <div style="font-size:0.75rem;color:#6B7280;">Dify-Hosting-Score</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="https://render.com?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-primary">Render testen →</a>
+          <a href="/de/providers/hetzner/" class="btn-secondary">Günstigere Alternative: Hetzner</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="/de/best-dify-hosting/" class="btn-secondary">← Alle Anbieter im Ranking</a>
+        <a href="/de/providers/elestio/" class="btn-secondary">Alternative: Elestio</a>
+        <a href="/de/providers/railway/" class="btn-secondary">Alternative: Railway</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

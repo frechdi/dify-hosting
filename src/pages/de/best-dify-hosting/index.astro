@@ -1,0 +1,359 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/best-dify-hosting/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Beste Dify Hosting Anbieter 2026',
+  description: 'Die 8 besten Hosting-Anbieter für selbstgehostetes Dify AI, getestet und bewertet.',
+  numberOfItems: 8,
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Hetzner', url: 'https://dify-hosting.com/de/providers/hetzner/' },
+    { '@type': 'ListItem', position: 2, name: 'Hostinger', url: 'https://dify-hosting.com/de/providers/hostinger/' },
+    { '@type': 'ListItem', position: 3, name: 'DigitalOcean', url: 'https://dify-hosting.com/de/providers/digitalocean/' },
+    { '@type': 'ListItem', position: 4, name: 'Vultr', url: 'https://dify-hosting.com/de/providers/vultr/' },
+    { '@type': 'ListItem', position: 5, name: 'Elestio', url: 'https://dify-hosting.com/de/providers/elestio/' },
+    { '@type': 'ListItem', position: 6, name: 'Railway', url: 'https://dify-hosting.com/de/providers/railway/' },
+    { '@type': 'ListItem', position: 7, name: 'Render', url: 'https://dify-hosting.com/de/providers/render/' },
+    { '@type': 'ListItem', position: 8, name: 'Kamatera', url: 'https://dify-hosting.com/de/providers/kamatera/' },
+  ],
+};
+
+const providers = [
+  { rank: 1, name: 'Hetzner', price: '€3,79/Mon.', ram: '4GB', vcpu: '2 vCPU', storage: '40GB NVMe', locations: 'EU (DE/FI)', ease: 3, rating: 4.8, badge: 'Bestes Preis-Leistungs-Verhältnis', badgeClass: 'badge-editors-choice', href: '/de/providers/hetzner/' },
+  { rank: 2, name: 'Hostinger', price: '$7,99/Mon.', ram: '8GB', vcpu: '2 vCPU', storage: '50GB NVMe', locations: 'Global', ease: 4, rating: 4.5, badge: 'Ideal für Anfänger', badgeClass: 'badge-primary', href: '/de/providers/hostinger/' },
+  { rank: 3, name: 'DigitalOcean', price: '$24/Mon.', ram: '4GB', vcpu: '2 vCPU', storage: '80GB SSD', locations: '15 Regionen', ease: 4, rating: 4.3, badge: 'Entwicklerfreundlich', badgeClass: 'badge-primary', href: '/de/providers/digitalocean/' },
+  { rank: 4, name: 'Vultr', price: '$12/Mon.', ram: '4GB', vcpu: '2 vCPU', storage: '65GB NVMe', locations: '32 Standorte', ease: 3, rating: 4.2, badge: null, badgeClass: null, href: '/de/providers/vultr/' },
+  { rank: 5, name: 'Elestio', price: '$19/Mon.', ram: 'Verwaltet', vcpu: 'Verwaltet', storage: 'Verwaltet', locations: 'Global', ease: 5, rating: 4.0, badge: 'Einfachstes Setup', badgeClass: 'badge-success', href: '/de/providers/elestio/' },
+  { rank: 6, name: 'Railway', price: '$5/Mon.', ram: '512MB–8GB', vcpu: 'Geteilt', storage: 'Ephemeral', locations: 'Verwaltet', ease: 5, rating: 3.8, badge: null, badgeClass: null, href: '/de/providers/railway/' },
+  { rank: 7, name: 'Render', price: '$25/Mon.', ram: '2GB', vcpu: 'Geteilt', storage: '—', locations: 'US/EU', ease: 4, rating: 3.7, badge: null, badgeClass: null, href: '/de/providers/render/' },
+  { rank: 8, name: 'Kamatera', price: '$4/Mon.*', ram: 'Konfig.', vcpu: 'Konfig.', storage: '20GB+', locations: '13 Standorte', ease: 2, rating: 3.9, badge: null, badgeClass: null, href: '/de/providers/kamatera/' },
+];
+
+function renderStars(rating: number) {
+  const full = Math.floor(rating);
+  const hasHalf = rating % 1 >= 0.5;
+  const empty = 5 - full - (hasHalf ? 1 : 0);
+  return { full, hasHalf, empty };
+}
+
+function rankClass(rank: number) {
+  if (rank === 1) return 'rank-badge rank-1';
+  if (rank === 2) return 'rank-badge rank-2';
+  if (rank === 3) return 'rank-badge rank-3';
+  return 'rank-badge rank-other';
+}
+---
+
+<BaseLayout
+  title="Bestes Dify Hosting 2026 — Anbieter im Vergleich"
+  description="Wir haben 8 Hosting-Anbieter für Dify AI getestet. Vergleich von Preisen, Leistung und Setup-Aufwand. Hetzner gewinnt beim Preis-Leistungs-Verhältnis."
+  lang="de"
+  canonical="https://dify-hosting.com/de/best-dify-hosting/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="hero-gradient section" style="padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Startseite', href: '/de/' },
+        { label: 'Bestes Dify Hosting' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span class="badge badge-success">Zuletzt aktualisiert: März 2026</span>
+        <span class="badge badge-primary">8 Anbieter getestet</span>
+      </div>
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#111827;line-height:1.2;margin-bottom:1rem;">
+        Bestes Dify Hosting 2026 — Anbieter im Vergleich
+      </h1>
+      <p style="font-size:1.15rem;color:#4B5563;max-width:680px;line-height:1.7;margin-bottom:1.5rem;">
+        Wir haben Dify auf 8 verschiedenen Cloud-Anbietern deployt, Kaltstart-Zeiten gemessen, Lasttests durchgeführt und die Gesamtbetriebskosten berechnet. Hier sind unsere Ergebnisse — mit ehrlichen Vor- und Nachteilen sowie Einrichtungsanleitungen für jeden Anbieter.
+      </p>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;font-size:0.875rem;color:#6B7280;">
+        <span>✓ Praxisnah getestet</span>
+        <span style="color:#D1D5DB;">·</span>
+        <span>✓ Echte Preisdaten</span>
+        <span style="color:#D1D5DB;">·</span>
+        <span>✓ Schritt-für-Schritt-Anleitungen</span>
+        <span style="color:#D1D5DB;">·</span>
+        <span>✓ Keine bezahlten Platzierungen</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Picks -->
+  <section class="section section-alt" style="padding-top:3rem;padding-bottom:3rem;">
+    <div class="container">
+      <div class="container-sm" style="margin:0 auto;">
+        <p class="section-label">Schnellauswahl</p>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Unsere Top-Empfehlungen</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;max-width:1000px;margin:0 auto;">
+        <!-- Bester Gesamtwert -->
+        <div class="card card-featured" style="position:relative;">
+          <div style="position:absolute;top:-1px;left:1.5rem;">
+            <span class="badge badge-editors-choice">Bester Gesamtwert</span>
+          </div>
+          <div style="padding-top:1rem;">
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+              <div style="background:#D50C2D;color:white;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;">H</div>
+              <div>
+                <div style="font-weight:700;color:#111827;">Hetzner</div>
+                <div style="font-size:0.8rem;color:#6B7280;">Ab €3,79/Mon.</div>
+              </div>
+            </div>
+            <p style="font-size:0.875rem;color:#4B5563;margin-bottom:1rem;">DSGVO-konform, günstigstes EU VPS, ausgezeichnete NVMe-Performance. Unsere #1-Empfehlung für europäische Teams.</p>
+            <a href="https://www.hetzner.com/cloud?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-primary" style="width:100%;display:block;text-align:center;">Hetzner testen →</a>
+          </div>
+        </div>
+        <!-- Ideal für Anfänger -->
+        <div class="card" style="position:relative;">
+          <div style="position:absolute;top:-1px;left:1.5rem;">
+            <span class="badge badge-primary">Ideal für Anfänger</span>
+          </div>
+          <div style="padding-top:1rem;">
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+              <div style="background:#673DE6;color:white;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;">H</div>
+              <div>
+                <div style="font-weight:700;color:#111827;">Hostinger</div>
+                <div style="font-size:0.8rem;color:#6B7280;">Ab $7,99/Mon.</div>
+              </div>
+            </div>
+            <p style="font-size:0.875rem;color:#4B5563;margin-bottom:1rem;">24/7 Live-Chat-Support, benutzerfreundliche Oberfläche, 8GB RAM für $12,99/Mon. Perfekt für Einsteiger ins Selbsthosten.</p>
+            <a href="https://www.hostinger.com/vps-hosting?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-secondary" style="width:100%;display:block;text-align:center;">Hostinger testen →</a>
+          </div>
+        </div>
+        <!-- Einfachstes Setup -->
+        <div class="card" style="position:relative;">
+          <div style="position:absolute;top:-1px;left:1.5rem;">
+            <span class="badge badge-success">Einfachstes Setup</span>
+          </div>
+          <div style="padding-top:1rem;">
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+              <div style="background:#0052CC;color:white;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;">El</div>
+              <div>
+                <div style="font-weight:700;color:#111827;">Elestio</div>
+                <div style="font-size:0.8rem;color:#6B7280;">Ab $19/Mon.</div>
+              </div>
+            </div>
+            <p style="font-size:0.875rem;color:#4B5563;margin-bottom:1rem;">1-Klick-Deploy, automatische Updates und Backups. Kein DevOps-Wissen erforderlich. Vollständig verwaltetes Dify-Hosting.</p>
+            <a href="https://elest.io/?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-secondary" style="width:100%;display:block;text-align:center;">Elestio testen →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mindestanforderungen -->
+  <section class="section">
+    <div class="container-sm">
+      <p class="section-label">Mindestanforderungen</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Was braucht Dify zum Laufen?</h2>
+      <p style="color:#4B5563;margin-bottom:1.5rem;">Dify verwendet Docker Compose und startet über 10 Container gleichzeitig. Diese Mindestanforderungen sind nicht verhandelbar:</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem;">
+        {[
+          { icon: '🖥️', label: 'vCPU', value: '2 vCPU', note: 'Minimum' },
+          { icon: '💾', label: 'Arbeitsspeicher', value: '4 GB RAM', note: 'Minimum, 8 GB empfohlen' },
+          { icon: '💿', label: 'Speicher', value: '50 GB SSD', note: 'NVMe bevorzugt' },
+          { icon: '🐧', label: 'Betriebssystem', value: 'Ubuntu 22.04', note: 'LTS empfohlen' },
+        ].map((req) => (
+          <div class="card" style="text-align:center;padding:1.25rem;">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem;">{req.icon}</div>
+            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:#6B7280;margin-bottom:0.25rem;">{req.label}</div>
+            <div style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.25rem;">{req.value}</div>
+            <div style="font-size:0.75rem;color:#6B7280;">{req.note}</div>
+          </div>
+        ))}
+      </div>
+      <div class="card" style="background:#FFF7ED;border-color:#FED7AA;">
+        <p style="font-size:0.875rem;color:#92400E;margin:0;">
+          <strong>Tipp:</strong> Der Hetzner CX22 (€3,79/Mon.) erfüllt gerade die Mindestanforderungen. Für produktive Nutzung mit mehreren gleichzeitigen Benutzern empfehlen wir den CX32 (4 vCPU / 8 GB RAM, €5,59/Mon.).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vergleichstabelle -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label">Vollständiger Vergleich</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Alle Anbieter im Überblick</h2>
+      <div style="overflow-x:auto;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Rang</th>
+              <th>Anbieter</th>
+              <th>Preis ab</th>
+              <th>RAM</th>
+              <th>vCPU</th>
+              <th>Speicher</th>
+              <th>Standorte</th>
+              <th>Einfachheit</th>
+              <th>Bewertung</th>
+            </tr>
+          </thead>
+          <tbody>
+            {providers.map((p, i) => (
+              <tr style={i % 2 === 0 ? 'border-bottom:1px solid #e5e7eb;' : 'border-bottom:1px solid #e5e7eb;background:#f9fafb;'}>
+                <td>
+                  <span class={rankClass(p.rank)}>#{p.rank}</span>
+                </td>
+                <td>
+                  <a href={p.href} style="font-weight:600;color:#111827;text-decoration:none;">{p.name}</a>
+                  {p.badge && <span class={`badge ${p.badgeClass}`} style="margin-left:0.5rem;font-size:0.7rem;">{p.badge}</span>}
+                </td>
+                <td class="price">{p.price}</td>
+                <td>{p.ram}</td>
+                <td>{p.vcpu}</td>
+                <td>{p.storage}</td>
+                <td>{p.locations}</td>
+                <td>
+                  <div style="display:flex;gap:2px;">
+                    {Array.from({length: p.ease}).map(() => <span style="color:#F59E0B;font-size:0.875rem;">★</span>)}
+                    {Array.from({length: 5 - p.ease}).map(() => <span style="color:#E5E7EB;font-size:0.875rem;">★</span>)}
+                  </div>
+                </td>
+                <td style="font-weight:700;color:#111827;">{p.rating}/5</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.78rem;color:#6B7280;margin-top:0.75rem;">* Kamatera: Preis variiert je nach Konfiguration. Einstiegspreis bei minimaler Konfiguration.</p>
+    </div>
+  </section>
+
+  <!-- Detaillierte Anbieter-Beschreibungen -->
+  <section class="section">
+    <div class="container-sm">
+      <p class="section-label">Detailbewertungen</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Anbieter im Detail</h2>
+
+      <!-- Hetzner -->
+      <div class="card card-featured" style="margin-bottom:1.5rem;">
+        <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;">
+          <div style="background:#D50C2D;color:white;width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;flex-shrink:0;">H</div>
+          <div style="flex:1;">
+            <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.25rem;">
+              <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">#1 Hetzner</h3>
+              <span class="badge badge-editors-choice">Editors' Choice</span>
+            </div>
+            <div style="font-size:0.875rem;color:#16A34A;font-weight:600;">Ab €3,79/Mon. · 4.8/5</div>
+          </div>
+        </div>
+        <p style="font-size:0.9rem;color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+          Hetzner ist unser klarer Testsieger für das Selbsthosten von Dify. Kein US-Anbieter kann mithalten, wenn es um das Preis-Leistungs-Verhältnis geht: Der CX32 bietet 4 vCPU und 8 GB RAM für nur €5,59/Mon. — weniger als eine Netflix-Mitgliedschaft. DSGVO-konform in Deutschland und Finnland mit ISO-27001-zertifizierten Rechenzentren.
+        </p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="/de/providers/hetzner/" class="btn-primary">Vollständige Bewertung lesen</a>
+          <a href="https://www.hetzner.com/cloud?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-secondary">Hetzner Cloud testen →</a>
+        </div>
+      </div>
+
+      <!-- Hostinger -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;">
+          <div style="background:#673DE6;color:white;width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;flex-shrink:0;">H</div>
+          <div style="flex:1;">
+            <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.25rem;">
+              <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">#2 Hostinger</h3>
+              <span class="badge badge-primary">Ideal für Anfänger</span>
+            </div>
+            <div style="font-size:0.875rem;color:#16A34A;font-weight:600;">Ab $7,99/Mon. · 4.5/5</div>
+          </div>
+        </div>
+        <p style="font-size:0.9rem;color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+          Hostinger bietet das beste Einstiegserlebnis für Dify-Neulinge. Der KVM 2-Plan (8 GB RAM, 2 vCPU) kostet $12,99/Mon. und bietet damit mehr Speicher als DigitalOceans $28/Mon.-Droplet. Rund-um-die-Uhr-Live-Chat-Support (echte Menschen) und eine benutzerfreundliche Oberfläche machen den Einstieg sehr einfach.
+        </p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="/de/providers/hostinger/" class="btn-secondary">Vollständige Bewertung lesen</a>
+          <a href="https://www.hostinger.com/vps-hosting?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-secondary">Hostinger testen →</a>
+        </div>
+      </div>
+
+      <!-- DigitalOcean -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;">
+          <div style="background:#0080FF;color:white;width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;flex-shrink:0;">DO</div>
+          <div style="flex:1;">
+            <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.25rem;">
+              <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">#3 DigitalOcean</h3>
+              <span class="badge badge-primary">Entwicklerfreundlich</span>
+            </div>
+            <div style="font-size:0.875rem;color:#16A34A;font-weight:600;">Ab $24/Mon. · 4.3/5</div>
+          </div>
+        </div>
+        <p style="font-size:0.9rem;color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+          DigitalOcean ist die bevorzugte Wahl für Entwickler, die ausgereifte Infrastruktur-Werkzeuge benötigen. Verwaltete Datenbanken, Kubernetes, Load Balancer und ausgezeichnete Dokumentation machen es ideal für skalierbare Dify-Deployments. Teurer als Hetzner, aber mit mehr Ökosystem-Integrationen.
+        </p>
+        <a href="/de/providers/digitalocean/" class="btn-secondary">Vollständige Bewertung lesen</a>
+      </div>
+
+      <!-- Weitere Anbieter -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+        {[
+          { rank: 4, name: 'Vultr', color: '#007BFC', label: 'V', price: '$12/Mon.', rating: '4.2/5', desc: '32 globale Standorte mit NVMe High-Frequency VPS. Gut für internationale Deployments.', href: '/de/providers/vultr/' },
+          { rank: 5, name: 'Elestio', color: '#0052CC', label: 'El', price: '$19/Mon.', rating: '4.0/5', desc: '1-Klick verwaltetes Dify-Hosting mit automatischen Updates. Kein Serververwalten nötig.', href: '/de/providers/elestio/' },
+          { rank: 6, name: 'Railway', color: '#0B0D0E', label: 'R', price: '$5/Mon.', rating: '3.8/5', desc: 'PaaS mit Git-Integration. Hobby-Plan mit kostenlosem Kontingent — ideal zum Testen.', href: '/de/providers/railway/' },
+          { rank: 7, name: 'Render', color: '#46E3B7', label: 'Re', price: '$25/Mon.', rating: '3.7/5', desc: 'Verwaltetes Cloud-Hosting mit Auto-Deploy aus Git. Einfach, aber teuer für Dify.', href: '/de/providers/render/' },
+          { rank: 8, name: 'Kamatera', color: '#FF6B35', label: 'K', price: '$4/Mon.*', rating: '3.9/5', desc: 'Vollständig anpassbarer Cloud-VPS. Günstig bei richtiger Konfiguration, aber komplex.', href: '/de/providers/kamatera/' },
+        ].map((p) => (
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+              <div style={`background:${p.color};color:white;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.875rem;flex-shrink:0;`}>{p.label}</div>
+              <div>
+                <div style="font-weight:700;color:#111827;font-size:0.95rem;">#{p.rank} {p.name}</div>
+                <div style="font-size:0.75rem;color:#6B7280;">{p.price} · {p.rating}</div>
+              </div>
+            </div>
+            <p style="font-size:0.8rem;color:#4B5563;line-height:1.6;margin-bottom:0.75rem;">{p.desc}</p>
+            <a href={p.href} style="font-size:0.8rem;color:#2563EB;font-weight:600;">Bewertung lesen →</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Sektion -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <p class="section-label">Häufige Fragen</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Dify Hosting — Häufige Fragen</h2>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        {[
+          { q: 'Welcher Anbieter ist am besten für Dify?', a: 'Für europäische Teams ist Hetzner mit Abstand die beste Wahl — DSGVO-konform, günstigstes Preis-Leistungs-Verhältnis. Für globale Nutzer oder Anfänger empfehlen wir Hostinger.' },
+          { q: 'Was kostet Dify selbst hosten pro Monat?', a: 'Das günstigste produktionsfähige Setup kostet €5,59/Mon. auf Hetzner CX32. Dazu kommen LLM-API-Kosten je nach Nutzung. Insgesamt deutlich günstiger als Dify Cloud Pro ($59/Mon.).' },
+          { q: 'Brauche ich technisches Wissen für das Selbsthosten?', a: 'Grundkenntnisse in der Linux-Kommandozeile und Docker sind hilfreich. Mit unseren Schritt-für-Schritt-Anleitungen schaffen es auch Anfänger in 1–2 Stunden. Elestio bietet auch ein vollständig verwaltetes 1-Klick-Deployment an.' },
+          { q: 'Ist Dify DSGVO-konform beim Selbsthosten?', a: 'Ja — beim Selbsthosten auf einem EU-Server (z.B. Hetzner Deutschland) bleiben alle Daten auf Ihrem Server. Keine Daten werden an Dify gesendet (Telemetrie kann deaktiviert werden). Sie haben volle Datenkontrolle.' },
+        ].map((faq) => (
+          <div class="card">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">{faq.q}</h3>
+            <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin:0;">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+      <div style="margin-top:1.5rem;text-align:center;">
+        <a href="/de/faq/" class="btn-secondary">Alle häufigen Fragen →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weiterführende Links -->
+  <section class="section">
+    <div class="container-sm">
+      <h2 style="font-size:1.2rem;font-weight:700;color:#111827;margin-bottom:1rem;">Weiterführende Ressourcen</h2>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="/de/guides/self-host-dify/" class="btn-secondary">Dify selbst hosten — Anleitung</a>
+        <a href="/de/guides/dify-docker-setup/" class="btn-secondary">Docker Compose Setup</a>
+        <a href="/de/comparisons/dify-vs-n8n/" class="btn-secondary">Dify vs n8n</a>
+        <a href="/de/faq/" class="btn-secondary">FAQ</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

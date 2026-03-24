@@ -1,0 +1,320 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/providers/hostinger/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  name: 'Hostinger Dify Hosting Review 2026',
+  reviewBody: 'Hostinger VPS offers fast NVMe storage and 24/7 support for $7.99/mo, making it the best beginner-friendly option for self-hosting Dify.',
+  author: { '@type': 'Organization', name: 'Dify Hosting Team' },
+  itemReviewed: { '@type': 'SoftwareApplication', name: 'Hostinger VPS', url: 'https://www.hostinger.com/vps-hosting' },
+  reviewRating: { '@type': 'Rating', ratingValue: '4.5', bestRating: '5', worstRating: '1' },
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-01',
+};
+
+const plans = [
+  { name: 'KVM 1', price: '$7.99/mo', vcpu: '1 vCPU', ram: '4 GB', storage: '50 GB NVMe', bandwidth: '4 TB', ready: 'Minimum' },
+  { name: 'KVM 2', price: '$12.99/mo', vcpu: '2 vCPU', ram: '8 GB', storage: '100 GB NVMe', bandwidth: '8 TB', ready: 'Recommended', featured: true },
+  { name: 'KVM 4', price: '$19.99/mo', vcpu: '4 vCPU', ram: '16 GB', storage: '200 GB NVMe', bandwidth: '16 TB', ready: 'Production' },
+  { name: 'KVM 8', price: '$31.99/mo', vcpu: '8 vCPU', ram: '32 GB', storage: '400 GB NVMe', bandwidth: '32 TB', ready: 'Enterprise' },
+];
+---
+
+<BaseLayout
+  title="Hostinger Dify Hosting Review 2026 — VPS Plans & Setup Guide"
+  description="Hostinger VPS offers fast NVMe storage and 24/7 support for $7.99/mo. Learn how to deploy Dify on Hostinger with our step-by-step Docker guide."
+  lang="en"
+  canonical="https://dify-hosting.com/en/providers/hostinger/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="hero-gradient section" style="padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/en/' },
+        { label: 'Providers', href: '/en/best-dify-hosting/' },
+        { label: 'Hostinger' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span class="badge badge-primary">Best for Beginners</span>
+        <span class="badge badge-success">Reviewed March 2026</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;">
+        <div class="provider-icon" style="background:#673DE6;color:white;width:56px;height:56px;font-size:1.5rem;border-radius:14px;flex-shrink:0;">H</div>
+        <div>
+          <h1 style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;color:#111827;line-height:1.2;margin-bottom:0.5rem;">
+            Hostinger Dify Hosting Review
+          </h1>
+          <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:0.25rem;">
+              {[1,2,3,4].map(() => <span style="color:#F59E0B;font-size:1.2rem;">★</span>)}
+              <span style="color:#F59E0B;font-size:1.2rem;">½</span>
+            </div>
+            <span style="font-size:1.1rem;font-weight:700;color:#111827;">4.5 / 5</span>
+            <span style="color:#D1D5DB;">·</span>
+            <span style="color:#16A34A;font-weight:700;font-size:1rem;">From $7.99/mo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Stats -->
+  <section style="background:#FFFFFF;border-bottom:1px solid #E2E8F0;padding:1.25rem 1.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;">
+        <div style="text-align:center;">
+          <div style="font-size:1.1rem;font-weight:700;color:#111827;">$7.99/mo</div>
+          <div style="font-size:0.75rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;">Starting Price</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:1.1rem;font-weight:700;color:#111827;">8 GB</div>
+          <div style="font-size:0.75rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;">RAM (KVM 2)</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:1.1rem;font-weight:700;color:#111827;">2 vCPU</div>
+          <div style="font-size:0.75rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;">CPU (KVM 2)</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:1.1rem;font-weight:700;color:#111827;">50–400 GB</div>
+          <div style="font-size:0.75rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;">NVMe Storage</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:1.1rem;font-weight:700;color:#111827;">24/7</div>
+          <div style="font-size:0.75rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;">Live Chat Support</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:1.1rem;font-weight:700;color:#111827;">Global</div>
+          <div style="font-size:0.75rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;">Server Locations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="section">
+    <div class="container-sm">
+      <div class="prose">
+        <p style="font-size:1.05rem;">
+          Hostinger is one of the most affordable VPS providers offering excellent performance for Dify. Their KVM 2 plan (8 GB RAM, 2 vCPU, $12.99/mo) is perfect for running Dify with room to spare for multiple concurrent users. With hPanel's one-click features and 24/7 live chat support, even complete beginners can get Dify running within an hour of signing up.
+        </p>
+        <p>
+          What makes Hostinger stand out for beginners isn't just price — it's the combination of generous RAM at entry level, global server footprint (US, EU, Asia, Latin America), and genuine 24/7 human support. When you're stuck debugging a Docker networking issue, Hostinger's support team will actually work through it with you, unlike providers that deflect to documentation.
+        </p>
+
+        <!-- CTA -->
+        <div class="card card-featured" style="margin:2rem 0;text-align:center;">
+          <p style="font-weight:600;color:#111827;margin-bottom:0.25rem;">Ready to get started with Hostinger?</p>
+          <p style="color:#4B5563;font-size:0.875rem;margin-bottom:1rem;">KVM 2 plan — 8GB RAM, 2 vCPU, 100GB NVMe — best value for Dify</p>
+          <a href="https://www.hostinger.com/vps-hosting?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-primary">
+            Get Hostinger VPS — from $12.99/mo →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plans Table -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label">Pricing</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Hostinger VPS Plans for Dify</h2>
+      <p style="color:#4B5563;margin-bottom:1.5rem;">All plans include NVMe SSD, free weekly backups, and 24/7 support. Prices as of March 2026.</p>
+      <div style="overflow-x:auto;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Plan</th>
+              <th>Price</th>
+              <th>vCPU</th>
+              <th>RAM</th>
+              <th>Storage</th>
+              <th>Bandwidth</th>
+              <th>Dify Ready?</th>
+            </tr>
+          </thead>
+          <tbody>
+            {plans.map((plan) => (
+              <tr style={plan.featured ? 'background:#F0F7FF;' : ''}>
+                <td>
+                  <span class="provider-name">{plan.name}</span>
+                  {plan.featured && <span class="badge badge-primary" style="margin-left:0.5rem;">Recommended</span>}
+                </td>
+                <td class="price">{plan.price}</td>
+                <td>{plan.vcpu}</td>
+                <td>{plan.ram}</td>
+                <td>{plan.storage}</td>
+                <td>{plan.bandwidth}</td>
+                <td>
+                  <span class="check">✅</span>
+                  <span style="font-size:0.8rem;color:#4B5563;margin-left:0.25rem;">{plan.ready}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pros & Cons -->
+  <section class="section">
+    <div class="container-sm">
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Pros & Cons</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div class="card" style="border-top:3px solid #22C55E;">
+          <h3 style="font-size:1rem;font-weight:700;color:#16A34A;margin-bottom:1rem;">✅ Pros</h3>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+            {[
+              'Affordable pricing — lowest $/GB RAM ratio globally',
+              '8 GB RAM at entry KVM 2 ($12.99/mo) beats most competitors',
+              '24/7 live chat support (real humans)',
+              'hPanel control panel — easy for beginners',
+              '99.9% uptime SLA',
+              'Free weekly backups included',
+              'Global server locations (US, EU, Asia, LatAm)',
+              'Fast NVMe SSD storage across all plans',
+            ].map((pro) => (
+              <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;">
+                <span style="color:#22C55E;flex-shrink:0;margin-top:1px;">✓</span>
+                {pro}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="card" style="border-top:3px solid #EF4444;">
+          <h3 style="font-size:1rem;font-weight:700;color:#DC2626;margin-bottom:1rem;">❌ Cons</h3>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+            {[
+              'No hourly billing (monthly only)',
+              'Snapshots only on higher-tier plans',
+              'Some US locations can be slow from EU',
+              'No managed database add-ons',
+              'DDoS protection not as robust as DigitalOcean',
+            ].map((con) => (
+              <li style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.875rem;color:#374151;">
+                <span style="color:#EF4444;flex-shrink:0;margin-top:1px;">✗</span>
+                {con}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Setup Guide -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <p class="section-label">Setup Guide</p>
+      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">How to Deploy Dify on Hostinger VPS</h2>
+      <p style="color:#4B5563;margin-bottom:2rem;">Follow these steps to get Dify running on Hostinger in under 30 minutes.</p>
+
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        {[
+          {
+            n: 1,
+            title: 'Sign up and choose KVM 2 plan',
+            body: 'Create your Hostinger account and select the KVM 2 plan ($12.99/mo). Choose a server location closest to your users. Add a payment method and complete checkout.',
+          },
+          {
+            n: 2,
+            title: 'Select Ubuntu 22.04 LTS as OS',
+            body: 'In hPanel, navigate to your VPS and select Ubuntu 22.04 LTS as the operating system. This is the recommended OS for Docker-based deployments.',
+          },
+          {
+            n: 3,
+            title: 'SSH into your server',
+            body: 'Once provisioning is complete (2–5 minutes), connect via SSH using the credentials from hPanel: ssh root@YOUR_SERVER_IP',
+            code: 'ssh root@YOUR_SERVER_IP',
+          },
+          {
+            n: 4,
+            title: 'Install Docker and Docker Compose',
+            body: 'Run the official Docker install script, then add Docker Compose:',
+            code: 'curl -fsSL https://get.docker.com | sh\napt-get install -y docker-compose-plugin',
+          },
+          {
+            n: 5,
+            title: 'Clone Dify repository',
+            body: 'Clone the official Dify repository from GitHub:',
+            code: 'git clone https://github.com/langgenius/dify.git\ncd dify/docker',
+          },
+          {
+            n: 6,
+            title: 'Configure .env file',
+            body: 'Copy the example environment file and set a strong secret key:',
+            code: 'cp .env.example .env\n# Edit .env and set a strong SECRET_KEY\nnano .env',
+          },
+          {
+            n: 7,
+            title: 'Start Dify with Docker Compose',
+            body: 'Launch all Dify containers in detached mode. First startup takes 3–5 minutes to pull images:',
+            code: 'docker compose up -d\n# Check status\ndocker compose ps',
+          },
+        ].map((step) => (
+          <div style="display:flex;gap:1rem;align-items:flex-start;">
+            <div class="step-number">{step.n}</div>
+            <div style="flex:1;">
+              <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.4rem;">{step.title}</h3>
+              <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin-bottom:0.5rem;">{step.body}</p>
+              {step.code && (
+                <pre class="prose" style="margin:0;"><code>{step.code}</code></pre>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="card" style="background:#F0FDF4;border-color:#86EFAC;margin-top:1.5rem;">
+        <p style="font-size:0.875rem;color:#166534;margin:0;">
+          <strong>Tip:</strong> After starting Dify, access it at <code>http://YOUR_SERVER_IP</code>. Set up a domain name and SSL certificate using Nginx and Certbot for production use. See our <a href="/en/guides/dify-docker-setup/" style="color:#166534;">Docker setup guide</a> for the full production checklist.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verdict -->
+  <section class="section">
+    <div class="container-sm">
+      <div class="card card-featured">
+        <p class="section-label">Our Verdict</p>
+        <h2 style="font-size:1.3rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Best Budget Option for Beginners</h2>
+        <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+          Hostinger's KVM 2 plan ($12.99/mo) delivers exceptional value with 8 GB RAM, 2 vCPU, and 100 GB NVMe. This is more memory than DigitalOcean's $28/mo Premium AMD Droplet. Combined with 24/7 live chat support and a beginner-friendly control panel, Hostinger is our top recommendation for anyone new to self-hosting Dify.
+        </p>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;">
+          <span style="font-size:2rem;font-weight:800;color:#111827;">4.5</span>
+          <div>
+            <div style="display:flex;gap:2px;">
+              {[1,2,3,4].map(() => <span style="color:#F59E0B;font-size:1.1rem;">★</span>)}
+              <span style="color:#F59E0B;font-size:1.1rem;">½</span>
+            </div>
+            <div style="font-size:0.75rem;color:#6B7280;">Dify Hosting Score</div>
+          </div>
+        </div>
+        <a href="https://www.hostinger.com/vps-hosting?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-primary">
+          Get Hostinger VPS →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Links -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <h2 style="font-size:1.2rem;font-weight:700;color:#111827;margin-bottom:1rem;">Related Resources</h2>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="/en/best-dify-hosting/" class="btn-secondary">← All Provider Rankings</a>
+        <a href="/en/guides/self-host-dify/" class="btn-secondary">Self-Host Dify Guide</a>
+        <a href="/en/guides/dify-docker-setup/" class="btn-secondary">Docker Setup Guide</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

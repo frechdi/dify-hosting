@@ -1,0 +1,34 @@
+---
+interface BreadcrumbItem { label: string; href?: string; }
+interface Props { items: BreadcrumbItem[]; }
+const { items } = Astro.props;
+const site = 'https://dify-hosting.com';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.label,
+    ...(item.href ? { item: `${site}${item.href}` } : {}),
+  })),
+};
+---
+
+<nav aria-label="Breadcrumb" style="padding:0.75rem 0;margin-bottom:0.5rem;">
+  <ol style="display:flex;flex-wrap:wrap;gap:0.25rem;list-style:none;align-items:center;">
+    {items.map((item, i) => (
+      <li style="display:flex;align-items:center;gap:0.25rem;">
+        {i > 0 && <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="hsl(0 0% 40%)" stroke-width="1.5"><path d="M5 3l4 4-4 4"/></svg>}
+        {item.href ? (
+          <a href={item.href} style="color:hsl(0 0% 55%);text-decoration:none;font-size:0.8rem;transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='hsl(0 0% 55%)'">{item.label}</a>
+        ) : (
+          <span style="color:hsl(0 0% 75%);font-size:0.8rem;">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
