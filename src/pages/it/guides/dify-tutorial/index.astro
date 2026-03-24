@@ -1,0 +1,353 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-tutorial/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Tutorial Dify 2026: Guida Completa per Principianti',
+  description: 'Tutorial Dify passo dopo passo per principianti. Impara a configurare Dify, creare il tuo primo chatbot, connettere OpenAI, costruire un workflow e distribuirlo — in meno di 30 minuti.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+---
+
+<BaseLayout
+  title="Tutorial Dify 2026: Guida Completa per Principianti"
+  description="Tutorial Dify passo dopo passo per principianti. Impara a configurare Dify, creare il tuo primo chatbot, connettere OpenAI, costruire un workflow e distribuirlo — in meno di 30 minuti."
+  lang="it"
+  canonical="https://dify-hosting.com/it/guides/dify-tutorial/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/it/' },
+        { label: 'Guide', href: '/it/guides/' },
+        { label: 'Tutorial Dify' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Aggiornato marzo 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#fef9c3;color:#713f12;">Adatto ai principianti</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#ede9fe;color:#4c1d95;">~30 minuti</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Tutorial Completo di Dify per Principianti (2026)
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Questo tutorial passo dopo passo ti porta da zero a un chatbot IA funzionante con Dify. Nessuna esperienza pregressa richiesta. Alla fine, avrai un chatbot distribuito alimentato dall'LLM di tua scelta — pronto per essere condiviso con chiunque.
+      </p>
+    </div>
+  </section>
+
+  <!-- Cos'è Dify -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Cos'è Dify?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        Dify è una piattaforma open-source per costruire applicazioni alimentate da LLM. Fornisce un'interfaccia visuale per creare chatbot, agenti IA e applicazioni RAG — senza scrivere codice. Pensala come un toolkit completo per lo sviluppo di app IA: gestione dei modelli, basi di conoscenza, orchestrazione dei workflow e pubblicazione delle app tutto in un unico posto.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify supporta tutti i principali fornitori di IA (OpenAI, Anthropic, Google Gemini, Mistral) oltre ai modelli locali tramite Ollama. Controlli tu i prompt, i dati e dove viene ospitato tutto.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.75rem;">
+        {[
+          'Costruisci chatbot senza codice',
+          'Connetti qualsiasi fornitore LLM',
+          'Crea basi di conoscenza da PDF',
+          'Costruisci workflow IA multi-step',
+          'Pubblica e condividi con un clic',
+          'Self-host per il controllo totale dei dati',
+        ].map(f => (
+          <div style="display:flex;align-items:center;gap:0.5rem;background:#f0fdf4;padding:0.75rem;border-radius:0.5rem;">
+            <span style="color:#16a34a;font-weight:700;">✓</span>
+            <span style="font-size:0.875rem;color:#166534;">{f}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Prerequisiti -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Prerequisiti</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">Prima di iniziare, assicurati di avere:</p>
+      <div class="card" style="max-width:520px;">
+        <h3 style="font-size:0.9rem;font-weight:700;color:#111827;margin-bottom:1rem;">Di cosa avrai bisogno</h3>
+        {[
+          { item: 'Un account Dify o server', detail: 'Dify Cloud (gratuito) o un VPS con Docker installato', required: true },
+          { item: 'Una chiave API LLM', detail: 'OpenAI, Anthropic o Google Gemini — qualsiasi andrà bene', required: true },
+          { item: 'Un browser web', detail: 'Chrome, Firefox, Safari — qualsiasi browser moderno funziona', required: true },
+          { item: 'Conoscenze base del terminale', detail: 'Necessario solo se fai self-hosting. Non richiesto per Dify Cloud.', required: false },
+        ].map(p => (
+          <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.75rem 0;border-bottom:1px solid #f3f4f6;">
+            <span style={`width:1.25rem;height:1.25rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;flex-shrink:0;margin-top:0.1rem;background:${p.required ? '#dcfce7' : '#f3f4f6'};color:${p.required ? '#166534' : '#6B7280'};`}>{p.required ? '✓' : '~'}</span>
+            <div>
+              <p style="font-weight:600;font-size:0.875rem;color:#111827;margin:0 0 0.2rem;">{p.item}</p>
+              <p style="font-size:0.8rem;color:#6B7280;margin:0;">{p.detail}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Passo 1: Avviare Dify -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">1</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Avvia Dify</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">Hai due percorsi. Scegli quello adatto alla tua situazione:</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+        <div style="background:#f0fdf4;border:2px solid #16a34a;border-radius:0.75rem;padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+            <span style="background:#16a34a;color:#fff;padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.75rem;font-weight:700;">Più semplice</span>
+            <h3 style="font-size:1rem;font-weight:700;color:#14532d;margin:0;">Opzione A: Dify Cloud</h3>
+          </div>
+          <ol style="color:#166534;line-height:2;margin:0;padding-left:1.25rem;font-size:0.875rem;">
+            <li>Vai su <strong>cloud.dify.ai</strong></li>
+            <li>Clicca su "Get Started" e crea un account gratuito</li>
+            <li>Sei dentro — nessuna configurazione richiesta</li>
+          </ol>
+          <p style="font-size:0.8rem;color:#166534;margin-top:0.75rem;margin-bottom:0;background:#dcfce7;padding:0.5rem;border-radius:0.375rem;">Il livello gratuito include 200 crediti messaggio/mese. Ottimo per i test.</p>
+        </div>
+        <div style="background:#eff6ff;border:2px solid #1677FF;border-radius:0.75rem;padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+            <span style="background:#1677FF;color:#fff;padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.75rem;font-weight:700;">Miglior valore</span>
+            <h3 style="font-size:1rem;font-weight:700;color:#1e40af;margin:0;">Opzione B: Self-host su Hetzner</h3>
+          </div>
+          <ol style="color:#1e40af;line-height:2;margin:0;padding-left:1.25rem;font-size:0.875rem;">
+            <li>Prendi un server Hetzner CX22 (~€3,79/mese)</li>
+            <li>Connettiti via SSH ed esegui: <code style="background:#dbeafe;padding:0.1rem 0.3rem;border-radius:0.25rem;font-size:0.8rem;">git clone https://github.com/langgenius/dify.git && cd dify/docker && docker compose up -d</code></li>
+            <li>Apri la porta 80 — Dify è online</li>
+          </ol>
+          <a href="/it/guides/self-host-dify/" style="display:inline-block;font-size:0.8rem;color:#1677FF;margin-top:0.75rem;text-decoration:none;font-weight:600;">Guida completa al self-hosting →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Passo 2: Connettere LLM -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">2</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Connetti il tuo LLM</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        Dify deve connettersi a un LLM prima di poter costruire qualcosa. Ci vogliono meno di 2 minuti:
+      </p>
+      <div style="display:grid;gap:0.75rem;max-width:600px;">
+        {[
+          { step: '1', action: 'Clicca sul tuo avatar (in alto a destra) → Impostazioni', detail: '' },
+          { step: '2', action: 'Vai a Fornitori di Modelli nella barra laterale sinistra', detail: '' },
+          { step: '3', action: 'Clicca su OpenAI (o il tuo fornitore preferito)', detail: '' },
+          { step: '4', action: 'Incolla la tua chiave API e clicca su Salva', detail: 'Ottieni la tua chiave OpenAI su platform.openai.com/api-keys' },
+          { step: '5', action: 'Clicca su "Test" per verificare che la connessione funzioni', detail: '' },
+        ].map(s => (
+          <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+            <span style="width:1.5rem;height:1.5rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;margin-top:0.1rem;">{s.step}</span>
+            <div>
+              <p style="font-size:0.9rem;font-weight:600;color:#111827;margin:0;">{s.action}</p>
+              {s.detail && <p style="font-size:0.8rem;color:#6B7280;margin:0.2rem 0 0;">{s.detail}</p>}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="background:#fef9c3;border-left:3px solid #f59e0b;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;margin-top:1.25rem;font-size:0.875rem;color:#713f12;">
+        <strong>Suggerimento:</strong> Se non hai ancora una chiave OpenAI, puoi usare anche Anthropic Claude, Google Gemini (che ha un livello gratuito), o un modello locale tramite Ollama — tutti supportati nativamente in Dify.
+      </div>
+    </div>
+  </section>
+
+  <!-- Passo 3: Creare primo chatbot -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">3</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Crea il tuo primo chatbot</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        Costruiamo un semplice chatbot di supporto clienti. Ci vogliono circa 5 minuti:
+      </p>
+      <div style="display:grid;gap:1rem;max-width:640px;">
+        {[
+          { step: '1', title: 'Apri Studio', desc: 'Clicca su "Studio" nella barra di navigazione superiore.' },
+          { step: '2', title: 'Crea un\'app', desc: 'Clicca sul pulsante "+ Crea App" in alto a destra.' },
+          { step: '3', title: 'Scegli Chatbot', desc: 'Seleziona "Chatbot" dalle opzioni del tipo di app. Clicca su Avanti.' },
+          { step: '4', title: 'Nomina la tua app', desc: 'Dagli un nome come "Bot Supporto Clienti". Clicca su Crea.' },
+          { step: '5', title: 'Seleziona il tuo modello', desc: 'Nel selettore di modello (in alto a destra del canvas), scegli GPT-4o o il tuo modello preferito.' },
+          { step: '6', title: 'Scrivi un prompt di sistema', desc: 'Nella casella di testo "Istruzioni", digita: "Sei un assistente di supporto clienti utile. Sii conciso, amichevole e preciso. Se non conosci la risposta, dillo."' },
+          { step: '7', title: 'Clicca su Pubblica', desc: 'Premi il pulsante blu "Pubblica" in alto a destra. Il tuo chatbot è ora attivo.' },
+        ].map(s => (
+          <div class="card" style="display:flex;gap:1rem;align-items:flex-start;padding:1rem;">
+            <span style="width:1.75rem;height:1.75rem;background:#eff6ff;color:#1677FF;border:2px solid #1677FF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;flex-shrink:0;">{s.step}</span>
+            <div>
+              <p style="font-weight:700;font-size:0.9rem;color:#111827;margin:0 0 0.25rem;">{s.title}</p>
+              <p style="font-size:0.85rem;color:#4B5563;margin:0;line-height:1.5;">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Passo 4: Testare e condividere -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">4</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Testa e condividi il tuo chatbot</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        Ora assicuriamoci che funzioni e condividiamolo con gli altri:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+        <div class="card">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Pannello di anteprima</h3>
+          <p style="font-size:0.875rem;color:#4B5563;line-height:1.5;margin:0;">Sul lato destro dello Studio, vedrai un'anteprima della chat. Digita un messaggio e premi Invio per testare il tuo bot. Le modifiche al prompt di sistema hanno effetto immediato in modalità anteprima.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Link di condivisione</h3>
+          <p style="font-size:0.875rem;color:#4B5563;line-height:1.5;margin:0;">Dopo la pubblicazione, vai su Panoramica → clicca su "Esegui" per aprire la pagina di chat pubblica. Copia l'URL e condividilo con chiunque — possono chattare con il tuo bot senza effettuare l'accesso a Dify.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Incorpora in un sito web</h3>
+          <p style="font-size:0.875rem;color:#4B5563;line-height:1.5;margin:0;">Vai su Panoramica → Incorpora → copia il tag iframe o script. Incollalo in qualsiasi sito web per aggiungere un widget di chat. Colori e posizione completamente personalizzabili.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Accesso API</h3>
+          <p style="font-size:0.875rem;color:#4B5563;line-height:1.5;margin:0;">Ogni app Dify ottiene automaticamente una API REST. Vai a Riferimento API per ottenere la tua chiave e chiamarla da qualsiasi applicazione, inclusi n8n, Zapier o il tuo codice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Passo 5: Base di conoscenza / RAG -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">5</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Costruisci una Base di Conoscenza (RAG)</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        Il RAG (Generazione Aumentata dal Recupero) permette al tuo chatbot di rispondere a domande dai tuoi documenti. Questa è una delle funzionalità killer di Dify:
+      </p>
+      <div style="display:grid;gap:0.75rem;max-width:640px;margin-bottom:1.5rem;">
+        {[
+          { step: '1', action: 'Clicca su "Conoscenza" nella navigazione superiore' },
+          { step: '2', action: 'Clicca su "+ Crea Conoscenza"' },
+          { step: '3', action: 'Carica i tuoi documenti (PDF, Word, TXT, Markdown, pagine web)' },
+          { step: '4', action: 'Scegli le impostazioni di suddivisione (quelle predefinite funzionano bene nella maggior parte dei casi)' },
+          { step: '5', action: 'Clicca su "Salva ed Elabora" — Dify suddivide e incorpora automaticamente i tuoi documenti' },
+          { step: '6', action: 'Torna al tuo chatbot in Studio → sezione Contesto → clicca su "+ Aggiungi" → seleziona la tua base di conoscenza' },
+          { step: '7', action: 'Pubblica di nuovo. Il tuo bot ora può rispondere dai tuoi documenti.' },
+        ].map(s => (
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <span style="width:1.5rem;height:1.5rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;">{s.step}</span>
+            <p style="font-size:0.875rem;color:#374151;margin:0;">{s.action}</p>
+          </div>
+        ))}
+      </div>
+      <div style="background:#f0f9ff;border-left:3px solid #1677FF;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#1e40af;">
+        <strong>Consiglio pro:</strong> Puoi aggiungere più basi di conoscenza allo stesso chatbot. Usa dataset separati per argomenti diversi (es. "Manuale prodotto" + "FAQ" + "Prezzi") per una maggiore precisione nel recupero.
+      </div>
+    </div>
+  </section>
+
+  <!-- Passo 6: Workflow -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">6</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Crea un Workflow</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        I workflow di Dify ti permettono di costruire pipeline IA multi-step usando un editor visuale basato su nodi. È più potente di un semplice chatbot — puoi concatenare chiamate LLM, fare richieste HTTP, eseguire codice e ramificare in base alle condizioni.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.25rem;">
+        {[
+          { node: 'Inizio', desc: 'Il punto di ingresso. Definisce le variabili di input (es., query_utente).' },
+          { node: 'Nodo LLM', desc: 'Chiama il tuo modello IA con un prompt. Può usare variabili dai nodi precedenti.' },
+          { node: 'Richiesta HTTP', desc: 'Effettua una chiamata API a qualsiasi servizio esterno. Utile per recuperare dati.' },
+          { node: 'Nodo Codice', desc: 'Esegue Python o JavaScript per trasformare i dati tra i passaggi.' },
+          { node: 'SE/ALTRIMENTI', desc: 'Ramifica il workflow in base alle condizioni. Instrada verso percorsi diversi.' },
+          { node: 'Fine', desc: 'Il nodo di output. Definisce cosa restituire all\'utente.' },
+        ].map(n => (
+          <div class="card">
+            <h3 style="font-size:0.85rem;font-weight:700;color:#1677FF;margin-bottom:0.35rem;">{n.node}</h3>
+            <p style="font-size:0.82rem;color:#6B7280;margin:0;line-height:1.5;">{n.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div style="background:#f8fafc;border-radius:0.75rem;padding:1.25rem;">
+        <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Esempio: workflow di riepilogo articoli</h3>
+        <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;font-size:0.85rem;color:#374151;">
+          <span style="background:#eff6ff;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">Inizio (input url)</span>
+          <span style="color:#6B7280;">→</span>
+          <span style="background:#eff6ff;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">HTTP (recupera articolo)</span>
+          <span style="color:#6B7280;">→</span>
+          <span style="background:#eff6ff;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">Codice (estrai testo)</span>
+          <span style="color:#6B7280;">→</span>
+          <span style="background:#eff6ff;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">LLM (riassumi)</span>
+          <span style="color:#6B7280;">→</span>
+          <span style="background:#dcfce7;padding:0.3rem 0.6rem;border-radius:0.375rem;font-weight:600;">Fine (restituisci riassunto)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prossimi passi -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Prossimi passi</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Hai creato il tuo primo chatbot Dify. Ecco cosa esplorare dopo:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+        {[
+          { title: 'Passa da Cloud a Self-Hosted', desc: 'Spostati su un VPS per crediti illimitati e piena proprietà dei dati. A partire da €3,79/mese.', href: '/it/guides/self-host-dify/', cta: 'Guida al self-hosting →' },
+          { title: 'Confronta i costi di hosting', desc: 'Comprendi il quadro completo dei costi — VPS vs Dify Cloud vs livello gratuito.', href: '/it/guides/dify-pricing/', cta: 'Guida ai prezzi →' },
+          { title: 'Esplora i migliori provider', desc: 'Confronta Hetzner, Hostinger, DigitalOcean e altri per fare self-hosting di Dify.', href: '/it/best-dify-hosting/', cta: 'Confronta provider →' },
+          { title: 'Dify vs alternative', desc: 'Scopri come Dify si confronta con Flowise, n8n, LangFlow e OpenWebUI.', href: '/it/guides/dify-alternatives/', cta: 'Vedi alternative →' },
+        ].map(n => (
+          <div class="card">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.4rem;">{n.title}</h3>
+            <p style="font-size:0.85rem;color:#6B7280;line-height:1.5;margin:0 0 0.75rem;">{n.desc}</p>
+            <a href={n.href} style="font-size:0.85rem;font-weight:600;color:#1677FF;text-decoration:none;">{n.cta}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA finale -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Ospita Dify sul tuo server</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify Cloud è ottimo per imparare, ma il vero potere viene dal self-hosting: crediti illimitati, piena privacy dei dati e nessun abbonamento SaaS mensile. Inizia da soli €3,79/mese su Hetzner.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="/it/best-dify-hosting/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;">
+          Ospita Dify sul tuo server →
+        </a>
+        <a href="/it/guides/dify-pricing/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Guida ai prezzi di Dify
+        </a>
+        <a href="/it/guides/dify-alternatives/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Alternative a Dify
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
