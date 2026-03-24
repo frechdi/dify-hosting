@@ -22,7 +22,7 @@ const schema = {
   lang="it"
   canonical="https://dify-hosting.com/it/guides/dify-vs-n8n/"
   hreflang={hreflang}
-  schema={schema}
+  schema={[schema, {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual e la differenza principale tra Dify e n8n?","acceptedAnswer":{"@type":"Answer","text":"Dify e progettato per app alimentate da LLM — chatbot, pipeline RAG e agenti IA. n8n e uno strumento di automazione workflow generalista."}},{"@type":"Question","name":"Posso usare Dify e n8n insieme?","acceptedAnswer":{"@type":"Answer","text":"Si — molti team li usano entrambi. Dify gestisce il livello IA mentre n8n gestisce il livello di automazione. Si integrano tramite la REST API di Dify."}},{"@type":"Question","name":"Quale costa meno da auto-ospitare?","acceptedAnswer":{"@type":"Answer","text":"Entrambi sono gratuiti da auto-ospitare. Dify richiede almeno 4 GB di RAM (€3,79/mese su Hetzner CX22). n8n e piu leggero."}},{"@type":"Question","name":"Quale e migliore per i chatbot IA?","acceptedAnswer":{"@type":"Answer","text":"Dify e significativamente migliore per i chatbot IA. Ha una UI di chat nativa, basi di conoscenza RAG e memoria di conversazione integrata."}}]}]}
 >
   <!-- Hero -->
   <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">

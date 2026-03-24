@@ -22,7 +22,7 @@ const schema = {
   lang="es"
   canonical="https://dify-hosting.com/es/guides/dify-tutorial/"
   hreflang={hreflang}
-  schema={schema}
+  schema={[schema, {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Cuanto tiempo lleva configurar Dify?","acceptedAnswer":{"@type":"Answer","text":"Dify Cloud tarda 2 minutos. El autohospedaje en un VPS tarda 15-30 minutos. La opcion mas rapida es Elestio — completamente operativo en menos de 5 minutos."}},{"@type":"Question","name":"Necesito habilidades de programacion para usar Dify?","acceptedAnswer":{"@type":"Answer","text":"No. Dify esta disenado para no desarrolladores. Puedes crear chatbots, apps RAG y flujos de trabajo completamente a traves de la interfaz visual."}},{"@type":"Question","name":"Que LLM funciona mejor con Dify?","acceptedAnswer":{"@type":"Answer","text":"Cualquier LLM principal funciona. GPT-4o es el mas capaz. Claude 3.5 Sonnet destaca siguiendo instrucciones. Gemini Flash es el mas barato para altos volumenes."}},{"@type":"Question","name":"Es Dify gratuito?","acceptedAnswer":{"@type":"Answer","text":"Dify es open-source — gratuito para autohospedar sin limites de creditos. Dify Cloud tiene un nivel gratuito con 200 creditos de mensajes/mes."}}]}]}
 >
   <!-- Hero -->
   <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">

@@ -22,7 +22,7 @@ const schema = {
   lang="en"
   canonical="https://dify-hosting.com/en/guides/dify-tutorial/"
   hreflang={hreflang}
-  schema={schema}
+  schema={[schema, {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How long does it take to set up Dify?","acceptedAnswer":{"@type":"Answer","text":"Dify Cloud takes 2 minutes — just sign up at cloud.dify.ai. Self-hosting on a VPS takes 15-30 minutes. The fastest managed option is Elestio — fully running in under 5 minutes."}},{"@type":"Question","name":"Do I need coding skills to use Dify?","acceptedAnswer":{"@type":"Answer","text":"No. Dify is designed for non-developers. You can build chatbots, RAG apps, and workflows entirely through the visual interface. Coding is optional for advanced custom nodes."}},{"@type":"Question","name":"Which LLM works best with Dify?","acceptedAnswer":{"@type":"Answer","text":"Any major LLM works. GPT-4o is the most capable. Claude 3.5 Sonnet excels at following instructions. Gemini Flash is the cheapest for high volume. Ollama with Llama 3 works for free local use."}},{"@type":"Question","name":"Is Dify free to use?","acceptedAnswer":{"@type":"Answer","text":"Dify is open-source (Apache 2.0) — free to self-host with no credit limits. Dify Cloud has a free tier with 200 message credits/month. Self-hosting on Hetzner costs €3.79/month for unlimited usage."}}]}]}
 >
   <!-- Hero -->
   <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
