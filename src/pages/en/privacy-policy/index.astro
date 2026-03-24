@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../i18n/hreflang';
+
+const hreflang = getHreflang('/privacy-policy/');
+---
+
+<BaseLayout
+  title="Privacy Policy — Dify Hosting"
+  description="Privacy policy for dify-hosting.com — what data we collect, how we use it, and your rights."
+  lang="en"
+  canonical="https://dify-hosting.com/en/privacy-policy/"
+  hreflang={hreflang}
+>
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/en/' },
+        { label: 'Privacy Policy' },
+      ]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#f8fafc;line-height:1.2;margin-bottom:1rem;">
+        Privacy Policy
+      </h1>
+      <p style="color:#94a3b8;font-size:0.95rem;">Last updated: March 2026</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-sm">
+      <div class="card" style="padding:2rem;max-width:800px;">
+        <div class="prose">
+
+          <h2>1. Introduction</h2>
+          <p>
+            Dify Hosting (<strong>dify-hosting.com</strong>) is an independent comparison website. This Privacy Policy explains what information we collect when you visit our site, how we use it, and your rights in relation to it.
+          </p>
+
+          <h2>2. Information We Collect</h2>
+          <h3>2.1 Automatically Collected Data</h3>
+          <p>When you visit our site, our hosting infrastructure may log:</p>
+          <ul>
+            <li>IP address (anonymised after 24 hours)</li>
+            <li>Browser type and version</li>
+            <li>Pages visited and time spent</li>
+            <li>Referring URL</li>
+          </ul>
+          <p>This data is used solely for security and aggregate analytics (page view counts). We do not build individual user profiles.</p>
+
+          <h3>2.2 Cookies</h3>
+          <p>We use a single functional cookie to store your cookie consent preference. We do not use tracking cookies, advertising cookies, or third-party analytics cookies. If you accept analytics in our cookie banner, we may use a privacy-respecting analytics tool (no cross-site tracking, no fingerprinting, no data sold to third parties).</p>
+
+          <h3>2.3 Contact Form</h3>
+          <p>If you submit our contact form, we collect your name, email address, and message. This data is used only to respond to your enquiry and is not shared with third parties.</p>
+
+          <h2>3. Affiliate Links</h2>
+          <p>
+            Some links on this site are affiliate links. When you click them and sign up with a hosting provider, we may earn a commission at no extra cost to you. The affiliate providers may set their own cookies in accordance with their own privacy policies. We recommend reviewing the privacy policy of any provider you sign up with.
+          </p>
+
+          <h2>4. How We Use Your Data</h2>
+          <ul>
+            <li>To operate and improve this website</li>
+            <li>To respond to contact form submissions</li>
+            <li>To detect and prevent abuse or security incidents</li>
+          </ul>
+          <p>We do not sell, rent, or trade your personal data with any third party.</p>
+
+          <h2>5. Data Retention</h2>
+          <p>Server logs are retained for up to 30 days. Contact form submissions are retained for up to 12 months, after which they are deleted.</p>
+
+          <h2>6. Your Rights (GDPR)</h2>
+          <p>If you are located in the European Economic Area, you have the right to:</p>
+          <ul>
+            <li>Access the personal data we hold about you</li>
+            <li>Request correction or deletion of your data</li>
+            <li>Object to or restrict processing of your data</li>
+            <li>Lodge a complaint with a supervisory authority</li>
+          </ul>
+          <p>To exercise these rights, contact us at <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;">contact@dify-hosting.com</a>.</p>
+
+          <h2>7. Security</h2>
+          <p>Our site is served over HTTPS. We take reasonable technical and organisational measures to protect any data we hold, but no transmission over the internet is 100% secure.</p>
+
+          <h2>8. Changes to This Policy</h2>
+          <p>We may update this policy from time to time. The "last updated" date at the top of this page will reflect any changes. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+
+          <h2>9. Contact</h2>
+          <p>Questions about this policy? Email us at <a href="mailto:contact@dify-hosting.com" style="color:#1677FF;">contact@dify-hosting.com</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose h2 { font-size:1.3rem;font-weight:700;color:#111827;margin-top:2rem;margin-bottom:0.75rem; }
+  .prose h3 { font-size:1.05rem;font-weight:600;color:#1f2937;margin-top:1.5rem;margin-bottom:0.5rem; }
+  .prose p { color:#4B5563;line-height:1.75;margin-bottom:1rem; }
+  .prose ul { color:#4B5563;line-height:1.75;padding-left:1.5rem;margin-bottom:1rem; }
+  .prose li { margin-bottom:0.375rem; }
+</style>

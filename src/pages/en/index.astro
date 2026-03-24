@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getHreflang } from '../../i18n/hreflang';
+
+const hreflang = getHreflang('/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Best Dify Hosting — Compare Providers & Self-Host Dify in 2026',
+  description: 'Compare the best cloud providers for self-hosting Dify AI. Honest, hands-on reviews of Hetzner, Hostinger, DigitalOcean, Vultr and more.',
+  url: 'https://dify-hosting.com/en/',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Dify Hosting',
+    url: 'https://dify-hosting.com',
+  },
+};
+
+const providers = [
+  { rank: 1, name: 'Hetzner', price: '€3.79/mo', badge: 'Best Value', desc: '4GB RAM · 2 vCPU · 40GB NVMe · EU regions', href: '/en/providers/hetzner/', rating: 4.8 },
+  { rank: 2, name: 'Hostinger', price: '$7.99/mo', badge: 'Best for Beginners', desc: '8GB RAM · 2 vCPU · 50GB NVMe · Global CDN', href: '/en/providers/hostinger/', rating: 4.5 },
+  { rank: 3, name: 'DigitalOcean', price: '$24/mo', badge: 'Developer Friendly', desc: '4GB RAM · 2 vCPU · 80GB SSD · 15 regions', href: '/en/providers/digitalocean/', rating: 4.3 },
+  { rank: 4, name: 'Vultr', price: '$12/mo', badge: null, desc: '4GB RAM · 2 vCPU · 65GB NVMe · 32 locations', href: '/en/providers/vultr/', rating: 4.2 },
+  { rank: 5, name: 'Elestio', price: '$19/mo', badge: 'Easiest Setup', desc: 'Fully managed · Auto-updates · Global', href: '/en/providers/elestio/', rating: 4.0 },
+  { rank: 6, name: 'Railway', price: '$5/mo', badge: null, desc: 'Shared CPU · Managed infra · Fast deploy', href: '/en/providers/railway/', rating: 3.8 },
+];
+
+const features = [
+  { icon: '🔍', title: 'Hands-On Testing', desc: 'We deploy Dify on every provider and run real benchmark tests — not just spec sheets.' },
+  { icon: '💰', title: 'True Cost of Ownership', desc: 'We calculate total monthly costs including bandwidth, backups, and hidden fees.' },
+  { icon: '⚡', title: 'Performance Benchmarks', desc: 'Cold-start times, response latency, and load test results for each provider.' },
+  { icon: '🛡️', title: 'No Paid Placements', desc: 'Rankings are based on merit. No provider can buy a higher position.' },
+];
+---
+
+<BaseLayout
+  title="Best Dify Hosting — Compare Providers & Self-Host Dify in 2026"
+  description="Compare the best cloud providers for self-hosting Dify AI. Honest, hands-on reviews of Hetzner, Hostinger, DigitalOcean, Vultr and more. Find the right host for your budget."
+  lang="en"
+  canonical="https://dify-hosting.com/en/"
+  hreflang={hreflang}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="hero-gradient section" style="padding-bottom:3rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span class="badge badge-success">Updated March 2026</span>
+        <span class="badge badge-primary">8 Providers Tested</span>
+      </div>
+      <h1 style="font-size:clamp(2.2rem,5vw,3.2rem);font-weight:800;color:#111827;line-height:1.15;margin-bottom:1.25rem;">
+        The Best Cloud Hosts<br/>for <span style="color:#1677FF;">Self-Hosting Dify AI</span>
+      </h1>
+      <p style="font-size:1.15rem;color:#4B5563;max-width:660px;line-height:1.75;margin-bottom:1.75rem;">
+        We deployed Dify on 8 different cloud providers, ran load tests, and calculated real total cost of ownership. Here's our honest ranking — no paid placements, no fluff.
+      </p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="/en/best-dify-hosting/" class="btn-primary" style="text-decoration:none;">See Full Rankings</a>
+        <a href="/en/guides/self-host-dify/" class="btn-secondary" style="text-decoration:none;">Self-Host Guide</a>
+      </div>
+      <div style="display:flex;gap:1.25rem;flex-wrap:wrap;font-size:0.875rem;color:#6B7280;margin-top:1.25rem;">
+        <span>✓ Hands-on tested</span>
+        <span>✓ Real pricing data</span>
+        <span>✓ Updated monthly</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Provider Cards -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <h2 style="font-size:1.75rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Top Picks at a Glance</h2>
+      <p style="color:#6B7280;margin-bottom:2rem;">Our top-ranked providers for 2026. <a href="/en/best-dify-hosting/" style="color:#1677FF;text-decoration:none;">See full comparison →</a></p>
+      <div style="display:flex;flex-direction:column;gap:0.875rem;">
+        {providers.map((p) => (
+          <a href={p.href} style="display:flex;align-items:center;gap:1rem;padding:1.125rem 1.25rem;background:white;border:1px solid #E5E7EB;border-radius:0.875rem;text-decoration:none;transition:box-shadow 0.2s,border-color 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(22,119,255,0.1)';this.style.borderColor='#1677FF'" onmouseout="this.style.boxShadow='none';this.style.borderColor='#E5E7EB'">
+            <div style={`flex-shrink:0;width:2.25rem;height:2.25rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;${p.rank===1?'background:#FFD700;color:#78350F;':p.rank===2?'background:#C0C0C0;color:#374151;':p.rank===3?'background:#CD7F32;color:#fff;':'background:#F3F4F6;color:#6B7280;'}`}>
+              {p.rank}
+            </div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;align-items:center;gap:0.625rem;flex-wrap:wrap;">
+                <span style="font-weight:700;color:#111827;font-size:1rem;">{p.name}</span>
+                {p.badge && <span class="badge badge-primary" style="font-size:0.7rem;">{p.badge}</span>}
+              </div>
+              <p style="color:#6B7280;font-size:0.8rem;margin-top:0.125rem;">{p.desc}</p>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-weight:700;color:#111827;font-size:0.9375rem;">{p.price}</div>
+              <div style="font-size:0.75rem;color:#1677FF;">★ {p.rating}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div style="text-align:center;margin-top:1.5rem;">
+        <a href="/en/best-dify-hosting/" class="btn-primary" style="text-decoration:none;">View All 8 Providers</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Trust Us -->
+  <section class="section">
+    <div class="container-sm">
+      <h2 style="font-size:1.75rem;font-weight:700;color:#111827;margin-bottom:0.5rem;text-align:center;">Why Trust Our Reviews?</h2>
+      <p style="color:#6B7280;text-align:center;margin-bottom:2.5rem;">Every recommendation is backed by real testing, not marketing copy.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;">
+        {features.map((f) => (
+          <div class="card" style="padding:1.5rem;">
+            <div style="font-size:2rem;margin-bottom:0.75rem;">{f.icon}</div>
+            <h3 style="font-weight:700;color:#111827;margin-bottom:0.5rem;font-size:1rem;">{f.title}</h3>
+            <p style="color:#6B7280;font-size:0.875rem;line-height:1.65;">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section class="section section-alt">
+    <div class="container-sm">
+      <h2 style="font-size:1.75rem;font-weight:700;color:#111827;margin-bottom:2rem;text-align:center;">Explore More</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;">
+        <a href="/en/guides/self-host-dify/" style="display:block;padding:1.5rem;background:white;border:1px solid #E5E7EB;border-radius:0.875rem;text-decoration:none;" onmouseover="this.style.borderColor='#1677FF'" onmouseout="this.style.borderColor='#E5E7EB'">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">📖</div>
+          <h3 style="font-weight:700;color:#111827;margin-bottom:0.375rem;font-size:1rem;">Self-Host Dify Guide</h3>
+          <p style="color:#6B7280;font-size:0.875rem;">Step-by-step instructions to deploy Dify on any VPS in under an hour.</p>
+        </a>
+        <a href="/en/guides/dify-docker-setup/" style="display:block;padding:1.5rem;background:white;border:1px solid #E5E7EB;border-radius:0.875rem;text-decoration:none;" onmouseover="this.style.borderColor='#1677FF'" onmouseout="this.style.borderColor='#E5E7EB'">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">🐳</div>
+          <h3 style="font-weight:700;color:#111827;margin-bottom:0.375rem;font-size:1rem;">Dify Docker Setup</h3>
+          <p style="color:#6B7280;font-size:0.875rem;">Configure Dify with Docker Compose — from environment variables to SSL.</p>
+        </a>
+        <a href="/en/comparisons/dify-vs-n8n/" style="display:block;padding:1.5rem;background:white;border:1px solid #E5E7EB;border-radius:0.875rem;text-decoration:none;" onmouseover="this.style.borderColor='#1677FF'" onmouseout="this.style.borderColor='#E5E7EB'">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">⚔️</div>
+          <h3 style="font-weight:700;color:#111827;margin-bottom:0.375rem;font-size:1rem;">Dify vs n8n</h3>
+          <p style="color:#6B7280;font-size:0.875rem;">LLM app platform vs workflow automation — which one fits your use case?</p>
+        </a>
+        <a href="/en/faq/" style="display:block;padding:1.5rem;background:white;border:1px solid #E5E7EB;border-radius:0.875rem;text-decoration:none;" onmouseover="this.style.borderColor='#1677FF'" onmouseout="this.style.borderColor='#E5E7EB'">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">❓</div>
+          <h3 style="font-weight:700;color:#111827;margin-bottom:0.375rem;font-size:1rem;">Dify FAQ</h3>
+          <p style="color:#6B7280;font-size:0.875rem;">Answers to the most common questions about self-hosting Dify.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
