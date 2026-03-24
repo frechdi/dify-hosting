@@ -8,7 +8,7 @@ interface Props {
   canonical?: string; ogImage?: string; schema?: object | object[];
   noindex?: boolean; keywords?: string; hreflang?: { lang: string; url: string }[];
 }
-const { title, description, lang, canonical, ogImage='/images/og-dify-hosting.webp', schema, noindex=false, keywords, hreflang=[] } = Astro.props;
+const { title, description, lang, canonical, ogImage='/images/og-dify-hosting.svg', schema, noindex=false, keywords, hreflang=[] } = Astro.props;
 const site = 'https://dify-hosting.com';
 const canonicalUrl = canonical || `${site}${Astro.url.pathname}`;
 const schemas = Array.isArray(schema) ? schema : schema ? [schema] : [];

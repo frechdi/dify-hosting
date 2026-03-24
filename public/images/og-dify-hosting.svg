@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F172A"/>
+      <stop offset="50%" style="stop-color:#1E1B4B"/>
+      <stop offset="100%" style="stop-color:#0F172A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Logo box -->
+  <rect x="80" y="240" width="72" height="72" rx="18" fill="url(#logoGrad)"/>
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1677FF"/>
+      <stop offset="100%" style="stop-color:#0958D9"/>
+    </linearGradient>
+  </defs>
+  <rect x="80" y="240" width="72" height="72" rx="18" fill="#1677FF"/>
+  <text x="116" y="292" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800" fill="white" text-anchor="middle">D</text>
+  <!-- Brand name -->
+  <text x="172" y="277" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="white">dify</text>
+  <text x="233" y="277" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="#60A5FA">hosting</text>
+  <text x="360" y="277" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="400" fill="#475569">.com</text>
+  <!-- Headline -->
+  <text x="80" y="360" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="800" fill="white">Best Dify Hosting 2026</text>
+  <text x="80" y="430" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="400" fill="#94A3B8">Independent comparison · 8 providers tested · Real pricing</text>
+  <!-- Badges -->
+  <rect x="80" y="480" width="180" height="40" rx="8" fill="#1677FF" opacity="0.2"/>
+  <rect x="80" y="480" width="180" height="40" rx="8" fill="none" stroke="#1677FF" stroke-width="1"/>
+  <text x="170" y="506" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#60A5FA" text-anchor="middle">Hetzner €3.79/mo</text>
+  <rect x="276" y="480" width="180" height="40" rx="8" fill="#8B5CF6" opacity="0.2"/>
+  <rect x="276" y="480" width="180" height="40" rx="8" fill="none" stroke="#8B5CF6" stroke-width="1"/>
+  <text x="366" y="506" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#C4B5FD" text-anchor="middle">Hostinger $7.99/mo</text>
+  <rect x="472" y="480" width="160" height="40" rx="8" fill="#059669" opacity="0.2"/>
+  <rect x="472" y="480" width="160" height="40" rx="8" fill="none" stroke="#059669" stroke-width="1"/>
+  <text x="552" y="506" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#6EE7B7" text-anchor="middle">Elestio $19/mo</text>
+</svg>

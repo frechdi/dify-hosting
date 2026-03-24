@@ -121,7 +121,7 @@ const howToSchema = JSON.stringify({
   hreflang={hreflang}
 >
 
-  <script type="application/ld+json" set:text={howToSchema}></script>
+  <script type="application/ld+json" set:html={howToSchema}></script>
 
   <!-- Hero Section -->
   <section style="background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 50%,#0f172a 100%);color:#fff;padding:3rem 1rem 2.5rem;">
@@ -139,6 +139,16 @@ const howToSchema = JSON.stringify({
       <p style="font-size:1.1rem;color:#cbd5e1;max-width:680px;line-height:1.7;margin:0;">Host Dify on a GPU server and connect it to Ollama or LocalAI to run Llama 3, Mistral, and other open-source models locally — with zero per-token API costs and complete data privacy.</p>
     </div>
   </section>
+
+  <!-- TL;DR Summary -->
+  <div style="max-width:860px;margin:2rem auto;padding:0 1.5rem;">
+    <div style="background:#F0F9FF;border:1px solid #BAE6FD;border-left:4px solid #0EA5E9;border-radius:0.75rem;padding:1.25rem 1.5rem;">
+      <p style="font-size:0.75rem;font-weight:700;color:#0369A1;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;">Quick Answer</p>
+      <p style="color:#0C4A6E;font-size:0.95rem;line-height:1.7;margin:0;">
+        Running Dify on a GPU server lets you serve open-source LLMs like Llama 3 and Mistral locally via Ollama — eliminating per-token API costs entirely. A GPU server with 24 GB VRAM (e.g. Vast.ai RTX 4090 at ~$0.35/hr) can run 7B and 13B models comfortably. This guide covers CUDA setup, Ollama installation, and connecting your GPU server to Dify.
+      </p>
+    </div>
+  </div>
 
   <div style="max-width:860px;margin:0 auto;padding:2rem 1rem;">
 
