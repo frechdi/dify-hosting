@@ -22,7 +22,7 @@ const schema = {
   lang="en"
   canonical="https://dify-hosting.com/en/guides/dify-alternatives/"
   hreflang={hreflang}
-  schema={schema}
+  schema={[schema, {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the best open-source alternative to Dify?","acceptedAnswer":{"@type":"Answer","text":"Flowise is the closest alternative — both are visual LLM app builders with RAG support. Flowise is simpler but less feature-rich. For workflow automation, n8n is excellent. For local AI chat, OpenWebUI is the top choice."}},{"@type":"Question","name":"Is Flowise better than Dify?","acceptedAnswer":{"@type":"Answer","text":"Flowise is simpler and lighter. Dify has more features: multi-model support, built-in RAG, workflow orchestration, and a production-ready API. For serious projects, Dify wins."}},{"@type":"Question","name":"Can Dify alternatives be self-hosted?","acceptedAnswer":{"@type":"Answer","text":"Yes — Flowise, LangFlow, n8n, and OpenWebUI are all fully open-source and self-hostable via Docker. Most run well on a 2 GB VPS. Dify requires 4 GB minimum."}},{"@type":"Question","name":"What is the difference between Dify and LangFlow?","acceptedAnswer":{"@type":"Answer","text":"Both use a visual node-based editor for LLM pipelines. LangFlow is more code-oriented; Dify is more product-focused with a built-in chat UI and knowledge base management."}}]}]}
 >
   <!-- Hero -->
   <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
