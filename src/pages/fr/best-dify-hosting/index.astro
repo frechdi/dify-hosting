@@ -9,7 +9,7 @@ const schema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Meilleurs hébergeurs Dify 2026',
-  description: 'Les 8 meilleurs hébergeurs pour Dify AI auto-hébergé, testés et évalués.',
+  description: 'Top 8 des hébergeurs pour auto-héberger Dify AI, testés et classés.',
   numberOfItems: 8,
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Hetzner', url: 'https://dify-hosting.com/fr/providers/hetzner/' },
@@ -24,14 +24,14 @@ const schema = {
 };
 
 const providers = [
-  { rank: 1, name: 'Hetzner', price: '€3,79/mois', ram: '4 Go', vcpu: '2 vCPU', storage: '40 Go NVMe', locations: 'EU (DE/FI)', ease: 3, rating: 4.8, badge: 'Meilleur rapport qualité-prix', badgeClass: 'badge-editors-choice', href: '/fr/providers/hetzner/' },
-  { rank: 2, name: 'Hostinger', price: '$7,99/mois', ram: '8 Go', vcpu: '2 vCPU', storage: '50 Go NVMe', locations: 'Mondial', ease: 4, rating: 4.5, badge: 'Idéal pour débutants', badgeClass: 'badge-primary', href: '/fr/providers/hostinger/' },
-  { rank: 3, name: 'DigitalOcean', price: '$24/mois', ram: '4 Go', vcpu: '2 vCPU', storage: '80 Go SSD', locations: '15 régions', ease: 4, rating: 4.3, badge: 'Orienté développeur', badgeClass: 'badge-primary', href: '/fr/providers/digitalocean/' },
-  { rank: 4, name: 'Vultr', price: '$12/mois', ram: '4 Go', vcpu: '2 vCPU', storage: '65 Go NVMe', locations: '32 sites', ease: 3, rating: 4.2, badge: null, badgeClass: null, href: '/fr/providers/vultr/' },
-  { rank: 5, name: 'Elestio', price: '$19/mois', ram: 'Géré', vcpu: 'Géré', storage: 'Géré', locations: 'Mondial', ease: 5, rating: 4.0, badge: 'Installation la plus simple', badgeClass: 'badge-success', href: '/fr/providers/elestio/' },
+  { rank: 1, name: 'Hetzner', price: '€3.79/mois', ram: '4 Go', vcpu: '2 vCPU', storage: '40 Go NVMe', locations: 'EU (DE/FI)', ease: 3, rating: 4.8, badge: 'Meilleur rapport qualité-prix', badgeClass: 'badge-editors-choice', href: '/fr/providers/hetzner/' },
+  { rank: 2, name: 'Hostinger', price: '$7.99/mois', ram: '8 Go', vcpu: '2 vCPU', storage: '50 Go NVMe', locations: 'Mondial', ease: 4, rating: 4.5, badge: 'Idéal débutants', badgeClass: 'badge-primary', href: '/fr/providers/hostinger/' },
+  { rank: 3, name: 'DigitalOcean', price: '$24/mois', ram: '4 Go', vcpu: '2 vCPU', storage: '80 Go SSD', locations: '15 régions', ease: 4, rating: 4.3, badge: 'Orienté développeurs', badgeClass: 'badge-primary', href: '/fr/providers/digitalocean/' },
+  { rank: 4, name: 'Vultr', price: '$12/mois', ram: '4 Go', vcpu: '2 vCPU', storage: '65 Go NVMe', locations: '32 localisations', ease: 3, rating: 4.2, badge: null, badgeClass: null, href: '/fr/providers/vultr/' },
+  { rank: 5, name: 'Elestio', price: '$19/mois', ram: 'Géré', vcpu: 'Géré', storage: 'Géré', locations: 'Mondial', ease: 5, rating: 4.0, badge: 'Configuration la plus simple', badgeClass: 'badge-success', href: '/fr/providers/elestio/' },
   { rank: 6, name: 'Railway', price: '$5/mois', ram: '512 Mo–8 Go', vcpu: 'Partagé', storage: 'Éphémère', locations: 'Géré', ease: 5, rating: 3.8, badge: null, badgeClass: null, href: '/fr/providers/railway/' },
   { rank: 7, name: 'Render', price: '$25/mois', ram: '2 Go', vcpu: 'Partagé', storage: '—', locations: 'US/EU', ease: 4, rating: 3.7, badge: null, badgeClass: null, href: '/fr/providers/render/' },
-  { rank: 8, name: 'Kamatera', price: '$4/mois*', ram: 'Config.', vcpu: 'Config.', storage: '20 Go+', locations: '13 sites', ease: 2, rating: 3.9, badge: null, badgeClass: null, href: '/fr/providers/kamatera/' },
+  { rank: 8, name: 'Kamatera', price: '$4/mois*', ram: 'Config.', vcpu: 'Config.', storage: '20 Go+', locations: '13 localisations', ease: 2, rating: 3.9, badge: null, badgeClass: null, href: '/fr/providers/kamatera/' },
 ];
 
 function renderStars(rating: number) {
@@ -50,8 +50,8 @@ function rankClass(rank: number) {
 ---
 
 <BaseLayout
-  title="Meilleur hébergement Dify 2026 — Comparatif des fournisseurs"
-  description="Nous avons testé 8 hébergeurs pour Dify AI. Comparatif des prix, performances et facilité d'installation. Hetzner remporte le meilleur rapport qualité-prix."
+  title="Meilleurs hébergeurs Dify 2026 — Testés et classés"
+  description="Nous avons testé 8 hébergeurs pour Dify AI en 2026. Comparez prix, performances et facilité d'installation. Hetzner gagne sur la valeur, Hostinger sur l'accessibilité débutants."
   lang="fr"
   canonical="https://dify-hosting.com/fr/best-dify-hosting/"
   hreflang={hreflang}
@@ -62,31 +62,31 @@ function rankClass(rank: number) {
     <div class="container-sm">
       <Breadcrumb items={[
         { label: 'Accueil', href: '/fr/' },
-        { label: 'Meilleur hébergement Dify' },
+        { label: 'Meilleurs hébergeurs Dify' },
       ]} />
       <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
-        <span class="badge badge-success">Dernière mise à jour : mars 2026</span>
-        <span class="badge badge-primary">8 fournisseurs testés</span>
+        <span class="badge badge-success">Mis à jour : mars 2026</span>
+        <span class="badge badge-primary">8 hébergeurs testés</span>
       </div>
       <h1 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#111827;line-height:1.2;margin-bottom:1rem;">
-        Meilleur hébergement Dify 2026 — Comparatif des fournisseurs
+        Meilleurs hébergeurs Dify 2026
       </h1>
       <p style="font-size:1.15rem;color:#4B5563;max-width:680px;line-height:1.7;margin-bottom:1.5rem;">
-        Nous avons déployé Dify chez 8 fournisseurs cloud différents, mesuré les temps de démarrage à froid, effectué des tests de charge et calculé le coût total de possession. Voici nos résultats — avec des avantages et inconvénients honnêtes ainsi que des guides d'installation pour chaque fournisseur.
+        Nous avons déployé Dify sur 8 fournisseurs cloud différents, mesuré les temps de démarrage, effectué des tests de charge et calculé le coût total de possession. Voici ce que nous avons trouvé — avec les avantages, inconvénients et guides d'installation honnêtes pour chacun.
       </p>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;font-size:0.875rem;color:#6B7280;">
         <span>✓ Testé en conditions réelles</span>
         <span style="color:#D1D5DB;">·</span>
         <span>✓ Données de prix réelles</span>
         <span style="color:#D1D5DB;">·</span>
-        <span>✓ Guides pas à pas</span>
+        <span>✓ Guides étape par étape</span>
         <span style="color:#D1D5DB;">·</span>
-        <span>✓ Aucun classement payant</span>
+        <span>✓ Aucun placement payant</span>
       </div>
     </div>
   </section>
 
-  <!-- Sélections rapides -->
+  <!-- Quick Picks -->
   <section class="section section-alt" style="padding-top:3rem;padding-bottom:3rem;">
     <div class="container">
       <div class="container-sm" style="margin:0 auto;">
@@ -94,228 +94,362 @@ function rankClass(rank: number) {
         <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Nos meilleures recommandations</h2>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;max-width:1000px;margin:0 auto;">
-        <!-- Meilleur rapport qualité-prix -->
+        <!-- Best Overall -->
         <div class="card card-featured" style="position:relative;">
           <div style="position:absolute;top:-1px;left:1.5rem;">
-            <span class="badge badge-editors-choice">Meilleur rapport qualité-prix</span>
+            <span class="badge badge-editors-choice">Meilleur choix global</span>
           </div>
-          <div style="padding-top:1rem;">
+          <div style="margin-top:1.25rem;">
             <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
-              <div style="background:#D50C2D;color:white;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;">H</div>
+              <div class="provider-icon" style="background:#D50C2D;color:white;">H</div>
               <div>
-                <div style="font-weight:700;color:#111827;">Hetzner</div>
-                <div style="font-size:0.8rem;color:#6B7280;">À partir de €3,79/mois</div>
+                <div style="font-weight:700;font-size:1.1rem;color:#111827;">Hetzner</div>
+                <div style="color:#16A34A;font-weight:700;">Dès €3.79/mois</div>
               </div>
             </div>
-            <p style="font-size:0.875rem;color:#4B5563;margin-bottom:1rem;">Conforme RGPD, VPS EU le moins cher, excellentes performances NVMe. Notre recommandation n°1 pour les équipes européennes.</p>
-            <a href="https://www.hetzner.com/cloud?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-primary" style="width:100%;display:block;text-align:center;">Essayer Hetzner →</a>
+            <p style="font-size:0.875rem;color:#4B5563;margin-bottom:1rem;line-height:1.6;">
+              Cloud EU le moins cher avec conformité RGPD. CX22 correspond aux specs minimales de Dify ; CX32 est idéal pour la production.
+            </p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+              <span class="spec-chip">4 Go RAM</span>
+              <span class="spec-chip">2 vCPU</span>
+              <span class="spec-chip">40 Go NVMe</span>
+              <span class="spec-chip">RGPD</span>
+            </div>
+            <a href="/fr/providers/hetzner/" class="btn-primary" style="width:100%;justify-content:center;">Lire l'avis complet →</a>
           </div>
         </div>
-        <!-- Idéal pour débutants -->
-        <div class="card" style="position:relative;">
-          <div style="position:absolute;top:-1px;left:1.5rem;">
-            <span class="badge badge-primary">Idéal pour débutants</span>
-          </div>
-          <div style="padding-top:1rem;">
-            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
-              <div style="background:#673DE6;color:white;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;">H</div>
-              <div>
-                <div style="font-weight:700;color:#111827;">Hostinger</div>
-                <div style="font-size:0.8rem;color:#6B7280;">À partir de $7,99/mois</div>
+        <!-- Best for Beginners -->
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <div class="provider-icon" style="background:#673DE6;color:white;">H</div>
+            <div>
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <span style="font-weight:700;font-size:1.1rem;color:#111827;">Hostinger</span>
+                <span class="badge badge-primary">Débutants</span>
               </div>
+              <div style="color:#16A34A;font-weight:700;">Dès $7.99/mois</div>
             </div>
-            <p style="font-size:0.875rem;color:#4B5563;margin-bottom:1rem;">Support en direct 24h/7j, interface conviviale, 8 Go RAM à $12,99/mois. Parfait pour ceux qui débutent dans l'auto-hébergement.</p>
-            <a href="https://www.hostinger.com/vps-hosting?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-secondary" style="width:100%;display:block;text-align:center;">Essayer Hostinger →</a>
           </div>
+          <p style="font-size:0.875rem;color:#4B5563;margin-bottom:1rem;line-height:1.6;">
+            8 Go de RAM en entrée de gamme surpasse la plupart des concurrents. Support live chat 24h/24 pour une installation Dify sans stress.
+          </p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+            <span class="spec-chip">8 Go RAM</span>
+            <span class="spec-chip">2 vCPU</span>
+            <span class="spec-chip">Support 24/7</span>
+          </div>
+          <a href="/fr/providers/hostinger/" class="btn-secondary" style="width:100%;justify-content:center;">Lire l'avis complet →</a>
         </div>
-        <!-- Installation la plus simple -->
-        <div class="card" style="position:relative;">
-          <div style="position:absolute;top:-1px;left:1.5rem;">
-            <span class="badge badge-success">Installation la plus simple</span>
-          </div>
-          <div style="padding-top:1rem;">
-            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
-              <div style="background:#0052CC;color:white;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;">El</div>
-              <div>
-                <div style="font-weight:700;color:#111827;">Elestio</div>
-                <div style="font-size:0.8rem;color:#6B7280;">À partir de $19/mois</div>
+        <!-- Managed -->
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <div class="provider-icon" style="background:#10B981;color:white;">E</div>
+            <div>
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <span style="font-weight:700;font-size:1.1rem;color:#111827;">Elestio</span>
+                <span class="badge badge-success">Géré</span>
               </div>
+              <div style="color:#16A34A;font-weight:700;">Dès $19/mois</div>
             </div>
-            <p style="font-size:0.875rem;color:#4B5563;margin-bottom:1rem;">Déploiement en 1 clic, mises à jour et sauvegardes automatiques. Aucune expertise DevOps requise. Hébergement Dify entièrement géré.</p>
-            <a href="https://elest.io/?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-secondary" style="width:100%;display:block;text-align:center;">Essayer Elestio →</a>
           </div>
+          <p style="font-size:0.875rem;color:#4B5563;margin-bottom:1rem;line-height:1.6;">
+            Hébergement Dify entièrement géré — mises à jour, sauvegardes et mise à l'échelle assurées. Zéro opération DevOps.
+          </p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+            <span class="spec-chip">Entièrement géré</span>
+            <span class="spec-chip">Mises à jour auto</span>
+            <span class="spec-chip">Mondial</span>
+          </div>
+          <a href="/fr/providers/elestio/" class="btn-secondary" style="width:100%;justify-content:center;">Lire l'avis complet →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Configuration minimale -->
+  <!-- Requirements -->
   <section class="section">
     <div class="container-sm">
-      <p class="section-label">Configuration minimale</p>
-      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Ce dont Dify a besoin pour fonctionner</h2>
-      <p style="color:#4B5563;margin-bottom:1.5rem;">Dify utilise Docker Compose et démarre plus de 10 conteneurs simultanément. Ces exigences minimales ne sont pas négociables :</p>
+      <p class="section-label">Configuration requise</p>
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Configuration minimale pour Dify</h2>
+      <p style="color:#4B5563;margin-bottom:1.5rem;">Avant de choisir un hébergeur, vérifiez que votre plan respecte ces spécifications minimales. En dessous, Dify plantera lors des workflows IA intensifs.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem;">
-        {[
-          { icon: '🖥️', label: 'vCPU', value: '2 vCPU', note: 'Minimum' },
-          { icon: '💾', label: 'Mémoire vive', value: '4 Go RAM', note: 'Minimum, 8 Go recommandé' },
-          { icon: '💿', label: 'Stockage', value: '50 Go SSD', note: 'NVMe préféré' },
-          { icon: '🐧', label: 'Système d\'exploitation', value: 'Ubuntu 22.04', note: 'LTS recommandé' },
-        ].map((req) => (
-          <div class="card" style="text-align:center;padding:1.25rem;">
-            <div style="font-size:1.5rem;margin-bottom:0.5rem;">{req.icon}</div>
-            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:#6B7280;margin-bottom:0.25rem;">{req.label}</div>
-            <div style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.25rem;">{req.value}</div>
-            <div style="font-size:0.75rem;color:#6B7280;">{req.note}</div>
-          </div>
-        ))}
+        <div class="card" style="text-align:center;">
+          <div style="font-size:2rem;margin-bottom:0.5rem;">🖥️</div>
+          <div style="font-size:1.5rem;font-weight:800;color:#1677FF;">2 vCPU</div>
+          <div style="font-size:0.875rem;color:#4B5563;margin-top:0.25rem;">CPU minimum</div>
+          <p style="font-size:0.78rem;color:#6B7280;margin-top:0.5rem;line-height:1.5;">Dify exécute plusieurs conteneurs Docker. 2 vCPU évitent la contention CPU pendant l'exécution des workflows.</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:2rem;margin-bottom:0.5rem;">💾</div>
+          <div style="font-size:1.5rem;font-weight:800;color:#1677FF;">4 Go RAM</div>
+          <div style="font-size:0.875rem;color:#4B5563;margin-top:0.25rem;">Mémoire minimale</div>
+          <p style="font-size:0.78rem;color:#6B7280;margin-top:0.5rem;line-height:1.5;">Weaviate, Redis, PostgreSQL et le serveur API consomment chacun de la RAM. 8 Go est recommandé pour un fonctionnement confortable.</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:2rem;margin-bottom:0.5rem;">💿</div>
+          <div style="font-size:1.5rem;font-weight:800;color:#1677FF;">50 Go</div>
+          <div style="font-size:0.875rem;color:#4B5563;margin-top:0.25rem;">Stockage minimum</div>
+          <p style="font-size:0.78rem;color:#6B7280;margin-top:0.5rem;line-height:1.5;">Les images Docker (~10 Go), index vectoriels, fichiers uploadés et données de base de données consomment rapidement l'espace disque.</p>
+        </div>
       </div>
       <div class="card" style="background:#FFF7ED;border-color:#FED7AA;">
         <p style="font-size:0.875rem;color:#92400E;margin:0;">
-          <strong>Conseil :</strong> Le Hetzner CX22 (€3,79/mois) satisfait tout juste la configuration minimale. Pour une utilisation en production avec plusieurs utilisateurs simultanés, nous recommandons le CX32 (4 vCPU / 8 Go RAM, €5,59/mois).
+          <strong>⚠ Conseil production :</strong> Pour toute charge réelle, visez 8 Go RAM / 4 vCPU / 80 Go NVMe. Cette marge évite les crashs mémoire lors de l'exécution d'agents IA en parallèle.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Tableau comparatif -->
+  <!-- Comparison Table -->
   <section class="section section-alt">
     <div class="container">
       <p class="section-label">Comparaison complète</p>
-      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Tous les fournisseurs en un coup d'œil</h2>
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Les 8 hébergeurs comparés</h2>
+      <p style="color:#4B5563;margin-bottom:1.5rem;">Prix au mars 2026. *Le prix de base $4/mois de Kamatera ne couvre que 1 Go RAM — il faut ~$12/mois pour 4 Go RAM.</p>
       <div style="overflow-x:auto;">
         <table class="comparison-table">
           <thead>
             <tr>
-              <th>Rang</th>
-              <th>Fournisseur</th>
-              <th>Prix à partir de</th>
+              <th>#</th>
+              <th>Hébergeur</th>
+              <th>Prix de départ</th>
               <th>RAM</th>
               <th>vCPU</th>
-              <th>Stockage</th>
-              <th>Localisations</th>
+              <th class="hide-mobile">Stockage</th>
+              <th class="hide-mobile">Localisations</th>
               <th>Facilité</th>
               <th>Note</th>
             </tr>
           </thead>
           <tbody>
-            {providers.map((p, i) => (
-              <tr style={i % 2 === 0 ? 'border-bottom:1px solid #e5e7eb;' : 'border-bottom:1px solid #e5e7eb;background:#f9fafb;'}>
-                <td>
-                  <span class={rankClass(p.rank)}>#{p.rank}</span>
-                </td>
-                <td>
-                  <a href={p.href} style="font-weight:600;color:#111827;text-decoration:none;">{p.name}</a>
-                  {p.badge && <span class={`badge ${p.badgeClass}`} style="margin-left:0.5rem;font-size:0.7rem;">{p.badge}</span>}
-                </td>
-                <td class="price">{p.price}</td>
-                <td>{p.ram}</td>
-                <td>{p.vcpu}</td>
-                <td>{p.storage}</td>
-                <td>{p.locations}</td>
-                <td>
-                  <div style="display:flex;gap:2px;">
-                    {Array.from({length: p.ease}).map(() => <span style="color:#F59E0B;font-size:0.875rem;">★</span>)}
-                    {Array.from({length: 5 - p.ease}).map(() => <span style="color:#E5E7EB;font-size:0.875rem;">★</span>)}
-                  </div>
-                </td>
-                <td style="font-weight:700;color:#111827;">{p.rating}/5</td>
-              </tr>
-            ))}
+            {providers.map((p) => {
+              const stars = renderStars(p.rating);
+              return (
+                <tr>
+                  <td><span class={rankClass(p.rank)}>{p.rank}</span></td>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+                      <a href={p.href} class="provider-name" style="color:#111827;text-decoration:none;">{p.name}</a>
+                      {p.badge && <span class={`badge ${p.badgeClass}`}>{p.badge}</span>}
+                    </div>
+                  </td>
+                  <td class="price">{p.price}</td>
+                  <td>{p.ram}</td>
+                  <td>{p.vcpu}</td>
+                  <td class="hide-mobile">{p.storage}</td>
+                  <td class="hide-mobile">{p.locations}</td>
+                  <td>
+                    <div style="display:flex;gap:2px;">
+                      {Array.from({length: 5}).map((_, i) => (
+                        <span style={`width:8px;height:8px;border-radius:50%;background:${i < p.ease ? '#1677FF' : '#E2E8F0'};`}></span>
+                      ))}
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:0.25rem;">
+                      <span style="font-weight:700;color:#111827;">{p.rating}</span>
+                      <span style="color:#F59E0B;font-size:0.75rem;">★</span>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
-      <p style="font-size:0.78rem;color:#6B7280;margin-top:0.75rem;">* Kamatera : prix variable selon la configuration. Prix de départ pour une configuration minimale.</p>
     </div>
   </section>
 
-  <!-- Évaluations détaillées -->
+  <!-- Provider Reviews -->
   <section class="section">
     <div class="container-sm">
-      <p class="section-label">Évaluations détaillées</p>
-      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Fournisseurs en détail</h2>
+      <p class="section-label">Avis détaillés</p>
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:2rem;">Avis par hébergeur</h2>
 
       <!-- Hetzner -->
       <div class="card card-featured" style="margin-bottom:1.5rem;">
-        <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;">
-          <div style="background:#D50C2D;color:white;width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;flex-shrink:0;">H</div>
-          <div style="flex:1;">
-            <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.25rem;">
-              <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">#1 Hetzner</h3>
-              <span class="badge badge-editors-choice">Choix de la rédaction</span>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div class="provider-icon" style="background:#D50C2D;color:white;font-size:1.2rem;">H</div>
+            <div>
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <h3 style="font-size:1.2rem;font-weight:700;color:#111827;margin:0;">1. Hetzner</h3>
+                <span class="badge badge-editors-choice">Choix de la rédaction</span>
+              </div>
+              <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">Dès €3.79/mois</div>
             </div>
-            <div style="font-size:0.875rem;color:#16A34A;font-weight:600;">À partir de €3,79/mois · 4.8/5</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:1.75rem;font-weight:800;color:#111827;">4.8<span style="font-size:1rem;color:#F59E0B;">★</span></div>
           </div>
         </div>
-        <p style="font-size:0.9rem;color:#4B5563;line-height:1.7;margin-bottom:1rem;">
-          Hetzner est notre grand vainqueur pour l'auto-hébergement de Dify. Aucun fournisseur américain ne peut rivaliser en termes de rapport qualité-prix : le CX32 offre 4 vCPU et 8 Go de RAM pour seulement €5,59/mois — moins qu'un abonnement Netflix. Conforme RGPD en Allemagne et en Finlande avec des centres de données certifiés ISO 27001.
-        </p>
-        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-          <a href="/fr/providers/hetzner/" class="btn-primary">Lire l'évaluation complète</a>
-          <a href="https://www.hetzner.com/cloud?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-secondary">Essayer Hetzner Cloud →</a>
+        <div class="prose">
+          <p>Hetzner est le champion incontesté du rapport qualité-prix pour l'auto-hébergement de Dify en Europe. Leur plan CX22 (€3.79/mois) atteint les spécifications minimales de Dify — 2 vCPU, 4 Go RAM, 40 Go NVMe — pour moins qu'un café par semaine. Passez au CX32 (€5.59/mois, 4 vCPU / 8 Go RAM) et vous obtenez une instance Dify de qualité production capable de gérer des agents IA en parallèle sans broncher.</p>
+          <p>Pour les équipes basées en Europe, les datacenters allemands et finlandais de Hetzner offrent une conformité RGPD intégrée, pas ajoutée. La facturation horaire, les réseaux privés et une API REST complète complètent un ensemble de fonctionnalités impressionnant à un prix qu'aucun concurrent américain ne peut égaler. Le seul vrai inconvénient est géographique — si vos utilisateurs sont aux États-Unis ou en Asie, la latence depuis Frankfurt ou Helsinki sera perceptible.</p>
+        </div>
+        <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;">
+          <a href="/fr/providers/hetzner/" class="btn-primary">Avis complet Hetzner →</a>
+          <a href="/fr/guides/dify-docker-setup/" class="btn-secondary">Guide Docker Setup</a>
         </div>
       </div>
 
       <!-- Hostinger -->
       <div class="card" style="margin-bottom:1.5rem;">
-        <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;">
-          <div style="background:#673DE6;color:white;width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;flex-shrink:0;">H</div>
-          <div style="flex:1;">
-            <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.25rem;">
-              <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">#2 Hostinger</h3>
-              <span class="badge badge-primary">Idéal pour débutants</span>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div class="provider-icon" style="background:#673DE6;color:white;">H</div>
+            <div>
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <h3 style="font-size:1.2rem;font-weight:700;color:#111827;margin:0;">2. Hostinger</h3>
+                <span class="badge badge-primary">Idéal débutants</span>
+              </div>
+              <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">Dès $7.99/mois</div>
             </div>
-            <div style="font-size:0.875rem;color:#16A34A;font-weight:600;">À partir de $7,99/mois · 4.5/5</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:1.75rem;font-weight:800;color:#111827;">4.5<span style="font-size:1rem;color:#F59E0B;">★</span></div>
           </div>
         </div>
-        <p style="font-size:0.9rem;color:#4B5563;line-height:1.7;margin-bottom:1rem;">
-          Hostinger offre la meilleure expérience d'entrée de gamme pour les débutants sur Dify. Le plan KVM 2 (8 Go RAM, 2 vCPU) coûte $12,99/mois et offre ainsi plus de mémoire que le Droplet DigitalOcean à $28/mois. Un support en direct 24h/7j (de vraies personnes) et une interface conviviale rendent la prise en main très facile.
-        </p>
-        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-          <a href="/fr/providers/hostinger/" class="btn-secondary">Lire l'évaluation complète</a>
-          <a href="https://www.hostinger.com/vps-hosting?ref=difyhosting" rel="nofollow sponsored" target="_blank" class="btn-secondary">Essayer Hostinger →</a>
+        <div class="prose">
+          <p>Les plans VPS KVM d'Hostinger surpassent largement leur catégorie de prix. Le plan KVM 1 ($7.99/mois) offre 4 Go de RAM et 50 Go NVMe — répondant aux specs minimales de Dify — tandis que le KVM 2 ($12.99/mois, 8 Go RAM / 2 vCPU) est l'une des meilleures propositions de valeur pour Dify dans le monde. Ces 8 Go de RAM à moins de 13 $/mois battent l'offre comparable de DigitalOcean de plus de 40 $/mois.</p>
+          <p>Ce qui distingue vraiment Hostinger pour les nouveaux utilisateurs, c'est hPanel et leur support live chat 24h/24. Lorsque vous êtes bloqué sur un problème de réseau Docker à 2h du matin, l'équipe de support Hostinger vous aidera vraiment à déboguer. Les localisations de serveurs mondiales (US, EU, Asie, Amérique latine) le rendent adapté à toutes les géographies.</p>
+        </div>
+        <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;">
+          <a href="/fr/providers/hostinger/" class="btn-primary">Avis complet Hostinger →</a>
         </div>
       </div>
 
       <!-- DigitalOcean -->
       <div class="card" style="margin-bottom:1.5rem;">
-        <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;">
-          <div style="background:#0080FF;color:white;width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;flex-shrink:0;">DO</div>
-          <div style="flex:1;">
-            <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.25rem;">
-              <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">#3 DigitalOcean</h3>
-              <span class="badge badge-primary">Orienté développeur</span>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div class="provider-icon" style="background:#0080FF;color:white;">DO</div>
+            <div>
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <h3 style="font-size:1.2rem;font-weight:700;color:#111827;margin:0;">3. DigitalOcean</h3>
+                <span class="badge badge-primary">Orienté développeurs</span>
+              </div>
+              <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">Dès $24/mois</div>
             </div>
-            <div style="font-size:0.875rem;color:#16A34A;font-weight:600;">À partir de $24/mois · 4.3/5</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:1.75rem;font-weight:800;color:#111827;">4.3<span style="font-size:1rem;color:#F59E0B;">★</span></div>
           </div>
         </div>
-        <p style="font-size:0.9rem;color:#4B5563;line-height:1.7;margin-bottom:1rem;">
-          DigitalOcean est le choix préféré des développeurs qui ont besoin d'outils d'infrastructure matures. Les bases de données gérées, Kubernetes, les équilibreurs de charge et une excellente documentation en font un choix idéal pour les déploiements Dify évolutifs. Plus cher que Hetzner, mais avec plus d'intégrations dans l'écosystème.
-        </p>
-        <a href="/fr/providers/digitalocean/" class="btn-secondary">Lire l'évaluation complète</a>
+        <div class="prose">
+          <p>DigitalOcean coûte plus cher que Hetzner pour des specs équivalentes, mais la contrepartie est un écosystème mature de services gérés. Associez un Droplet Premium AMD ($28/mois, 4 Go / 2 vCPU NVMe) avec PostgreSQL géré et Redis géré, et vous obtenez une stack Dify de production où vous ne touchez jamais à l'administration de base de données. Les nouveaux utilisateurs reçoivent également $200 de crédits gratuits — suffisant pour près de 7 mois d'un Droplet aux specs minimales.</p>
+          <p>Avec 15 régions mondiales et certains des meilleurs outils de développement du secteur (API DigitalOcean, CLI doctl, App Platform), DigitalOcean est le choix incontournable pour les équipes qui privilégient la fiabilité et les services gérés à la rentabilité brute.</p>
+        </div>
+        <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;">
+          <a href="/fr/providers/digitalocean/" class="btn-primary">Avis complet DigitalOcean →</a>
+        </div>
       </div>
 
-      <!-- Autres fournisseurs -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
-        {[
-          { rank: 4, name: 'Vultr', color: '#007BFC', label: 'V', price: '$12/mois', rating: '4.2/5', desc: '32 sites mondiaux avec VPS NVMe haute fréquence. Idéal pour les déploiements internationaux.', href: '/fr/providers/vultr/' },
-          { rank: 5, name: 'Elestio', color: '#0052CC', label: 'El', price: '$19/mois', rating: '4.0/5', desc: 'Hébergement Dify géré en 1 clic avec mises à jour automatiques. Aucune gestion de serveur requise.', href: '/fr/providers/elestio/' },
-          { rank: 6, name: 'Railway', color: '#0B0D0E', label: 'R', price: '$5/mois', rating: '3.8/5', desc: 'PaaS avec intégration Git. Plan Hobby avec quota gratuit — idéal pour les tests.', href: '/fr/providers/railway/' },
-          { rank: 7, name: 'Render', color: '#46E3B7', label: 'Re', price: '$25/mois', rating: '3.7/5', desc: 'Hébergement cloud géré avec déploiement automatique depuis Git. Simple mais cher pour Dify.', href: '/fr/providers/render/' },
-          { rank: 8, name: 'Kamatera', color: '#FF6B35', label: 'K', price: '$4/mois*', rating: '3.9/5', desc: 'VPS cloud entièrement personnalisable. Économique avec la bonne configuration, mais complexe.', href: '/fr/providers/kamatera/' },
-        ].map((p) => (
-          <div class="card">
-            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
-              <div style={`background:${p.color};color:white;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.875rem;flex-shrink:0;`}>{p.label}</div>
-              <div>
-                <div style="font-weight:700;color:#111827;font-size:0.95rem;">#{p.rank} {p.name}</div>
-                <div style="font-size:0.75rem;color:#6B7280;">{p.price} · {p.rating}</div>
-              </div>
+      <!-- Vultr -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div class="provider-icon" style="background:#007BFC;color:white;">V</div>
+            <div>
+              <h3 style="font-size:1.2rem;font-weight:700;color:#111827;margin:0;">4. Vultr</h3>
+              <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">Dès $12/mois</div>
             </div>
-            <p style="font-size:0.8rem;color:#4B5563;line-height:1.6;margin-bottom:0.75rem;">{p.desc}</p>
-            <a href={p.href} style="font-size:0.8rem;color:#2563EB;font-weight:600;">Lire l'évaluation →</a>
           </div>
-        ))}
+          <div style="text-align:right;">
+            <div style="font-size:1.75rem;font-weight:800;color:#111827;">4.2<span style="font-size:1rem;color:#F59E0B;">★</span></div>
+          </div>
+        </div>
+        <div class="prose">
+          <p>Les plans High Frequency Compute de Vultr utilisent du stockage NVMe et offrent de solides performances pour Dify. À $12/mois pour 4 Go RAM / 2 vCPU / 65 Go NVMe, Vultr se situe entre le prix de Hetzner et la qualité de DigitalOcean. Avec 32 localisations de serveurs — le plus grand réseau de tous les hébergeurs de cette liste — Vultr est la meilleure option pour les équipes qui ont besoin de serveurs proches de leurs utilisateurs dans des régions moins courantes comme la Corée du Sud, l'Australie ou l'Amérique du Sud.</p>
+          <p>L'interface est simple mais manque de l'expérience guidée de Hostinger ou DigitalOcean. La facturation horaire et une API solide rendent Vultr populaire auprès des développeurs qui veulent une couverture mondiale sans payer les prix DigitalOcean.</p>
+        </div>
+        <a href="/fr/providers/vultr/" class="btn-primary" style="margin-top:1rem;">Avis complet Vultr →</a>
+      </div>
+
+      <!-- Elestio -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div class="provider-icon" style="background:#10B981;color:white;">E</div>
+            <div>
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <h3 style="font-size:1.2rem;font-weight:700;color:#111827;margin:0;">5. Elestio</h3>
+                <span class="badge badge-success">Configuration la plus simple</span>
+              </div>
+              <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">Dès $19/mois</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:1.75rem;font-weight:800;color:#111827;">4.0<span style="font-size:1rem;color:#F59E0B;">★</span></div>
+          </div>
+        </div>
+        <div class="prose">
+          <p>Elestio est la seule option d'hébergement Dify entièrement géré de cette liste. Vous cliquez sur "Déployer Dify", choisissez votre région et votre plan, et Elestio gère tout : configuration Docker, certificats SSL, sauvegardes, monitoring et mises à jour de version. Pour les fondateurs non techniques ou les équipes qui veulent des workflows IA sans DevOps, c'est vraiment la meilleure option.</p>
+          <p>La contrepartie est le prix et le contrôle. À $19/mois, vous obtenez moins de puissance brute que le CX32 de Hetzner à €5.59, et vous ne pouvez pas modifier librement la configuration Docker Compose. Mais si votre temps vaut plus que la différence de 13 $/mois, Elestio s'amortit immédiatement.</p>
+        </div>
+        <a href="/fr/providers/elestio/" class="btn-primary" style="margin-top:1rem;">Avis complet Elestio →</a>
+      </div>
+
+      <!-- Railway -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div class="provider-icon" style="background:#0B0D0E;color:white;">R</div>
+            <div>
+              <h3 style="font-size:1.2rem;font-weight:700;color:#111827;margin:0;">6. Railway</h3>
+              <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">Dès $5/mois</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:1.75rem;font-weight:800;color:#111827;">3.8<span style="font-size:1rem;color:#F59E0B;">★</span></div>
+          </div>
+        </div>
+        <div class="prose">
+          <p>La tarification à l'usage de Railway semble attractive mais nécessite une surveillance attentive. L'architecture multi-conteneurs de Dify peut rapidement faire grimper les coûts lorsque l'utilisation mémoire augmente pendant les workflows IA intensifs. Railway est mieux adapté aux environnements de développement et de test qu'aux déploiements Dify en production.</p>
+          <p>Le stockage éphémère est un problème significatif — vos données Dify ne persisteront pas entre les redémarrages sans attacher un volume persistant, ce qui augmente la complexité et le coût. Cela dit, l'expérience développeur de Railway est excellente pour le prototypage rapide.</p>
+        </div>
+        <a href="/fr/providers/railway/" class="btn-secondary" style="margin-top:1rem;">Avis complet Railway →</a>
+      </div>
+
+      <!-- Render -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div class="provider-icon" style="background:#46E3B7;color:#0D3330;">Re</div>
+            <div>
+              <h3 style="font-size:1.2rem;font-weight:700;color:#111827;margin:0;">7. Render</h3>
+              <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">Dès $25/mois</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:1.75rem;font-weight:800;color:#111827;">3.7<span style="font-size:1rem;color:#F59E0B;">★</span></div>
+          </div>
+        </div>
+        <div class="prose">
+          <p>La plateforme gérée de Render simplifie le déploiement mais le coût par unité de calcul est élevé par rapport aux options VPS. À $25/mois, vous obtenez 2 Go de RAM sur un CPU partagé — insuffisant pour un fonctionnement confortable de Dify. L'exécution de la stack Dify complète sur Render nécessite un plan supérieur, faisant monter les coûts bien au-dessus des alternatives. Render fonctionne pour Dify mais il est difficile de le recommander quand des options moins chères existent.</p>
+        </div>
+        <a href="/fr/providers/render/" class="btn-secondary" style="margin-top:1rem;">Avis complet Render →</a>
+      </div>
+
+      <!-- Kamatera -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div class="provider-icon" style="background:#FF6B35;color:white;">K</div>
+            <div>
+              <h3 style="font-size:1.2rem;font-weight:700;color:#111827;margin:0;">8. Kamatera</h3>
+              <div style="color:#16A34A;font-weight:700;font-size:0.9rem;">Dès ~$12/mois (4 Go RAM)</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:1.75rem;font-weight:800;color:#111827;">3.9<span style="font-size:1rem;color:#F59E0B;">★</span></div>
+          </div>
+        </div>
+        <div class="prose">
+          <p>Le prix d'entrée affiché de $4/mois de Kamatera est trompeur pour Dify — cela vous donne seulement 1 Go de RAM, bien en dessous du minimum de 4 Go. Une configuration Dify utilisable (4 Go RAM, 2 vCPU, 20 Go de stockage) coûte environ $12/mois, ce qui la rend comparable à Vultr mais avec une interface moins soignée et une courbe d'apprentissage plus raide. Les 13 localisations de serveurs incluent des régions utiles comme Israël et l'Afrique du Sud que d'autres hébergeurs n'ont pas.</p>
+        </div>
+        <a href="/fr/providers/kamatera/" class="btn-secondary" style="margin-top:1rem;">Avis complet Kamatera →</a>
       </div>
     </div>
   </section>
@@ -323,37 +457,103 @@ function rankClass(rank: number) {
   <!-- FAQ -->
   <section class="section section-alt">
     <div class="container-sm">
-      <p class="section-label">Questions fréquentes</p>
-      <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Hébergement Dify — Questions fréquentes</h2>
-      <div style="display:flex;flex-direction:column;gap:1rem;">
-        {[
-          { q: 'Quel fournisseur est le meilleur pour Dify ?', a: 'Pour les équipes européennes, Hetzner est de loin le meilleur choix — conforme RGPD, meilleur rapport qualité-prix. Pour les utilisateurs mondiaux ou les débutants, nous recommandons Hostinger.' },
-          { q: 'Combien coûte l\'auto-hébergement de Dify par mois ?', a: 'La configuration la moins chère capable de fonctionner en production coûte €5,59/mois sur Hetzner CX32. À cela s\'ajoutent les coûts d\'API LLM selon l\'utilisation. Au total, bien moins cher que Dify Cloud Pro ($59/mois).' },
-          { q: 'Faut-il des connaissances techniques pour l\'auto-hébergement ?', a: 'Des notions de base sur la ligne de commande Linux et Docker sont utiles. Avec nos guides pas à pas, même les débutants y arrivent en 1 à 2 heures. Elestio propose également un déploiement en 1 clic entièrement géré.' },
-          { q: 'L\'auto-hébergement de Dify est-il conforme au RGPD ?', a: 'Oui — en auto-hébergeant sur un serveur EU (par exemple Hetzner Allemagne), toutes les données restent sur votre serveur. Aucune donnée n\'est envoyée à Dify (la télémétrie peut être désactivée). Vous avez un contrôle total sur vos données.' },
-        ].map((faq) => (
-          <div class="card">
-            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">{faq.q}</h3>
-            <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin:0;">{faq.a}</p>
-          </div>
-        ))}
+      <p class="section-label">FAQ</p>
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Questions fréquentes</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Quelle est la configuration serveur minimale pour Dify ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Dify nécessite au minimum 2 vCPU, 4 Go de RAM et 50 Go de stockage. Cela couvre les images Docker, la base de données PostgreSQL, le cache Redis et le store vectoriel Weaviate. Pour toute utilisation en production avec de vrais utilisateurs, nous recommandons 4 vCPU et 8 Go de RAM pour gérer les exécutions de workflows parallèles sans pression mémoire.
+        </div>
       </div>
-      <div style="margin-top:1.5rem;text-align:center;">
-        <a href="/fr/faq/" class="btn-secondary">Toutes les questions fréquentes →</a>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Dify est-il gratuit à auto-héberger ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Oui — Dify est open source (licence MIT) et gratuit à auto-héberger. Vous payez uniquement le serveur sur lequel vous l'exécutez. Il n'y a pas de frais de licence par siège ni de redevance d'utilisation. Cependant, vous payez toujours votre fournisseur LLM (OpenAI, Anthropic, etc.) pour les appels API, exactement comme avec Dify Cloud.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Est-il difficile d'installer Dify sur un VPS ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Avec nos guides étape par étape, la plupart des utilisateurs font fonctionner Dify en moins de 30 minutes. Le processus est : provisionner un VPS, installer Docker et Docker Compose, cloner le dépôt Dify, modifier un fichier de configuration, et exécuter <code>docker compose up -d</code>. Si vous êtes à l'aise avec SSH et les commandes Linux de base, vous n'aurez aucun problème. Elestio est l'option la plus simple si vous souhaitez éviter tout cela.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Quel hébergeur est le meilleur pour la conformité RGPD ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Hetzner est le meilleur choix pour la conformité RGPD. Leurs serveurs en Allemagne (Nuremberg, Falkenstein) et en Finlande (Helsinki) sont couverts par la législation européenne sur la protection des données. Hetzner a signé un contrat de traitement des données et possède de solides certifications de sécurité. Hostinger propose également des localisations de serveurs en EU si vous avez besoin d'une couverture mondiale associée à la conformité RGPD.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Puis-je utiliser Dify avec mes propres LLM comme Ollama ou des modèles locaux ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Oui. L'auto-hébergement de Dify sur un VPS vous donne un contrôle total pour connecter n'importe quel fournisseur LLM supporté par Dify, y compris les modèles locaux via Ollama. Si vous souhaitez exécuter Ollama sur le même serveur, tenez compte des besoins en GPU ou CPU de votre modèle — cela augmente considérablement les spécifications requises et le coût.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Comment Dify auto-hébergé se compare-t-il à Dify Cloud ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Dify auto-hébergé vous donne la propriété complète des données, aucune limite d'utilisation au-delà de la capacité de votre serveur, et une personnalisation totale. Dify Cloud est plus facile à démarrer mais a une tarification par message qui s'accumule à grande échelle. Pour les équipes avec plus de quelques centaines d'exécutions de workflows IA par jour, l'auto-hébergement devient généralement moins cher. Consultez notre <a href="/fr/faq/">guide FAQ</a> pour une analyse détaillée.
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Ressources complémentaires -->
+  <!-- Internal Links -->
   <section class="section">
     <div class="container-sm">
-      <h2 style="font-size:1.2rem;font-weight:700;color:#111827;margin-bottom:1rem;">Ressources complémentaires</h2>
-      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-        <a href="/fr/guides/self-host-dify/" class="btn-secondary">Guide auto-hébergement Dify</a>
-        <a href="/fr/guides/dify-docker-setup/" class="btn-secondary">Configuration Docker Compose</a>
-        <a href="/fr/comparisons/dify-vs-n8n/" class="btn-secondary">Dify vs n8n</a>
-        <a href="/fr/faq/" class="btn-secondary">FAQ</a>
+      <p class="section-label">Explorer davantage</p>
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Guides et ressources</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+        <a href="/fr/guides/self-host-dify/" class="card" style="text-decoration:none;color:inherit;">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">📖</div>
+          <div style="font-weight:600;color:#111827;margin-bottom:0.25rem;">Comment auto-héberger Dify</div>
+          <div style="font-size:0.875rem;color:#6B7280;">Guide complet pour débutants pour héberger Dify sur votre propre serveur.</div>
+        </a>
+        <a href="/fr/guides/dify-docker-setup/" class="card" style="text-decoration:none;color:inherit;">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">🐳</div>
+          <div style="font-weight:600;color:#111827;margin-bottom:0.25rem;">Guide Docker Setup Dify</div>
+          <div style="font-size:0.875rem;color:#6B7280;">Configuration Docker Compose étape par étape avec les meilleures pratiques de production.</div>
+        </a>
+        <a href="/fr/comparisons/dify-vs-n8n/" class="card" style="text-decoration:none;color:inherit;">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">⚖️</div>
+          <div style="font-weight:600;color:#111827;margin-bottom:0.25rem;">Dify vs n8n</div>
+          <div style="font-size:0.875rem;color:#6B7280;">Quelle plateforme de workflow IA devriez-vous auto-héberger ?</div>
+        </a>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+function toggleFaq(btn: HTMLButtonElement) {
+  const answer = btn.nextElementSibling as HTMLElement;
+  const icon = btn.querySelector('.faq-icon') as HTMLElement;
+  const isOpen = answer.classList.contains('open');
+  answer.classList.toggle('open', !isOpen);
+  icon.classList.toggle('rotated', !isOpen);
+}
+</script>
