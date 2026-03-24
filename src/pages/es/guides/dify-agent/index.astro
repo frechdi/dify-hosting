@@ -1,0 +1,497 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-agent/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Guía Agentes IA Dify 2026: Construye IA autónoma con herramientas',
+  description: 'Guía completa de agentes IA Dify. Construye IA autónoma que busca en la web, ejecuta código, llama APIs y completa tareas en múltiples pasos — sin programar.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+---
+
+<BaseLayout
+  title="Guía Agentes IA Dify 2026: Construye IA autónoma con herramientas"
+  description="Guía completa de agentes IA Dify. Construye IA autónoma que busca en la web, ejecuta código, llama APIs y completa tareas en múltiples pasos — sin programar."
+  lang="es"
+  canonical="https://dify-hosting.com/es/guides/dify-agent/"
+  hreflang={hreflang}
+  schema={[schema, {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué pueden hacer los agentes IA de Dify?","acceptedAnswer":{"@type":"Answer","text":"Los agentes Dify pueden buscar en la web (Google, Bing, DuckDuckGo), ejecutar código Python, llamar APIs externas, leer Wikipedia, calcular matemáticas, comprobar el tiempo y más. Razonan sobre qué herramientas usar para cada tarea."}},{"@type":"Question","name":"¿Cuál es la diferencia entre un agente Dify y un chatbot?","acceptedAnswer":{"@type":"Answer","text":"Un chatbot Dify responde preguntas basándose en su entrenamiento. Un agente Dify usa herramientas activamente — puede buscar en internet, ejecutar código o llamar APIs para obtener información en tiempo real. Usa chatbot para soporte, agente para investigación."}},{"@type":"Question","name":"¿Puedo añadir herramientas personalizadas a un agente Dify?","acceptedAnswer":{"@type":"Answer","text":"Sí. Puedes añadir cualquier API REST como herramienta personalizada proporcionando una especificación OpenAPI o definiendo manualmente el endpoint con nombre, descripción y parámetros. El agente usará tu herramienta cuando la tarea lo requiera."}},{"@type":"Question","name":"¿El agente Dify soporta razonamiento multi-paso?","acceptedAnswer":{"@type":"Answer","text":"Sí. Los agentes Dify usan ReAct (Razonamiento + Acción) o Function Calling. El agente piensa paso a paso, llama herramientas, observa resultados y continúa hasta completar la tarea — similar a AutoGPT o LangChain."}}]}]}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Inicio', href: '/es/' },
+        { label: 'Guías', href: '/es/guides/' },
+        { label: 'Agentes IA Dify' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Actualizado marzo 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#fef9c3;color:#713f12;">Agentes IA</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#ede9fe;color:#4c1d95;">Avanzado</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Guía Agentes IA Dify 2026: Construye IA autónoma con herramientas
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Los agentes IA de Dify van mucho más allá de los chatbots — pueden buscar en la web, ejecutar código Python, llamar cualquier API y resolver tareas multi-paso de forma autónoma. Esta guía cubre todo: desde crear tu primer agente hasta herramientas personalizadas y orquestación multi-agente.
+      </p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem;">
+        <a href="#crear-agente" style="display:inline-flex;align-items:center;padding:0.65rem 1.25rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;font-size:0.9rem;">
+          Crear tu primer agente →
+        </a>
+        <a href="#herramientas-integradas" style="display:inline-flex;align-items:center;padding:0.65rem 1.25rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.2);color:#e2e8f0;font-size:0.9rem;">
+          Explorar herramientas
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué son los agentes IA Dify -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">¿Qué son los agentes IA de Dify?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        Un agente IA de Dify es una aplicación de IA que decide de forma autónoma qué herramientas usar para completar una tarea. A diferencia de un chatbot ordinario que simplemente genera texto basado en tu prompt, un agente puede tomar acciones reales en el mundo: buscar en Google, leer un artículo de Wikipedia, ejecutar un script Python, consultar el clima actual o llamar cualquier API REST que configures.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        La diferencia clave es la <strong>autonomía</strong>: le das al agente un objetivo ("Investiga las 5 principales startups de IA de 2026 y resume su financiación"), y el agente determina por sí mismo los pasos necesarios — búsqueda web, lectura de resultados, filtrado de información y composición de una respuesta.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+        {[
+          { icon: '🔍', label: 'Buscar en la web en tiempo real', bg: '#eff6ff', color: '#1e40af' },
+          { icon: '🐍', label: 'Ejecutar código Python', bg: '#f0fdf4', color: '#166534' },
+          { icon: '🔗', label: 'Llamar APIs REST', bg: '#fdf4ff', color: '#6b21a8' },
+          { icon: '🧮', label: 'Realizar cálculos', bg: '#fff7ed', color: '#9a3412' },
+          { icon: '📚', label: 'Consultar Wikipedia', bg: '#eff6ff', color: '#1e40af' },
+          { icon: '🤔', label: 'Razonar paso a paso', bg: '#f0fdf4', color: '#166534' },
+        ].map(f => (
+          <div style={`display:flex;align-items:center;gap:0.5rem;background:${f.bg};padding:0.75rem;border-radius:0.5rem;`}>
+            <span style="font-size:1.1rem;">{f.icon}</span>
+            <span style={`font-size:0.875rem;font-weight:600;color:${f.color};`}>{f.label}</span>
+          </div>
+        ))}
+      </div>
+      <div style="background:#fef9c3;border-left:3px solid #f59e0b;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;margin-top:1.5rem;font-size:0.875rem;color:#713f12;">
+        <strong>Ejemplo real:</strong> Pregúntale a un agente Dify "¿Cuál es el precio actual del Bitcoin en euros y cómo ha cambiado esta semana?" — el agente usará Google Search, leerá los resultados y te dará una respuesta actualizada y precisa. Un chatbot normal no puede hacer esto.
+      </div>
+    </div>
+  </section>
+
+  <!-- Agente vs Chatbot vs Workflow -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Agente vs Chatbot vs Workflow — ¿Cuándo usar cada uno?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify ofrece tres tipos principales de aplicaciones. Entender cuándo usar cada uno ahorra tiempo y produce mejores resultados:
+      </p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#111827;min-width:100px;">Característica</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#374151;">Chatbot</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#374151;">Workflow</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#1677FF;">Agente</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { feature: 'Uso de herramientas', chatbot: '✗ Ninguno', workflow: '✓ Herramientas fijas', agent: '✓ Selección dinámica' },
+              { feature: 'Toma de decisiones', chatbot: 'Ninguna', workflow: 'Ramas fijas', agent: 'Razonamiento autónomo' },
+              { feature: 'Ideal para', chatbot: 'P&R, soporte', workflow: 'Pipelines, automatización', agent: 'Investigación, tareas complejas' },
+              { feature: 'Pasos', chatbot: '1 paso (prompt → respuesta)', workflow: 'Pasos predefinidos', agent: 'Variables, elegidos en runtime' },
+              { feature: 'Datos en tiempo real', chatbot: '✗ No', workflow: 'Solo via nodos HTTP', agent: '✓ Sí, via herramientas' },
+              { feature: 'Previsibilidad', chatbot: 'Alta', workflow: 'Muy alta', agent: 'Menor (flexible)' },
+            ].map((row, i) => (
+              <tr style={`border-bottom:1px solid #f3f4f6;${i % 2 === 0 ? 'background:#fff;' : 'background:#f8fafc;'}`}>
+                <td style="padding:0.65rem 1rem;font-weight:600;color:#111827;">{row.feature}</td>
+                <td style="padding:0.65rem 1rem;color:#6B7280;">{row.chatbot}</td>
+                <td style="padding:0.65rem 1rem;color:#6B7280;">{row.workflow}</td>
+                <td style="padding:0.65rem 1rem;color:#1677FF;font-weight:600;">{row.agent}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem;">
+        <div style="background:#f0fdf4;border-radius:0.75rem;padding:1rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#14532d;margin-bottom:0.4rem;">Usa un Chatbot cuando...</h3>
+          <p style="font-size:0.85rem;color:#166534;margin:0;line-height:1.6;">Necesitas un asistente conversacional simple para soporte al cliente, responder FAQs o helpdesk. Conocimiento estático, sin necesidad de datos en tiempo real.</p>
+        </div>
+        <div style="background:#eff6ff;border-radius:0.75rem;padding:1rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#1e3a8a;margin-bottom:0.4rem;">Usa un Workflow cuando...</h3>
+          <p style="font-size:0.85rem;color:#1e40af;margin:0;line-height:1.6;">Tienes un pipeline repetible y determinista: traducir texto, resumir un artículo, clasificar un ticket de soporte. Los mismos pasos cada vez.</p>
+        </div>
+        <div style="background:#fdf4ff;border-radius:0.75rem;padding:1rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#581c87;margin-bottom:0.4rem;">Usa un Agente cuando...</h3>
+          <p style="font-size:0.85rem;color:#6b21a8;margin:0;line-height:1.6;">La tarea requiere información en tiempo real, múltiples herramientas o toma de decisiones dinámica. Investigación, análisis competitivo, búsquedas de datos en vivo o tareas multi-paso complejas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Crear tu primer agente -->
+  <section id="crear-agente" class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">3</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Crea tu primer agente Dify</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Sigue estos pasos para construir un agente de investigación que pueda buscar en la web y hacer cálculos. Toma unos 10 minutos:
+      </p>
+      <div style="display:grid;gap:1rem;max-width:660px;margin-bottom:1.5rem;">
+        {[
+          { step: '1', title: 'Crear una nueva aplicación', desc: 'En Dify Studio, haz clic en "+ Crear aplicación". Cuando se te pida elegir el tipo, selecciona "Agente". Dale un nombre como "Asistente de investigación".' },
+          { step: '2', title: 'Escribir el prompt del sistema', desc: 'Describe el rol del agente. Ejemplo: "Eres un asistente de investigación. Cuando se necesite información actual, usa Google Search. Usa la Calculadora para cálculos. Siempre cita tus fuentes."' },
+          { step: '3', title: 'Añadir herramientas', desc: 'En la sección "Herramientas" (panel izquierdo), haz clic en "+ Añadir herramienta". Activa "Google Search" — necesitarás una clave SerpAPI (plan gratuito disponible). También activa "Calculadora" que no requiere clave.' },
+          { step: '4', title: 'Elegir la estrategia del agente', desc: 'En "Estrategia del agente", selecciona "Function Calling" para GPT-4o o modelos Claude. Selecciona "ReAct" para modelos sin function calling nativo.' },
+          { step: '5', title: 'Seleccionar tu modelo', desc: 'Elige GPT-4o o Claude 3.5 Sonnet para el mejor rendimiento del agente. Estos modelos entienden mejor cuándo y cómo usar las herramientas.' },
+          { step: '6', title: 'Probar el agente', desc: 'En el panel de vista previa, escribe: "¿Cuál es el precio actual del Bitcoin en euros?" — observa cómo el agente llama a Google Search, lee los resultados y da una respuesta actualizada. Luego prueba: "Si compro 0,5 BTC a ese precio, ¿cuánto pago en total?"' },
+          { step: '7', title: 'Publicar', desc: 'Haz clic en el botón azul "Publicar". Tu agente ya está disponible y accesible via el enlace de compartir o la API REST.' },
+        ].map(s => (
+          <div class="card" style="display:flex;gap:1rem;align-items:flex-start;padding:1rem;">
+            <span style="width:1.75rem;height:1.75rem;background:#eff6ff;color:#1677FF;border:2px solid #1677FF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;flex-shrink:0;">{s.step}</span>
+            <div>
+              <p style="font-weight:700;font-size:0.9rem;color:#111827;margin:0 0 0.25rem;">{s.title}</p>
+              <p style="font-size:0.85rem;color:#4B5563;margin:0;line-height:1.5;">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#166534;">
+        <strong>Consejo pro:</strong> Mantén el prompt del sistema enfocado. Dile al agente exactamente qué es, qué herramientas debe preferir y cómo formatear sus respuestas. Los prompts vagos llevan a un uso inconsistente de las herramientas.
+      </div>
+    </div>
+  </section>
+
+  <!-- Herramientas integradas -->
+  <section id="herramientas-integradas" class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Herramientas integradas para agentes Dify</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify incluye una biblioteca de herramientas listas para usar. La mayoría requieren una clave API gratuita o de pago del proveedor. Aquí están las más útiles:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+        {[
+          {
+            name: 'Google Search',
+            icon: '🔍',
+            provider: 'SerpAPI',
+            desc: 'Busca en Google y devuelve los mejores resultados con títulos, fragmentos y URLs. La herramienta de búsqueda más potente — ideal para noticias actuales, precios, datos de empresas y cualquier información sensible al tiempo.',
+            keyRequired: 'Clave SerpAPI (100 búsquedas gratis/mes)',
+            badge: 'Más usada',
+            badgeColor: '#1677FF',
+          },
+          {
+            name: 'DuckDuckGo',
+            icon: '🦆',
+            provider: 'Integrado',
+            desc: 'Búsqueda web orientada a la privacidad sin clave API. Buena para búsquedas generales. Ligeramente menos fiable que Google Search para información muy reciente.',
+            keyRequired: 'Ninguna — gratuita',
+            badge: 'Sin clave',
+            badgeColor: '#16a34a',
+          },
+          {
+            name: 'Bing Search',
+            icon: '🔎',
+            provider: 'Microsoft Azure',
+            desc: 'Motor de búsqueda de Microsoft vía Azure Cognitive Services. Buena alternativa a SerpAPI con plan gratuito generoso (1.000 transacciones/mes).',
+            keyRequired: 'Clave Azure Bing Search API',
+            badge: 'Buen plan gratis',
+            badgeColor: '#16a34a',
+          },
+          {
+            name: 'Wikipedia',
+            icon: '📚',
+            provider: 'Integrado',
+            desc: 'Busca en Wikipedia y devuelve el texto completo del artículo. Ideal para conocimiento enciclopédico y factual. Mucho más fiable que la búsqueda web para hechos estables.',
+            keyRequired: 'Ninguna — gratuita',
+            badge: 'Sin clave',
+            badgeColor: '#16a34a',
+          },
+          {
+            name: 'Calculadora',
+            icon: '🧮',
+            provider: 'Integrado',
+            desc: 'Evalúa expresiones matemáticas. Evita que el modelo intente hacer aritmética mentalmente (los LLM son notoriamente malos en matemáticas). Esencial para precios, porcentajes, conversiones y estadísticas.',
+            keyRequired: 'Ninguna — gratuita',
+            badge: 'Sin clave',
+            badgeColor: '#16a34a',
+          },
+          {
+            name: 'Intérprete de código',
+            icon: '🐍',
+            provider: 'Integrado (sandbox)',
+            desc: 'Ejecuta código Python en un entorno seguro. El agente puede escribir y ejecutar código para analizar datos, procesar texto, realizar cálculos complejos, generar gráficos o manipular archivos.',
+            keyRequired: 'Ninguna — se ejecuta localmente',
+            badge: 'Muy potente',
+            badgeColor: '#7c3aed',
+          },
+          {
+            name: 'Tiempo',
+            icon: '🌤',
+            provider: 'OpenWeatherMap',
+            desc: 'Devuelve condiciones meteorológicas actuales y pronósticos para cualquier ubicación. Útil para agentes de viaje, planificación de eventos o cualquier aplicación sensible a la ubicación.',
+            keyRequired: 'Clave OpenWeatherMap (plan gratuito disponible)',
+            badge: 'Plan gratuito',
+            badgeColor: '#16a34a',
+          },
+          {
+            name: 'WolframAlpha',
+            icon: '🧠',
+            provider: 'Wolfram',
+            desc: 'Inteligencia computacional — responde problemas matemáticos, preguntas científicas, datos históricos, conversiones de unidades con altísima precisión. Excelente complemento a la búsqueda web.',
+            keyRequired: 'Clave Wolfram API (2.000 llamadas gratis/mes)',
+            badge: 'Muy preciso',
+            badgeColor: '#d97706',
+          },
+        ].map(tool => (
+          <div class="card" style="padding:1.25rem;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;margin-bottom:0.75rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <span style="font-size:1.25rem;">{tool.icon}</span>
+                <h3 style="font-size:1rem;font-weight:700;color:#111827;margin:0;">{tool.name}</h3>
+              </div>
+              <span style={`font-size:0.7rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:9999px;white-space:nowrap;background:${tool.badgeColor}1a;color:${tool.badgeColor};`}>{tool.badge}</span>
+            </div>
+            <p style="font-size:0.82rem;color:#6B7280;margin:0 0 0.5rem;line-height:1.5;">{tool.desc}</p>
+            <div style="display:flex;align-items:center;gap:0.4rem;margin-top:0.5rem;">
+              <span style="font-size:0.75rem;color:#9CA3AF;">Proveedor:</span>
+              <span style="font-size:0.75rem;font-weight:600;color:#374151;">{tool.provider}</span>
+            </div>
+            <div style="background:#f8fafc;border-radius:0.375rem;padding:0.4rem 0.6rem;margin-top:0.5rem;">
+              <span style="font-size:0.75rem;color:#6B7280;">Clave: </span>
+              <span style="font-size:0.75rem;color:#374151;">{tool.keyRequired}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Herramientas personalizadas -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Herramientas personalizadas: Conecta cualquier API</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        La verdadera potencia de los agentes Dify está en que puedes conectar cualquier API REST como herramienta personalizada. Esto significa que tu agente puede interactuar con los sistemas internos de tu empresa, herramientas SaaS de terceros, bases de datos o cualquier servicio con API.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem;">
+        <div style="background:#eff6ff;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#1e40af;margin-bottom:0.75rem;">Método 1: Esquema OpenAPI</h3>
+          <p style="font-size:0.85rem;color:#1e40af;line-height:1.5;margin:0 0 0.75rem;">Si tu API tiene una especificación OpenAPI (Swagger), pega el JSON o YAML directamente en Dify. Analizará automáticamente todos los endpoints, parámetros y descripciones.</p>
+          <ol style="font-size:0.82rem;color:#1e40af;line-height:1.8;margin:0;padding-left:1.1rem;">
+            <li>Herramientas → Herramientas personalizadas → Crear herramienta</li>
+            <li>Selecciona "Importar desde esquema OpenAPI"</li>
+            <li>Pega tu JSON/YAML de OpenAPI</li>
+            <li>Añade autenticación (clave API, Bearer token, etc.)</li>
+            <li>Guardar — todos los endpoints se convierten en herramientas</li>
+          </ol>
+        </div>
+        <div style="background:#f0fdf4;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#14532d;margin-bottom:0.75rem;">Método 2: Definición manual</h3>
+          <p style="font-size:0.85rem;color:#166534;line-height:1.5;margin:0 0 0.75rem;">Para APIs simples sin especificación formal, define cada endpoint manualmente:</p>
+          <ol style="font-size:0.82rem;color:#166534;line-height:1.8;margin:0;padding-left:1.1rem;">
+            <li>Nombre: "obtener_cliente" (cómo el agente lo llama)</li>
+            <li>Descripción: "Busca un cliente por correo electrónico" (el agente lee esto para decidir cuándo usarlo)</li>
+            <li>Método: GET, POST, PUT, DELETE</li>
+            <li>URL: Tu URL de endpoint con parámetros</li>
+            <li>Parámetros: nombre, tipo, descripción, requerido/opcional</li>
+          </ol>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1.25rem;">
+        <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Ejemplo: Herramienta API CRM</h3>
+        <div style="background:#1e293b;border-radius:0.5rem;padding:1rem;overflow-x:auto;">
+          <pre style="margin:0;font-size:0.8rem;color:#e2e8f0;font-family:monospace;line-height:1.6;">{`Nombre de herramienta: obtener_info_cliente
+Descripción: Recupera detalles del cliente desde la base de datos
+             CRM por correo electrónico. Usa esto cuando se pregunte
+             sobre el estado o historial de un cliente específico.
+
+Método: GET
+URL: https://api.tucrm.com/clientes?email={{email}}
+
+Parámetros:
+  - email (string, requerido): Correo electrónico del cliente
+
+Cabeceras:
+  Authorization: Bearer {{api_key}}`}</pre>
+        </div>
+        <p style="font-size:0.82rem;color:#6B7280;margin:0.75rem 0 0;line-height:1.5;">Una vez configurado, tu agente puede responder preguntas como "¿Cuál es el estado de suscripción de juan@ejemplo.com?" llamando automáticamente a tu API CRM.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ReAct vs Function Calling -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Estrategias del agente: ReAct vs Function Calling</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify soporta dos estrategias para que el agente razone y use herramientas. La elección correcta depende de tu modelo LLM:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-bottom:1.5rem;">
+        <div style="background:#fff;border:2px solid #1677FF;border-radius:0.75rem;padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+            <span style="background:#1677FF;color:#fff;padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.75rem;font-weight:700;">Recomendado</span>
+            <h3 style="font-size:1rem;font-weight:700;color:#111827;margin:0;">Function Calling</h3>
+          </div>
+          <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin:0 0 0.75rem;">El modelo entiende nativamente cómo llamar herramientas como llamadas de función estructuradas. Más fiable, más eficiente y produce cadenas de razonamiento más limpias.</p>
+          <div style="background:#eff6ff;border-radius:0.5rem;padding:0.75rem;">
+            <p style="font-size:0.8rem;font-weight:700;color:#1e40af;margin:0 0 0.3rem;">Mejores modelos:</p>
+            <ul style="font-size:0.8rem;color:#1e40af;margin:0;padding-left:1.1rem;line-height:1.7;">
+              <li>GPT-4o, GPT-4 Turbo</li>
+              <li>Claude 3.5 Sonnet, Claude 3 Opus</li>
+              <li>Gemini 1.5 Pro, Gemini 1.5 Flash</li>
+              <li>Mistral Large</li>
+            </ul>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+            <span style="background:#f59e0b;color:#fff;padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.75rem;font-weight:700;">Universal</span>
+            <h3 style="font-size:1rem;font-weight:700;color:#111827;margin:0;">ReAct (Razonamiento + Acción)</h3>
+          </div>
+          <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin:0 0 0.75rem;">El modelo escribe su razonamiento como texto ("Pensamiento: necesito buscar X...") seguido de instrucciones de acción ("Acción: google_search[X]"). Funciona con cualquier modelo que pueda seguir instrucciones.</p>
+          <div style="background:#fff7ed;border-radius:0.5rem;padding:0.75rem;">
+            <p style="font-size:0.8rem;font-weight:700;color:#9a3412;margin:0 0 0.3rem;">Cuándo usarlo:</p>
+            <ul style="font-size:0.8rem;color:#9a3412;margin:0;padding-left:1.1rem;line-height:1.7;">
+              <li>Modelos open-source (Llama, Qwen, Mistral 7B)</li>
+              <li>Modelos sin function calling nativo</li>
+              <li>Cuando quieres ver el razonamiento completo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="background:#f8fafc;border-radius:0.75rem;padding:1.25rem;">
+        <h3 style="font-size:0.9rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Regla rápida</h3>
+        <p style="font-size:0.875rem;color:#4B5563;margin:0;line-height:1.6;">¿Usas GPT-4o, Claude 3.5+ o Gemini Pro? → Usa <strong>Function Calling</strong>. ¿Usas un modelo open-source? → Usa <strong>ReAct</strong>. En caso de duda, prueba primero Function Calling.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Orquestación multi-agente -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Orquestación multi-agente</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        Para tareas complejas, puedes encadenar múltiples agentes especializados. Cada agente se enfoca en lo que mejor hace, y un agente coordinador dirige el trabajo entre ellos.
+      </p>
+      <div style="display:grid;gap:1rem;margin-bottom:1.5rem;">
+        <div class="card" style="padding:1.25rem;">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Ejemplo: Sistema de análisis competitivo</h3>
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;font-size:0.82rem;">
+            <div style="background:#fdf4ff;border-radius:0.5rem;padding:0.5rem 0.75rem;text-align:center;">
+              <div style="font-weight:700;color:#6b21a8;">Agente coordinador</div>
+              <div style="color:#7c3aed;font-size:0.75rem;">Recibe la solicitud</div>
+            </div>
+            <span style="color:#9CA3AF;font-size:1.2rem;">→</span>
+            <div style="background:#eff6ff;border-radius:0.5rem;padding:0.5rem 0.75rem;text-align:center;">
+              <div style="font-weight:700;color:#1e40af;">Agente investigación</div>
+              <div style="color:#1e40af;font-size:0.75rem;">Google Search + Wikipedia</div>
+            </div>
+            <span style="color:#9CA3AF;font-size:1.2rem;">+</span>
+            <div style="background:#f0fdf4;border-radius:0.5rem;padding:0.5rem 0.75rem;text-align:center;">
+              <div style="font-weight:700;color:#166534;">Agente datos</div>
+              <div style="color:#166534;font-size:0.75rem;">Code Interpreter + WolframAlpha</div>
+            </div>
+            <span style="color:#9CA3AF;font-size:1.2rem;">→</span>
+            <div style="background:#fff7ed;border-radius:0.5rem;padding:0.5rem 0.75rem;text-align:center;">
+              <div style="font-weight:700;color:#9a3412;">Agente redacción</div>
+              <div style="color:#9a3412;font-size:0.75rem;">Resume y formatea</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.75rem;">
+        {[
+          { title: 'Especialización', desc: 'Cada agente tiene un prompt del sistema enfocado y solo las herramientas que necesita. Un agente de investigación recibe herramientas de búsqueda; un agente de redacción recibe herramientas de formato.' },
+          { title: 'Ejecución paralela', desc: 'Los nodos de workflow Dify pueden invocar múltiples agentes en paralelo. Recopila todos los resultados y fúndelos en un paso final para una finalización más rápida.' },
+          { title: 'Control de iteraciones', desc: 'Establece límites máximos de iteración por agente para evitar bucles infinitos. Un coordinador puede reintentar sub-tareas fallidas o recurrir a enfoques más simples automáticamente.' },
+          { title: 'Aislamiento de herramientas', desc: 'Mantén herramientas sensibles (acceso CRM, escrituras en base de datos) en agentes separados con controles de acceso estrictos. El coordinador público nunca toca directamente los sistemas sensibles.' },
+        ].map(item => (
+          <div class="card">
+            <h3 style="font-size:0.875rem;font-weight:700;color:#111827;margin-bottom:0.35rem;">{item.title}</h3>
+            <p style="font-size:0.82rem;color:#6B7280;margin:0;line-height:1.5;">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Preguntas frecuentes</h2>
+      <div style="display:grid;gap:1rem;max-width:720px;">
+        {[
+          {
+            q: '¿Qué pueden hacer los agentes IA de Dify?',
+            a: 'Los agentes Dify pueden buscar en la web (Google, Bing, DuckDuckGo), ejecutar código Python, llamar APIs externas, leer Wikipedia, calcular matemáticas, comprobar el tiempo y más. Razonan sobre qué herramientas usar para cada tarea.',
+          },
+          {
+            q: '¿Cuál es la diferencia entre un agente Dify y un chatbot?',
+            a: 'Un chatbot Dify responde preguntas basándose en su entrenamiento. Un agente Dify usa herramientas activamente — puede buscar en internet, ejecutar código o llamar APIs para obtener información en tiempo real. Usa chatbot para soporte, agente para investigación.',
+          },
+          {
+            q: '¿Puedo añadir herramientas personalizadas a un agente Dify?',
+            a: 'Sí. Puedes añadir cualquier API REST como herramienta personalizada proporcionando una especificación OpenAPI o definiendo manualmente el endpoint con nombre, descripción y parámetros. El agente usará tu herramienta cuando la tarea lo requiera.',
+          },
+          {
+            q: '¿El agente Dify soporta razonamiento multi-paso?',
+            a: 'Sí. Los agentes Dify usan ReAct (Razonamiento + Acción) o Function Calling. El agente piensa paso a paso, llama herramientas, observa resultados y continúa hasta completar la tarea — similar a AutoGPT o LangChain.',
+          },
+        ].map(item => (
+          <div class="card" style="padding:1.25rem;">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">{item.q}</h3>
+            <p style="font-size:0.875rem;color:#4B5563;margin:0;line-height:1.6;">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">¿Listo para desplegar tu agente Dify?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Ejecutar agentes en Dify Cloud acumula créditos rápidamente. Alojar en tu propio servidor te da ejecuciones ilimitadas de agentes por un costo mensual fijo — desde €3,79/mes. Elige hosting gestionado si quieres cero mantenimiento.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:1.5rem;">
+        <div style="background:#fff;border:2px solid #1677FF;border-radius:0.75rem;padding:1.25rem;">
+          <div style="font-size:0.75rem;font-weight:700;color:#1677FF;margin-bottom:0.5rem;">MEJOR RELACIÓN CALIDAD-PRECIO</div>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.4rem;">Hetzner VPS</h3>
+          <p style="font-size:0.85rem;color:#4B5563;margin:0 0 1rem;line-height:1.5;">Desde €3,79/mes. Control total, ejecuciones ilimitadas de agentes, sin tarifas por mensaje. La mejor opción para agentes IA en producción con uso intensivo de herramientas.</p>
+          <a href="https://filedesign.com/go/hetzner?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.6rem 1.1rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;font-size:0.875rem;">
+            Obtener Hetzner VPS →
+          </a>
+        </div>
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1.25rem;">
+          <div style="font-size:0.75rem;font-weight:700;color:#16a34a;margin-bottom:0.5rem;">GESTIONADO — CERO MANTENIMIENTO</div>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.4rem;">Elestio</h3>
+          <p style="font-size:0.85rem;color:#4B5563;margin:0 0 1rem;line-height:1.5;">Hosting Dify gestionado — completamente configurado en 5 minutos. Actualizaciones automáticas, copias de seguridad y SSL incluidos. Ideal si quieres centrarte en construir agentes.</p>
+          <a href="https://filedesign.com/go/elestio?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.6rem 1.1rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;font-size:0.875rem;">
+            Probar Elestio →
+          </a>
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="/es/best-dify-hosting/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;">
+          Comparar todas las opciones →
+        </a>
+        <a href="/es/guides/dify-tutorial/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Tutorial Dify para principiantes
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
