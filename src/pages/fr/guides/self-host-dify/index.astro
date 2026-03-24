@@ -24,11 +24,11 @@ const schema = {
     { '@type': 'HowToTool', name: 'Certbot' },
   ],
   step: [
-    { '@type': 'HowToStep', position: 1, name: 'Choisir un serveur', text: 'Sélectionnez un VPS avec au moins 2 vCPU, 4 Go RAM et 50 Go SSD sous Ubuntu 22.04 LTS.' },
-    { '@type': 'HowToStep', position: 2, name: 'Configuration initiale du serveur', text: 'Connectez-vous via SSH, mettez à jour les paquets, créez un utilisateur non-root et configurez UFW.' },
-    { '@type': 'HowToStep', position: 3, name: 'Installer Docker Engine', text: 'Ajoutez le dépôt Docker apt et installez docker-ce sur Ubuntu 22.04.' },
-    { '@type': 'HowToStep', position: 4, name: 'Installer le plugin Docker Compose', text: 'Installez le plugin Docker Compose pour exécuter les commandes docker compose.' },
-    { '@type': 'HowToStep', position: 5, name: 'Cloner et configurer Dify', text: 'Clonez le dépôt Dify, copiez .env.example vers .env et définissez votre SECRET_KEY.' },
+    { '@type': 'HowToStep', position: 1, name: 'Choisir un serveur', text: 'Sélectionnez un fournisseur VPS avec au moins 2 vCPU, 4 Go RAM et 50 Go SSD sous Ubuntu 22.04 LTS.' },
+    { '@type': 'HowToStep', position: 2, name: 'Configuration initiale du serveur', text: 'Connectez-vous via SSH, mettez à jour les paquets, créez un utilisateur non-root et configurez le pare-feu UFW.' },
+    { '@type': 'HowToStep', position: 3, name: 'Installer Docker Engine', text: 'Ajoutez le dépôt apt Docker et installez docker-ce sur Ubuntu 22.04.' },
+    { '@type': 'HowToStep', position: 4, name: 'Installer le plugin Docker Compose', text: 'Installez le plugin Docker Compose pour pouvoir exécuter les commandes docker compose.' },
+    { '@type': 'HowToStep', position: 5, name: 'Cloner et configurer Dify', text: 'Clonez le dépôt Dify, copiez le fichier .env exemple et définissez votre SECRET_KEY.' },
     { '@type': 'HowToStep', position: 6, name: 'Démarrer Dify', text: 'Exécutez docker compose up -d et vérifiez que tous les conteneurs fonctionnent.' },
     { '@type': 'HowToStep', position: 7, name: 'Configurer SSL avec Nginx', text: 'Installez Nginx et Certbot, configurez un proxy inverse et obtenez un certificat SSL gratuit.' },
     { '@type': 'HowToStep', position: 8, name: 'Maintenance', text: 'Apprenez comment mettre à jour Dify, sauvegarder les données et surveiller votre installation.' },
@@ -37,10 +37,10 @@ const schema = {
 
 const nginxConfig = `server {
     listen 80;
-    server_name votre-domaine.com www.votre-domaine.com;
+    server_name your-domain.com www.your-domain.com;
 
     location / {
-        proxy_pass http://localhost:8080;
+        proxy_pass http://localhost:80;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -53,7 +53,7 @@ const nginxConfig = `server {
 
 <BaseLayout
   title="Comment auto-héberger Dify en 2026 — Guide complet étape par étape"
-  description="Guide complet pour auto-héberger Dify sur un VPS. Couvre la configuration du serveur, l'installation Docker, la configuration Dify, SSL avec Nginx et la maintenance. Mis à jour mars 2026."
+  description="Guide complet pour auto-héberger Dify sur un VPS. Couvre la configuration du serveur, l'installation Docker, la configuration de Dify, SSL avec Nginx et la maintenance. Mis à jour mars 2026."
   lang="fr"
   canonical="https://dify-hosting.com/fr/guides/self-host-dify/"
   hreflang={hreflang}
@@ -68,14 +68,14 @@ const nginxConfig = `server {
         { label: 'Auto-héberger Dify' },
       ]} />
       <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
-        <span style="display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Mis à jour mars 2026</span>
-        <span style="display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dbeafe;color:#1e40af;">~2 heures de configuration</span>
+        <span class="badge-success" style="display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Mis à jour mars 2026</span>
+        <span class="badge-primary" style="display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dbeafe;color:#1e40af;">~2 heures de configuration</span>
       </div>
       <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
         Comment auto-héberger Dify en 2026
       </h1>
       <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;margin-bottom:1.5rem;">
-        Un guide complet et pratique pour exécuter Dify sur votre propre VPS. Du choix d'un serveur aux certificats SSL et à la maintenance continue — tout ce dont vous avez besoin en un seul endroit.
+        Un guide complet et pratique pour exécuter Dify sur votre propre VPS. Du choix du serveur aux certificats SSL et à la maintenance continue — tout ce dont vous avez besoin en un seul endroit.
       </p>
     </div>
   </section>
@@ -86,19 +86,20 @@ const nginxConfig = `server {
       <div class="prose">
         <h2>Qu'est-ce que l'auto-hébergement de Dify ?</h2>
         <p>
-          Dify est une plateforme open source de développement d'applications LLM qui vous permet de créer des applications IA, des chatbots et des pipelines RAG. <strong>L'auto-hébergement</strong> signifie exécuter Dify sur votre propre serveur plutôt que d'utiliser <a href="https://cloud.dify.ai" target="_blank" rel="noopener">Dify Cloud</a>.
+          Dify est une plateforme open source de développement d'applications LLM qui vous permet de créer des applications alimentées par l'IA, des chatbots et des pipelines RAG. <strong>L'auto-hébergement</strong> signifie exécuter Dify sur votre propre serveur plutôt que d'utiliser <a href="https://cloud.dify.ai" target="_blank" rel="noopener">Dify Cloud</a>.
         </p>
         <p>Vous choisiriez l'auto-hébergement plutôt que Dify Cloud pour trois raisons principales :</p>
         <ul>
-          <li><strong>Coût</strong> — Un Hetzner CX22 coûte 3,79 €/mois contre 59 $/mois pour Dify Cloud Pro. À l'échelle d'une équipe, les économies sont dramatiques.</li>
-          <li><strong>Contrôle</strong> — Accès complet à la configuration, aux plugins, aux modèles personnalisés, membres illimités dans l'espace de travail et aucune limite de crédits de messages.</li>
-          <li><strong>Confidentialité des données</strong> — Vos prompts, documents et historiques de conversations ne quittent jamais votre propre infrastructure. Critique pour les secteurs réglementés.</li>
+          <li><strong>Coût</strong> — Un Hetzner CX22 coûte €3,79/mois contre $59/mois pour Dify Cloud Pro. À l'échelle d'une équipe, les économies sont considérables.</li>
+          <li><strong>Contrôle</strong> — Accès complet à la configuration, aux plugins, aux modèles personnalisés, membres d'espace de travail illimités et sans limites de crédits de messages.</li>
+          <li><strong>Confidentialité des données</strong> — Vos prompts, documents et historiques de conversations ne quittent jamais votre infrastructure. Essentiel pour les secteurs réglementés.</li>
         </ul>
-        <p>La contrepartie est que vous êtes responsable de la configuration, des mises à jour et de la disponibilité. Ce guide rend cela simple.</p>
+        <p>La contrepartie est que vous êtes responsable de la configuration, des mises à jour et de la disponibilité. Ce guide vous simplifie la tâche.</p>
       </div>
 
+      <!-- Prérequis -->
       <div class="card" style="margin-top:2rem;">
-        <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:1rem;">Prérequis serveur</h3>
+        <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:1rem;">Prérequis du serveur</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
           <div>
             <p style="font-size:0.8rem;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Minimum</p>
@@ -117,7 +118,7 @@ const nginxConfig = `server {
             </div>
           </div>
         </div>
-        <p style="margin-top:1rem;font-size:0.9rem;color:#4B5563;">Système d'exploitation : <strong>Ubuntu 22.04 LTS</strong> (recommandé). Debian 11/12 fonctionne également.</p>
+        <p style="margin-top:1rem;font-size:0.9rem;color:#4B5563;">OS : <strong>Ubuntu 22.04 LTS</strong> (recommandé). Debian 11/12 fonctionne également.</p>
       </div>
     </div>
   </section>
@@ -126,29 +127,31 @@ const nginxConfig = `server {
   <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
     <div class="container-sm">
 
+      <!-- Étape 1 -->
       <div style="display:flex;gap:1.5rem;margin-bottom:3rem;">
         <div class="step-number" style="flex-shrink:0;">1</div>
         <div style="flex:1;">
           <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Choisir un serveur</h2>
           <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
-            Pour la plupart des auto-hébergeurs, <a href="/fr/providers/hetzner/" style="color:#1677FF;text-decoration:none;font-weight:500;">Hetzner CX22</a> (3,79 €/mois, 2 vCPU, 4 Go RAM, 40 Go NVMe) est le meilleur point de départ. Les centres de données européens en font une option idéale pour la conformité RGPD.
+            Pour la plupart des auto-hébergeurs, <a href="/fr/providers/hetzner/" style="color:#1677FF;text-decoration:none;font-weight:500;">Hetzner CX22</a> (€3,79/mois, 2 vCPU, 4 Go RAM, 40 Go NVMe) est le meilleur point de départ. Il fait tourner confortablement Dify et tous ses services. Les centres de données européens en font un choix idéal pour la conformité RGPD.
           </p>
           <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
-            Pour les débutants qui souhaitent un panneau de contrôle plus simple, <a href="/fr/providers/hostinger/" style="color:#1677FF;text-decoration:none;font-weight:500;">Hostinger VPS</a> commence à 7,99 $/mois. Leur plan KVM 2 à 12,99 $/mois offre 8 Go de RAM à un excellent rapport qualité-prix.
+            Pour les débutants qui souhaitent un panneau de contrôle plus simple, <a href="/fr/providers/hostinger/" style="color:#1677FF;text-decoration:none;font-weight:500;">Hostinger VPS</a> commence à $7,99/mois et offre plus d'accompagnement. Si vous avez besoin de 8 Go RAM, leur plan KVM 2 à $9,99/mois est un excellent rapport qualité-prix.
           </p>
           <div style="background:#f0f9ff;border-left:3px solid #1677FF;padding:1rem 1.25rem;border-radius:0 0.5rem 0.5rem 0;">
-            <p style="margin:0;font-size:0.9rem;color:#1e40af;"><strong>Conseil :</strong> Créez le serveur avec votre clé SSH publique déjà ajoutée pour éviter l'authentification par mot de passe.</p>
+            <p style="margin:0;font-size:0.9rem;color:#1e40af;"><strong>Conseil :</strong> Créez le serveur avec votre clé publique SSH déjà ajoutée. Cela évite entièrement l'authentification par mot de passe et est plus sécurisé.</p>
           </div>
         </div>
       </div>
 
+      <!-- Étape 2 -->
       <div style="display:flex;gap:1.5rem;margin-bottom:3rem;">
         <div class="step-number" style="flex-shrink:0;">2</div>
         <div style="flex:1;">
           <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Configuration initiale du serveur</h2>
-          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">Connectez-vous à votre serveur et exécutez la configuration initiale :</p>
-          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;"><code># Connexion SSH
-ssh root@IP_DE_VOTRE_SERVEUR
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">Connectez-vous à votre serveur et effectuez la configuration initiale :</p>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;"><code># Se connecter au serveur via SSH
+ssh root@YOUR_SERVER_IP
 
 # Mettre à jour les paquets
 apt update && apt upgrade -y
@@ -160,35 +163,37 @@ apt install -y curl wget git ufw
 adduser dify
 usermod -aG sudo dify
 
-# Copier les clés SSH
+# Copier les clés SSH vers le nouvel utilisateur
 rsync --archive --chown=dify:dify ~/.ssh /home/dify
 
-# Configurer UFW
+# Configurer le pare-feu UFW
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow 22/tcp comment 'SSH'
 ufw allow 80/tcp comment 'HTTP'
 ufw allow 443/tcp comment 'HTTPS'
-ufw --force enable</code></pre>
-          <p style="color:#4B5563;line-height:1.7;">Déconnectez-vous et reconnectez-vous en tant qu'utilisateur <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">dify</code> pour les étapes suivantes.</p>
+ufw --force enable
+ufw status</code></pre>
+          <p style="color:#4B5563;line-height:1.7;">Déconnectez-vous maintenant et reconnectez-vous en tant qu'utilisateur <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">dify</code> pour les étapes suivantes.</p>
         </div>
       </div>
 
+      <!-- Étape 3 -->
       <div style="display:flex;gap:1.5rem;margin-bottom:3rem;">
         <div class="step-number" style="flex-shrink:0;">3</div>
         <div style="flex:1;">
           <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Installer Docker Engine</h2>
-          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">Installez Docker via le dépôt apt officiel — n'utilisez pas la version snap :</p>
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">Installez Docker en utilisant le dépôt apt officiel — n'utilisez pas la version snap :</p>
           <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;"><code># Installer les prérequis
 sudo apt install -y ca-certificates curl gnupg lsb-release
 
-# Ajouter la clé GPG Docker
+# Ajouter la clé GPG officielle de Docker
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
   sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-# Ajouter le dépôt Docker
+# Ajouter le dépôt apt Docker
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
   https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
@@ -198,7 +203,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io
 
-# Ajouter votre utilisateur au groupe docker
+# Ajouter votre utilisateur au groupe docker (pas besoin de sudo)
 sudo usermod -aG docker $USER
 newgrp docker
 
@@ -207,19 +212,21 @@ docker --version</code></pre>
         </div>
       </div>
 
+      <!-- Étape 4 -->
       <div style="display:flex;gap:1.5rem;margin-bottom:3rem;">
         <div class="step-number" style="flex-shrink:0;">4</div>
         <div style="flex:1;">
           <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Installer le plugin Docker Compose</h2>
           <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">Le plugin Docker Compose est inclus dans le paquet ci-dessus. Vérifiez qu'il fonctionne :</p>
-          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Vérifier la version (devrait être v2.x)
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Vérifier la version Docker Compose (doit être v2.x)
 docker compose version
 
-# Si non installé, ajoutez manuellement
+# Si non installé, l'ajouter manuellement
 sudo apt install -y docker-compose-plugin</code></pre>
         </div>
       </div>
 
+      <!-- Étape 5 -->
       <div style="display:flex;gap:1.5rem;margin-bottom:3rem;">
         <div class="step-number" style="flex-shrink:0;">5</div>
         <div style="flex:1;">
@@ -229,93 +236,104 @@ sudo apt install -y docker-compose-plugin</code></pre>
 git clone https://github.com/langgenius/dify.git
 cd dify/docker
 
-# Créer votre .env
+# Créer votre fichier .env depuis l'exemple
 cp .env.example .env
 
-# Générer une SECRET_KEY sécurisée
+# Générer un SECRET_KEY sécurisé
 openssl rand -base64 42
 
 # Modifier le fichier .env
 nano .env</code></pre>
-          <p style="color:#4B5563;line-height:1.7;margin-bottom:0.75rem;">Paramètres clés à mettre à jour :</p>
-          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># REQUIS : clé secrète forte
-SECRET_KEY=votre-clé-secrète-générée
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:0.75rem;">Paramètres clés à mettre à jour dans <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">.env</code> :</p>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># OBLIGATOIRE : Définir une clé secrète aléatoire forte
+SECRET_KEY=your-generated-secret-key-here
 
-# Votre domaine
-CONSOLE_URL=https://votre-domaine.com
-APP_URL=https://votre-domaine.com
+# Définir votre domaine (utilisé dans les emails et liens)
+CONSOLE_URL=https://your-domain.com
+APP_URL=https://your-domain.com
 
-# Mots de passe forts
-DB_PASSWORD=mot-de-passe-bd-fort
-REDIS_PASSWORD=mot-de-passe-redis-fort
+# Changer le mot de passe de base de données par défaut
+DB_PASSWORD=your-strong-db-password
 
-# Optionnel : clé API LLM
+# Changer le mot de passe Redis par défaut
+REDIS_PASSWORD=your-strong-redis-password
+
+# Optionnel : Ajouter votre clé API OpenAI pour un démarrage rapide
 OPENAI_API_KEY=sk-...</code></pre>
         </div>
       </div>
 
+      <!-- Étape 6 -->
       <div style="display:flex;gap:1.5rem;margin-bottom:3rem;">
         <div class="step-number" style="flex-shrink:0;">6</div>
         <div style="flex:1;">
           <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Démarrer Dify</h2>
-          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">Lancez tous les services Dify :</p>
-          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;"><code># Démarrer en arrière-plan
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">Lancez tous les services Dify avec Docker Compose :</p>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;"><code># Démarrer tous les services en arrière-plan
 docker compose up -d
 
-# Vérifier l'état des conteneurs
+# Vérifier que tous les conteneurs fonctionnent
 docker compose ps
 
-# Suivre les logs (Ctrl+C pour quitter)
+# Suivre les logs pour observer le démarrage (Ctrl+C pour quitter)
 docker compose logs -f</code></pre>
-          <p style="color:#4B5563;line-height:1.7;">Une fois tous les conteneurs en statut <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">healthy</code>, visitez <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">http://IP_DE_VOTRE_SERVEUR</code> pour compléter la configuration.</p>
+          <p style="color:#4B5563;line-height:1.7;">Une fois que tous les conteneurs affichent le statut <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">healthy</code> (prend 1 à 2 minutes), visitez <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">http://YOUR_SERVER_IP</code> pour compléter l'assistant de configuration administrateur.</p>
         </div>
       </div>
 
+      <!-- Étape 7 -->
       <div style="display:flex;gap:1.5rem;margin-bottom:3rem;">
         <div class="step-number" style="flex-shrink:0;">7</div>
         <div style="flex:1;">
           <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Configurer SSL avec Nginx</h2>
           <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
-            Changez d'abord le port Dify pour éviter les conflits avec Nginx hôte :
+            La stack Docker de Dify inclut son propre Nginx sur le port 80. Pour SSL, nous allons ajouter un Nginx au niveau hôte comme proxy inverse devant lui. Commencez par changer le port de Dify pour éviter les conflits :
           </p>
-          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;"><code># Dans dify/docker/.env
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;"><code># Dans dify/docker/.env, changer le port Nginx
 EXPOSE_NGINX_PORT=8080
 
-# Redémarrer
+# Redémarrer pour appliquer
 docker compose down && docker compose up -d
 
-# Installer Nginx et Certbot
+# Installer Nginx et Certbot sur l'hôte
 sudo apt install -y nginx certbot python3-certbot-nginx
 
-# Créer la config Nginx
+# Créer la configuration Nginx pour votre domaine
 sudo nano /etc/nginx/sites-available/dify</code></pre>
-          <p style="color:#4B5563;line-height:1.7;margin-bottom:0.75rem;">Ajoutez cette configuration :</p>
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:0.75rem;">Ajoutez cette configuration (remplacez <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">your-domain.com</code>) :</p>
           <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;"><code set:text={nginxConfig}/></pre>
-          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Activer et obtenir SSL
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Activer et tester
 sudo ln -s /etc/nginx/sites-available/dify /etc/nginx/sites-enabled/
-sudo nginx -t && sudo systemctl reload nginx
-sudo certbot --nginx -d votre-domaine.com -d www.votre-domaine.com</code></pre>
+sudo nginx -t
+sudo systemctl reload nginx
+
+# Obtenir le certificat SSL (configure Nginx pour HTTPS automatiquement)
+sudo certbot --nginx -d your-domain.com -d www.your-domain.com</code></pre>
         </div>
       </div>
 
+      <!-- Étape 8 -->
       <div style="display:flex;gap:1.5rem;margin-bottom:3rem;">
         <div class="step-number" style="flex-shrink:0;">8</div>
         <div style="flex:1;">
           <h2 style="font-size:1.4rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Maintenance</h2>
-          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;"><strong>Mettre à jour Dify :</strong></p>
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;"><strong>Mise à jour de Dify</strong> — Dify publie fréquemment des mises à jour. Mettez à jour sans aucun changement de configuration :</p>
           <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;"><code>cd ~/dify
 git pull origin main
 cd docker
 docker compose pull
 docker compose up -d</code></pre>
-          <p style="color:#4B5563;line-height:1.7;margin-bottom:0.75rem;"><strong>Sauvegarder :</strong></p>
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:0.75rem;"><strong>Sauvegarde</strong> — Sauvegardez votre base de données PostgreSQL et les fichiers téléversés :</p>
           <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;"><code># Sauvegarder la base de données
 docker compose exec db pg_dump -U postgres dify > backup_$(date +%Y%m%d).sql
 
-# Sauvegarder les fichiers
+# Sauvegarder les fichiers téléversés
 tar -czf dify_storage_$(date +%Y%m%d).tar.gz ./volumes/app/storage</code></pre>
-          <p style="color:#4B5563;line-height:1.7;margin-bottom:0.75rem;"><strong>Surveiller :</strong></p>
-          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code>docker stats
+          <p style="color:#4B5563;line-height:1.7;margin-bottom:0.75rem;"><strong>Surveillance</strong> — Vérifier l'utilisation des ressources :</p>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code># Utilisation des ressources par conteneur
+docker stats
+
+# Utilisation du disque
 df -h
 docker system df</code></pre>
         </div>
@@ -326,59 +344,59 @@ docker system df</code></pre>
   <!-- FAQ -->
   <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
     <div class="container-sm">
-      <h2 style="font-size:1.75rem;font-weight:700;color:#111827;margin-bottom:2rem;">Questions fréquentes</h2>
+      <h2 style="font-size:1.75rem;font-weight:700;color:#111827;margin-bottom:2rem;">Questions fréquemment posées</h2>
 
       <div class="faq-item" style="border-bottom:1px solid #e5e7eb;padding-bottom:1.5rem;margin-bottom:1.5rem;">
         <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Conflit de port : quelque chose utilise déjà le port 80</h3>
-        <p style="color:#4B5563;line-height:1.7;margin:0;">Un autre service occupe le port 80. Arrêtez-le (<code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">sudo systemctl stop apache2</code>) ou définissez <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">EXPOSE_NGINX_PORT=8080</code> dans .env.</p>
+        <p style="color:#4B5563;line-height:1.7;margin:0;">Un autre service (souvent Apache) occupe le port 80. Soit vous l'arrêtez (<code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">sudo systemctl stop apache2</code>), soit vous changez le port Nginx de Dify dans <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">.env</code> en définissant <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">EXPOSE_NGINX_PORT=8080</code>.</p>
       </div>
 
       <div class="faq-item" style="border-bottom:1px solid #e5e7eb;padding-bottom:1.5rem;margin-bottom:1.5rem;">
-        <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Erreur de mémoire insuffisante</h3>
-        <p style="color:#4B5563;line-height:1.7;margin:0;">Dify nécessite au moins 4 Go de RAM. Vérifiez avec <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">free -h</code>. Si nécessaire, ajoutez un swap : <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">fallocate -l 4G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile</code>.</p>
+        <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Le conteneur se termine avec une erreur de mémoire insuffisante</h3>
+        <p style="color:#4B5563;line-height:1.7;margin:0;">Dify a besoin d'au moins 4 Go RAM. Vérifiez avec <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">free -h</code>. Si la RAM est limite, ajoutez un fichier swap de 4 Go : <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">fallocate -l 4G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile</code>.</p>
       </div>
 
       <div class="faq-item" style="border-bottom:1px solid #e5e7eb;padding-bottom:1.5rem;margin-bottom:1.5rem;">
-        <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Impossible d'accéder à la page de configuration</h3>
-        <p style="color:#4B5563;line-height:1.7;margin:0;">Vérifiez <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker compose ps</code> et <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">sudo ufw status</code>. Le conteneur API prend 30 à 60 secondes — attendez le statut <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">healthy</code>.</p>
+        <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Impossible d'accéder à la page de configuration administrateur</h3>
+        <p style="color:#4B5563;line-height:1.7;margin:0;">Vérifiez que tous les conteneurs fonctionnent (<code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker compose ps</code>) et que votre pare-feu autorise le port 80 (<code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">sudo ufw status</code>). Le conteneur API prend 30 à 60 secondes pour être prêt — attendez le statut <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">healthy</code>.</p>
       </div>
 
       <div class="faq-item" style="border-bottom:1px solid #e5e7eb;padding-bottom:1.5rem;margin-bottom:1.5rem;">
         <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Mot de passe administrateur oublié</h3>
-        <p style="color:#4B5563;line-height:1.7;margin:0;">Réinitialisez via : <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker compose exec api flask reset-password</code></p>
+        <p style="color:#4B5563;line-height:1.7;margin:0;">Réinitialisez-le via le conteneur API : <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker compose exec api flask reset-password</code> — suivez les instructions pour entrer votre email et nouveau mot de passe.</p>
       </div>
 
       <div class="faq-item" style="padding-bottom:1rem;">
-        <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Comment mettre à jour Dify sans interruption ?</h3>
-        <p style="color:#4B5563;line-height:1.7;margin:0;">Exécutez <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker compose pull</code> pour pré-télécharger les images, puis <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker compose up -d</code>. L'interruption est généralement inférieure à 30 secondes.</p>
+        <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Comment mettre à jour Dify sans interruption de service ?</h3>
+        <p style="color:#4B5563;line-height:1.7;margin:0;">Exécutez <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker compose pull</code> pour pré-télécharger les nouvelles images, puis <code style="background:#f1f5f9;padding:0.1em 0.3em;border-radius:0.25rem;">docker compose up -d</code> pour appliquer. Docker Compose effectue des redémarrages progressifs par défaut, donc l'interruption de service est généralement inférieure à 30 secondes.</p>
       </div>
     </div>
   </section>
 
-  <!-- Guides connexes -->
+  <!-- Guides liés -->
   <section class="section" style="padding-top:2.5rem;padding-bottom:3rem;">
     <div class="container-sm">
-      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Guides connexes</h2>
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Guides liés</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
         <a href="/fr/guides/dify-docker-setup/" style="text-decoration:none;">
           <div class="card">
             <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Guide</p>
-            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Docker Compose Dify en détail</h3>
-            <p style="font-size:0.875rem;color:#6B7280;margin:0;">Configuration complète pour chaque service et variable d'environnement.</p>
+            <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Docker Compose Dify — Guide approfondi</h3>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">Guide de configuration complet pour chaque service et variable d'environnement.</p>
           </div>
         </a>
         <a href="/fr/providers/hetzner/" style="text-decoration:none;">
           <div class="card">
-            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Hébergeur</p>
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Fournisseur</p>
             <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Hetzner pour Dify</h3>
-            <p style="font-size:0.875rem;color:#6B7280;margin:0;">Meilleur rapport qualité-prix VPS — à partir de 3,79 €/mois.</p>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">Meilleur VPS rapport qualité-prix pour auto-héberger Dify — à partir de €3,79/mois.</p>
           </div>
         </a>
         <a href="/fr/best-dify-hosting/" style="text-decoration:none;">
           <div class="card">
-            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Comparaison</p>
+            <p style="font-size:0.75rem;font-weight:600;color:#1677FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Comparatif</p>
             <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:0.25rem;">Meilleurs hébergeurs Dify</h3>
-            <p style="font-size:0.875rem;color:#6B7280;margin:0;">8 hébergeurs testés et classés pour l'auto-hébergement de Dify.</p>
+            <p style="font-size:0.875rem;color:#6B7280;margin:0;">8 fournisseurs testés et classés pour l'auto-hébergement de Dify.</p>
           </div>
         </a>
       </div>
