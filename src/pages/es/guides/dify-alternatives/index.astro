@@ -1,0 +1,319 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-alternatives/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Mejores alternativas a Dify en 2026 — Flowise, n8n, LangFlow & más',
+  description: '¿Buscas alternativas a Dify? Comparamos Flowise, n8n, LangFlow y OpenWebUI para ayudarte a encontrar la mejor plataforma de apps IA para tus necesidades.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+---
+
+<BaseLayout
+  title="Mejores alternativas a Dify en 2026 — Flowise, n8n, LangFlow & más"
+  description="¿Buscas alternativas a Dify? Comparamos Flowise, n8n, LangFlow y OpenWebUI para ayudarte a encontrar la mejor plataforma de apps IA para tus necesidades."
+  lang="es"
+  canonical="https://dify-hosting.com/es/guides/dify-alternatives/"
+  hreflang={hreflang}
+  schema={[schema, {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Cual es la mejor alternativa open-source a Dify?","acceptedAnswer":{"@type":"Answer","text":"Flowise es la alternativa mas cercana. Para automatizacion de flujos de trabajo, n8n es excelente. Para chat IA local, OpenWebUI es la mejor opcion."}},{"@type":"Question","name":"Es Flowise mejor que Dify?","acceptedAnswer":{"@type":"Answer","text":"Flowise es mas simple pero Dify tiene mas caracteristicas: soporte multi-modelo, RAG integrado, orquestacion de flujos de trabajo y una API lista para produccion."}},{"@type":"Question","name":"Se pueden autohospedar las alternativas a Dify?","acceptedAnswer":{"@type":"Answer","text":"Si — Flowise, LangFlow, n8n y OpenWebUI son todos open-source y se pueden hospedar mediante Docker."}},{"@type":"Question","name":"Cual es la diferencia entre Dify y LangFlow?","acceptedAnswer":{"@type":"Answer","text":"Ambos usan un editor visual basado en nodos. LangFlow esta mas orientado al codigo; Dify esta mas orientado al producto con una UI de chat nativa."}}]}]}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Inicio', href: '/es/' },
+        { label: 'Guides', href: '/es/guides/' },
+        { label: 'Alternativas a Dify' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Actualizado marzo 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#fef9c3;color:#713f12;">5 herramientas comparadas</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Las mejores alternativas a Dify en 2026
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Dify es la plataforma LLM open-source líder — pero no es para todos. Comparamos las mejores alternativas (Flowise, n8n, LangFlow, OpenWebUI) para ayudarte a elegir la herramienta correcta para tu caso de uso específico.
+      </p>
+    </div>
+  </section>
+
+  <!-- Por qué buscar alternativas -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">¿Por qué buscar alternativas a Dify?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify es excelente para la mayoría de casos de desarrollo de apps IA — pero hay razones legítimas para considerar alternativas:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+        {[
+          { title: 'Caso de uso más simple', desc: 'Solo necesitas una cadena LLM básica o un chatbot simple — el conjunto completo de características de Dify puede ser excesivo.' },
+          { title: 'Flujos no-LLM', desc: 'Tu automatización involucra principalmente lógica empresarial e integraciones SaaS con mínima IA.' },
+          { title: 'Requisito open-source puro', desc: 'Necesitas una herramienta sin versión Cloud SaaS y desarrollo completamente impulsado por la comunidad.' },
+          { title: 'Integraciones específicas', desc: 'Necesitas integración nativa profunda con un framework como LangChain o un almacén vectorial específico.' },
+        ].map(r => (
+          <div class="card">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">{r.title}</h3>
+            <p style="font-size:0.85rem;color:#6B7280;margin:0;line-height:1.5;">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparación rápida -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Comparación rápida</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">Todas las herramientas a continuación son open-source y auto-alojables. Así se comparan:</p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Herramienta</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Tipo</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Auto-alojamiento</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Precio Cloud</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Ideal para</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;color:#374151;">Estrellas GitHub</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { tool: 'Dify', type: 'Plataforma de apps LLM', host: '✅ Gratis', price: 'Gratis / $59+/mes', best: 'Apps IA prod & agentes', stars: '90k+' },
+              { tool: 'Flowise', type: 'Builder LLM visual', host: '✅ Gratis', price: 'Gratis (solo auto-aloj.)', best: 'Cadenas LLM simples', stars: '35k+' },
+              { tool: 'n8n', type: 'Automatización workflows', host: '✅ Gratis', price: '$20–50+/mes', best: 'Automatización empresarial', stars: '50k+' },
+              { tool: 'LangFlow', type: 'IDE visual LangChain', host: '✅ Gratis', price: 'Gratis (solo auto-aloj.)', best: 'Usuarios avanzados LangChain', stars: '40k+' },
+              { tool: 'OpenWebUI', type: 'Interfaz de chat LLM', host: '✅ Gratis', price: 'Gratis (solo auto-aloj.)', best: 'Chat con modelos locales', stars: '60k+' },
+            ].map((row, i) => (
+              <tr style={`border-bottom:1px solid #e5e7eb;${i % 2 === 0 ? '' : 'background:#f9fafb;'}`}>
+                <td style={`padding:0.75rem 1rem;font-weight:700;color:${i === 0 ? '#1677FF' : '#111827'};`}>{row.tool}{i === 0 ? ' ★' : ''}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{row.type}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{row.host}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{row.price}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{row.best}</td>
+                <td style="padding:0.75rem 1rem;color:#374151;">{row.stars}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flowise -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Flowise — El builder LLM más sencillo</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        Flowise es un builder visual drag-and-drop para aplicaciones LLM. Construido sobre LangChain, permite crear cadenas, agentes y chatbots conectando componentes pre-construidos en un canvas. Es la opción más accesible para principiantes que quieren crear herramientas LLM.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem;">
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#14532d;margin-bottom:0.5rem;">Fortalezas de Flowise</h3>
+          <ul style="color:#166534;line-height:2;margin:0;padding-left:1rem;font-size:0.875rem;">
+            <li>Muy fácil de empezar — no se requiere código</li>
+            <li>Excelente para chatbots RAG simples y bots de Q&A</li>
+            <li>Gran biblioteca de componentes LangChain pre-construidos</li>
+            <li>Ligero — funciona con recursos mínimos</li>
+          </ul>
+        </div>
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#7f1d1d;margin-bottom:0.5rem;">Limitaciones de Flowise</h3>
+          <ul style="color:#991b1b;line-height:2;margin:0;padding-left:1rem;font-size:0.875rem;">
+            <li>Sin gestión de usuarios ni características de equipo</li>
+            <li>Preparación limitada para producción en apps complejas</li>
+            <li>Desarrollo menos activo comparado con Dify</li>
+            <li>Sin opción cloud — solo auto-alojamiento</li>
+          </ul>
+        </div>
+      </div>
+      <div style="background:#f8fafc;border-radius:0.75rem;padding:1rem;font-size:0.875rem;color:#374151;">
+        <strong>Ideal para:</strong> Desarrolladores individuales o equipos pequeños que crean chatbots RAG simples o cadenas LLM. No recomendado para apps de producción con múltiples usuarios o workflows agénticos complejos.
+      </div>
+    </div>
+  </section>
+
+  <!-- n8n -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">n8n — Ideal para automatización con algo de IA</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        n8n es una plataforma de automatización de flujos con capacidades LLM — no al revés. Se conecta a 400+ servicios y es excelente para automatizar procesos empresariales. Si tu caso de uso es "disparar un flujo cuando X ocurre y quizás llamar a un modelo IA en algún punto intermedio," n8n es probablemente la mejor herramienta.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem;">
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#14532d;margin-bottom:0.5rem;">Fortalezas de n8n</h3>
+          <ul style="color:#166534;line-height:2;margin:0;padding-left:1rem;font-size:0.875rem;">
+            <li>400+ integraciones con herramientas SaaS</li>
+            <li>Fiabilidad de workflows y gestión de errores de primer nivel</li>
+            <li>Comunidad fuerte y amplia biblioteca de templates</li>
+            <li>Opción cloud disponible (también auto-alojable)</li>
+          </ul>
+        </div>
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#7f1d1d;margin-bottom:0.5rem;">Limitaciones de n8n</h3>
+          <ul style="color:#991b1b;line-height:2;margin:0;padding-left:1rem;font-size:0.875rem;">
+            <li>No diseñado para aplicaciones IA-first</li>
+            <li>Sin RAG, base de conocimiento ni memoria de agente</li>
+            <li>Licencia fair-code (no completamente open source)</li>
+            <li>Plan cloud desde $20/mes (sin nivel gratuito)</li>
+          </ul>
+        </div>
+      </div>
+      <div style="background:#f8fafc;border-radius:0.75rem;padding:1rem;font-size:0.875rem;color:#374151;">
+        <strong>Ideal para:</strong> Equipos de automatización empresarial que necesitan IA como un paso en un flujo más amplio. A menudo se usa junto con Dify — n8n maneja disparadores e integraciones, Dify maneja la lógica IA.
+      </div>
+    </div>
+  </section>
+
+  <!-- LangFlow -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">LangFlow — Para usuarios avanzados de LangChain</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        LangFlow es un IDE visual para LangChain. Proporciona una interfaz drag-and-drop para construir, probar y exportar pipelines LangChain. Si ya estás profundamente en el ecosistema LangChain y quieres una interfaz visual para diseñar tus cadenas, LangFlow es una elección natural — pero está más orientado a desarrolladores que Dify.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem;">
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#14532d;margin-bottom:0.5rem;">Fortalezas de LangFlow</h3>
+          <ul style="color:#166534;line-height:2;margin:0;padding-left:1rem;font-size:0.875rem;">
+            <li>Soporte LangChain nativo — usa cualquier componente</li>
+            <li>Bueno para prototipar arquitecturas de cadenas complejas</li>
+            <li>Exporta flujos a código Python</li>
+            <li>Desarrollo activo respaldado por DataStax</li>
+          </ul>
+        </div>
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#7f1d1d;margin-bottom:0.5rem;">Limitaciones de LangFlow</h3>
+          <ul style="color:#991b1b;line-height:2;margin:0;padding-left:1rem;font-size:0.875rem;">
+            <li>Más orientado a desarrolladores — curva de aprendizaje mayor</li>
+            <li>UX menos pulida que Dify</li>
+            <li>Sin publicación ni compartición de apps integrada</li>
+            <li>Gestión de usuarios limitada para equipos</li>
+          </ul>
+        </div>
+      </div>
+      <div style="background:#f8fafc;border-radius:0.75rem;padding:1rem;font-size:0.875rem;color:#374151;">
+        <strong>Ideal para:</strong> Desarrolladores Python que ya usan LangChain y quieren una herramienta de prototipado visual. Menos adecuado para usuarios no técnicos o equipos que necesitan un producto final pulido.
+      </div>
+    </div>
+  </section>
+
+  <!-- OpenWebUI -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">OpenWebUI — La interfaz ChatGPT para modelos locales</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        OpenWebUI es una interfaz de chat auto-alojada con muchas funciones para LLMs locales. Si tu objetivo es simplemente usar Ollama u otros modelos locales con una interfaz elegante similar a ChatGPT, OpenWebUI es la mejor opción. Pero no es un constructor de apps — es un cliente de chat.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem;">
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#14532d;margin-bottom:0.5rem;">Fortalezas de OpenWebUI</h3>
+          <ul style="color:#166534;line-height:2;margin:0;padding-left:1rem;font-size:0.875rem;">
+            <li>60k+ estrellas GitHub — comunidad enorme</li>
+            <li>Hermosa interfaz similar a ChatGPT</li>
+            <li>Funciona con Ollama, OpenAI y cualquier API compatible con OpenAI</li>
+            <li>Multi-usuario, roles y cambio de modelos integrados</li>
+          </ul>
+        </div>
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#7f1d1d;margin-bottom:0.5rem;">Limitaciones de OpenWebUI</h3>
+          <ul style="color:#991b1b;line-height:2;margin:0;padding-left:1rem;font-size:0.875rem;">
+            <li>No es un constructor de apps — solo una interfaz de chat</li>
+            <li>Sin editor visual de flujos ni constructor de agentes</li>
+            <li>Sin gestión de pipeline RAG más allá de cargar archivos</li>
+            <li>No puede publicar ni incrustar apps para usuarios finales</li>
+          </ul>
+        </div>
+      </div>
+      <div style="background:#f8fafc;border-radius:0.75rem;padding:1rem;font-size:0.875rem;color:#374151;">
+        <strong>Ideal para:</strong> Individuos o equipos que quieren una interfaz ChatGPT privada y auto-alojada para interactuar con LLMs locales o cloud. No reemplaza a Dify si necesitas construir aplicaciones.
+      </div>
+    </div>
+  </section>
+
+  <!-- Matriz de decisión -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">¿Cuál deberías elegir?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">Usa esta matriz de decisión para encontrar rápidamente la herramienta correcta:</p>
+      <div style="display:grid;gap:0.75rem;">
+        {[
+          { condition: 'Quiero crear un chatbot IA orientado al cliente con los datos de mi empresa', answer: '→ Dify', reason: 'Mejor RAG, gestión del conocimiento y publicación de apps' },
+          { condition: 'Quiero automatizar un proceso empresarial conectando 5+ herramientas SaaS', answer: '→ n8n', reason: 'Mejores integraciones y fiabilidad de workflows' },
+          { condition: 'Quiero una interfaz ChatGPT para modelos locales de forma privada', answer: '→ OpenWebUI', reason: 'Construido específicamente para este caso de uso' },
+          { condition: 'Soy desarrollador Python prototipando pipelines LangChain', answer: '→ LangFlow', reason: 'Soporte LangChain nativo y exportación de código' },
+          { condition: 'Soy principiante y quiero el chatbot LLM más simple posible', answer: '→ Flowise', reason: 'Interfaz más accesible para principiantes' },
+          { condition: 'Necesito agentes IA listos para producción con memoria y uso de herramientas', answer: '→ Dify', reason: 'Framework de agentes más completo' },
+          { condition: 'Necesito disparar flujos IA desde eventos empresariales (pedidos, emails)', answer: '→ n8n + Dify', reason: 'n8n maneja eventos, Dify maneja la lógica IA' },
+        ].map((d, i) => (
+          <div class="card" style="display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;">
+            <p style="font-size:0.875rem;color:#374151;margin:0;">{d.condition}</p>
+            <div style="text-align:right;min-width:120px;">
+              <p style="font-weight:700;color:#1677FF;margin:0;font-size:0.9rem;">{d.answer}</p>
+              <p style="font-size:0.75rem;color:#6B7280;margin:0;">{d.reason}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Veredicto -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Veredicto: Por qué la mayoría de equipos elige Dify</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        Después de evaluar todas las alternativas, Dify sigue siendo la mejor plataforma integral para equipos que construyen aplicaciones IA de producción. Aquí está el porqué:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem;">
+        {[
+          { title: 'Soporte multi-modelo', desc: 'OpenAI, Anthropic, Gemini, Mistral, Ollama — cambia modelos sin reescribir tu app.' },
+          { title: 'RAG listo para producción', desc: 'No solo carga de archivos — estrategias de chunking, búsqueda híbrida y ajuste de recuperación.' },
+          { title: 'Framework de agentes completo', desc: 'Uso de herramientas, navegación web, ejecución de código y memoria — todo integrado.' },
+          { title: 'Colaboración en equipo', desc: 'Gestión de usuarios, workspaces, claves API y acceso basado en roles incluidos.' },
+          { title: 'Publicación de apps', desc: 'Publica chatbots como enlaces compartibles o widgets incrustables en minutos.' },
+          { title: 'Comunidad 90k+', desc: 'La comunidad más grande de todas las plataformas de apps LLM — plugins e integraciones extensos.' },
+        ].map(f => (
+          <div class="card">
+            <h3 style="font-size:0.9rem;font-weight:700;color:#111827;margin-bottom:0.4rem;">{f.title}</h3>
+            <p style="font-size:0.82rem;color:#6B7280;margin:0;line-height:1.5;">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:0.75rem;padding:1.25rem;">
+        <p style="font-weight:700;color:#1e40af;margin:0 0 0.5rem;">Conclusión</p>
+        <p style="font-size:0.9rem;color:#3730a3;line-height:1.7;margin:0;">Si estás construyendo una aplicación IA real para usuarios — internos o externos — empieza con Dify. Tiene la mejor combinación de facilidad de uso, características de producción y soporte comunitario. Solo cambia a una alternativa si tienes un caso de uso muy específico que Dify no aborda.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Encuentra la mejor forma de alojar Dify</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        ¿Listo para empezar? La forma más barata de usar Dify es auto-alojarlo en un VPS. Compara los mejores proveedores de hosting para encontrar la mejor opción para tu presupuesto y nivel técnico.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="/es/best-dify-hosting/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;">
+          Encuentra la mejor forma de alojar Dify →
+        </a>
+        <a href="/es/guides/dify-tutorial/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Tutorial Dify para principiantes
+        </a>
+        <a href="/es/guides/dify-vs-n8n/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Dify vs n8n en profundidad
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -45,7 +45,7 @@ const localeMap: Record<string,string> = {en:'en_US',de:'de_DE',fr:'fr_FR',es:'e
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet"/>
   {allSchemas.map(s=><script type="application/ld+json" set:html={JSON.stringify(s)}/>)}
 </head>
 <body>
@@ -53,5 +53,35 @@ const localeMap: Record<string,string> = {en:'en_US',de:'de_DE',fr:'fr_FR',es:'e
   <main style="padding-top:64px;"><slot/></main>
   <Footer lang={lang}/>
   <CookieBanner lang={lang}/>
+  <script>
+    // FAQ accordion: auto-detect FAQ sections by h2 text and make cards collapsible
+    const faqKeywords = ['faq','frequently','häufig','fréquent','preguntas','domande frequenti','sık sorulan'];
+    document.querySelectorAll('section').forEach(section => {
+      const h2 = section.querySelector('h2');
+      if (!h2) return;
+      const h2text = h2.textContent.toLowerCase();
+      if (!faqKeywords.some(k => h2text.includes(k))) return;
+      section.querySelectorAll('.card').forEach(card => {
+        const h3 = card.querySelector('h3');
+        const p = card.querySelector('p');
+        if (!h3 || !p) return;
+        // Hide answer initially
+        p.style.display = 'none';
+        p.style.marginTop = '0.6rem';
+        // Style question as clickable
+        h3.style.cssText += ';cursor:pointer;display:flex;justify-content:space-between;align-items:center;margin-bottom:0;user-select:none;';
+        const chevron = document.createElement('span');
+        chevron.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5l5 5 5-5"/></svg>';
+        chevron.style.cssText = 'flex-shrink:0;margin-left:0.75rem;opacity:0.5;transition:transform 0.2s;';
+        h3.appendChild(chevron);
+        h3.addEventListener('click', () => {
+          const isOpen = p.style.display !== 'none';
+          p.style.display = isOpen ? 'none' : 'block';
+          chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+          chevron.style.opacity = isOpen ? '0.5' : '1';
+        });
+      });
+    });
+  </script>
 </body>
 </html>

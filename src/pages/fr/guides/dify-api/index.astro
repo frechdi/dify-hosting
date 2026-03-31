@@ -1,0 +1,395 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-api/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: "Guide API Dify 2026 : Intégrez l'IA dans votre app avec REST",
+  description: "Guide complet de l'API Dify. Authentification, endpoints de chat, streaming et intégration de l'IA Dify dans n'importe quelle app via REST. Exemples curl et Python inclus.",
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+
+const faqSchema = {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment obtenir une clé API Dify ?","acceptedAnswer":{"@type":"Answer","text":"Ouvrez votre app Dify, cliquez sur 'API Access' en haut à droite, puis créez une nouvelle clé API. Copiez la clé secrète — elle ne sera plus affichée. Utilisez-la dans l'en-tête Authorization comme 'Bearer VOTRE_CLE'."}},{"@type":"Question","name":"L'API Dify est-elle gratuite ?","acceptedAnswer":{"@type":"Answer","text":"L'API Dify elle-même est gratuite — vous payez uniquement les tokens LLM consommés (OpenAI, Anthropic, etc.). Dify auto-hébergé n'a pas de frais par appel. Dify Cloud facture selon les crédits de messages."}},{"@type":"Question","name":"Puis-je streamer les réponses de l'API Dify ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Définissez 'response_mode':'streaming' dans le corps de la requête pour recevoir des Server-Sent Events (SSE). Cela affiche les tokens au fur et à mesure, comme l'effet de frappe de ChatGPT."}},{"@type":"Question","name":"Quels langages fonctionnent avec l'API Dify ?","acceptedAnswer":{"@type":"Answer","text":"N'importe quel langage supportant les requêtes HTTP : Python, JavaScript/Node.js, PHP, Ruby, Go, Java, C# et plus. Dify fournit des SDKs officiels pour Python et Node.js, plus des exemples curl pour chaque endpoint."}}]};
+---
+
+<BaseLayout
+  title="Guide API Dify 2026 : Intégrez l'IA dans votre app avec REST"
+  description="Guide complet de l'API Dify. Authentification, endpoints de chat, streaming et intégration de l'IA Dify dans n'importe quelle app via REST. Exemples curl et Python inclus."
+  lang="fr"
+  canonical="https://dify-hosting.com/fr/guides/dify-api/"
+  hreflang={hreflang}
+  schema={[schema, faqSchema]}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Accueil', href: '/fr/' },
+        { label: 'Guides', href: '/fr/guides/' },
+        { label: 'Guide API Dify' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Mis à jour mars 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#fef9c3;color:#713f12;">Guide Développeur</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#ede9fe;color:#4c1d95;">REST API</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Guide API Dify 2026 : Intégrez l'IA dans votre app avec REST
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        L'API REST Dify vous permet d'appeler n'importe quelle app Dify depuis votre propre code — intégrer un chatbot à votre site, automatiser le traitement de documents ou ajouter des fonctionnalités IA à n'importe quel produit SaaS. Ce guide couvre tout, de l'obtention de votre clé API au streaming des réponses.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 1: Qu'est-ce que l'API Dify ? -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Qu'est-ce que l'API Dify ?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        L'API Dify est une API REST qui vous permet d'appeler par programme n'importe quelle app créée dans Dify — depuis n'importe quel langage de programmation ou plateforme. Une fois que vous publiez une app Dify (chatbot, agent, workflow ou app de complétion), elle obtient son propre endpoint API que vous pouvez appeler avec une clé secrète.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        L'URL de base pour Dify Cloud est <code style="background:#f1f5f9;padding:0.15rem 0.4rem;border-radius:0.25rem;font-size:0.875rem;">https://api.dify.ai/v1</code>. Si vous auto-hébergez Dify, remplacez-la par votre propre domaine : <code style="background:#f1f5f9;padding:0.15rem 0.4rem;border-radius:0.25rem;font-size:0.875rem;">https://votre-serveur.com/v1</code>.
+      </p>
+      <h3 style="font-size:1.1rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Cas d'usage courants</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;margin-bottom:1.5rem;">
+        {[
+          { title: 'Chatbot de site web', desc: "Intégrer un chat IA dans n'importe quel site sans utiliser le widget Dify." },
+          { title: 'Automatisation documentaire', desc: 'Envoyer des PDFs ou textes à un workflow Dify et recevoir une sortie structurée.' },
+          { title: 'Fonctionnalités IA SaaS', desc: "Ajouter de l'écriture IA, du résumé ou du Q&R à votre produit existant." },
+          { title: 'Pipelines backend', desc: 'Déclencher des agents Dify depuis des cron jobs, webhooks ou processeurs de file.' },
+          { title: 'Apps mobiles', desc: "Appeler Dify depuis des apps iOS ou Android via HTTP standard." },
+          { title: 'Outils no-code', desc: 'Connecter Dify à n8n, Make ou Zapier via des nœuds de requête HTTP.' },
+        ].map(u => (
+          <div style="background:#f8fafc;border-radius:0.5rem;padding:0.875rem;border-left:3px solid #1677FF;">
+            <p style="font-weight:700;font-size:0.875rem;color:#111827;margin:0 0 0.3rem;">{u.title}</p>
+            <p style="font-size:0.82rem;color:#6B7280;margin:0;line-height:1.5;">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div style="background:#f0f9ff;border-left:3px solid #1677FF;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#1e40af;">
+        <strong>Note :</strong> Chaque type d'app Dify (Chatbot, Agent, Workflow, Complétion) a des endpoints légèrement différents. Ce guide se concentre sur l'API Chat Messages, la plus utilisée.
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Obtenir votre clé API -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Obtenir votre clé API</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        Chaque app Dify a sa propre clé API. Vous devez en créer une pour chaque app à laquelle vous souhaitez accéder via API. Voici comment :
+      </p>
+      <div style="display:grid;gap:0.75rem;max-width:620px;margin-bottom:1.5rem;">
+        {[
+          { step: '1', action: 'Ouvrez votre app Dify dans Studio', detail: 'Allez sur cloud.dify.ai (ou votre URL auto-hébergée) et ouvrez l\'app que vous souhaitez appeler via API.' },
+          { step: '2', action: 'Cliquez sur "API Access" en haut à droite', detail: 'Cela ouvre le panneau de référence API pour cette app spécifique.' },
+          { step: '3', action: 'Cliquez sur "Créer une clé API"', detail: 'Donnez-lui un nom (ex. "production" ou "test") pour l\'identifier plus tard.' },
+          { step: '4', action: 'Copiez la clé secrète immédiatement', detail: 'La clé n\'est affichée qu\'une seule fois. Stockez-la dans vos variables d\'environnement — ne la codez jamais en dur dans le code source.' },
+          { step: '5', action: 'Utilisez-la dans l\'en-tête Authorization', detail: 'Toutes les requêtes API nécessitent cet en-tête : Authorization: Bearer VOTRE_CLE_API' },
+        ].map(s => (
+          <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+            <span style="width:1.75rem;height:1.75rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;flex-shrink:0;margin-top:0.1rem;">{s.step}</span>
+            <div>
+              <p style="font-weight:700;font-size:0.9rem;color:#111827;margin:0 0 0.2rem;">{s.action}</p>
+              <p style="font-size:0.82rem;color:#6B7280;margin:0;line-height:1.5;">{s.detail}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="background:#fef2f2;border-left:3px solid #ef4444;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#991b1b;">
+        <strong>Avertissement de sécurité :</strong> N'exposez jamais votre clé API dans du JavaScript côté client ou dans un dépôt public. Stockez-la toujours comme variable d'environnement et effectuez les appels API Dify depuis votre serveur backend.
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Endpoints API -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Aperçu des endpoints API</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        L'API Dify fournit des endpoints pour envoyer des messages, gérer les conversations, uploader des fichiers et plus. Tous les endpoints sont relatifs à l'URL de base <code style="background:#f1f5f9;padding:0.15rem 0.4rem;border-radius:0.25rem;font-size:0.875rem;">https://api.dify.ai/v1</code>.
+      </p>
+      <div style="overflow-x:auto;margin-bottom:1.5rem;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;">
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Méthode</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Endpoint</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:700;color:#374151;border-bottom:2px solid #e5e7eb;">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { method: 'POST', color: '#16a34a', bg: '#f0fdf4', endpoint: '/chat-messages', desc: 'Envoyer un message de chat et recevoir une réponse. Supporte les modes blocking et streaming.' },
+              { method: 'POST', color: '#16a34a', bg: '#f0fdf4', endpoint: '/completion-messages', desc: 'Envoyer un prompt à une app de complétion. Retourne un texte généré.' },
+              { method: 'POST', color: '#16a34a', bg: '#f0fdf4', endpoint: '/files/upload', desc: 'Uploader un fichier (PDF, image, etc.) pour les apps RAG ou vision.' },
+              { method: 'GET', color: '#1677FF', bg: '#eff6ff', endpoint: '/conversations', desc: "Lister toutes les conversations d'un utilisateur. Utilisez le paramètre user pour filtrer." },
+              { method: 'GET', color: '#1677FF', bg: '#eff6ff', endpoint: '/messages', desc: "Obtenir l'historique des messages d'une conversation spécifique." },
+              { method: 'DELETE', color: '#dc2626', bg: '#fef2f2', endpoint: '/conversations/:id', desc: 'Supprimer définitivement une conversation et tous ses messages.' },
+              { method: 'POST', color: '#16a34a', bg: '#f0fdf4', endpoint: '/messages/:id/feedbacks', desc: 'Soumettre une évaluation (pouce haut/bas) pour un message spécifique.' },
+              { method: 'GET', color: '#1677FF', bg: '#eff6ff', endpoint: '/parameters', desc: "Obtenir les paramètres d'entrée, le texte d'intro et les questions suggérées de l'app." },
+            ].map(r => (
+              <tr style="border-bottom:1px solid #f3f4f6;">
+                <td style={`padding:0.75rem 1rem;font-family:monospace;font-size:0.8rem;font-weight:700;color:${r.color};background:${r.bg};white-space:nowrap;`}>{r.method}</td>
+                <td style="padding:0.75rem 1rem;font-family:monospace;font-size:0.8rem;color:#374151;white-space:nowrap;">{r.endpoint}</td>
+                <td style="padding:0.75rem 1rem;color:#6B7280;line-height:1.5;">{r.desc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Premier appel API -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Votre premier appel API</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Effectuons un vrai appel API. Remplacez <code style="background:#f1f5f9;padding:0.15rem 0.4rem;border-radius:0.25rem;">VOTRE_CLE_API</code> par votre clé réelle. Le champ <code style="background:#f1f5f9;padding:0.15rem 0.4rem;border-radius:0.25rem;">user</code> est un identifiant unique pour l'utilisateur final — utilisez n'importe quelle chaîne qui l'identifie dans votre système.
+      </p>
+
+      <h3 style="font-size:1.05rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Exemple curl</h3>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.82rem;line-height:1.7;margin-bottom:1.5rem;"><code>curl -X POST 'https://api.dify.ai/v1/chat-messages' \
+  -H 'Authorization: Bearer VOTRE_CLE_API' \
+  -H 'Content-Type: application/json' \
+  -d '{"{"}
+    "inputs": {"{"}{"}"},
+    "query": "Bonjour ! Comment pouvez-vous m'aider ?",
+    "response_mode": "blocking",
+    "conversation_id": "",
+    "user": "utilisateur-123"
+  {"}"}'</code></pre>
+
+      <h3 style="font-size:1.05rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Exemple de réponse</h3>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.82rem;line-height:1.7;margin-bottom:1.5rem;"><code>{"{"}
+  "event": "message",
+  "task_id": "abc123",
+  "id": "msg_456",
+  "conversation_id": "conv_789",
+  "mode": "chat",
+  "answer": "Bonjour ! Je peux vous aider avec des questions, de la rédaction, des analyses et bien plus. Que souhaitez-vous explorer ?",
+  "metadata": {"{"} "usage": {"{"} "prompt_tokens": 12, "completion_tokens": 25 {"}"} {"}"},
+  "created_at": 1711234567
+{"}"}</code></pre>
+
+      <h3 style="font-size:1.05rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Exemple Python (avec requests)</h3>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.82rem;line-height:1.7;margin-bottom:1.5rem;"><code>import requests
+
+API_KEY = "votre_cle_api_ici"
+BASE_URL = "https://api.dify.ai/v1"
+
+def chat(query, conversation_id="", user="utilisateur-123"):
+    response = requests.post(
+        f"{"{BASE_URL}"}/chat-messages",
+        headers={"{"}
+            "Authorization": f"Bearer {"{API_KEY}"}",
+            "Content-Type": "application/json",
+        {"}"},
+        json={"{"}
+            "inputs": {"{}"},
+            "query": query,
+            "response_mode": "blocking",
+            "conversation_id": conversation_id,
+            "user": user,
+        {"}"}
+    )
+    response.raise_for_status()
+    return response.json()
+
+# Premier message
+result = chat("Qu'est-ce que Dify ?")
+print(result["answer"])
+conversation_id = result["conversation_id"]
+
+# Suite dans la même conversation
+result2 = chat("Pouvez-vous développer ?", conversation_id=conversation_id)
+print(result2["answer"])</code></pre>
+
+      <div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#166534;">
+        <strong>Astuce :</strong> Conservez le <code>conversation_id</code> de la première réponse et transmettez-le dans les appels suivants. Cela maintient l'historique de la conversation afin que l'IA se souvienne de ce qui a été dit.
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Streaming -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Réponses en streaming (SSE)</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        Le streaming vous permet d'afficher les tokens au fur et à mesure de leur génération — comme l'effet de frappe de ChatGPT. Dify utilise les Server-Sent Events (SSE) pour le streaming. Définissez <code style="background:#f1f5f9;padding:0.15rem 0.4rem;border-radius:0.25rem;">"response_mode": "streaming"</code> dans le corps de votre requête.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Chaque événement arrive comme une ligne préfixée par <code style="background:#f1f5f9;padding:0.15rem 0.4rem;border-radius:0.25rem;">data:</code>. Les types d'événements incluent <code style="background:#f1f5f9;padding:0.15rem 0.4rem;border-radius:0.25rem;">message</code> (un chunk de token), <code style="background:#f1f5f9;padding:0.15rem 0.4rem;border-radius:0.25rem;">message_end</code> (message final avec métadonnées) et <code style="background:#f1f5f9;padding:0.15rem 0.4rem;border-radius:0.25rem;">error</code>.
+      </p>
+
+      <h3 style="font-size:1.05rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Exemple curl en streaming</h3>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.82rem;line-height:1.7;margin-bottom:1.5rem;"><code>curl -X POST 'https://api.dify.ai/v1/chat-messages' \
+  -H 'Authorization: Bearer VOTRE_CLE_API' \
+  -H 'Content-Type: application/json' \
+  --no-buffer \
+  -d '{"{"}
+    "inputs": {"{"}{"}"},
+    "query": "Écris un court poème sur l'IA.",
+    "response_mode": "streaming",
+    "conversation_id": "",
+    "user": "utilisateur-123"
+  {"}"}'</code></pre>
+
+      <h3 style="font-size:1.05rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Exemple Python en streaming</h3>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.82rem;line-height:1.7;margin-bottom:1.5rem;"><code>import requests
+import json
+
+def stream_chat(query, user="utilisateur-123"):
+    with requests.post(
+        "https://api.dify.ai/v1/chat-messages",
+        headers={"{"}
+            "Authorization": "Bearer VOTRE_CLE_API",
+            "Content-Type": "application/json",
+        {"}"},
+        json={"{"}
+            "inputs": {"{}"},
+            "query": query,
+            "response_mode": "streaming",
+            "conversation_id": "",
+            "user": user,
+        {"}"},
+        stream=True,
+    ) as response:
+        for line in response.iter_lines():
+            if line and line.startswith(b"data: "):
+                data = json.loads(line[6:])
+                if data.get("event") == "message":
+                    print(data["answer"], end="", flush=True)
+                elif data.get("event") == "message_end":
+                    print()
+                    break
+
+stream_chat("Explique l'informatique quantique simplement.")</code></pre>
+
+      <h3 style="font-size:1.05rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">JavaScript / Navigateur (fetch avec ReadableStream)</h3>
+      <pre style="background:#0f172a;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;font-size:0.82rem;line-height:1.7;margin-bottom:1rem;"><code>async function streamChat(query) {"{"}
+  const response = await fetch("https://api.dify.ai/v1/chat-messages", {"{"}
+    method: "POST",
+    headers: {"{"}
+      "Authorization": "Bearer VOTRE_CLE_API",
+      "Content-Type": "application/json",
+    {"}"},
+    body: JSON.stringify({"{"}
+      inputs: {"{"}{"}"},
+      query,
+      response_mode: "streaming",
+      conversation_id: "",
+      user: "utilisateur-navigateur",
+    {"}"}),
+  {"}"});
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+
+  while (true) {"{"}
+    const {"{"} done, value {"}"} = await reader.read();
+    if (done) break;
+    const lines = decoder.decode(value).split("\n");
+    for (const line of lines) {"{"}
+      if (line.startsWith("data: ")) {"{"}
+        const data = JSON.parse(line.slice(6));
+        if (data.event === "message") {"{"}
+          document.getElementById("sortie").textContent += data.answer;
+        {"}"}
+      {"}"}
+    {"}"}
+  {"}"}
+{"}"}
+
+streamChat("Quels sont les avantages de l'IA auto-hébergée ?");</code></pre>
+    </div>
+  </section>
+
+  <!-- Section 6: API Self-Hosted -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">API Dify avec installation auto-hébergée</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        Si vous auto-hébergez Dify sur votre propre serveur, l'API fonctionne exactement de la même façon — remplacez simplement l'URL de base. C'est le principal avantage de l'auto-hébergement : vous contrôlez l'infrastructure, les données restent sur votre serveur, et il n'y a pas de limites de crédits de messages.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem;">
+        <div style="background:#f8fafc;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Dify Cloud</h3>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:0.875rem;border-radius:0.5rem;font-size:0.8rem;margin:0;overflow-x:auto;"><code>BASE_URL = "https://api.dify.ai/v1"</code></pre>
+        </div>
+        <div style="background:#f8fafc;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Auto-hébergé</h3>
+          <pre style="background:#0f172a;color:#e2e8f0;padding:0.875rem;border-radius:0.5rem;font-size:0.8rem;margin:0;overflow-x:auto;"><code>BASE_URL = "https://votre-serveur.com/v1"</code></pre>
+        </div>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        Tout le reste — le format de la clé API, les corps de requête, le format de réponse, le streaming — reste identique. Cela facilite le développement contre Dify Cloud, puis le passage à une instance auto-hébergée pour la production en changeant une seule variable d'environnement.
+      </p>
+      <div style="background:#f8fafc;border-radius:0.75rem;padding:1.25rem;margin-bottom:1.5rem;">
+        <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Meilleures options d'hébergement pour les charges API</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.75rem;">
+          <div style="background:#fff;border-radius:0.5rem;padding:1rem;border:1px solid #e5e7eb;">
+            <p style="font-weight:700;font-size:0.875rem;color:#111827;margin:0 0 0.3rem;">Hetzner VPS (autonome)</p>
+            <p style="font-size:0.82rem;color:#6B7280;margin:0 0 0.5rem;line-height:1.5;">À partir de €3,79/mois. Meilleur rapport qualité-prix. Idéal pour les développeurs à l'aise avec Linux.</p>
+            <a href="https://filedesign.com/go/hetzner?ref=dify-hosting.com" rel="noopener sponsored" style="font-size:0.82rem;font-weight:600;color:#1677FF;text-decoration:none;">Voir Hetzner →</a>
+          </div>
+          <div style="background:#fff;border-radius:0.5rem;padding:1rem;border:1px solid #e5e7eb;">
+            <p style="font-weight:700;font-size:0.875rem;color:#111827;margin:0 0 0.3rem;">Elestio (Géré)</p>
+            <p style="font-size:0.82rem;color:#6B7280;margin:0 0 0.5rem;line-height:1.5;">Déploiement Dify géré. Mises à jour auto, sauvegardes, SSL. Aucune gestion de serveur requise.</p>
+            <a href="https://filedesign.com/go/elestio?ref=dify-hosting.com" rel="noopener sponsored" style="font-size:0.82rem;font-weight:600;color:#1677FF;text-decoration:none;">Voir Elestio →</a>
+          </div>
+        </div>
+      </div>
+      <div style="background:#f0f9ff;border-left:3px solid #1677FF;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#1e40af;">
+        <strong>SSL requis :</strong> Assurez-vous que votre Dify auto-hébergé est accessible en HTTPS. La plupart des navigateurs bloquent les requêtes mixed-content de pages HTTPS vers des API HTTP. Configurez un proxy inverse (Nginx + Let's Encrypt) pour SSL.
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Questions fréquentes</h2>
+      <div style="display:grid;gap:1rem;max-width:700px;">
+        {[
+          { q: "Comment obtenir une clé API Dify ?", a: "Ouvrez votre app Dify, cliquez sur 'API Access' en haut à droite, puis créez une nouvelle clé API. Copiez la clé secrète — elle ne sera plus affichée. Utilisez-la dans l'en-tête Authorization comme 'Bearer VOTRE_CLE'." },
+          { q: "L'API Dify est-elle gratuite ?", a: "L'API Dify elle-même est gratuite — vous payez uniquement les tokens LLM consommés (OpenAI, Anthropic, etc.). Dify auto-hébergé n'a pas de frais par appel. Dify Cloud facture selon les crédits de messages." },
+          { q: "Puis-je streamer les réponses de l'API Dify ?", a: "Oui. Définissez 'response_mode':'streaming' dans le corps de la requête pour recevoir des Server-Sent Events (SSE). Cela affiche les tokens au fur et à mesure, comme l'effet de frappe de ChatGPT." },
+          { q: "Quels langages fonctionnent avec l'API Dify ?", a: "N'importe quel langage supportant les requêtes HTTP : Python, JavaScript/Node.js, PHP, Ruby, Go, Java, C# et plus. Dify fournit des SDKs officiels pour Python et Node.js, plus des exemples curl pour chaque endpoint." },
+        ].map(item => (
+          <div class="card">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">{item.q}</h3>
+            <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin:0;">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Prêt à auto-héberger Dify ?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Tirez le meilleur parti de l'API Dify en auto-hébergeant : aucune limite de crédits, confidentialité totale des données, domaine personnalisé et la même interface API. Comparez les meilleures options d'hébergement.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="/fr/best-dify-hosting/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;">
+          Comparer les options d'hébergement →
+        </a>
+        <a href="/fr/guides/dify-tutorial/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Tutoriel Dify
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

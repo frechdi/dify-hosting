@@ -1,0 +1,372 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-rag/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Dify RAG Anleitung 2026: KI-Apps mit eigenen Dokumenten erstellen',
+  description: 'Vollständige Anleitung zu Dify RAG (Retrieval-Augmented Generation). Lerne, wie du Dokumente hochlädst, eine Wissensdatenbank erstellst und einen KI-Chatbot baust, der aus deinen eigenen Daten antwortet.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+
+const faqSchema = {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Was ist Dify RAG?","acceptedAnswer":{"@type":"Answer","text":"RAG steht für Retrieval-Augmented Generation. Mit Dify RAG kann deine KI vor der Antwort deine eigenen Dokumente, PDFs oder Datenbanken durchsuchen — das reduziert Halluzinationen erheblich und verbessert die Genauigkeit bei fachspezifischen Fragen."}},{"@type":"Question","name":"Welche Dateiformate unterstützt Dify RAG?","acceptedAnswer":{"@type":"Answer","text":"Die Dify Wissensdatenbank unterstützt PDF, Word (.docx), Plaintext (.txt), Markdown (.md), HTML und CSV-Dateien. Du kannst auch externe Datenquellen über die API verbinden oder mit Notion synchronisieren."}},{"@type":"Question","name":"Wie reduziert Dify RAG Halluzinationen?","acceptedAnswer":{"@type":"Answer","text":"Anstatt sich nur auf das Trainingswissen des LLMs zu verlassen, ruft Dify RAG relevante Textabschnitte aus deinen Dokumenten ab und fügt sie als Kontext ein. Das Modell antwortet dann auf Basis deiner tatsächlichen Daten."}},{"@type":"Question","name":"Welche Vektordatenbanken funktionieren mit Dify RAG?","acceptedAnswer":{"@type":"Answer","text":"Dify unterstützt mehrere Vektorspeicher: integriert (Standard, kein Setup), pgvector (PostgreSQL), Qdrant, Weaviate, Milvus und Pinecone. Der integrierte Speicher reicht für die meisten Nutzer aus."}}]};
+---
+
+<BaseLayout
+  title="Dify RAG Anleitung 2026: KI-Apps mit eigenen Dokumenten erstellen"
+  description="Vollständige Anleitung zu Dify RAG (Retrieval-Augmented Generation). Lerne, wie du Dokumente hochlädst, eine Wissensdatenbank erstellst und einen KI-Chatbot baust, der aus deinen eigenen Daten antwortet."
+  lang="de"
+  canonical="https://dify-hosting.com/de/guides/dify-rag/"
+  hreflang={hreflang}
+  schema={[schema, faqSchema]}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Startseite', href: '/de/' },
+        { label: 'Anleitungen', href: '/de/guides/' },
+        { label: 'Dify RAG Anleitung' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Aktualisiert März 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#fef9c3;color:#713f12;">RAG-Anleitung</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#ede9fe;color:#4c1d95;">Fortgeschritten</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Dify RAG Anleitung 2026: Fragen aus eigenen Dokumenten beantworten
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Retrieval-Augmented Generation (RAG) ist die mächtigste Funktion von Dify. Diese Anleitung zeigt dir genau, wie du eine KI aufbaust, die deine Dokumente durchsucht bevor sie antwortet — und damit genaue, fundierte Antworten statt halluzinierten Vermutungen liefert.
+      </p>
+    </div>
+  </section>
+
+  <!-- Was ist Dify RAG -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Was ist Dify RAG?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        RAG steht für <strong>Retrieval-Augmented Generation</strong>. Diese Technik gibt deiner KI Zugang zu deinen eigenen Dokumenten, Datenbanken und Wissensquellen — anstatt nur aus allgemeinen Trainingsdaten zu antworten, durchsucht sie zuerst deine Inhalte und generiert eine Antwort, die auf dem Gefundenen basiert.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        Standard-LLMs wie GPT-4 oder Claude halluzinieren, wenn man sie nach internen Dokumenten, Produktspezifikationen oder Unternehmensrichtlinien fragt — weil sie diese Daten schlicht nicht kennen. Dify RAG löst das, indem es eine <strong>Wissensdatenbank</strong> aus deinen Dateien erstellt und die relevantesten Textabschnitte als Kontext einfügt, bevor das Modell antwortet.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Das Ergebnis: Ein KI-Chatbot, der präzise aus deinen echten Daten antwortet, Quellen zitiert und „Ich weiß es nicht" sagt, wenn die Information nicht verfügbar ist — statt etwas zu erfinden.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+        {[
+          'Antworten aus deinen Dokumenten',
+          'Dramatisch weniger Halluzinationen',
+          'Zitiert spezifische Textpassagen',
+          'Funktioniert mit PDF, Word, TXT, Markdown',
+          'Kein Fine-Tuning des Modells nötig',
+          'Wissensbasis jederzeit aktualisierbar',
+        ].map(f => (
+          <div style="display:flex;align-items:center;gap:0.5rem;background:#f0fdf4;padding:0.75rem;border-radius:0.5rem;">
+            <span style="color:#16a34a;font-weight:700;">✓</span>
+            <span style="font-size:0.875rem;color:#166534;">{f}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Wie RAG funktioniert -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Wie Dify RAG intern funktioniert</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Das Verständnis der Pipeline hilft dir bei der besseren Konfiguration. So läuft der Prozess ab, wenn du ein Dokument hochlädst und deinen Chatbot eine Frage stellst:
+      </p>
+      <div style="display:grid;gap:0.75rem;max-width:640px;margin-bottom:1.5rem;">
+        {[
+          { step: '1', title: 'Dokumentenaufnahme', desc: 'Du lädst eine Datei hoch. Dify extrahiert den Textinhalt aus PDFs, Word-Dokumenten, Markdown usw.' },
+          { step: '2', title: 'Chunking', desc: 'Der Text wird in kleinere Abschnitte aufgeteilt (typischerweise 500–1000 Tokens), damit die Suche präzise ist.' },
+          { step: '3', title: 'Embedding', desc: 'Jeder Abschnitt wird mit einem Embedding-Modell wie text-embedding-3-small in einen Vektor (Zahlenliste) umgewandelt.' },
+          { step: '4', title: 'Vektorspeicherung', desc: 'Die Vektoren werden in einer Vektordatenbank gespeichert (integriert, pgvector, Qdrant, Weaviate, Milvus oder Pinecone).' },
+          { step: '5', title: 'Abfrage-Retrieval', desc: 'Wenn ein Nutzer eine Frage stellt, wird diese ebenfalls eingebettet und die ähnlichsten Abschnitte aus dem Vektorspeicher abgerufen.' },
+          { step: '6', title: 'Kontext-Injektion', desc: 'Die abgerufenen Abschnitte werden als Kontext in den LLM-Prompt eingefügt. Das Modell antwortet auf Basis dieser echten Daten.' },
+        ].map(s => (
+          <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+            <span style="width:1.75rem;height:1.75rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;margin-top:0.1rem;">{s.step}</span>
+            <div>
+              <p style="font-weight:700;font-size:0.9rem;color:#111827;margin:0 0 0.2rem;">{s.title}</p>
+              <p style="font-size:0.85rem;color:#4B5563;margin:0;line-height:1.5;">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="background:#f0f9ff;border-left:3px solid #1677FF;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#1e40af;">
+        <strong>Wichtig zu verstehen:</strong> RAG verändert das LLM nicht. Es fügt einen Retrieval-Schritt vor der Generierung hinzu. Das bedeutet, du kannst deine Wissensdatenbank jederzeit aktualisieren, ohne das Modell anzufassen.
+      </div>
+    </div>
+  </section>
+
+  <!-- Wissensdatenbank einrichten -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">1</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Wissensdatenbank einrichten</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Die Wissensdatenbank ist der Ort, wo du deine Dokumente hochlädst und indexierst. Folge diesen Schritten:
+      </p>
+      <div style="display:grid;gap:1rem;max-width:640px;margin-bottom:1.5rem;">
+        {[
+          { step: '1', title: 'Dify öffnen → Reiter "Knowledge"', desc: 'Klicke oben in der Navigation auf "Knowledge" (Wissen). Hier befinden sich alle deine Dokumentensammlungen.' },
+          { step: '2', title: 'Neue Wissensdatenbank erstellen', desc: 'Klicke auf "+ Wissen erstellen". Gib ihr einen beschreibenden Namen (z.B. "Produktdokumentation", "Support-FAQ").' },
+          { step: '3', title: 'Dateien hochladen', desc: 'Ziehe Dateien per Drag & Drop oder wähle sie über den Browser aus. Unterstützt: PDF, Word (.docx), TXT, Markdown (.md), HTML, CSV. Mehrere Dateien gleichzeitig möglich.' },
+          { step: '4', title: 'Chunking-Strategie wählen', desc: 'Wähle "Automatisch" für die meisten Fälle. Das teilt Dokumente nach Absätzen und Überschriften. Für dichte technische Dokumente: "Benutzerdefiniert" mit 800-Token-Chunks und 150-Token-Überlappung.' },
+          { step: '5', title: 'Embedding-Modell auswählen', desc: 'Wähle dein Embedding-Modell. OpenAI text-embedding-3-small wird empfohlen — schnell, günstig und präzise. Beim Self-Hosting funktioniert nomic-embed-text über Ollama auch offline.' },
+          { step: '6', title: 'Dokumente indexieren', desc: 'Klicke auf "Speichern & Verarbeiten". Dify chunked und embeddet alles. Je nach Dokumentgröße dauert das 1–5 Minuten. Ein Fortschrittsbalken zeigt den Status.' },
+        ].map(s => (
+          <div class="card" style="display:flex;gap:1rem;align-items:flex-start;padding:1rem;">
+            <span style="width:1.75rem;height:1.75rem;background:#eff6ff;color:#1677FF;border:2px solid #1677FF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;flex-shrink:0;">{s.step}</span>
+            <div>
+              <p style="font-weight:700;font-size:0.9rem;color:#111827;margin:0 0 0.25rem;">{s.title}</p>
+              <p style="font-size:0.85rem;color:#4B5563;margin:0;line-height:1.5;">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="background:#fef9c3;border-left:3px solid #f59e0b;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#713f12;">
+        <strong>Tipp:</strong> Sauber formatierte Dokumente werden besser indexiert. Entferne Kopf- und Fußzeilen, Seitenzahlen und Standardtexte aus deinen PDFs vor dem Hochladen, um die Retrieval-Qualität zu verbessern.
+      </div>
+    </div>
+  </section>
+
+  <!-- RAG mit App verbinden -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">2</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">RAG mit deiner App verbinden</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Sobald deine Wissensdatenbank indexiert ist, verbinde sie mit einem Chatbot oder Agent:
+      </p>
+      <div style="display:grid;gap:0.75rem;max-width:640px;margin-bottom:1.5rem;">
+        {[
+          { step: '1', action: 'Öffne deinen Chatbot oder Agent im Studio' },
+          { step: '2', action: 'Suche im linken Bereich den Abschnitt "Kontext"' },
+          { step: '3', action: 'Klicke auf "+ Kontext hinzufügen" und wähle deine Wissensdatenbank' },
+          { step: '4', action: 'Stelle den Abrufmodus auf "Semantische Suche" (empfohlen) für bedeutungsbasiertes Retrieval oder "Volltextsuche" für Schlüsselwort-Matching' },
+          { step: '5', action: 'Setze "Top K" auf 3–5 (wie viele Abschnitte pro Anfrage abgerufen werden). Starte mit 3.' },
+          { step: '6', action: 'Aktiviere "Score-Schwellenwert" bei 0,5, um irrelevante Ergebnisse herauszufiltern' },
+          { step: '7', action: 'Teste im Vorschau-Panel mit Fragen aus deinen Dokumenten. Überprüfe, ob der Bot korrekte Infos liefert.' },
+        ].map(s => (
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <span style="width:1.5rem;height:1.5rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;">{s.step}</span>
+            <p style="font-size:0.875rem;color:#374151;margin:0;">{s.action}</p>
+          </div>
+        ))}
+      </div>
+      <div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#166534;">
+        <strong>Profi-Tipp:</strong> Ergänze deinen System-Prompt: "Wenn du aus dem bereitgestellten Kontext antwortest, gib immer den Namen des Quelldokuments an." Das macht transparent, welches Dokument als Quelle diente.
+      </div>
+    </div>
+  </section>
+
+  <!-- Vektordatenbanken -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">3</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Unterstützte Vektordatenbanken</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify unterstützt mehrere Vektorspeicher. Für die meisten Nutzer reicht der integrierte Speicher aus. Für große Deployments (Millionen von Dokumenten) wechsle zu einer dedizierten Vektordatenbank:
+      </p>
+      <div style="overflow-x:auto;margin-bottom:1.5rem;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;">
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#111827;border-bottom:2px solid #e5e7eb;">Vektorspeicher</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#111827;border-bottom:2px solid #e5e7eb;">Einrichtung</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#111827;border-bottom:2px solid #e5e7eb;">Ideal für</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#111827;border-bottom:2px solid #e5e7eb;">Kosten</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { name: 'Integriert (Standard)', setup: 'Keiner', best: 'Die meisten Nutzer — bis ~100k Dokumente', cost: 'Kostenlos', highlight: true },
+              { name: 'pgvector', setup: 'PostgreSQL-Extension', best: 'Bestehende PostgreSQL-Nutzer', cost: 'Kostenlos (Self-Hosted)', highlight: false },
+              { name: 'Qdrant', setup: 'Docker-Container', best: 'Self-Hosted, hohe Performance', cost: 'Kostenlos (Self-Hosted)', highlight: false },
+              { name: 'Weaviate', setup: 'Docker oder Cloud', best: 'Multimodale Daten (Text + Bilder)', cost: 'Kostenlos / bezahlte Cloud', highlight: false },
+              { name: 'Milvus', setup: 'Docker oder Zilliz Cloud', best: 'Milliarden von Vektoren, Enterprise', cost: 'Kostenlos / bezahlte Cloud', highlight: false },
+              { name: 'Pinecone', setup: 'Nur API-Schlüssel', best: 'Fully Managed, kein Infrastruktur-Aufwand', cost: 'Bezahltes SaaS', highlight: false },
+            ].map(r => (
+              <tr style={`border-bottom:1px solid #f3f4f6;${r.highlight ? 'background:#f0fdf4;' : ''}`}>
+                <td style="padding:0.75rem 1rem;font-weight:600;color:#111827;">{r.name} {r.highlight && <span style="font-size:0.7rem;background:#16a34a;color:#fff;padding:0.1rem 0.4rem;border-radius:9999px;margin-left:0.4rem;">Empfohlen</span>}</td>
+                <td style="padding:0.75rem 1rem;color:#4B5563;">{r.setup}</td>
+                <td style="padding:0.75rem 1rem;color:#4B5563;">{r.best}</td>
+                <td style="padding:0.75rem 1rem;color:#4B5563;">{r.cost}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div style="background:#fef9c3;border-left:3px solid #f59e0b;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#713f12;">
+        <strong>Empfehlung:</strong> Starte mit dem integrierten Vektorspeicher. Er erfordert keinerlei Konfiguration und funktioniert gut für die meisten Projekte. Wechsle nur dann zu einem externen Speicher, wenn du mehr als 100.000 Dokument-Chunks hast.
+      </div>
+    </div>
+  </section>
+
+  <!-- Tipps für beste Ergebnisse -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">4</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">RAG-Tipps für beste Ergebnisse</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Diese Konfigurationstipps verbessern deine RAG-Genauigkeit erheblich:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;">
+        {[
+          {
+            title: 'Optimale Chunk-Größe: 500–1000 Tokens',
+            desc: 'Zu klein = fehlender Kontext. Zu groß = verwässerte Relevanz. Für die meisten Dokumente ist 600 Tokens mit 100 Token Überlappung ideal.',
+          },
+          {
+            title: 'Quelldokumente bereinigen',
+            desc: 'Entferne wiederkehrende Kopf- und Fußzeilen, Seitenzahlen und Navigationselemente. Diese erzeugen Rauschen, das die Retrieval-Qualität beeinträchtigt.',
+          },
+          {
+            title: 'Metadaten-Filterung nutzen',
+            desc: 'Beschrifte Dokumente mit Kategorien (z.B. "Produkt: Abrechnung", "Typ: FAQ"). Filter erlauben präzises Retrieval aus relevanten Teilmengen.',
+          },
+          {
+            title: 'Wissensdatenbanken nach Thema trennen',
+            desc: 'Mische nicht das Produkthandbuch mit der Personalrichtlinie. Separate Datensätze ermöglichen präziseres Retrieval. Du kannst mehrere Basen an eine App anhängen.',
+          },
+          {
+            title: 'Hybrid-Suche verwenden',
+            desc: 'Dify unterstützt einen Hybrid-Modus (semantische + Schlüsselwortsuche kombiniert). Ideal für exakte Begriffe wie Produktcodes oder Eigennamen.',
+          },
+          {
+            title: 'Retrieval in den Logs überwachen',
+            desc: 'Gehe zu Logs & Annotierungen in deiner App, um zu sehen, welche Chunks für jede Anfrage abgerufen wurden. Nutze das zur Fehleranalyse bei schlechten Antworten.',
+          },
+        ].map(t => (
+          <div class="card">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.4rem;">{t.title}</h3>
+            <p style="font-size:0.85rem;color:#6B7280;line-height:1.5;margin:0;">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Abrufmodi -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Abrufmodi erklärt</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify bietet drei Abrufmodi. Wähle je nach deinem Inhaltstyp:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+        <div style="background:#eff6ff;border:2px solid #1677FF;border-radius:0.75rem;padding:1.25rem;">
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+            <span style="background:#1677FF;color:#fff;padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.75rem;font-weight:700;">Empfohlen</span>
+          </div>
+          <h3 style="font-size:1rem;font-weight:700;color:#1e40af;margin-bottom:0.5rem;">Semantische Suche</h3>
+          <p style="font-size:0.85rem;color:#1e40af;line-height:1.5;margin:0;">Findet konzeptionell ähnliche Inhalte, auch wenn die genauen Wörter abweichen. Ideal für natürlichsprachliche Fragen zu komplexen Themen. Nutzt Vektorsimilarität.</p>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Volltextsuche</h3>
+          <p style="font-size:0.85rem;color:#4B5563;line-height:1.5;margin:0;">Schlüsselwortbasierte Suche wie eine klassische Suchmaschine. Besser bei exakten Begriffen: Produktcodes, Namen, IDs. Schnell und vorhersehbar.</p>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Hybridsuche</h3>
+          <p style="font-size:0.85rem;color:#4B5563;line-height:1.5;margin:0;">Kombiniert semantische und Volltextsuche mit einem Reranker. Beste Gesamtgenauigkeit, aber langsamer. Benötigt ein Reranker-Modell (z.B. cohere-rerank).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Externe Datenquellen -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Externe Datenquellen &amp; Synchronisierung</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify geht über einfache Datei-Uploads hinaus. Du kannst externe Quellen verbinden, die sich automatisch synchronisieren:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+        {[
+          { source: 'Notion', desc: 'Verbinde deinen Notion-Workspace. Dify synchronisiert Seiten automatisch. Ideal für Team-Wikis und Dokumentation.' },
+          { source: 'Web-Scraping', desc: 'Gib eine URL an und Dify ruft die Seite ab und indexiert sie. Gut für öffentliche Dokumentationsseiten.' },
+          { source: 'Benutzerdefinierte API', desc: 'Baue ein Retrieval-Plugin über die External Knowledge Base API. Verbinde beliebige Datenbanken oder proprietäre Datenquellen.' },
+          { source: 'Dateisync über API', desc: 'Lade Dokumente programmatisch über die Dataset API hoch und aktualisiere sie. Nützlich für CMS-Integrationen.' },
+        ].map(s => (
+          <div class="card">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#1677FF;margin-bottom:0.4rem;">{s.source}</h3>
+            <p style="font-size:0.85rem;color:#4B5563;line-height:1.5;margin:0;">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Häufig gestellte Fragen</h2>
+      <div style="display:grid;gap:1rem;max-width:720px;">
+        {[
+          {
+            q: 'Was ist Dify RAG?',
+            a: 'RAG steht für Retrieval-Augmented Generation. Mit Dify RAG kann deine KI vor der Antwort deine eigenen Dokumente, PDFs oder Datenbanken durchsuchen — das reduziert Halluzinationen erheblich und verbessert die Genauigkeit bei fachspezifischen Fragen.',
+          },
+          {
+            q: 'Welche Dateiformate unterstützt Dify RAG?',
+            a: 'Die Dify Wissensdatenbank unterstützt PDF, Word (.docx), Plaintext (.txt), Markdown (.md), HTML und CSV-Dateien. Du kannst auch externe Datenquellen über die API verbinden oder mit Notion synchronisieren.',
+          },
+          {
+            q: 'Wie reduziert Dify RAG Halluzinationen?',
+            a: 'Anstatt sich nur auf das Trainingswissen des LLMs zu verlassen, ruft Dify RAG relevante Textabschnitte aus deinen Dokumenten ab und fügt sie als Kontext ein. Das Modell antwortet dann auf Basis deiner tatsächlichen Daten.',
+          },
+          {
+            q: 'Welche Vektordatenbanken funktionieren mit Dify RAG?',
+            a: 'Dify unterstützt mehrere Vektorspeicher: integriert (Standard, kein Setup), pgvector (PostgreSQL), Qdrant, Weaviate, Milvus und Pinecone. Der integrierte Speicher reicht für die meisten Nutzer aus.',
+          },
+        ].map(item => (
+          <div class="card">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">{item.q}</h3>
+            <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin:0;">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Bereit, Dify mit RAG selbst zu hosten?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Self-Hosting von Dify gibt dir volle Kontrolle über deine Daten — entscheidend, wenn deine Wissensdatenbank sensible Dokumente enthält. Betreibe Dify auf deinem eigenen Server ab €3,79/Monat auf Hetzner oder nutze eine vollständig verwaltete Instanz auf Elestio in unter 5 Minuten.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="https://filedesign.com/go/hetzner?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;">
+          Dify auf Hetzner selbst hosten →
+        </a>
+        <a href="https://filedesign.com/go/elestio?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Verwaltetes Dify auf Elestio
+        </a>
+        <a href="/de/best-dify-hosting/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Alle Hosting-Optionen vergleichen
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

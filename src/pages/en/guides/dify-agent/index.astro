@@ -1,0 +1,501 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-agent/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Dify AI Agents Guide 2026: Build Autonomous AI with Tools',
+  description: 'Complete guide to Dify AI Agents. Build autonomous AI that searches the web, runs code, calls APIs, and completes multi-step tasks — no coding required. Step-by-step with examples.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+---
+
+<BaseLayout
+  title="Dify AI Agents Guide 2026: Build Autonomous AI with Tools"
+  description="Complete guide to Dify AI Agents. Build autonomous AI that searches the web, runs code, calls APIs, and completes multi-step tasks — no coding required. Step-by-step with examples."
+  lang="en"
+  canonical="https://dify-hosting.com/en/guides/dify-agent/"
+  hreflang={hreflang}
+  schema={[schema, {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What can Dify AI Agents do?","acceptedAnswer":{"@type":"Answer","text":"Dify AI Agents can search the web (Google, Bing, DuckDuckGo), run Python code, call external APIs, read Wikipedia, calculate math, check weather, and more. They reason about which tools to use for each task and can complete multi-step workflows autonomously."}},{"@type":"Question","name":"What is the difference between a Dify Agent and a Chatbot?","acceptedAnswer":{"@type":"Answer","text":"A Dify Chatbot answers questions based on its training and your prompts. A Dify Agent actively uses tools — it can search the internet, execute code, or call APIs to get real-time information. Use a chatbot for support; use an agent for research or automation."}},{"@type":"Question","name":"Can I add custom tools to a Dify Agent?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can add any REST API as a custom tool by providing an OpenAPI spec or manually defining the endpoint with a name, description, and parameters. The agent will use your tool when the task requires it."}},{"@type":"Question","name":"Does Dify Agent support multi-step reasoning?","acceptedAnswer":{"@type":"Answer","text":"Yes. Dify agents use ReAct (Reasoning + Acting) or Function Calling strategies. The agent thinks step-by-step, calls tools as needed, observes the results, and continues until the task is complete — similar to AutoGPT or LangChain agents."}}]}]}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/en/' },
+        { label: 'Guides', href: '/en/guides/' },
+        { label: 'Dify AI Agents' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Updated March 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#fef9c3;color:#713f12;">AI Agents</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#ede9fe;color:#4c1d95;">Advanced</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Dify AI Agents Guide 2026: Build Autonomous AI with Tools
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Dify AI Agents go beyond chatbots — they can search the web, run Python code, call any API, and reason through multi-step tasks autonomously. This guide covers everything: from creating your first agent to building custom tools and chaining multiple agents together.
+      </p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem;">
+        <a href="#create-agent" style="display:inline-flex;align-items:center;padding:0.65rem 1.25rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;font-size:0.9rem;">
+          Create Your First Agent →
+        </a>
+        <a href="#built-in-tools" style="display:inline-flex;align-items:center;padding:0.65rem 1.25rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.2);color:#e2e8f0;font-size:0.9rem;">
+          Browse Built-in Tools
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What are Dify AI Agents -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">What Are Dify AI Agents?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        A Dify AI Agent is an AI application that can autonomously decide which tools to use in order to complete a task. Unlike a regular chatbot that simply generates text based on your prompt, an agent can take real actions in the world: it can search Google, read a Wikipedia article, run a Python script, check today's weather, or call any REST API you configure.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        The key difference is <strong>agency</strong>: you give the agent a goal ("Research the top 5 AI startups of 2026 and summarize their funding"), and the agent figures out the steps — searching the web, reading results, filtering information, and composing a response — without you directing each step manually.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+        {[
+          { icon: '🔍', label: 'Search the web in real time', bg: '#eff6ff', color: '#1e40af' },
+          { icon: '🐍', label: 'Execute Python code', bg: '#f0fdf4', color: '#166534' },
+          { icon: '🔗', label: 'Call any REST API', bg: '#fdf4ff', color: '#6b21a8' },
+          { icon: '🧮', label: 'Perform calculations', bg: '#fff7ed', color: '#9a3412' },
+          { icon: '📚', label: 'Query Wikipedia', bg: '#eff6ff', color: '#1e40af' },
+          { icon: '🤔', label: 'Reason step-by-step', bg: '#f0fdf4', color: '#166534' },
+        ].map(f => (
+          <div style={`display:flex;align-items:center;gap:0.5rem;background:${f.bg};padding:0.75rem;border-radius:0.5rem;`}>
+            <span style="font-size:1.1rem;">{f.icon}</span>
+            <span style={`font-size:0.875rem;font-weight:600;color:${f.color};`}>{f.label}</span>
+          </div>
+        ))}
+      </div>
+      <div style="background:#fef9c3;border-left:3px solid #f59e0b;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;margin-top:1.5rem;font-size:0.875rem;color:#713f12;">
+        <strong>Real example:</strong> Ask a Dify Agent "What is the current price of Bitcoin and how has it changed this week?" — the agent will use Google Search to look up live prices, read the results, and synthesize a current, accurate answer. A plain chatbot cannot do this.
+      </div>
+    </div>
+  </section>
+
+  <!-- Agent vs Chatbot vs Workflow -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Agent vs Chatbot vs Workflow — When to Use Each</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify offers three main app types. Understanding when to use each saves time and produces better results:
+      </p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#111827;min-width:100px;">Feature</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#374151;">Chatbot</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#374151;">Workflow</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#1677FF;">Agent</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { feature: 'Tool use', chatbot: '✗ None', workflow: '✓ Fixed tools', agent: '✓ Dynamic selection' },
+              { feature: 'Decision making', chatbot: 'None', workflow: 'Fixed branching', agent: 'Autonomous reasoning' },
+              { feature: 'Best for', chatbot: 'Q&A, support bots', workflow: 'Pipelines, automation', agent: 'Research, complex tasks' },
+              { feature: 'Steps', chatbot: '1 step (prompt → response)', workflow: 'Pre-defined steps', agent: 'Variable, chosen at runtime' },
+              { feature: 'Real-time data', chatbot: '✗ No', workflow: 'Via HTTP nodes only', agent: '✓ Yes, via tools' },
+              { feature: 'Predictability', chatbot: 'High', workflow: 'Very high', agent: 'Lower (flexible)' },
+              { feature: 'Complexity', chatbot: 'Low', workflow: 'Medium', agent: 'Medium-High' },
+            ].map((row, i) => (
+              <tr style={`border-bottom:1px solid #f3f4f6;${i % 2 === 0 ? 'background:#fff;' : 'background:#f8fafc;'}`}>
+                <td style="padding:0.65rem 1rem;font-weight:600;color:#111827;">{row.feature}</td>
+                <td style="padding:0.65rem 1rem;color:#6B7280;">{row.chatbot}</td>
+                <td style="padding:0.65rem 1rem;color:#6B7280;">{row.workflow}</td>
+                <td style="padding:0.65rem 1rem;color:#1677FF;font-weight:600;">{row.agent}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem;">
+        <div style="background:#f0fdf4;border-radius:0.75rem;padding:1rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#14532d;margin-bottom:0.4rem;">Use a Chatbot when...</h3>
+          <p style="font-size:0.85rem;color:#166534;margin:0;line-height:1.6;">You need a simple conversational assistant for customer support, FAQ answering, or a help desk. Static knowledge, no real-time data needed.</p>
+        </div>
+        <div style="background:#eff6ff;border-radius:0.75rem;padding:1rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#1e3a8a;margin-bottom:0.4rem;">Use a Workflow when...</h3>
+          <p style="font-size:0.85rem;color:#1e40af;margin:0;line-height:1.6;">You have a repeatable, deterministic pipeline: translate text, summarize an article, classify a support ticket, generate a structured report. Same steps every time.</p>
+        </div>
+        <div style="background:#fdf4ff;border-radius:0.75rem;padding:1rem;">
+          <h3 style="font-size:0.9rem;font-weight:700;color:#581c87;margin-bottom:0.4rem;">Use an Agent when...</h3>
+          <p style="font-size:0.85rem;color:#6b21a8;margin:0;line-height:1.6;">The task requires real-time information, multiple tools, or dynamic decision-making. Research tasks, competitive analysis, live data lookups, or anything that needs to "figure out" the steps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Create Your First Agent -->
+  <section id="create-agent" class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">3</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Create Your First Dify Agent</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Follow these steps to build a research agent that can search the web and do calculations. This takes about 10 minutes:
+      </p>
+      <div style="display:grid;gap:1rem;max-width:660px;margin-bottom:1.5rem;">
+        {[
+          { step: '1', title: 'Create a New App', desc: 'In Dify Studio, click "+ Create App". When prompted to choose a type, select "Agent". Give it a name like "Research Assistant".' },
+          { step: '2', title: 'Write the System Prompt', desc: 'Describe the agent\'s role. Example: "You are a research assistant. When asked questions requiring current information, use the Google Search tool. Use the Calculator for any math. Always cite your sources."' },
+          { step: '3', title: 'Add Tools', desc: 'In the Tools section (left panel), click "+ Add Tool". Enable "Google Search" — you\'ll need a SerpAPI key (free tier available). Also enable "Calculator" which requires no API key.' },
+          { step: '4', title: 'Choose Agent Strategy', desc: 'Under "Agent Strategy", select "Function Calling" for GPT-4o or Claude models. Select "ReAct" if using models without native function calling (like some open-source models).' },
+          { step: '5', title: 'Select Your Model', desc: 'Choose GPT-4o or Claude 3.5 Sonnet for best agent performance. These models understand when and how to use tools most reliably.' },
+          { step: '6', title: 'Test the Agent', desc: 'In the preview panel, type: "What is the current Bitcoin price in USD?" — watch the agent call Google Search, read the results, and give you an up-to-date answer. Then try: "If I bought 0.5 BTC at that price, what\'s my total cost?"' },
+          { step: '7', title: 'Publish', desc: 'Click the blue "Publish" button. Your agent is now live and accessible via the share link or REST API.' },
+        ].map(s => (
+          <div class="card" style="display:flex;gap:1rem;align-items:flex-start;padding:1rem;">
+            <span style="width:1.75rem;height:1.75rem;background:#eff6ff;color:#1677FF;border:2px solid #1677FF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;flex-shrink:0;">{s.step}</span>
+            <div>
+              <p style="font-weight:700;font-size:0.9rem;color:#111827;margin:0 0 0.25rem;">{s.title}</p>
+              <p style="font-size:0.85rem;color:#4B5563;margin:0;line-height:1.5;">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#166534;">
+        <strong>Pro tip:</strong> Keep the system prompt focused. Tell the agent exactly what it is, what tools it should prefer, and how to format its answers. Vague prompts lead to inconsistent tool usage.
+      </div>
+    </div>
+  </section>
+
+  <!-- Built-in Tools -->
+  <section id="built-in-tools" class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Built-in Tools for Dify Agents</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify comes with a library of ready-to-use tools. Most require a free or paid API key from the tool's provider. Here are the most useful ones:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+        {[
+          {
+            name: 'Google Search',
+            icon: '🔍',
+            provider: 'SerpAPI',
+            desc: 'Searches Google and returns the top results with titles, snippets, and URLs. The most powerful search tool — use for finding current news, prices, company info, and anything time-sensitive.',
+            keyRequired: 'SerpAPI key (100 free searches/month)',
+            badge: 'Most Used',
+            badgeColor: '#1677FF',
+          },
+          {
+            name: 'DuckDuckGo',
+            icon: '🦆',
+            provider: 'Built-in',
+            desc: 'Privacy-focused web search with no API key required. Good for general searches. Slightly less reliable than Google Search for very recent information.',
+            keyRequired: 'None — free to use',
+            badge: 'No Key Needed',
+            badgeColor: '#16a34a',
+          },
+          {
+            name: 'Bing Search',
+            icon: '🔎',
+            provider: 'Microsoft Azure',
+            desc: 'Microsoft\'s search engine, accessible via Azure Cognitive Services. Solid alternative to SerpAPI with generous free tier (1,000 transactions/month).',
+            keyRequired: 'Azure Bing Search API key',
+            badge: 'Good Free Tier',
+            badgeColor: '#16a34a',
+          },
+          {
+            name: 'Wikipedia',
+            icon: '📚',
+            provider: 'Built-in',
+            desc: 'Searches Wikipedia and returns the full article text. Ideal for factual, encyclopedic knowledge. Much more reliable than web search for stable facts — use it to supplement Google Search.',
+            keyRequired: 'None — free to use',
+            badge: 'No Key Needed',
+            badgeColor: '#16a34a',
+          },
+          {
+            name: 'Calculator',
+            icon: '🧮',
+            provider: 'Built-in',
+            desc: 'Evaluates mathematical expressions. Prevents the model from trying to do arithmetic in its head (LLMs are notoriously bad at math). Use whenever your agent needs to calculate prices, percentages, conversions, or statistics.',
+            keyRequired: 'None — free to use',
+            badge: 'No Key Needed',
+            badgeColor: '#16a34a',
+          },
+          {
+            name: 'Code Interpreter',
+            icon: '🐍',
+            provider: 'Built-in (sandboxed)',
+            desc: 'Runs Python code in a secure sandbox. The agent can write and execute code to analyze data, process text, perform complex calculations, generate charts, or manipulate files. One of the most powerful tools available.',
+            keyRequired: 'None — runs locally in Dify',
+            badge: 'Very Powerful',
+            badgeColor: '#7c3aed',
+          },
+          {
+            name: 'Weather',
+            icon: '🌤',
+            provider: 'OpenWeatherMap',
+            desc: 'Returns current weather conditions and forecasts for any location. Useful for travel agents, event planning bots, or any agent that needs location-aware responses.',
+            keyRequired: 'OpenWeatherMap API key (free tier available)',
+            badge: 'Free Tier',
+            badgeColor: '#16a34a',
+          },
+          {
+            name: 'WolframAlpha',
+            icon: '🧠',
+            provider: 'Wolfram',
+            desc: 'Computational intelligence engine — can answer math problems, scientific questions, historical data, unit conversions, and factual queries with extremely high accuracy. Great complement to web search.',
+            keyRequired: 'Wolfram API key (2,000 free calls/month)',
+            badge: 'Highly Accurate',
+            badgeColor: '#d97706',
+          },
+        ].map(tool => (
+          <div class="card" style="padding:1.25rem;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;margin-bottom:0.75rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <span style="font-size:1.25rem;">{tool.icon}</span>
+                <h3 style="font-size:1rem;font-weight:700;color:#111827;margin:0;">{tool.name}</h3>
+              </div>
+              <span style={`font-size:0.7rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:9999px;white-space:nowrap;background:${tool.badgeColor}1a;color:${tool.badgeColor};`}>{tool.badge}</span>
+            </div>
+            <p style="font-size:0.82rem;color:#6B7280;margin:0 0 0.5rem;line-height:1.5;">{tool.desc}</p>
+            <div style="display:flex;align-items:center;gap:0.4rem;margin-top:0.5rem;">
+              <span style="font-size:0.75rem;color:#9CA3AF;">Provider:</span>
+              <span style="font-size:0.75rem;font-weight:600;color:#374151;">{tool.provider}</span>
+            </div>
+            <div style="background:#f8fafc;border-radius:0.375rem;padding:0.4rem 0.6rem;margin-top:0.5rem;">
+              <span style="font-size:0.75rem;color:#6B7280;">Key: </span>
+              <span style="font-size:0.75rem;color:#374151;">{tool.keyRequired}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom Tool Integration -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Custom Tool Integration: Connect Any API</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        The real power of Dify Agents is that you can connect any REST API as a custom tool. This means your agent can interact with your company's internal systems, third-party SaaS tools, databases, or any service that has an API.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem;">
+        <div style="background:#eff6ff;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#1e40af;margin-bottom:0.75rem;">Method 1: OpenAPI Schema</h3>
+          <p style="font-size:0.85rem;color:#1e40af;line-height:1.5;margin:0 0 0.75rem;">If your API has an OpenAPI (Swagger) spec, paste the JSON or YAML directly into Dify. It will automatically parse all endpoints, parameters, and descriptions.</p>
+          <ol style="font-size:0.82rem;color:#1e40af;line-height:1.8;margin:0;padding-left:1.1rem;">
+            <li>Go to Tools → Custom Tools → Create Tool</li>
+            <li>Select "Import from OpenAPI Schema"</li>
+            <li>Paste your OpenAPI JSON/YAML</li>
+            <li>Add authentication (API key, Bearer token, etc.)</li>
+            <li>Click Save — all endpoints become available as tools</li>
+          </ol>
+        </div>
+        <div style="background:#f0fdf4;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#14532d;margin-bottom:0.75rem;">Method 2: Manual Definition</h3>
+          <p style="font-size:0.85rem;color:#166534;line-height:1.5;margin:0 0 0.75rem;">For simple APIs without a formal spec, define each endpoint manually:</p>
+          <ol style="font-size:0.82rem;color:#166534;line-height:1.8;margin:0;padding-left:1.1rem;">
+            <li>Name: "get_customer" (what the agent calls it)</li>
+            <li>Description: "Looks up a customer by email address" (the agent reads this to decide when to use it)</li>
+            <li>Method: GET, POST, PUT, DELETE</li>
+            <li>URL: Your endpoint URL with parameter placeholders</li>
+            <li>Parameters: name, type, description, required/optional</li>
+          </ol>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1.25rem;">
+        <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Example: CRM API Tool</h3>
+        <p style="font-size:0.85rem;color:#4B5563;margin:0 0 0.75rem;line-height:1.5;">Here's what a custom tool definition looks like for a company CRM:</p>
+        <div style="background:#1e293b;border-radius:0.5rem;padding:1rem;overflow-x:auto;">
+          <pre style="margin:0;font-size:0.8rem;color:#e2e8f0;font-family:monospace;line-height:1.6;">{`Tool Name: get_customer_info
+Description: Retrieves customer details from the CRM database
+             by customer email. Use this when asked about a
+             specific customer's account status or history.
+
+Method: GET
+URL: https://api.yourcrm.com/customers?email={{email}}
+
+Parameters:
+  - email (string, required): The customer's email address
+
+Headers:
+  Authorization: Bearer {{api_key}}`}</pre>
+        </div>
+        <p style="font-size:0.82rem;color:#6B7280;margin:0.75rem 0 0;line-height:1.5;">Once configured, your agent can answer questions like "What is the subscription status of john@example.com?" by automatically calling your CRM API.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ReAct vs Function Calling -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Agent Strategies: ReAct vs Function Calling</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify supports two strategies for how an agent reasons and uses tools. Choosing the right one depends on your LLM model:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-bottom:1.5rem;">
+        <div style="background:#fff;border:2px solid #1677FF;border-radius:0.75rem;padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+            <span style="background:#1677FF;color:#fff;padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.75rem;font-weight:700;">Recommended</span>
+            <h3 style="font-size:1rem;font-weight:700;color:#111827;margin:0;">Function Calling</h3>
+          </div>
+          <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin:0 0 0.75rem;">The model natively understands how to call tools as structured function calls. More reliable, more efficient, and produces cleaner reasoning chains.</p>
+          <div style="background:#eff6ff;border-radius:0.5rem;padding:0.75rem;margin-bottom:0.75rem;">
+            <p style="font-size:0.8rem;font-weight:700;color:#1e40af;margin:0 0 0.3rem;">Best models for this:</p>
+            <ul style="font-size:0.8rem;color:#1e40af;margin:0;padding-left:1.1rem;line-height:1.7;">
+              <li>GPT-4o, GPT-4 Turbo</li>
+              <li>Claude 3.5 Sonnet, Claude 3 Opus</li>
+              <li>Gemini 1.5 Pro, Gemini 1.5 Flash</li>
+              <li>Mistral Large</li>
+            </ul>
+          </div>
+          <p style="font-size:0.8rem;color:#6B7280;margin:0;line-height:1.5;"><strong>How it works:</strong> The LLM outputs a structured JSON object specifying which tool to call and with what arguments. Dify executes the call and feeds results back to the model.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+            <span style="background:#f59e0b;color:#fff;padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.75rem;font-weight:700;">Universal</span>
+            <h3 style="font-size:1rem;font-weight:700;color:#111827;margin:0;">ReAct (Reasoning + Acting)</h3>
+          </div>
+          <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin:0 0 0.75rem;">The model writes its reasoning as text ("Thought: I need to search for X...") followed by action instructions ("Action: google_search[X]"). Works with any model that can follow instructions.</p>
+          <div style="background:#fff7ed;border-radius:0.5rem;padding:0.75rem;margin-bottom:0.75rem;">
+            <p style="font-size:0.8rem;font-weight:700;color:#9a3412;margin:0 0 0.3rem;">When to use this:</p>
+            <ul style="font-size:0.8rem;color:#9a3412;margin:0;padding-left:1.1rem;line-height:1.7;">
+              <li>Open-source models (Llama, Qwen, Mistral 7B)</li>
+              <li>Models without native function calling</li>
+              <li>When you want to see the agent's full reasoning</li>
+            </ul>
+          </div>
+          <p style="font-size:0.8rem;color:#6B7280;margin:0;line-height:1.5;"><strong>How it works:</strong> Thought → Action → Observation loop. The agent narrates its reasoning, takes an action, reads the observation, and continues until done. Similar to how LangChain and AutoGPT work.</p>
+        </div>
+      </div>
+      <div style="background:#f8fafc;border-radius:0.75rem;padding:1.25rem;">
+        <h3 style="font-size:0.9rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Quick Rule of Thumb</h3>
+        <p style="font-size:0.875rem;color:#4B5563;margin:0;line-height:1.6;">Using GPT-4o, Claude 3.5+, or Gemini Pro? → Use <strong>Function Calling</strong>. Using an open-source model or something older? → Use <strong>ReAct</strong>. If unsure, try Function Calling first — if the agent fails to use tools properly, switch to ReAct.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Multi-Agent Orchestration -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Multi-Agent Orchestration</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.25rem;">
+        For complex tasks, you can chain multiple specialized agents together. Each agent focuses on what it does best, and a coordinator agent routes work between them. This is sometimes called a "multi-agent system" or "agent swarm."
+      </p>
+      <div style="display:grid;gap:1rem;margin-bottom:1.5rem;">
+        <div class="card" style="padding:1.25rem;">
+          <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Example: Competitive Research System</h3>
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;font-size:0.82rem;">
+            <div style="background:#fdf4ff;border-radius:0.5rem;padding:0.5rem 0.75rem;text-align:center;">
+              <div style="font-weight:700;color:#6b21a8;">Coordinator Agent</div>
+              <div style="color:#7c3aed;font-size:0.75rem;">Receives user request</div>
+            </div>
+            <span style="color:#9CA3AF;font-size:1.2rem;">→</span>
+            <div style="background:#eff6ff;border-radius:0.5rem;padding:0.5rem 0.75rem;text-align:center;">
+              <div style="font-weight:700;color:#1e40af;">Research Agent</div>
+              <div style="color:#1e40af;font-size:0.75rem;">Google Search + Wikipedia</div>
+            </div>
+            <span style="color:#9CA3AF;font-size:1.2rem;">+</span>
+            <div style="background:#f0fdf4;border-radius:0.5rem;padding:0.5rem 0.75rem;text-align:center;">
+              <div style="font-weight:700;color:#166534;">Data Agent</div>
+              <div style="color:#166534;font-size:0.75rem;">Code Interpreter + WolframAlpha</div>
+            </div>
+            <span style="color:#9CA3AF;font-size:1.2rem;">→</span>
+            <div style="background:#fff7ed;border-radius:0.5rem;padding:0.5rem 0.75rem;text-align:center;">
+              <div style="font-weight:700;color:#9a3412;">Writer Agent</div>
+              <div style="color:#9a3412;font-size:0.75rem;">Summarizes & formats</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.75rem;">
+        {[
+          { title: 'Specialization', desc: 'Each agent has a focused system prompt and only the tools it needs. A research agent has search tools; a writing agent has formatting tools. This reduces errors and improves quality.' },
+          { title: 'Parallel Execution', desc: 'Dify Workflow nodes can invoke multiple agents in parallel. Collect all results and merge them in a final step for faster overall completion.' },
+          { title: 'Iteration Control', desc: 'Set max iteration limits per agent to prevent infinite loops. A coordinator can retry failed sub-tasks or fall back to simpler approaches automatically.' },
+          { title: 'Tool Isolation', desc: 'Keep sensitive tools (CRM access, database writes) in separate agents with strict access controls. The public-facing coordinator never directly touches sensitive systems.' },
+        ].map(item => (
+          <div class="card">
+            <h3 style="font-size:0.875rem;font-weight:700;color:#111827;margin-bottom:0.35rem;">{item.title}</h3>
+            <p style="font-size:0.82rem;color:#6B7280;margin:0;line-height:1.5;">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;max-width:720px;">
+        {[
+          {
+            q: 'What can Dify AI Agents do?',
+            a: 'Dify AI Agents can search the web (Google, Bing, DuckDuckGo), run Python code, call external APIs, read Wikipedia, calculate math, check weather, and more. They reason about which tools to use for each task and can complete multi-step workflows autonomously.',
+          },
+          {
+            q: 'What is the difference between a Dify Agent and a Chatbot?',
+            a: 'A Dify Chatbot answers questions based on its training and your prompts. A Dify Agent actively uses tools — it can search the internet, execute code, or call APIs to get real-time information. Use a chatbot for support; use an agent for research or automation.',
+          },
+          {
+            q: 'Can I add custom tools to a Dify Agent?',
+            a: 'Yes. You can add any REST API as a custom tool by providing an OpenAPI spec or manually defining the endpoint with a name, description, and parameters. The agent will use your tool when the task requires it.',
+          },
+          {
+            q: 'Does Dify Agent support multi-step reasoning?',
+            a: 'Yes. Dify agents use ReAct (Reasoning + Acting) or Function Calling strategies. The agent thinks step-by-step, calls tools as needed, observes the results, and continues until the task is complete — similar to AutoGPT or LangChain agents.',
+          },
+        ].map(item => (
+          <div class="card" style="padding:1.25rem;">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">{item.q}</h3>
+            <p style="font-size:0.875rem;color:#4B5563;margin:0;line-height:1.6;">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Ready to Deploy Your Dify Agent?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Running agents on Dify Cloud quickly adds up in credits. Self-hosting on your own server gives you unlimited agent runs for a fixed monthly cost — as low as €3.79/month. Choose a managed host if you want zero maintenance.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:1.5rem;">
+        <div style="background:#fff;border:2px solid #1677FF;border-radius:0.75rem;padding:1.25rem;">
+          <div style="font-size:0.75rem;font-weight:700;color:#1677FF;margin-bottom:0.5rem;">BEST VALUE — SELF-HOST</div>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.4rem;">Hetzner VPS</h3>
+          <p style="font-size:0.85rem;color:#4B5563;margin:0 0 1rem;line-height:1.5;">From €3.79/month. Full control, unlimited agent runs, no per-message fees. Best choice for production AI agents with heavy tool usage.</p>
+          <a href="https://filedesign.com/go/hetzner?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.6rem 1.1rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;font-size:0.875rem;">
+            Get Hetzner VPS →
+          </a>
+        </div>
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:0.75rem;padding:1.25rem;">
+          <div style="font-size:0.75rem;font-weight:700;color:#16a34a;margin-bottom:0.5rem;">MANAGED — ZERO MAINTENANCE</div>
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.4rem;">Elestio</h3>
+          <p style="font-size:0.85rem;color:#4B5563;margin:0 0 1rem;line-height:1.5;">Managed Dify hosting — fully set up in 5 minutes. Automatic updates, backups, and SSL included. Great if you want to focus on building agents, not ops.</p>
+          <a href="https://filedesign.com/go/elestio?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.6rem 1.1rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;font-size:0.875rem;">
+            Try Elestio →
+          </a>
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="/en/best-dify-hosting/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;">
+          Compare All Hosting Options →
+        </a>
+        <a href="/en/guides/dify-tutorial/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Dify Beginner Tutorial
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,372 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import { getHreflang } from '../../../../i18n/hreflang';
+
+const hreflang = getHreflang('/guides/dify-rag/');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Dify RAG Guide 2026: Build AI Apps with Your Own Documents',
+  description: 'Complete guide to Dify RAG (Retrieval-Augmented Generation). Learn how to upload documents, create a Knowledge Base, and build an AI chatbot that answers from your data — step by step.',
+  datePublished: '2026-01-01',
+  dateModified: '2026-03-24',
+  author: { '@type': 'Organization', name: 'Dify Hosting' },
+};
+
+const faqSchema = {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Dify RAG?","acceptedAnswer":{"@type":"Answer","text":"RAG stands for Retrieval-Augmented Generation. Dify RAG lets your AI search through your own documents, PDFs, or databases before generating an answer — dramatically reducing hallucinations and improving accuracy on domain-specific questions."}},{"@type":"Question","name":"What file types does Dify RAG support?","acceptedAnswer":{"@type":"Answer","text":"Dify Knowledge Base supports PDF, Word (.docx), plain text (.txt), Markdown (.md), HTML, and CSV files. You can also connect external data sources via API or sync with Notion and other platforms."}},{"@type":"Question","name":"How does Dify RAG reduce hallucinations?","acceptedAnswer":{"@type":"Answer","text":"Instead of relying solely on the LLM's training data, Dify RAG retrieves relevant chunks from your documents and injects them as context. The model then answers based on your actual data, citing specific passages rather than guessing."}},{"@type":"Question","name":"Which vector databases work with Dify RAG?","acceptedAnswer":{"@type":"Answer","text":"Dify supports multiple vector stores: built-in (default, no setup needed), pgvector (PostgreSQL extension), Qdrant, Weaviate, Milvus, and Pinecone. The built-in store is perfect for most users; switch to an external one for millions of documents."}}]};
+---
+
+<BaseLayout
+  title="Dify RAG Guide 2026: Build AI Apps with Your Own Documents"
+  description="Complete guide to Dify RAG (Retrieval-Augmented Generation). Learn how to upload documents, create a Knowledge Base, and build an AI chatbot that answers from your data — step by step."
+  lang="en"
+  canonical="https://dify-hosting.com/en/guides/dify-rag/"
+  hreflang={hreflang}
+  schema={[schema, faqSchema]}
+>
+  <!-- Hero -->
+  <section class="section" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);padding-bottom:3rem;">
+    <div class="container-sm">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/en/' },
+        { label: 'Guides', href: '/en/guides/' },
+        { label: 'Dify RAG Guide' },
+      ]} />
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#dcfce7;color:#166534;">Updated March 2026</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#fef9c3;color:#713f12;">RAG Guide</span>
+        <span style="display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:600;background:#ede9fe;color:#4c1d95;">Advanced</span>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:1rem;">
+        Dify RAG Guide 2026: Answer Questions from Your Own Documents
+      </h1>
+      <p style="font-size:1.1rem;color:#94a3b8;max-width:680px;line-height:1.7;">
+        Retrieval-Augmented Generation (RAG) is the most powerful feature in Dify. This guide shows you exactly how to build an AI that searches your documents before answering — giving accurate, grounded responses instead of hallucinated guesses.
+      </p>
+    </div>
+  </section>
+
+  <!-- What is Dify RAG -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">What is Dify RAG?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        RAG stands for <strong>Retrieval-Augmented Generation</strong>. It is a technique that gives your AI access to your own documents, databases, and knowledge sources — so instead of answering from general training data, it searches your content first and then generates a response grounded in what it found.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1rem;">
+        Standard LLMs like GPT-4 or Claude hallucinate when asked about your internal docs, your product specs, or your company's policies — because they simply don't have that data. Dify RAG solves this by creating a <strong>Knowledge Base</strong> from your files and injecting the most relevant passages as context before the model responds.
+      </p>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        The result: an AI chatbot that answers accurately from your actual data, cites sources, and says "I don't know" instead of making things up when information isn't available.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+        {[
+          'Answers from your documents, not guesses',
+          'Dramatically reduces hallucinations',
+          'Cites specific passages as sources',
+          'Works with PDFs, Word, TXT, Markdown',
+          'No model fine-tuning required',
+          'Update knowledge base without redeploying',
+        ].map(f => (
+          <div style="display:flex;align-items:center;gap:0.5rem;background:#f0fdf4;padding:0.75rem;border-radius:0.5rem;">
+            <span style="color:#16a34a;font-weight:700;">✓</span>
+            <span style="font-size:0.875rem;color:#166534;">{f}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How RAG Works -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">How Dify RAG Works Under the Hood</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Understanding the pipeline helps you configure it better. Here is what happens when you upload a document and ask your chatbot a question:
+      </p>
+      <div style="display:grid;gap:0.75rem;max-width:640px;margin-bottom:1.5rem;">
+        {[
+          { step: '1', title: 'Document ingestion', desc: 'You upload a file. Dify extracts the text content from PDFs, Word docs, Markdown, etc.' },
+          { step: '2', title: 'Chunking', desc: 'The text is split into smaller chunks (typically 500–1000 tokens each) so retrieval is precise.' },
+          { step: '3', title: 'Embedding', desc: 'Each chunk is converted into a vector (a list of numbers) using an embedding model like text-embedding-3-small.' },
+          { step: '4', title: 'Vector storage', desc: 'Vectors are stored in a vector database (built-in, pgvector, Qdrant, Weaviate, Milvus, or Pinecone).' },
+          { step: '5', title: 'Query retrieval', desc: 'When a user asks a question, it is also embedded, and the most similar chunks are retrieved from the vector store.' },
+          { step: '6', title: 'Context injection', desc: 'The retrieved chunks are injected into the LLM prompt as context. The model answers based on this real data.' },
+        ].map(s => (
+          <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+            <span style="width:1.75rem;height:1.75rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;margin-top:0.1rem;">{s.step}</span>
+            <div>
+              <p style="font-weight:700;font-size:0.9rem;color:#111827;margin:0 0 0.2rem;">{s.title}</p>
+              <p style="font-size:0.85rem;color:#4B5563;margin:0;line-height:1.5;">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="background:#f0f9ff;border-left:3px solid #1677FF;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#1e40af;">
+        <strong>Key insight:</strong> RAG does not modify the LLM. It adds a retrieval step before generation. This means you can update your knowledge base any time without touching the model.
+      </div>
+    </div>
+  </section>
+
+  <!-- Setting Up Knowledge Base -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">1</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Setting Up Your Knowledge Base</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        The Knowledge Base is where you upload and index your documents. Follow these steps:
+      </p>
+      <div style="display:grid;gap:1rem;max-width:640px;margin-bottom:1.5rem;">
+        {[
+          { step: '1', title: 'Open Dify → Knowledge tab', desc: 'Click "Knowledge" in the top navigation. This is where all your document collections live.' },
+          { step: '2', title: 'Create a new Knowledge Base', desc: 'Click "+ Create Knowledge". Give it a descriptive name (e.g., "Product Documentation", "Support FAQ").' },
+          { step: '3', title: 'Upload your files', desc: 'Drag and drop or browse to upload. Supported: PDF, Word (.docx), TXT, Markdown (.md), HTML, CSV. Multiple files at once are supported.' },
+          { step: '4', title: 'Choose chunking strategy', desc: 'Select "Automatic" for most cases. This splits documents by paragraphs and headings. For dense technical docs, try "Custom" with 800 token chunks and 150 token overlap.' },
+          { step: '5', title: 'Select embedding model', desc: 'Choose your embedding model. OpenAI text-embedding-3-small is recommended — fast, cheap, and accurate. If you are self-hosting, nomic-embed-text via Ollama works offline.' },
+          { step: '6', title: 'Index your documents', desc: 'Click "Save & Process". Dify chunks and embeds everything. Depending on document size, this takes 1–5 minutes. A progress bar shows status.' },
+        ].map(s => (
+          <div class="card" style="display:flex;gap:1rem;align-items:flex-start;padding:1rem;">
+            <span style="width:1.75rem;height:1.75rem;background:#eff6ff;color:#1677FF;border:2px solid #1677FF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;flex-shrink:0;">{s.step}</span>
+            <div>
+              <p style="font-weight:700;font-size:0.9rem;color:#111827;margin:0 0 0.25rem;">{s.title}</p>
+              <p style="font-size:0.85rem;color:#4B5563;margin:0;line-height:1.5;">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="background:#fef9c3;border-left:3px solid #f59e0b;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#713f12;">
+        <strong>Tip:</strong> Clean, well-formatted documents index better. Remove headers/footers, page numbers, and boilerplate text from your PDFs before uploading for best retrieval quality.
+      </div>
+    </div>
+  </section>
+
+  <!-- Connecting RAG to Your App -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">2</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Connecting RAG to Your App</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Once your Knowledge Base is indexed, attach it to a chatbot or agent app:
+      </p>
+      <div style="display:grid;gap:0.75rem;max-width:640px;margin-bottom:1.5rem;">
+        {[
+          { step: '1', action: 'Open your Chatbot or Agent app in Studio' },
+          { step: '2', action: 'In the left panel, find the "Context" section' },
+          { step: '3', action: 'Click "+ Add Context" and select your Knowledge Base' },
+          { step: '4', action: 'Set recall mode to "Semantic Search" (recommended) for meaning-based retrieval, or "Full-Text Search" for keyword matching' },
+          { step: '5', action: 'Set "Top K" to 3–5 (how many chunks to retrieve per query). Start with 3.' },
+          { step: '6', action: 'Enable "Score Threshold" at 0.5 to filter out low-relevance results' },
+          { step: '7', action: 'Test in the preview panel with questions from your documents. Verify the bot cites correct info.' },
+        ].map(s => (
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <span style="width:1.5rem;height:1.5rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;">{s.step}</span>
+            <p style="font-size:0.875rem;color:#374151;margin:0;">{s.action}</p>
+          </div>
+        ))}
+      </div>
+      <div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#166534;">
+        <strong>Pro tip:</strong> Add a citation instruction to your system prompt: "When answering from the context provided, always cite the source document name." This makes it clear which document the answer came from.
+      </div>
+    </div>
+  </section>
+
+  <!-- Vector Databases -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">3</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">Supported Vector Databases</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify supports multiple vector stores. For most users, the built-in store is all you need. For large-scale deployments (millions of documents), switch to a dedicated vector database:
+      </p>
+      <div style="overflow-x:auto;margin-bottom:1.5rem;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+          <thead>
+            <tr style="background:#f8fafc;">
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#111827;border-bottom:2px solid #e5e7eb;">Vector Store</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#111827;border-bottom:2px solid #e5e7eb;">Setup</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#111827;border-bottom:2px solid #e5e7eb;">Best For</th>
+              <th style="text-align:left;padding:0.75rem 1rem;font-weight:700;color:#111827;border-bottom:2px solid #e5e7eb;">Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { name: 'Built-in (default)', setup: 'None', best: 'Most users — up to ~100k documents', cost: 'Free', highlight: true },
+              { name: 'pgvector', setup: 'PostgreSQL extension', best: 'Existing PostgreSQL users', cost: 'Free (self-hosted)', highlight: false },
+              { name: 'Qdrant', setup: 'Docker container', best: 'Self-hosted, high performance', cost: 'Free (self-hosted)', highlight: false },
+              { name: 'Weaviate', setup: 'Docker or cloud', best: 'Multi-modal data (text + images)', cost: 'Free / paid cloud', highlight: false },
+              { name: 'Milvus', setup: 'Docker or Zilliz cloud', best: 'Billions of vectors, enterprise scale', cost: 'Free / paid cloud', highlight: false },
+              { name: 'Pinecone', setup: 'API key only', best: 'Fully managed, no infra work', cost: 'Paid SaaS', highlight: false },
+            ].map(r => (
+              <tr style={`border-bottom:1px solid #f3f4f6;${r.highlight ? 'background:#f0fdf4;' : ''}`}>
+                <td style="padding:0.75rem 1rem;font-weight:600;color:#111827;">{r.name} {r.highlight && <span style="font-size:0.7rem;background:#16a34a;color:#fff;padding:0.1rem 0.4rem;border-radius:9999px;margin-left:0.4rem;">Recommended</span>}</td>
+                <td style="padding:0.75rem 1rem;color:#4B5563;">{r.setup}</td>
+                <td style="padding:0.75rem 1rem;color:#4B5563;">{r.best}</td>
+                <td style="padding:0.75rem 1rem;color:#4B5563;">{r.cost}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div style="background:#fef9c3;border-left:3px solid #f59e0b;padding:0.75rem 1rem;border-radius:0 0.5rem 0.5rem 0;font-size:0.875rem;color:#713f12;">
+        <strong>Recommendation:</strong> Start with the built-in vector store. It requires zero configuration and works well for most projects. Only switch to an external store if you have more than 100,000 document chunks or require specific compliance/performance needs.
+      </div>
+    </div>
+  </section>
+
+  <!-- RAG Tips -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="width:2rem;height:2rem;background:#1677FF;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">4</span>
+        <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin:0;">RAG Tips for Best Results</h2>
+      </div>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        These configuration tips will significantly improve your RAG accuracy:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;">
+        {[
+          {
+            title: 'Optimal chunk size: 500–1000 tokens',
+            desc: 'Too small = missing context. Too large = diluted relevance. For most docs, 600 tokens with 100 token overlap hits the sweet spot.',
+          },
+          {
+            title: 'Clean your source documents',
+            desc: 'Remove repeated headers, footers, page numbers, and navigation menus. These add noise that hurts retrieval quality.',
+          },
+          {
+            title: 'Use metadata filtering',
+            desc: 'Tag documents with categories (e.g., "product: billing", "type: FAQ"). Filters let you retrieve only relevant subsets for each query.',
+          },
+          {
+            title: 'Separate knowledge bases by topic',
+            desc: 'Do not mix your product manual with your HR policy. Separate datasets give higher-precision retrieval. You can attach multiple bases to one app.',
+          },
+          {
+            title: 'Use Hybrid Search',
+            desc: 'Dify supports hybrid mode (semantic + keyword search combined). Enable it in your Knowledge Base settings for better coverage on exact terms like product codes or names.',
+          },
+          {
+            title: 'Monitor retrieval in logs',
+            desc: 'Go to Logs & Annotations in your app to see exactly which chunks were retrieved for each query. Use this to debug poor answers.',
+          },
+        ].map(t => (
+          <div class="card">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.4rem;">{t.title}</h3>
+            <p style="font-size:0.85rem;color:#6B7280;line-height:1.5;margin:0;">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Advanced: Retrieval Modes -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">Retrieval Modes Explained</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify offers three retrieval modes. Choose based on your content type:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+        <div style="background:#eff6ff;border:2px solid #1677FF;border-radius:0.75rem;padding:1.25rem;">
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+            <span style="background:#1677FF;color:#fff;padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.75rem;font-weight:700;">Recommended</span>
+          </div>
+          <h3 style="font-size:1rem;font-weight:700;color:#1e40af;margin-bottom:0.5rem;">Semantic Search</h3>
+          <p style="font-size:0.85rem;color:#1e40af;line-height:1.5;margin:0;">Finds conceptually similar content even if exact words differ. Best for natural language questions about complex topics. Uses vector similarity.</p>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Full-Text Search</h3>
+          <p style="font-size:0.85rem;color:#4B5563;line-height:1.5;margin:0;">Keyword-based search like a traditional search engine. Better for exact term matching: product codes, names, IDs. Fast and predictable.</p>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:0.75rem;padding:1.25rem;">
+          <h3 style="font-size:1rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">Hybrid Search</h3>
+          <p style="font-size:0.85rem;color:#4B5563;line-height:1.5;margin:0;">Combines semantic and full-text search using a reranker. Best overall accuracy but slower and requires a reranker model (e.g., cohere-rerank).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- External Data Sources -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1rem;">External Data Sources &amp; Sync</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Dify goes beyond file uploads. You can connect external sources that stay in sync automatically:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+        {[
+          { source: 'Notion', desc: 'Connect your Notion workspace. Dify syncs pages automatically. Great for team wikis and documentation.' },
+          { source: 'Web scraping', desc: 'Provide a URL and Dify fetches and indexes the page. Good for public documentation sites.' },
+          { source: 'Custom API', desc: 'Build a retrieval plugin via the External Knowledge Base API. Connect any database or proprietary data source.' },
+          { source: 'File sync via API', desc: 'Programmatically upload and update documents using the Dataset API. Useful for CMS integrations.' },
+        ].map(s => (
+          <div class="card">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#1677FF;margin-bottom:0.4rem;">{s.source}</h3>
+            <p style="font-size:0.85rem;color:#4B5563;line-height:1.5;margin:0;">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;max-width:720px;">
+        {[
+          {
+            q: 'What is Dify RAG?',
+            a: 'RAG stands for Retrieval-Augmented Generation. Dify RAG lets your AI search through your own documents, PDFs, or databases before generating an answer — dramatically reducing hallucinations and improving accuracy on domain-specific questions.',
+          },
+          {
+            q: 'What file types does Dify RAG support?',
+            a: 'Dify Knowledge Base supports PDF, Word (.docx), plain text (.txt), Markdown (.md), HTML, and CSV files. You can also connect external data sources via API or sync with Notion and other platforms.',
+          },
+          {
+            q: 'How does Dify RAG reduce hallucinations?',
+            a: 'Instead of relying solely on the LLM\'s training data, Dify RAG retrieves relevant chunks from your documents and injects them as context. The model then answers based on your actual data, citing specific passages rather than guessing.',
+          },
+          {
+            q: 'Which vector databases work with Dify RAG?',
+            a: 'Dify supports multiple vector stores: built-in (default, no setup needed), pgvector (PostgreSQL extension), Qdrant, Weaviate, Milvus, and Pinecone. The built-in store is perfect for most users; switch to an external one for millions of documents.',
+          },
+        ].map(item => (
+          <div class="card">
+            <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin-bottom:0.5rem;">{item.q}</h3>
+            <p style="font-size:0.875rem;color:#4B5563;line-height:1.6;margin:0;">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="section" style="padding-top:2.5rem;padding-bottom:3rem;">
+    <div class="container-sm">
+      <h2 style="font-size:1.5rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Ready to Self-Host Dify with RAG?</h2>
+      <p style="color:#4B5563;line-height:1.7;margin-bottom:1.5rem;">
+        Self-hosting Dify gives you full control over your data — critical when your Knowledge Base contains sensitive documents. Run Dify on your own server from €3.79/month on Hetzner, or get a fully managed instance on Elestio in under 5 minutes.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="https://filedesign.com/go/hetzner?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;background:#1677FF;color:#fff;">
+          Self-Host Dify on Hetzner →
+        </a>
+        <a href="https://filedesign.com/go/elestio?ref=dify-hosting.com" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Managed Dify on Elestio
+        </a>
+        <a href="/en/best-dify-hosting/" style="display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;text-decoration:none;border:1px solid #e2e8f0;color:#374151;">
+          Compare All Hosting Options
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
